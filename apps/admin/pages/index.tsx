@@ -11,7 +11,7 @@ const Home: NextPage = () => {
       </Head>
 
       <div>
-        Hello world
+        Hello world by ADMIN
       </div>
 
       <Link href="/test">
