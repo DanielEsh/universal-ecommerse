@@ -2,7 +2,7 @@ import React from 'react';
 
 export const SideBar = () => {
     return (
-        <div className="bg-yellow-500">
+        <div className="fixed grow-0 w-[320px] h-full p-8">
             SideBar
         </div>
     );

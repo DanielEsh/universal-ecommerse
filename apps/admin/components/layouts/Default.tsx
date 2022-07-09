@@ -8,9 +8,13 @@ type DefaultLayoutProps = {
 export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
 
     return (
-        <div>
+        <div className="relative flex w-full h-full">
             <SideBar />
-            <main>{children}</main>
+            <main className="absolute left-[320px] grow-0 p-4 content">
+                <div className="bg-gray-100 p-4 h-[1200px] rounded-md">
+                    {children}
+                </div>
+            </main>
         </div>
     )
 }
