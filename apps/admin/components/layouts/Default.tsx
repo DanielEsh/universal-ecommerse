@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import {SideBar} from "../Sidebar";
 
 type DefaultLayoutProps = {
     children: ReactNode;
@@ -8,7 +9,7 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
 
     return (
         <div>
-            GLOBAL LAYOUT
+            <SideBar />
             <main>{children}</main>
         </div>
     )
