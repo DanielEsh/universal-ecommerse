@@ -1,6 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
+import {GetServerSideProps} from "next";
+import {authUserRoute} from "../components/utils/authUserRoute";
 
 const Home: NextPage = () => {
   return (
@@ -20,5 +22,14 @@ const Home: NextPage = () => {
     </div>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = authUserRoute(async ctx => {
+    return {
+        props: {
+            user: true,
+        }
+    }
+})
+
 
 export default Home

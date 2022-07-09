@@ -18,13 +18,11 @@ const Test = () => {
 }
 
 export const getServerSideProps: GetServerSideProps = authUserRoute(async ctx => {
-    console.log('AUTH ROUTE');
-  
     return {
       props: {
         user: true,
       }
     }
-  })
+})
 
 export default Test

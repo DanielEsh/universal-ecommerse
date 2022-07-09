@@ -10,7 +10,7 @@ export async function signIn({ email, password }: any) {
     const { data } = await http.post(`/auth/login`, { email, password }, { headers: { 'content-type': 'application/json' } })
     console.log('DATA', data);
     setToken(data)
-    Router.push('/test')
+    Router.push('/')
 }
 
 export async function signUp(request: any) {
