@@ -28,10 +28,10 @@ export async function getUser(token: string): Promise<any> {
     return user
 }
 
-export function logout() {
-    console.log('Exiting... Removing cookies...')
-    clearCookies()
+export async function logout() {
+    const {data} = await http.get('/auth/logout');
 
-    console.log('Redirecting to login...')
-    Router.push('/auth/login')
+    console.log('logout', data);
+
+    Router.push('/auth')
 }

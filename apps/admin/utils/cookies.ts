@@ -36,3 +36,17 @@ export const getPayload = (token: string) => {
 export const clearCookies = () => {
     Cookies.remove(ACCESS_TOKEN)
 }
+
+export function getCookie(name: string) {
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.trim().split(';');
+    let value = '';
+    ca.forEach(item => {
+        const param = item.split('=');
+        if (param[0].trim() === name) {
+            value = param[1];
+        }
+    });
+    return value;
+}
+
