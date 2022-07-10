@@ -21,12 +21,12 @@ export class AuthController {
       @Body() body: LoginDto,
       @Res({ passthrough: true }) response: Response,
   ) {
-    const token = await this.service.login(body);
+    const {token, user} = await this.service.login(body);
     response.cookie('token', token, cookieOptions);
 
     return {
       message: 'Success login',
-      token: token,
+      user: user,
     }
   }
 

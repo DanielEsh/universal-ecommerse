@@ -39,7 +39,10 @@ let AuthService = class AuthService {
             throw new common_1.HttpException('No user found', common_1.HttpStatus.NOT_FOUND);
         }
         this.repository.update(user.id, { lastLoginAt: new Date() });
-        return this.helper.generateToken(user);
+        return {
+            token: this.helper.generateToken(user),
+            user: user,
+        };
     }
     async refresh(user) {
         this.repository.update(user.id, { lastLoginAt: new Date() });

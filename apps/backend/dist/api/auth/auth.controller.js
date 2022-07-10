@@ -23,11 +23,11 @@ let AuthController = class AuthController {
         return this.service.register(body);
     }
     async login(body, response) {
-        const token = await this.service.login(body);
+        const { token, user } = await this.service.login(body);
         response.cookie('token', token, cookie_1.cookieOptions);
         return {
             message: 'Success login',
-            token: token,
+            user: user,
         };
     }
     refresh({ user }) {
