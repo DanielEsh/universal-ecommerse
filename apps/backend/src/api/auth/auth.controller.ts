@@ -1,4 +1,4 @@
-import { Body, Controller, Inject, Post, UseGuards, Req, Res } from '@nestjs/common';
+import { Body, Controller, Inject, Post, Get, UseGuards, Req, Res } from '@nestjs/common';
 import { User } from '@/api/user/user.entity';
 import { RegisterDto, LoginDto } from './auth.dto';
 import { JwtAuthGuard } from './auth.guard';
@@ -34,5 +34,14 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   private refresh(@Req() { user }: Request): Promise<string | never> {
     return this.service.refresh(<User>user);
+  }
+
+  @Get('logout')
+  logout(@Res({ passthrough: true }) response: Response) {
+    response.clearCookie('token');
+
+    return {
+      message: 'Logged out successfully'
+    };
   }
 }
