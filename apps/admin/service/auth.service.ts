@@ -1,15 +1,11 @@
 import Router from "next/router";
 import { http } from "../config/axios";
 
-import { clearCookies, setToken } from "../utils/cookies";
-
 const delay = (amount = 750) => new Promise(resolve => setTimeout(resolve, amount))
 
 export async function signIn({ email, password }: any) {
     await delay()
     const { data } = await http.post(`/auth/signIn`, { email, password }, { headers: { 'content-type': 'application/json' } })
-    console.log('DATA', data);
-    setToken(data)
     Router.push('/')
 }
 

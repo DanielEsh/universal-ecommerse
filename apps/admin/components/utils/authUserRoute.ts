@@ -1,6 +1,6 @@
-// import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
-import { ACCESS_TOKEN, clearCookies, isTokenExpired, parseCookies } from "../../utils/cookies";
+import { clearCookies, isTokenExpired, parseCookies } from "../../utils/cookies";
 
 type Options = {
   roles: any
@@ -28,22 +28,23 @@ type Options = {
 //   }
 // }
 
-export function authUserRoute(func: any) {
-  return async (ctx: any) => {
+const ACCESS_TOKEN = 'token';
+
+export function authUserRoute(func: GetServerSideProps) {
+  return async (ctx: GetServerSidePropsContext) => {
     const cookies = parseCookies(ctx.req)
     const accessToken = cookies[ACCESS_TOKEN]
 
-    if (!accessToken || isTokenExpired(accessToken)) {
-      clearCookies()
-
+    if (!accessToken) {
       return {
         redirect: {
           permanent: false,
-          destination: "/auth/",
+          destination: '/auth/',
         },
       };
     }
 
-    return func(ctx, accessToken)
+    // @ts-ignore
+    return await func(ctx, accessToken)
   }
 }
