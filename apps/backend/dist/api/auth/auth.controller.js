@@ -17,12 +17,18 @@ const common_1 = require("@nestjs/common");
 const auth_dto_1 = require("./auth.dto");
 const auth_guard_1 = require("./auth.guard");
 const auth_service_1 = require("./auth.service");
+const cookie_1 = require("../../utils/cookie");
 let AuthController = class AuthController {
     register(body) {
         return this.service.register(body);
     }
-    login(body) {
-        return this.service.login(body);
+    async login(body, response) {
+        const token = await this.service.login(body);
+        response.cookie('token', token, cookie_1.cookieOptions);
+        return {
+            message: 'Success login',
+            token: token,
+        };
     }
     refresh({ user }) {
         return this.service.refresh(user);
@@ -42,8 +48,9 @@ __decorate([
 __decorate([
     (0, common_1.Post)('login'),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [auth_dto_1.LoginDto]),
+    __metadata("design:paramtypes", [auth_dto_1.LoginDto, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
 __decorate([

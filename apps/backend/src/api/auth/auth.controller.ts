@@ -1,9 +1,10 @@
-import { Body, Controller, Inject, Post, UseGuards, Req } from '@nestjs/common';
+import { Body, Controller, Inject, Post, UseGuards, Req, Res } from '@nestjs/common';
 import { User } from '@/api/user/user.entity';
 import { RegisterDto, LoginDto } from './auth.dto';
 import { JwtAuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
-import { Request } from 'express';
+import { Request, Response } from 'express';
+import {cookieOptions} from "@/utils/cookie";
 
 @Controller('auth')
 export class AuthController {
@@ -16,8 +17,17 @@ export class AuthController {
   }
 
   @Post('login')
-  private login(@Body() body: LoginDto): Promise<string | never> {
-    return this.service.login(body);
+  private async login(
+      @Body() body: LoginDto,
+      @Res({ passthrough: true }) response: Response,
+  ) {
+    const token = await this.service.login(body);
+    response.cookie('token', token, cookieOptions);
+
+    return {
+      message: 'Success login',
+      token: token,
+    }
   }
 
   @Post('refresh')

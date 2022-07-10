@@ -7,7 +7,8 @@ import { getToken } from '../utils/cookies';
 console.log(`Environment: ${process.env.NODE_ENV}`)
 
 export const http = axios.create({
-    baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`
+    baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`,
+    withCredentials: true,
 })
 
 http.interceptors.request.use((request: any) => {
