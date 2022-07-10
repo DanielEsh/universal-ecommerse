@@ -14,20 +14,27 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
-const auth_dto_1 = require("./auth.dto");
+const signIn_dto_1 = require("./dto/signIn.dto");
+const signUp_dto_1 = require("./dto/signUp.dto");
 const auth_guard_1 = require("./auth.guard");
 const auth_service_1 = require("./auth.service");
 const cookie_1 = require("../../utils/cookie");
 let AuthController = class AuthController {
-    register(body) {
-        return this.service.register(body);
+    signUp(body) {
+        return this.service.signUp(body);
     }
-    async login(body, response) {
-        const { token, user } = await this.service.login(body);
+    async signIn(body, response) {
+        const { token, user } = await this.service.signIn(body);
+        const { id, name, email } = user;
         response.cookie('token', token, cookie_1.cookieOptions);
         return {
             message: 'Success login',
-            user: user,
+            token: token,
+            user: {
+                id,
+                name,
+                email,
+            },
         };
     }
     refresh({ user }) {
@@ -45,20 +52,20 @@ __decorate([
     __metadata("design:type", auth_service_1.AuthService)
 ], AuthController.prototype, "service", void 0);
 __decorate([
-    (0, common_1.Post)('register'),
+    (0, common_1.Post)('signUp'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [auth_dto_1.RegisterDto]),
+    __metadata("design:paramtypes", [signUp_dto_1.SignUpDto]),
     __metadata("design:returntype", Promise)
-], AuthController.prototype, "register", null);
+], AuthController.prototype, "signUp", null);
 __decorate([
-    (0, common_1.Post)('login'),
+    (0, common_1.Post)('signIn'),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [auth_dto_1.LoginDto, Object]),
+    __metadata("design:paramtypes", [signIn_dto_1.SignInDto, Object]),
     __metadata("design:returntype", Promise)
-], AuthController.prototype, "login", null);
+], AuthController.prototype, "signIn", null);
 __decorate([
     (0, common_1.Post)('refresh'),
     (0, common_1.UseGuards)(auth_guard_1.JwtAuthGuard),

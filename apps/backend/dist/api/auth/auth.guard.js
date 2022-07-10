@@ -16,7 +16,7 @@ let JwtAuthGuard = class JwtAuthGuard extends (0, passport_1.AuthGuard)('jwt') {
     async canActivate(context) {
         await super.canActivate(context);
         const { user } = context.switchToHttp().getRequest();
-        return user ? true : false;
+        return Boolean(user);
     }
 };
 JwtAuthGuard = __decorate([

@@ -7,7 +7,7 @@ const delay = (amount = 750) => new Promise(resolve => setTimeout(resolve, amoun
 
 export async function signIn({ email, password }: any) {
     await delay()
-    const { data } = await http.post(`/auth/login`, { email, password }, { headers: { 'content-type': 'application/json' } })
+    const { data } = await http.post(`/auth/signIn`, { email, password }, { headers: { 'content-type': 'application/json' } })
     console.log('DATA', data);
     setToken(data)
     Router.push('/')

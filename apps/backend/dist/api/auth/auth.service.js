@@ -16,47 +16,48 @@ const user_entity_1 = require("../user/user.entity");
 const typeorm_2 = require("typeorm");
 const auth_helper_1 = require("./auth.helper");
 let AuthService = class AuthService {
-    async register(body) {
+    async signUp(body) {
         const { name, email, password } = body;
-        let user = await this.repository.findOne({ where: { email } });
+        let user = await this.userRepository.findOne({ where: { email } });
         if (user) {
             throw new common_1.HttpException('Conflict', common_1.HttpStatus.CONFLICT);
         }
         user = new user_entity_1.User();
         user.name = name;
         user.email = email;
-        user.password = this.helper.encodePassword(password);
-        return this.repository.save(user);
+        user.password = this.authHelper.encodePassword(password);
+        return this.userRepository.save(user);
     }
-    async login(body) {
+    async signIn(body) {
         const { email, password } = body;
-        const user = await this.repository.findOne({ where: { email } });
+        const user = await this.userRepository.findOne({ where: { email } });
         if (!user) {
             throw new common_1.HttpException('No user found', common_1.HttpStatus.NOT_FOUND);
         }
-        const isPasswordValid = this.helper.isPasswordValid(password, user.password);
+        const isPasswordValid = this.authHelper.isPasswordValid(password, user.password);
         if (!isPasswordValid) {
             throw new common_1.HttpException('No user found', common_1.HttpStatus.NOT_FOUND);
         }
-        this.repository.update(user.id, { lastLoginAt: new Date() });
+        await this.userRepository.update(user.id, { lastLoginAt: new Date() });
         return {
-            token: this.helper.generateToken(user),
+            message: 'Success SignIn',
+            token: this.authHelper.generateToken(user),
             user: user,
         };
     }
     async refresh(user) {
-        this.repository.update(user.id, { lastLoginAt: new Date() });
-        return this.helper.generateToken(user);
+        await this.userRepository.update(user.id, { lastLoginAt: new Date() });
+        return this.authHelper.generateToken(user);
     }
 };
 __decorate([
     (0, typeorm_1.InjectRepository)(user_entity_1.User),
     __metadata("design:type", typeorm_2.Repository)
-], AuthService.prototype, "repository", void 0);
+], AuthService.prototype, "userRepository", void 0);
 __decorate([
     (0, common_1.Inject)(auth_helper_1.AuthHelper),
     __metadata("design:type", auth_helper_1.AuthHelper)
-], AuthService.prototype, "helper", void 0);
+], AuthService.prototype, "authHelper", void 0);
 AuthService = __decorate([
     (0, common_1.Injectable)()
 ], AuthService);

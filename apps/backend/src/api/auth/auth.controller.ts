@@ -1,6 +1,7 @@
 import { Body, Controller, Inject, Post, Get, UseGuards, Req, Res } from '@nestjs/common';
 import { User } from '@/api/user/user.entity';
-import { RegisterDto, LoginDto } from './auth.dto';
+import { SignInDto } from "@/api/auth/dto/signIn.dto";
+import { SignUpDto } from "@/api/auth/dto/signUp.dto";
 import { JwtAuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { Request, Response } from 'express';
@@ -11,22 +12,28 @@ export class AuthController {
   @Inject(AuthService)
   private readonly service: AuthService;
 
-  @Post('register')
-  private register(@Body() body: RegisterDto): Promise<User | never> {
-    return this.service.register(body);
+  @Post('signUp')
+  private signUp(@Body() body: SignUpDto): Promise<User | never> {
+    return this.service.signUp(body);
   }
 
-  @Post('login')
-  private async login(
-      @Body() body: LoginDto,
+  @Post('signIn')
+  private async signIn(
+      @Body() body: SignInDto,
       @Res({ passthrough: true }) response: Response,
   ) {
-    const {token, user} = await this.service.login(body);
+    const {token, user} = await this.service.signIn(body);
+    const { id, name, email } = user;
     response.cookie('token', token, cookieOptions);
 
     return {
       message: 'Success login',
-      user: user,
+      token: token,
+      user: {
+        id,
+        name,
+        email,
+      },
     }
   }
 

@@ -1,10 +1,12 @@
 import { User } from '@/api/user/user.entity';
-import { RegisterDto, LoginDto } from './auth.dto';
+import { SignUpDto } from "@/api/auth/dto/signUp.dto";
+import { SignInDto } from "@/api/auth/dto/signIn.dto";
 export declare class AuthService {
-    private readonly repository;
-    private readonly helper;
-    register(body: RegisterDto): Promise<User | never>;
-    login(body: LoginDto): Promise<{
+    private readonly userRepository;
+    private readonly authHelper;
+    signUp(body: SignUpDto): Promise<User | never>;
+    signIn(body: SignInDto): Promise<{
+        message: string;
         token: string;
         user: User;
     }>;
