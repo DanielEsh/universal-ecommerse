@@ -1,11 +1,14 @@
-import { Body, Controller, Inject, Post, Get, UseGuards, Req, Res } from '@nestjs/common';
-import { User } from '@/api/user/user.entity';
-import { SignInDto } from "@/api/auth/dto/signIn.dto";
-import { SignUpDto } from "@/api/auth/dto/signUp.dto";
-import { JwtAuthGuard } from './auth.guard';
-import { AuthService } from './auth.service';
-import { Request, Response } from 'express';
+import {Body, Controller, Get, Inject, Post, Req, Res, UseGuards} from '@nestjs/common';
+import {User} from '@/api/user/user.entity';
+import {SignInDto} from "@/api/auth/dto/signIn.dto";
+import {SignUpDto} from "@/api/auth/dto/signUp.dto";
+import {JwtAuthGuard} from './auth.guard';
+import {RolesGuard} from "@/api/user/role.guard";
+import {Roles} from "@/api/user/role.decorator";
+import {AuthService} from './auth.service';
+import {Request, Response} from 'express';
 import {cookieOptions} from "@/utils/cookie";
+import {Role} from "@/api/user/role.enum";
 
 @Controller('auth')
 export class AuthController {
@@ -23,7 +26,7 @@ export class AuthController {
       @Res({ passthrough: true }) response: Response,
   ) {
     const {token, user} = await this.service.signIn(body);
-    const { id, name, email } = user;
+    const { id, name, email, roles } = user;
     response.cookie('token', token, cookieOptions);
 
     return {
@@ -33,6 +36,7 @@ export class AuthController {
         id,
         name,
         email,
+        roles,
       },
     }
   }
