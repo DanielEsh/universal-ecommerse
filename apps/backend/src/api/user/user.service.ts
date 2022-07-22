@@ -11,12 +11,14 @@ export class UserService {
             name: 'john',
             email: 'john@mail.ru',
             password: 'changeme',
+            roles: ['ADMIN'],
         },
         {
             id: 2,
             name: 'maria',
             email: 'maria@mail.ru',
             password: 'guess',
+            roles: ['GUEST'],
         },
     ];
 
