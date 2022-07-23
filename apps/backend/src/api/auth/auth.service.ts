@@ -1,13 +1,12 @@
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { UserService } from '../user/user.service';
-import { JwtService } from '@nestjs/jwt';
 import {AuthHelper} from "@/api/auth/helpers/auth.helper";
+import {User} from "@/api/user/user.entity";
 
 @Injectable()
 export class AuthService {
     constructor(
         private usersService: UserService,
-        private jwtService: JwtService,
     ) {}
 
     @Inject(AuthHelper)
@@ -38,10 +37,9 @@ export class AuthService {
         return result;
     }
 
-    async login(user: any) {
-        const payload = { name: user.name, sub: user.id };
+    async login(user: User) {
         return {
-            accessToken: this.jwtService.sign(payload),
+            accessToken: this.authHelper.generateToken(user),
         };
     }
 }
