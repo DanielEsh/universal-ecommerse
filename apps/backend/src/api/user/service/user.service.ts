@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Request } from 'express';
 import { User } from '@/api/user/user.entity';
 import { UpdateDto } from "@/api/user/dto/updateDto";
+import * as bcrypt from "bcryptjs";
 
 @Injectable()
 export class UserService {
@@ -30,5 +30,26 @@ export class UserService {
         user.roles = body?.roles || user.roles;
 
         return this.userRepository.save(user);
+    }
+
+    public async create(body) {
+        const newUser = new User();
+
+        if (!body.email && !body.password) {
+            return 'Email/Password обязательные поля';
+        }
+
+        newUser.name = body?.name;
+        newUser.email = body.email;
+        newUser.password = this.encodePassword(body.password);
+
+        return this.userRepository.save(newUser);
+    }
+
+    // Encode User's password
+    public encodePassword(password: string): string {
+        const salt: string = bcrypt.genSaltSync(10);
+
+        return bcrypt.hashSync(password, salt);
     }
 }

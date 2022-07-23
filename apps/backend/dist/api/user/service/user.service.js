@@ -14,6 +14,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("../user.entity");
+const bcrypt = require("bcryptjs");
 let UserService = class UserService {
     async findAll() {
         return await this.userRepository.find();
@@ -30,6 +31,20 @@ let UserService = class UserService {
         user.email = (body === null || body === void 0 ? void 0 : body.email) || user.email;
         user.roles = (body === null || body === void 0 ? void 0 : body.roles) || user.roles;
         return this.userRepository.save(user);
+    }
+    async create(body) {
+        const newUser = new user_entity_1.User();
+        if (!body.email && !body.password) {
+            return 'Email/Password обязательные поля';
+        }
+        newUser.name = body === null || body === void 0 ? void 0 : body.name;
+        newUser.email = body.email;
+        newUser.password = this.encodePassword(body.password);
+        return this.userRepository.save(newUser);
+    }
+    encodePassword(password) {
+        const salt = bcrypt.genSaltSync(10);
+        return bcrypt.hashSync(password, salt);
     }
 };
 __decorate([

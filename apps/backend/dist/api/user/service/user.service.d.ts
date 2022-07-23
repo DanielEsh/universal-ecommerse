@@ -6,4 +6,6 @@ export declare class UserService {
     findUserByEmailOrName(payload: string): Promise<User | undefined>;
     findById(id: number): Promise<User | undefined>;
     updateUserById(id: number, body: UpdateDto): Promise<User>;
+    create(body: any): Promise<User | "Email/Password обязательные поля">;
+    encodePassword(password: string): string;
 }

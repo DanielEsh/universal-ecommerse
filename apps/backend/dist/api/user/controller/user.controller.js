@@ -20,12 +20,16 @@ const roles_decorator_1 = require("../../auth/roles.decorator");
 const roles_enum_1 = require("../../auth/roles.enum");
 const roles_guard_1 = require("../../auth/guards/roles.guard");
 const updateDto_1 = require("../dto/updateDto");
+const createDto_1 = require("../dto/createDto");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
     }
     getAll(req) {
         return this.userService.findAll();
+    }
+    async create(body) {
+        return await this.userService.create(body);
     }
     getById(id) {
         return this.userService.findById(id);
@@ -49,12 +53,19 @@ let UserController = class UserController {
 };
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.Get)('all'),
+    (0, common_1.Get)(''),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "getAll", null);
+__decorate([
+    (0, common_1.Post)(''),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [createDto_1.CreateDto]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
