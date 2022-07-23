@@ -1,8 +1,9 @@
 import { AuthService } from "@/api/auth/service/auth.service";
+import { Response } from "express";
 export declare class AuthController {
     private authService;
     constructor(authService: AuthService);
-    login(req: any): Promise<{
+    signIn(req: any, res: Response): Promise<{
         accessToken: string;
     }>;
 }

@@ -2,6 +2,8 @@ import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { UserService } from '../../user/service/user.service';
 import {AuthHelper} from "@/api/auth/helpers/auth.helper";
 import {User} from "@/api/user/user.entity";
+import { Response } from "express";
+import {cookieOptions} from "@/utils/cookie";
 
 @Injectable()
 export class AuthService {
@@ -37,9 +39,11 @@ export class AuthService {
         return result;
     }
 
-    async login(user: User) {
+    async signIn(user: User, res: Response) {
+        const token = await this.authHelper.generateToken(user)
+        res.cookie('token', token, cookieOptions);
         return {
-            accessToken: this.authHelper.generateToken(user),
+            accessToken: token,
         };
     }
 }

@@ -24,6 +24,7 @@ exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("../../user/service/user.service");
 const auth_helper_1 = require("../helpers/auth.helper");
+const cookie_1 = require("../../../utils/cookie");
 let AuthService = class AuthService {
     constructor(usersService) {
         this.usersService = usersService;
@@ -40,9 +41,11 @@ let AuthService = class AuthService {
         const { password, lastLoginAt } = user, result = __rest(user, ["password", "lastLoginAt"]);
         return result;
     }
-    async login(user) {
+    async signIn(user, res) {
+        const token = await this.authHelper.generateToken(user);
+        res.cookie('token', token, cookie_1.cookieOptions);
         return {
-            accessToken: this.authHelper.generateToken(user),
+            accessToken: token,
         };
     }
 };
