@@ -24,6 +24,13 @@ let UserService = class UserService {
     async findById(id) {
         return await this.userRepository.findOne({ where: { id } });
     }
+    async updateUserById(id, body) {
+        const user = await this.findById(id);
+        user.name = (body === null || body === void 0 ? void 0 : body.name) || user.name;
+        user.email = (body === null || body === void 0 ? void 0 : body.email) || user.email;
+        user.roles = (body === null || body === void 0 ? void 0 : body.roles) || user.roles;
+        return this.userRepository.save(user);
+    }
 };
 __decorate([
     (0, typeorm_1.InjectRepository)(user_entity_1.User),

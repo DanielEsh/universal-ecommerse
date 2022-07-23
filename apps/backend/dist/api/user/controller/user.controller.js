@@ -19,12 +19,20 @@ const user_service_1 = require("../service/user.service");
 const roles_decorator_1 = require("../../auth/roles.decorator");
 const roles_enum_1 = require("../../auth/roles.enum");
 const roles_guard_1 = require("../../auth/guards/roles.guard");
+const updateDto_1 = require("../dto/updateDto");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
     }
     getAll(req) {
         return this.userService.findAll();
+    }
+    getById(id) {
+        return this.userService.findById(id);
+    }
+    async updateById(id, body) {
+        await this.userService.updateUserById(id, body);
+        return 'Success update';
     }
     getProfile(req) {
         const { user } = req;
@@ -47,6 +55,21 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "getAll", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "getById", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, updateDto_1.UpdateDto]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "updateById", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)('profile'),
