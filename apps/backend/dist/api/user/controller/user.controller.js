@@ -14,14 +14,17 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
-const jwt_auth_guard_1 = require("../auth/guards/jwt-auth.guard");
-const user_service_1 = require("./user.service");
-const roles_decorator_1 = require("../auth/roles.decorator");
-const roles_enum_1 = require("../auth/roles.enum");
-const roles_guard_1 = require("../auth/guards/roles.guard");
+const jwt_auth_guard_1 = require("../../auth/guards/jwt-auth.guard");
+const user_service_1 = require("../service/user.service");
+const roles_decorator_1 = require("../../auth/roles.decorator");
+const roles_enum_1 = require("../../auth/roles.enum");
+const roles_guard_1 = require("../../auth/guards/roles.guard");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
+    }
+    getAll(req) {
+        return this.userService.findAll();
     }
     getProfile(req) {
         const { user } = req;
@@ -36,6 +39,14 @@ let UserController = class UserController {
         return 'Admin route';
     }
 };
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Get)('all'),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "getAll", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)('profile'),

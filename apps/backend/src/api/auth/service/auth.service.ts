@@ -1,5 +1,5 @@
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
-import { UserService } from '../../user/user.service';
+import { UserService } from '../../user/service/user.service';
 import {AuthHelper} from "@/api/auth/helpers/auth.helper";
 import {User} from "@/api/user/user.entity";
 

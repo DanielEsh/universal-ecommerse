@@ -13,8 +13,11 @@ exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
-const user_entity_1 = require("./user.entity");
+const user_entity_1 = require("../user.entity");
 let UserService = class UserService {
+    async findAll() {
+        return await this.userRepository.find();
+    }
     async findUserByEmailOrName(payload) {
         return await this.userRepository.findOne({ where: { email: payload } }) || this.userRepository.findOne({ where: { name: payload } });
     }
