@@ -3,10 +3,12 @@ import {
     Get,
     Post,
     Put,
+    Delete,
     Param,
     Body,
     Request,
     UseGuards,
+    HttpStatus,
 } from '@nestjs/common';
 import {JwtAuthGuard} from "@/api/auth/guards/jwt-auth.guard";
 import {UserService} from "@/api/user/service/user.service";
@@ -47,6 +49,15 @@ export class UserController {
     ) {
         await this.userService.updateUserById(id, body);
         return 'Success update';
+    }
+
+    @Delete(':id')
+    async deleteUser(@Param('id') id: number) {
+        await this.userService.delete(id);
+        return {
+            statusCode: HttpStatus.OK,
+            message: `User deleted successfully`,
+        };
     }
 
     @UseGuards(JwtAuthGuard)

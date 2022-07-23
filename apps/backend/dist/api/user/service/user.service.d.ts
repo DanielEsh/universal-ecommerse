@@ -8,4 +8,7 @@ export declare class UserService {
     updateUserById(id: number, body: UpdateDto): Promise<User>;
     create(body: any): Promise<User | "Email/Password обязательные поля">;
     encodePassword(password: string): string;
+    delete(id: number): Promise<{
+        deleted: boolean;
+    }>;
 }

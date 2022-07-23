@@ -52,4 +52,9 @@ export class UserService {
 
         return bcrypt.hashSync(password, salt);
     }
+
+    public async delete(id: number) {
+        await this.userRepository.delete({ id });
+        return { deleted: true };
+    }
 }

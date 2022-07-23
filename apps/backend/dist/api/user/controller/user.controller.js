@@ -38,6 +38,13 @@ let UserController = class UserController {
         await this.userService.updateUserById(id, body);
         return 'Success update';
     }
+    async deleteUser(id) {
+        await this.userService.delete(id);
+        return {
+            statusCode: common_1.HttpStatus.OK,
+            message: `User deleted successfully`,
+        };
+    }
     getProfile(req) {
         const { user } = req;
         return this.userService.findById(user.id);
@@ -81,6 +88,13 @@ __decorate([
     __metadata("design:paramtypes", [Number, updateDto_1.UpdateDto]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "updateById", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "deleteUser", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)('profile'),

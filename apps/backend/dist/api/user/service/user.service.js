@@ -46,6 +46,10 @@ let UserService = class UserService {
         const salt = bcrypt.genSaltSync(10);
         return bcrypt.hashSync(password, salt);
     }
+    async delete(id) {
+        await this.userRepository.delete({ id });
+        return { deleted: true };
+    }
 };
 __decorate([
     (0, typeorm_1.InjectRepository)(user_entity_1.User),
