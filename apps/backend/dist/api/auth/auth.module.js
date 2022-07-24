@@ -14,9 +14,7 @@ const jwt_1 = require("@nestjs/jwt");
 const auth_controller_1 = require("./controller/auth.controller");
 const auth_service_1 = require("./service/auth.service");
 const auth_helper_1 = require("./helpers/auth.helper");
-const local_strategy_1 = require("./strategy/local.strategy");
-const accessJwt_strategy_1 = require("./strategy/accessJwt.strategy");
-const refreshJwt_strategy_1 = require("./strategy/refreshJwt.strategy");
+const strategy_1 = require("./strategy");
 const user_module_1 = require("../user/user.module");
 const user_entity_1 = require("../user/user.entity");
 let AuthModule = class AuthModule {
@@ -29,7 +27,7 @@ AuthModule = __decorate([
             typeorm_1.TypeOrmModule.forFeature([user_entity_1.User]),
             jwt_1.JwtModule.register({}),
         ],
-        providers: [auth_service_1.AuthService, auth_helper_1.AuthHelper, local_strategy_1.LocalStrategy, accessJwt_strategy_1.AccessJwtStrategy, refreshJwt_strategy_1.RefreshJwtStrategy],
+        providers: [auth_service_1.AuthService, auth_helper_1.AuthHelper, strategy_1.LocalStrategy, strategy_1.AccessJwtStrategy, strategy_1.RefreshJwtStrategy],
         controllers: [auth_controller_1.AuthController],
     })
 ], AuthModule);

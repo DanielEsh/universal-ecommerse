@@ -2,8 +2,10 @@ import { Controller, Req, Res, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from "express";
 import { AuthService } from "@/api/auth/service/auth.service";
-import { RefreshJwtAuthGuard } from "@/api/auth/guards/refresh-jwt.guard";
-import { AccessJwtAuthGuard } from "@/api/auth/guards/jwt-auth.guard";
+import {
+    AccessJwtAuthGuard,
+    RefreshJwtAuthGuard,
+} from "@/api/auth/guards";
 import { getCurrentUser } from "@/api/user/decorator/get-current-user.decorator";
 
 @Controller('auth')

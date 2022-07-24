@@ -16,8 +16,7 @@ exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
 const auth_service_1 = require("../service/auth.service");
-const refresh_jwt_guard_1 = require("../guards/refresh-jwt.guard");
-const jwt_auth_guard_1 = require("../guards/jwt-auth.guard");
+const guards_1 = require("../guards");
 const get_current_user_decorator_1 = require("../../user/decorator/get-current-user.decorator");
 let AuthController = class AuthController {
     constructor(authService) {
@@ -47,7 +46,7 @@ __decorate([
 ], AuthController.prototype, "signIn", null);
 __decorate([
     (0, common_1.Post)('refresh'),
-    (0, common_1.UseGuards)(refresh_jwt_guard_1.RefreshJwtAuthGuard),
+    (0, common_1.UseGuards)(guards_1.RefreshJwtAuthGuard),
     __param(0, (0, get_current_user_decorator_1.getCurrentUser)()),
     __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
@@ -56,7 +55,7 @@ __decorate([
 ], AuthController.prototype, "refresh", null);
 __decorate([
     (0, common_1.Post)('logout'),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.AccessJwtAuthGuard),
+    (0, common_1.UseGuards)(guards_1.AccessJwtAuthGuard),
     __param(0, (0, get_current_user_decorator_1.getCurrentUser)()),
     __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),

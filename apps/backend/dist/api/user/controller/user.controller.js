@@ -14,11 +14,10 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
-const jwt_auth_guard_1 = require("../../auth/guards/jwt-auth.guard");
+const guards_1 = require("../../auth/guards");
 const user_service_1 = require("../service/user.service");
 const roles_decorator_1 = require("../../auth/roles.decorator");
 const roles_enum_1 = require("../../auth/roles.enum");
-const roles_guard_1 = require("../../auth/guards/roles.guard");
 const updateDto_1 = require("../dto/updateDto");
 const createDto_1 = require("../dto/createDto");
 let UserController = class UserController {
@@ -59,7 +58,7 @@ let UserController = class UserController {
     }
 };
 __decorate([
-    (0, common_1.UseGuards)(jwt_auth_guard_1.AccessJwtAuthGuard),
+    (0, common_1.UseGuards)(guards_1.AccessJwtAuthGuard),
     (0, common_1.Get)(''),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
@@ -96,7 +95,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "deleteUser", null);
 __decorate([
-    (0, common_1.UseGuards)(jwt_auth_guard_1.AccessJwtAuthGuard),
+    (0, common_1.UseGuards)(guards_1.AccessJwtAuthGuard),
     (0, common_1.Get)('profile'),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
@@ -111,7 +110,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "guest", null);
 __decorate([
-    (0, common_1.UseGuards)(jwt_auth_guard_1.AccessJwtAuthGuard, roles_guard_1.RolesGuard),
+    (0, common_1.UseGuards)(guards_1.AccessJwtAuthGuard, guards_1.RolesGuard),
     (0, common_1.Get)('admin'),
     (0, roles_decorator_1.Roles)(roles_enum_1.Role.ADMIN),
     __param(0, (0, common_1.Request)()),

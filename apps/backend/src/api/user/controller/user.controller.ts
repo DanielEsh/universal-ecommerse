@@ -10,11 +10,13 @@ import {
     UseGuards,
     HttpStatus,
 } from '@nestjs/common';
-import {AccessJwtAuthGuard} from "@/api/auth/guards/jwt-auth.guard";
+import {
+    AccessJwtAuthGuard,
+    RolesGuard,
+} from "@/api/auth/guards";
 import {UserService} from "@/api/user/service/user.service";
 import { Roles } from "@/api/auth/roles.decorator";
 import { Role } from '@/api/auth/roles.enum';
-import { RolesGuard } from "@/api/auth/guards/roles.guard";
 import { UpdateDto } from "@/api/user/dto/updateDto";
 import { CreateDto } from "@/api/user/dto/createDto";
 
