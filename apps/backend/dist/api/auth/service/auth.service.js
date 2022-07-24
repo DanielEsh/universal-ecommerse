@@ -65,6 +65,13 @@ let AuthService = class AuthService {
             accessToken,
         };
     }
+    async logout(userId, response) {
+        response.clearCookie('accessToken');
+        response.clearCookie('refreshToken');
+        await this.usersService.updateUserById(userId, {
+            hashedRefreshToken: null
+        });
+    }
 };
 __decorate([
     (0, common_1.Inject)(auth_helper_1.AuthHelper),

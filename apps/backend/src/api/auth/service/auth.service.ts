@@ -67,4 +67,13 @@ export class AuthService {
             accessToken,
         }
     }
+
+    public async logout(userId: number, response: Response) {
+        response.clearCookie('accessToken');
+        response.clearCookie('refreshToken');
+
+        await this.usersService.updateUserById(userId, {
+            hashedRefreshToken: null
+        })
+    }
 }

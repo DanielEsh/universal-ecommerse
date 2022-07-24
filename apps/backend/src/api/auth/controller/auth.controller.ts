@@ -3,6 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { Response } from "express";
 import { AuthService } from "@/api/auth/service/auth.service";
 import { RefreshJwtAuthGuard } from "@/api/auth/guards/refresh-jwt.guard";
+import { AccessJwtAuthGuard } from "@/api/auth/guards/jwt-auth.guard";
 import { getCurrentUser } from "@/api/user/decorator/get-current-user.decorator";
 
 @Controller('auth')
@@ -27,5 +28,17 @@ export class AuthController {
         @Res({ passthrough: true }) res: Response,
     ) {
         return this.authService.refresh(user.id, user.refreshToken, res);
+    }
+
+    @Post('logout')
+    @UseGuards(AccessJwtAuthGuard)
+    private async logOut(
+        @getCurrentUser() user,
+        @Res({ passthrough: true }) res: Response,
+    ) {
+        await this.authService.logout(user.id, res);
+        return {
+            message: 'Success',
+        }
     }
 }

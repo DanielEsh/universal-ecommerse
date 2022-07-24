@@ -8,4 +8,5 @@ export declare class AuthController {
         refreshToken: string;
     }>;
     private refresh;
+    private logOut;
 }
