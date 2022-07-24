@@ -12,7 +12,7 @@ export const SignInForm = () => {
         event.preventDefault();
 
        await onLoggin({
-            email: emailRef.current.value,
+            username: emailRef.current.value,
             password: passwordRef.current.value
         })
 

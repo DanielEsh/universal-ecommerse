@@ -3,9 +3,9 @@ import { http } from "../config/axios";
 
 const delay = (amount = 750) => new Promise(resolve => setTimeout(resolve, amount))
 
-export async function signIn({ email, password }: any) {
+export async function signIn({ username, password }: any) {
     await delay()
-    const { data } = await http.post(`/auth/signIn`, { email, password }, { headers: { 'content-type': 'application/json' } })
+    const { data } = await http.post(`/auth/signIn`, { username, password }, { headers: { 'content-type': 'application/json' } })
     Router.push('/')
 }
 

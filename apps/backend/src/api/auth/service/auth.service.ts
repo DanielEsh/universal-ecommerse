@@ -44,7 +44,9 @@ export class AuthService {
         const accessToken = await this.authHelper.generateAccessToken(user)
         const refreshToken = await this.authHelper.generateRefreshToken(user)
         await this.usersService.updateRefreshTokenHash(user.id, refreshToken)
-        res.cookie('token', accessToken, cookieOptions);
+        res.cookie('accessToken', accessToken, cookieOptions);
+        res.cookie('refreshToken', refreshToken, cookieOptions);
+
         return {
             accessToken,
             refreshToken
@@ -61,7 +63,7 @@ export class AuthService {
         if(!matchTokens) throw new ForbiddenException('Access denied')
 
         const accessToken = await this.authHelper.generateAccessToken(user)
-        res.cookie('token', accessToken, cookieOptions);
+        res.cookie('accessToken', accessToken, cookieOptions);
 
         return {
             accessToken,

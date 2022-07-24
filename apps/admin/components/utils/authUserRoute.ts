@@ -28,7 +28,7 @@ type Options = {
 //   }
 // }
 
-const ACCESS_TOKEN = 'token';
+const ACCESS_TOKEN = 'accessToken';
 
 export function authUserRoute(func: GetServerSideProps) {
   return async (ctx: GetServerSidePropsContext) => {
