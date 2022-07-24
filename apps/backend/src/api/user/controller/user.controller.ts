@@ -10,7 +10,7 @@ import {
     UseGuards,
     HttpStatus,
 } from '@nestjs/common';
-import {JwtAuthGuard} from "@/api/auth/guards/jwt-auth.guard";
+import {AccessJwtAuthGuard} from "@/api/auth/guards/jwt-auth.guard";
 import {UserService} from "@/api/user/service/user.service";
 import { Roles } from "@/api/auth/roles.decorator";
 import { Role } from '@/api/auth/roles.enum';
@@ -24,7 +24,7 @@ export class UserController {
         private userService: UserService
     ) {}
 
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(AccessJwtAuthGuard)
     @Get('')
     getAll(@Request() req) {
         return this.userService.findAll();
@@ -60,7 +60,7 @@ export class UserController {
         };
     }
 
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(AccessJwtAuthGuard)
     @Get('profile')
     getProfile(@Request() req) {
         const { user } = req;
@@ -73,7 +73,7 @@ export class UserController {
         return 'Guest route';
     }
 
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    @UseGuards(AccessJwtAuthGuard, RolesGuard)
     @Get('admin')
     @Roles(Role.ADMIN)
     admin(@Request() req) {

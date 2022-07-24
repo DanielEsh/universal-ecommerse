@@ -9,15 +9,21 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import { User } from '@/api/user/user.entity';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthHelper {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>;
     private readonly jwt: JwtService;
+    private readonly config: ConfigService;
 
-    constructor(jwt: JwtService) {
+    constructor(
+        jwt: JwtService,
+        config: ConfigService,
+    ) {
         this.jwt = jwt;
+        this.config = config;
     }
 
     // Decoding the JWT Token
@@ -38,8 +44,8 @@ export class AuthHelper {
             email: user.email,
             name: user.name
         }, {
-            secret: process.env.JWT_ACCESS_KEY, // FIXME: fix with config
-            expiresIn: 60 * 60 * 24, // 1d
+            secret: this.config.get('JWT_ACCESS_KEY'),
+            expiresIn: 60 * 5, // 5min
         });
     }
 
@@ -49,7 +55,7 @@ export class AuthHelper {
             email: user.email,
             name: user.name
         }, {
-            secret: 'refresh', // FIXME: fix with config
+            secret: this.config.get('JWT_REFRESH_KEY'),
             expiresIn: 60 * 60 * 24 * 7, // 7d
         });
     }

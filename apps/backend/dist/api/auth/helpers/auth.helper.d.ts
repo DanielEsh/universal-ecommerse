@@ -1,9 +1,11 @@
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@/api/user/user.entity';
+import { ConfigService } from '@nestjs/config';
 export declare class AuthHelper {
     private readonly userRepository;
     private readonly jwt;
-    constructor(jwt: JwtService);
+    private readonly config;
+    constructor(jwt: JwtService, config: ConfigService);
     decode(token: string): Promise<unknown>;
     validateUser(decoded: any): Promise<User>;
     generateAccessToken(user: User): string;

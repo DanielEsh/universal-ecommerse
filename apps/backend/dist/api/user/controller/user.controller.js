@@ -59,7 +59,7 @@ let UserController = class UserController {
     }
 };
 __decorate([
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.AccessJwtAuthGuard),
     (0, common_1.Get)(''),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
@@ -96,7 +96,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "deleteUser", null);
 __decorate([
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.AccessJwtAuthGuard),
     (0, common_1.Get)('profile'),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
@@ -111,7 +111,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "guest", null);
 __decorate([
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.AccessJwtAuthGuard, roles_guard_1.RolesGuard),
     (0, common_1.Get)('admin'),
     (0, roles_decorator_1.Roles)(roles_enum_1.Role.ADMIN),
     __param(0, (0, common_1.Request)()),

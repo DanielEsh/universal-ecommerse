@@ -16,9 +16,11 @@ const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const bcrypt = require("bcryptjs");
 const user_entity_1 = require("../../user/user.entity");
+const config_1 = require("@nestjs/config");
 let AuthHelper = class AuthHelper {
-    constructor(jwt) {
+    constructor(jwt, config) {
         this.jwt = jwt;
+        this.config = config;
     }
     async decode(token) {
         return this.jwt.decode(token, null);
@@ -33,8 +35,8 @@ let AuthHelper = class AuthHelper {
             email: user.email,
             name: user.name
         }, {
-            secret: process.env.JWT_ACCESS_KEY,
-            expiresIn: 60 * 60 * 24,
+            secret: this.config.get('JWT_ACCESS_KEY'),
+            expiresIn: 60 * 5,
         });
     }
     generateRefreshToken(user) {
@@ -43,7 +45,7 @@ let AuthHelper = class AuthHelper {
             email: user.email,
             name: user.name
         }, {
-            secret: 'refresh',
+            secret: this.config.get('JWT_REFRESH_KEY'),
             expiresIn: 60 * 60 * 24 * 7,
         });
     }
@@ -72,7 +74,8 @@ __decorate([
 ], AuthHelper.prototype, "userRepository", void 0);
 AuthHelper = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [jwt_1.JwtService])
+    __metadata("design:paramtypes", [jwt_1.JwtService,
+        config_1.ConfigService])
 ], AuthHelper);
 exports.AuthHelper = AuthHelper;
 //# sourceMappingURL=auth.helper.js.map
