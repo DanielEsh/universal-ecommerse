@@ -43,6 +43,10 @@ __decorate([
     }),
     __metadata("design:type", Array)
 ], User.prototype, "roles", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', nullable: true }),
+    __metadata("design:type", String)
+], User.prototype, "hashedRefreshToken", void 0);
 User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);

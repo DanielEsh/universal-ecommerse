@@ -25,6 +25,7 @@ const common_1 = require("@nestjs/common");
 const user_service_1 = require("../../user/service/user.service");
 const auth_helper_1 = require("../helpers/auth.helper");
 const cookie_1 = require("../../../utils/cookie");
+const bcrypt = require("bcryptjs");
 let AuthService = class AuthService {
     constructor(usersService) {
         this.usersService = usersService;
@@ -42,10 +43,26 @@ let AuthService = class AuthService {
         return result;
     }
     async signIn(user, res) {
-        const token = await this.authHelper.generateToken(user);
-        res.cookie('token', token, cookie_1.cookieOptions);
+        const accessToken = await this.authHelper.generateAccessToken(user);
+        const refreshToken = await this.authHelper.generateRefreshToken(user);
+        await this.usersService.updateRefreshTokenHash(user.id, refreshToken);
+        res.cookie('token', accessToken, cookie_1.cookieOptions);
         return {
-            accessToken: token,
+            accessToken,
+            refreshToken
+        };
+    }
+    async refresh(userId, refreshToken, res) {
+        const user = await this.usersService.findById(userId);
+        if (!user)
+            throw new common_1.ForbiddenException('Access denied');
+        const matchTokens = await bcrypt.compare(refreshToken, user.hashedRefreshToken);
+        if (!matchTokens)
+            throw new common_1.ForbiddenException('Access denied');
+        const accessToken = await this.authHelper.generateAccessToken(user);
+        res.cookie('token', accessToken, cookie_1.cookieOptions);
+        return {
+            accessToken,
         };
     }
 };

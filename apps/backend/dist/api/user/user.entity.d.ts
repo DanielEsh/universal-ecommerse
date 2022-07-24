@@ -7,4 +7,5 @@ export declare class User extends BaseEntity {
     name: string | null;
     lastLoginAt: Date | null;
     roles: Role[];
+    hashedRefreshToken: string | null;
 }

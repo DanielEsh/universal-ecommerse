@@ -28,6 +28,7 @@ export class UserService {
         user.name = body?.name || user.name;
         user.email = body?.email || user.email;
         user.roles = body?.roles || user.roles;
+        user.hashedRefreshToken = body?.hashedRefreshToken || user.hashedRefreshToken;
 
         return this.userRepository.save(user);
     }
@@ -56,5 +57,16 @@ export class UserService {
     public async delete(id: number) {
         await this.userRepository.delete({ id });
         return { deleted: true };
+    }
+
+    async updateRefreshTokenHash(userId: number, refreshToken: string) {
+        const hash = await this.hashData(refreshToken);
+        await this.updateUserById(userId, {
+            hashedRefreshToken: hash,
+        })
+    }
+
+    hashData(data: string) {
+        return bcrypt.hash(data, 10)
     }
 }

@@ -11,4 +11,6 @@ export declare class UserService {
     delete(id: number): Promise<{
         deleted: boolean;
     }>;
+    updateRefreshTokenHash(userId: number, refreshToken: string): Promise<void>;
+    hashData(data: string): Promise<string>;
 }

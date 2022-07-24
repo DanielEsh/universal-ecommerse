@@ -24,10 +24,28 @@ let AuthHelper = class AuthHelper {
         return this.jwt.decode(token, null);
     }
     async validateUser(decoded) {
+        console.log('validateUser', decoded);
         return this.userRepository.findOne(decoded.id);
     }
-    generateToken(user) {
-        return this.jwt.sign({ id: user.id, email: user.email, name: user.name });
+    generateAccessToken(user) {
+        return this.jwt.sign({
+            id: user.id,
+            email: user.email,
+            name: user.name
+        }, {
+            secret: process.env.JWT_ACCESS_KEY,
+            expiresIn: 60 * 60 * 24,
+        });
+    }
+    generateRefreshToken(user) {
+        return this.jwt.sign({
+            id: user.id,
+            email: user.email,
+            name: user.name
+        }, {
+            secret: 'refresh',
+            expiresIn: 60 * 60 * 24 * 7,
+        });
     }
     isPasswordValid(password, userPassword) {
         return bcrypt.compareSync(password, userPassword);
@@ -45,7 +63,7 @@ let AuthHelper = class AuthHelper {
         if (!user) {
             throw new common_1.UnauthorizedException();
         }
-        return true;
+        return user;
     }
 };
 __decorate([

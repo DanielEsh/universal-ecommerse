@@ -7,7 +7,8 @@ import { AuthController } from '@/api/auth/controller/auth.controller';
 import { AuthService } from '@/api/auth/service/auth.service';
 import { AuthHelper } from "@/api/auth/helpers/auth.helper";
 import { LocalStrategy } from '@/api/auth/strategy/local.strategy';
-import { JwtStrategy } from '@/api/auth/strategy/jwt.strategy';
+import { AccessJwtStrategy } from '@/api/auth/strategy/accessJwt.strategy';
+import { RefreshJwtStrategy } from "@/api/auth/strategy/refreshJwt.strategy";
 import { UserModule } from '@/api/user/user.module'
 import { User } from "@/api/user/user.entity";
 
@@ -16,15 +17,9 @@ import { User } from "@/api/user/user.entity";
     UserModule,
     PassportModule,
     TypeOrmModule.forFeature([User]),
-    JwtModule.registerAsync({
-      inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        secret: config.get('JWT_KEY'),
-        signOptions: { expiresIn: '60s' },
-      })
-    }),
+    JwtModule.register({}),
   ],
-  providers: [AuthService, AuthHelper, LocalStrategy, JwtStrategy],
+  providers: [AuthService, AuthHelper, LocalStrategy, AccessJwtStrategy, RefreshJwtStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}

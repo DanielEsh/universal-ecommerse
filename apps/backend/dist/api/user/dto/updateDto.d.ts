@@ -3,4 +3,5 @@ export declare class UpdateDto {
     readonly name?: string;
     readonly email?: string;
     readonly roles?: [Role];
+    readonly hashedRefreshToken: string;
 }

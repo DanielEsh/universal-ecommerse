@@ -30,6 +30,7 @@ let UserService = class UserService {
         user.name = (body === null || body === void 0 ? void 0 : body.name) || user.name;
         user.email = (body === null || body === void 0 ? void 0 : body.email) || user.email;
         user.roles = (body === null || body === void 0 ? void 0 : body.roles) || user.roles;
+        user.hashedRefreshToken = (body === null || body === void 0 ? void 0 : body.hashedRefreshToken) || user.hashedRefreshToken;
         return this.userRepository.save(user);
     }
     async create(body) {
@@ -49,6 +50,15 @@ let UserService = class UserService {
     async delete(id) {
         await this.userRepository.delete({ id });
         return { deleted: true };
+    }
+    async updateRefreshTokenHash(userId, refreshToken) {
+        const hash = await this.hashData(refreshToken);
+        await this.updateUserById(userId, {
+            hashedRefreshToken: hash,
+        });
+    }
+    hashData(data) {
+        return bcrypt.hash(data, 10);
     }
 };
 __decorate([

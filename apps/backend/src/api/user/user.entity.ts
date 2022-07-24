@@ -25,4 +25,7 @@ export class User extends BaseEntity {
         default: [Role.GUEST]
     })
     public roles: Role[]
+
+    @Column({ type: 'varchar', nullable: true })
+    public hashedRefreshToken: string | null;
 }

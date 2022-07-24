@@ -12,18 +12,18 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.JwtStrategy = void 0;
+exports.AccessJwtStrategy = void 0;
 const passport_jwt_1 = require("passport-jwt");
 const passport_1 = require("@nestjs/passport");
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const auth_helper_1 = require("../helpers/auth.helper");
-let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy) {
+let AccessJwtStrategy = class AccessJwtStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy, 'access-jwt') {
     constructor(config) {
         super({
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
             ignoreExpiration: false,
-            secretOrKey: config.get('JWT_KEY'),
+            secretOrKey: config.get('JWT_ACCESS_KEY'),
         });
     }
     async validate(payload) {
@@ -37,11 +37,11 @@ let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(pas
 __decorate([
     (0, common_1.Inject)(auth_helper_1.AuthHelper),
     __metadata("design:type", auth_helper_1.AuthHelper)
-], JwtStrategy.prototype, "authHelper", void 0);
-JwtStrategy = __decorate([
+], AccessJwtStrategy.prototype, "authHelper", void 0);
+AccessJwtStrategy = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, common_1.Inject)(config_1.ConfigService)),
     __metadata("design:paramtypes", [config_1.ConfigService])
-], JwtStrategy);
-exports.JwtStrategy = JwtStrategy;
-//# sourceMappingURL=jwt.strategy.js.map
+], AccessJwtStrategy);
+exports.AccessJwtStrategy = AccessJwtStrategy;
+//# sourceMappingURL=accessJwt.strategy.js.map

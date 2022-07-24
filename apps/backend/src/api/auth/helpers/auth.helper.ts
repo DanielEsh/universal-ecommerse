@@ -14,7 +14,6 @@ import { User } from '@/api/user/user.entity';
 export class AuthHelper {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>;
-
     private readonly jwt: JwtService;
 
     constructor(jwt: JwtService) {
@@ -28,12 +27,31 @@ export class AuthHelper {
 
     // Get User by User ID we get from decode()
     public async validateUser(decoded: any): Promise<User> {
+        console.log('validateUser', decoded);
         return this.userRepository.findOne(decoded.id);
     }
 
-    // Generate JWT Token
-    public generateToken(user: User): string {
-        return this.jwt.sign({ id: user.id, email: user.email, name: user.name });
+    // Generate Access JWT Token
+    public generateAccessToken(user: User): string {
+        return this.jwt.sign({
+            id: user.id,
+            email: user.email,
+            name: user.name
+        }, {
+            secret: process.env.JWT_ACCESS_KEY, // FIXME: fix with config
+            expiresIn: 60 * 60 * 24, // 1d
+        });
+    }
+
+    public generateRefreshToken(user: User): string {
+        return this.jwt.sign({
+            id: user.id,
+            email: user.email,
+            name: user.name
+        }, {
+            secret: 'refresh', // FIXME: fix with config
+            expiresIn: 60 * 60 * 24 * 7, // 7d
+        });
     }
 
     // Validate User's password
@@ -49,7 +67,7 @@ export class AuthHelper {
     }
 
     // Validate JWT Token, throw forbidden error if JWT Token is invalid
-    private async validate(token: string): Promise<boolean | never> {
+    private async validate(token: string): Promise<User | never> {
         const decoded: unknown = this.jwt.verify(token);
 
         if (!decoded) {
@@ -62,6 +80,6 @@ export class AuthHelper {
             throw new UnauthorizedException();
         }
 
-        return true;
+        return user;
     }
 }

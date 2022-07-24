@@ -1,7 +1,10 @@
 import { Controller, Req, Res, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { AuthService } from "@/api/auth/service/auth.service";
 import { Response } from "express";
+import { AuthService } from "@/api/auth/service/auth.service";
+import { RefreshJwtAuthGuard } from "@/api/auth/guards/refresh-jwt.guard";
+import { JwtAuthGuard } from "@/api/auth/guards/jwt-auth.guard";
+import { getCurrentUser } from "@/api/user/decorator/get-current-user.decorator";
 
 @Controller('auth')
 export class AuthController {
@@ -16,5 +19,11 @@ export class AuthController {
         @Res({ passthrough: true }) res: Response,
     ) {
         return this.authService.signIn(req.user, res);
+    }
+
+    @Post('refresh')
+    @UseGuards(RefreshJwtAuthGuard)
+    private refresh(@getCurrentUser() user, @Res({ passthrough: true }) res: Response,) {
+        return this.authService.refresh(user.id, user.refreshToken, res);
     }
 }

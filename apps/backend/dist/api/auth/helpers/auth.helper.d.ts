@@ -6,7 +6,8 @@ export declare class AuthHelper {
     constructor(jwt: JwtService);
     decode(token: string): Promise<unknown>;
     validateUser(decoded: any): Promise<User>;
-    generateToken(user: User): string;
+    generateAccessToken(user: User): string;
+    generateRefreshToken(user: User): string;
     isPasswordValid(password: string, userPassword: string): boolean;
     encodePassword(password: string): string;
     private validate;

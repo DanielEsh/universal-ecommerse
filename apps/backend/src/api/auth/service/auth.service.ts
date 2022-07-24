@@ -1,9 +1,10 @@
-import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
+import {Injectable, Inject, HttpException, HttpStatus, ForbiddenException} from '@nestjs/common';
 import { UserService } from '../../user/service/user.service';
 import {AuthHelper} from "@/api/auth/helpers/auth.helper";
 import {User} from "@/api/user/user.entity";
 import { Response } from "express";
 import {cookieOptions} from "@/utils/cookie";
+import * as bcrypt from "bcryptjs";
 
 @Injectable()
 export class AuthService {
@@ -40,10 +41,30 @@ export class AuthService {
     }
 
     async signIn(user: User, res: Response) {
-        const token = await this.authHelper.generateToken(user)
-        res.cookie('token', token, cookieOptions);
+        const accessToken = await this.authHelper.generateAccessToken(user)
+        const refreshToken = await this.authHelper.generateRefreshToken(user)
+        await this.usersService.updateRefreshTokenHash(user.id, refreshToken)
+        res.cookie('token', accessToken, cookieOptions);
         return {
-            accessToken: token,
+            accessToken,
+            refreshToken
         };
+    }
+
+    public async refresh(userId: number, refreshToken: string, res: Response) {
+        const user = await this.usersService.findById(userId);
+
+        if (!user) throw new ForbiddenException('Access denied')
+
+        const matchTokens = await bcrypt.compare(refreshToken, user.hashedRefreshToken)
+
+        if(!matchTokens) throw new ForbiddenException('Access denied')
+
+        const accessToken = await this.authHelper.generateAccessToken(user)
+        res.cookie('token', accessToken, cookieOptions);
+
+        return {
+            accessToken,
+        }
     }
 }
