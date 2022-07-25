@@ -11,18 +11,24 @@ export const http = axios.create({
     withCredentials: true,
 })
 
-http.interceptors.request.use((request: any) => {
-    if (typeof window !== 'undefined') {
-        return request
+let axios_token = '';
+
+
+http.interceptors.response.use((response) => {
+    return response
+}, async function (error) {
+    const originalRequest = error.config;
+    if (error.response.status === 401) {
+        console.log('Просрочен accessToken');
+        const token = localStorage.getItem('refreshToken');
+
+        const access_token = http.post('auth/refresh', {}, { headers: { 'Authorization': `Bearer ${token}` }})
+            .then(response => {
+                localStorage.setItem('accessToken', response.data.accessToken);
+            })
+            .catch(console.log);
+
+        return http(originalRequest);
     }
-
-
-
-    const token = getToken()
-
-    if (token) {
-        request.headers['Authorization'] = `Bearer ${token}`
-    }
-
-    return request
+    return Promise.reject(error);
 });
