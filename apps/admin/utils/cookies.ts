@@ -1,7 +1,7 @@
 import cookie from "cookie";
 import Cookies from "js-cookie";
 
-export const ACCESS_TOKEN = 'access_token'
+export const ACCESS_TOKEN = 'accessToken'
 
 export const parseCookies = (req?: any) => {
     if (!req || !req.headers) {

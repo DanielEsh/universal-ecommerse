@@ -1,11 +1,15 @@
 import Router from "next/router";
 import { http } from "../config/axios";
+import { getCookie } from '../utils/cookies';
 
 const delay = (amount = 750) => new Promise(resolve => setTimeout(resolve, amount))
 
 export async function signIn({ username, password }: any) {
     await delay()
     const { data } = await http.post(`/auth/signIn`, { username, password }, { headers: { 'content-type': 'application/json' } })
+
+    localStorage.setItem('accessToken', data.accessToken);
+    localStorage.setItem('refreshToken', data.refreshToken);
     Router.push('/')
 }
 
@@ -25,7 +29,9 @@ export async function getUser(token: string): Promise<any> {
 }
 
 export async function logout() {
-    const {data} = await http.get('/auth/logout');
+    const token = localStorage.getItem('accessToken');
+    console.log('TOKEN', token);
+    const {data} = await http.post('/auth/logout', {},{ headers: { 'Authorization': `Bearer ${token}` }});
 
     console.log('logout', data);
 

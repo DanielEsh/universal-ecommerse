@@ -16,6 +16,8 @@ http.interceptors.request.use((request: any) => {
         return request
     }
 
+
+
     const token = getToken()
 
     if (token) {
