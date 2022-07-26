@@ -22,7 +22,7 @@ export async function signUp(request: any) {
 export async function getUser(): Promise<any> {
     const token = localStorage.getItem('accessToken');
     console.log('TOKEN req', token);
-    const { data } = await http.get(`/user/`, { headers: { 'Authorization': `Bearer ${token}` } })
+    const { data } = await http.get(`/user/`)
     return data;
 }
 
