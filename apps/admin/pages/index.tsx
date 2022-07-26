@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import {GetServerSideProps} from "next";
 import {authUserRoute} from "../components/utils/authUserRoute";
-import {getUser} from "../service/auth.service";
+import { getUser } from "../service/user.service";
 
 const onButtonClick = async () => {
     const user = await getUser();
