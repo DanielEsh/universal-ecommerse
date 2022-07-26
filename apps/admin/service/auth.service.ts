@@ -19,13 +19,11 @@ export async function signUp(request: any) {
     return await http.post(`/auth/new`, request, { headers: { 'content-type': 'application/json' } })
 }
 
-export async function getUser(token: string): Promise<any> {
-    const { data } = await http.get(`/auth/profile`, { headers: { 'Authorization': `Bearer ${token}` } })
-    const user: any = {
-        id: data.sub,
-        name: data.username
-    }
-    return user
+export async function getUser(): Promise<any> {
+    const token = localStorage.getItem('accessToken');
+    console.log('TOKEN req', token);
+    const { data } = await http.get(`/user/`, { headers: { 'Authorization': `Bearer ${token}` } })
+    return data;
 }
 
 export async function logout() {
@@ -33,6 +31,8 @@ export async function logout() {
     console.log('TOKEN', token);
     const {data} = await http.post('/auth/logout', {},{ headers: { 'Authorization': `Bearer ${token}` }});
 
+    localStorage.setItem('accessToken', '');
+    localStorage.setItem('refreshToken', '');
     console.log('logout', data);
 
     Router.push('/auth')

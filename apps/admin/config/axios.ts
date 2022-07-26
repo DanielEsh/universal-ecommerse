@@ -13,22 +13,28 @@ export const http = axios.create({
 
 let axios_token = '';
 
+// http.interceptors.request.use((config) => {
+//     // @ts-ignore
+//     config.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`
+//     return config;
+// })
 
-http.interceptors.response.use((response) => {
-    return response
-}, async function (error) {
+http.interceptors.response.use((config) => {
+    return config;
+},async (error) => {
     const originalRequest = error.config;
-    if (error.response.status === 401) {
-        console.log('Просрочен accessToken');
-        const token = localStorage.getItem('refreshToken');
-
-        const access_token = http.post('auth/refresh', {}, { headers: { 'Authorization': `Bearer ${token}` }})
-            .then(response => {
-                localStorage.setItem('accessToken', response.data.accessToken);
-            })
-            .catch(console.log);
-
-        return http(originalRequest);
+    if (error.response.status == 401 && error.config && !error.config._isRetry) {
+        originalRequest._isRetry = true;
+        try {
+            console.log('Просрочен accessToken', originalRequest._isRetry);
+            const token = localStorage.getItem('refreshToken');
+            const response = await http.post('auth/refresh', {}, { headers: { 'Authorization': `Bearer ${token}` }})
+            localStorage.setItem('accessToken', response.data.accessToken);
+            console.log('TOKEN', response.data.accessToken === localStorage.getItem('accessToken'))
+            return http.request(originalRequest);
+        } catch (e) {
+            console.log('НЕ АВТОРИЗОВАН')
+        }
     }
-    return Promise.reject(error);
-});
+    throw error;
+})

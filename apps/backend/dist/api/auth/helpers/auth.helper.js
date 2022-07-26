@@ -36,7 +36,7 @@ let AuthHelper = class AuthHelper {
             name: user.name
         }, {
             secret: this.config.get('JWT_ACCESS_KEY'),
-            expiresIn: 60 * 5,
+            expiresIn: 60,
         });
     }
     generateRefreshToken(user) {

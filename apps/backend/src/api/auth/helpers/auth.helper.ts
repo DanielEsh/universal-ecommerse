@@ -45,7 +45,7 @@ export class AuthHelper {
             name: user.name
         }, {
             secret: this.config.get('JWT_ACCESS_KEY'),
-            expiresIn: 60 * 5, // 5min
+            expiresIn: 60, // 5min
         });
     }
 
