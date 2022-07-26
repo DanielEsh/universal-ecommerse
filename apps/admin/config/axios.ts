@@ -1,38 +1,19 @@
 import axios from 'axios';
-import { getToken } from '../utils/cookies';
-
-export const canUseDom = (): boolean => {
-    return (
-        typeof window !== 'undefined' &&
-        typeof window.document !== 'undefined' &&
-        typeof window.document.createElement !== 'undefined'
-    );
-};
-
-// const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
-// export const API_URI = serverRuntimeConfig.URI || publicRuntimeConfig.URI;
 
 console.log(`Environment: ${process.env.NODE_ENV}`)
 
-export const http = axios.create({
+export const $axios = axios.create({
     baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`,
     withCredentials: true,
 })
 
-let axios_token = '';
-let AT: string | null
-
-if (canUseDom()) {
-    AT = localStorage.getItem('accessToken');
-}
-
-http.interceptors.request.use(
+$axios.interceptors.request.use(
     (config) => {
-        if (AT && config.url !== 'auth/refresh') {
-            console.log('AT', config);
-            console.log('TKEN', localStorage.getItem('accessToken'))
+        const ACCESS_TOKEN = localStorage.getItem('accessToken');
+
+        if (ACCESS_TOKEN && config.url !== 'auth/refresh') {
             // @ts-ignore
-            config.headers["Authorization"] = 'Bearer ' + AT;
+            config.headers["Authorization"] = `Bearer ${ACCESS_TOKEN}`;
         }
         return config;
     },
@@ -41,19 +22,17 @@ http.interceptors.request.use(
     }
 );
 
-http.interceptors.response.use((config) => {
+$axios.interceptors.response.use((config) => {
     return config;
 },async (error) => {
     const originalRequest = error.config;
     if (error.response.status == 401 && error.config && !error.config._retry) {
         originalRequest._retry = true;
         try {
-            console.log('ПРОСРОЧЕН ACCESS_TOKEN');
             const token = localStorage.getItem('refreshToken');
-            const response = await http.post('auth/refresh', {}, { headers: { 'Authorization': `Bearer ${token}` }})
-            AT = response.data.accessToken;
-            console.log('NEW TOKEN', response.data.accessToken === AT)
-            return http.request(originalRequest);
+            const response = await $axios.post('auth/refresh', {}, { headers: { 'Authorization': `Bearer ${token}` }})
+            localStorage.setItem('accessToken', response.data.accessToken)
+            return $axios.request(originalRequest);
         } catch (e) {
             console.log('НЕ АВТОРИЗОВАН')
             throw error;
