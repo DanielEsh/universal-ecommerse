@@ -1,8 +1,9 @@
 import Router from "next/router";
 import { $axios } from "../config/axios";
+import { api } from "./api";
 
 export async function signIn({ username, password }: any) {
-    const { data } = await $axios.post(`/auth/signIn`, { username, password })
+    const { data } = await $axios.post(api.auth.signIn, { username, password })
 
     localStorage.setItem('accessToken', data.accessToken);
     localStorage.setItem('refreshToken', data.refreshToken);
@@ -10,7 +11,7 @@ export async function signIn({ username, password }: any) {
 }
 
 export async function logout() {
-    await $axios.post('/auth/logout');
+    await $axios.post(api.auth.logout);
     localStorage.setItem('accessToken', '');
     localStorage.setItem('refreshToken', '');
 
