@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { GetServerSideProps } from 'next'
-import { authUserRoute } from '../components/utils/authUserRoute'
+import { authUserRoute } from '../utils/authUserRoute'
 import Head from "next/head";
 
 const Test = () => {

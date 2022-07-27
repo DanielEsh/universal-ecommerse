@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import {GetServerSideProps} from "next";
-import {authUserRoute} from "../components/utils/authUserRoute";
+import {authUserRoute} from "../utils/authUserRoute";
 import { getUser } from "../service/user.service";
 
 const onButtonClick = async () => {

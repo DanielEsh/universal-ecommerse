@@ -1,11 +1,11 @@
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { parseCookies } from 'nookies'
+import { parseCookies } from "./cookies";
 
 export function guestUserRoute(fn: GetServerSideProps) {
   return async (ctx: GetServerSidePropsContext) => {
-    const { accessToken } = parseCookies(ctx)
+    const { refreshToken } = parseCookies(ctx)
 
-    if (accessToken) {
+    if (refreshToken) {
       return {
         redirect: {
           destination: '/',
