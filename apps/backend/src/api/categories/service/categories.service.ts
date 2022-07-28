@@ -10,12 +10,17 @@ export class CategoriesService {
   @InjectRepository(Category)
   private readonly categoryRepository: Repository<Category>;
 
-  create(createCategoryDto: CreateCategoryDto) {
-    return 'This action adds a new category';
+  create(body: CreateCategoryDto) {
+    const newCategory = new Category();
+
+    newCategory.name = body.name;
+    newCategory.description = body?.description;
+
+    return this.categoryRepository.save(newCategory);
   }
 
-  findAll() {
-    return `This action returns all categories`;
+  async findAll() {
+    return await this.categoryRepository.find();
   }
 
   findOne(id: number) {

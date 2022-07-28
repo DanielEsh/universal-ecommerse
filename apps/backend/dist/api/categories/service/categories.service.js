@@ -15,11 +15,14 @@ const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const category_entity_1 = require("../entities/category.entity");
 let CategoriesService = class CategoriesService {
-    create(createCategoryDto) {
-        return 'This action adds a new category';
+    create(body) {
+        const newCategory = new category_entity_1.Category();
+        newCategory.name = body.name;
+        newCategory.description = body === null || body === void 0 ? void 0 : body.description;
+        return this.categoryRepository.save(newCategory);
     }
-    findAll() {
-        return `This action returns all categories`;
+    async findAll() {
+        return await this.categoryRepository.find();
     }
     findOne(id) {
         return `This action returns a #${id} category`;
