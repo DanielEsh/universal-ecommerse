@@ -6,18 +6,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ApiModule = void 0;
+exports.CategoriesService = void 0;
 const common_1 = require("@nestjs/common");
-const user_module_1 = require("./user/user.module");
-const auth_module_1 = require("./auth/auth.module");
-const goods_module_1 = require("./goods/goods.module");
-const categories_module_1 = require("./categories/categories.module");
-let ApiModule = class ApiModule {
+let CategoriesService = class CategoriesService {
+    create(createCategoryDto) {
+        return 'This action adds a new category';
+    }
+    findAll() {
+        return `This action returns all categories`;
+    }
+    findOne(id) {
+        return `This action returns a #${id} category`;
+    }
+    update(id, updateCategoryDto) {
+        return `This action updates a #${id} category`;
+    }
+    remove(id) {
+        return `This action removes a #${id} category`;
+    }
 };
-ApiModule = __decorate([
-    (0, common_1.Module)({
-        imports: [user_module_1.UserModule, auth_module_1.AuthModule, goods_module_1.GoodsModule, categories_module_1.CategoriesModule],
-    })
-], ApiModule);
-exports.ApiModule = ApiModule;
-//# sourceMappingURL=api.module.js.map
+CategoriesService = __decorate([
+    (0, common_1.Injectable)()
+], CategoriesService);
+exports.CategoriesService = CategoriesService;
+//# sourceMappingURL=categories.service.js.map
