@@ -1,7 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
-import { UserService } from "@/api/user/service/user.service";
-import { UpdateDto } from "@/api/user/dto/updateDto";
-import { CreateDto } from "@/api/user/dto/createDto";
+import { UserService } from '@/api/user/service/user.service';
+import { UpdateDto } from '@/api/user/dto/updateDto';
+import { CreateDto } from '@/api/user/dto/createDto';
 export declare class UserController {
     private userService;
     constructor(userService: UserService);

@@ -30,7 +30,7 @@ let AccessJwtStrategy = class AccessJwtStrategy extends (0, passport_1.PassportS
         return {
             id: payload.id,
             name: payload.name,
-            email: payload.email
+            email: payload.email,
         };
     }
 };

@@ -33,7 +33,7 @@ let AuthHelper = class AuthHelper {
         return this.jwt.sign({
             id: user.id,
             email: user.email,
-            name: user.name
+            name: user.name,
         }, {
             secret: this.config.get('JWT_ACCESS_KEY'),
             expiresIn: 60,
@@ -43,7 +43,7 @@ let AuthHelper = class AuthHelper {
         return this.jwt.sign({
             id: user.id,
             email: user.email,
-            name: user.name
+            name: user.name,
         }, {
             secret: this.config.get('JWT_REFRESH_KEY'),
             expiresIn: 60 * 60 * 24 * 7,
@@ -74,8 +74,7 @@ __decorate([
 ], AuthHelper.prototype, "userRepository", void 0);
 AuthHelper = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [jwt_1.JwtService,
-        config_1.ConfigService])
+    __metadata("design:paramtypes", [jwt_1.JwtService, config_1.ConfigService])
 ], AuthHelper);
 exports.AuthHelper = AuthHelper;
 //# sourceMappingURL=auth.helper.js.map

@@ -39,7 +39,7 @@ __decorate([
         type: 'enum',
         enum: roles_enum_1.Role,
         array: true,
-        default: [roles_enum_1.Role.GUEST]
+        default: [roles_enum_1.Role.GUEST],
     }),
     __metadata("design:type", Array)
 ], User.prototype, "roles", void 0);

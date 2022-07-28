@@ -50,7 +50,7 @@ let AuthService = class AuthService {
         res.cookie('refreshToken', refreshToken, cookie_1.cookieOptions);
         return {
             accessToken,
-            refreshToken
+            refreshToken,
         };
     }
     async refresh(userId, refreshToken, res) {
@@ -70,7 +70,7 @@ let AuthService = class AuthService {
         response.clearCookie('accessToken');
         response.clearCookie('refreshToken');
         await this.usersService.updateUserById(userId, {
-            hashedRefreshToken: null
+            hashedRefreshToken: null,
         });
     }
 };

@@ -1,5 +1,5 @@
 import { BaseEntity } from 'typeorm';
-import { Role } from "@/api/auth/roles.enum";
+import { Role } from '@/api/auth/roles.enum';
 export declare class User extends BaseEntity {
     id: number;
     email: string;

@@ -1,6 +1,6 @@
 import { UserService } from '../../user/service/user.service';
-import { User } from "@/api/user/user.entity";
-import { Response } from "express";
+import { User } from '@/api/user/user.entity';
+import { Response } from 'express';
 export declare class AuthService {
     private usersService;
     constructor(usersService: UserService);
