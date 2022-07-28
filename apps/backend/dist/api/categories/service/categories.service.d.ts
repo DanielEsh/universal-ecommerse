@@ -5,7 +5,7 @@ export declare class CategoriesService {
     private readonly categoryRepository;
     create(body: CreateCategoryDto): Promise<Category>;
     findAll(): Promise<Category[]>;
-    findOne(id: number): string;
+    findOne(id: number): Promise<Category>;
     update(id: number, updateCategoryDto: UpdateCategoryDto): string;
     remove(id: number): string;
 }

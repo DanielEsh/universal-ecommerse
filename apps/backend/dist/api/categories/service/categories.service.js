@@ -25,7 +25,7 @@ let CategoriesService = class CategoriesService {
         return await this.categoryRepository.find();
     }
     findOne(id) {
-        return `This action returns a #${id} category`;
+        return this.categoryRepository.findOne({ where: { id } });
     }
     update(id, updateCategoryDto) {
         return `This action updates a #${id} category`;
