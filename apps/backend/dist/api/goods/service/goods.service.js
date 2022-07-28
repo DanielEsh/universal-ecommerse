@@ -6,17 +6,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ApiModule = void 0;
+exports.GoodsService = void 0;
 const common_1 = require("@nestjs/common");
-const user_module_1 = require("./user/user.module");
-const auth_module_1 = require("./auth/auth.module");
-const goods_module_1 = require("./goods/goods.module");
-let ApiModule = class ApiModule {
+let GoodsService = class GoodsService {
+    create(createGoodDto) {
+        return 'This action adds a new good';
+    }
+    findAll() {
+        return `This action returns all goods`;
+    }
+    findOne(id) {
+        return `This action returns a #${id} good`;
+    }
+    update(id, updateGoodDto) {
+        return `This action updates a #${id} good`;
+    }
+    remove(id) {
+        return `This action removes a #${id} good`;
+    }
 };
-ApiModule = __decorate([
-    (0, common_1.Module)({
-        imports: [user_module_1.UserModule, auth_module_1.AuthModule, goods_module_1.GoodsModule],
-    })
-], ApiModule);
-exports.ApiModule = ApiModule;
-//# sourceMappingURL=api.module.js.map
+GoodsService = __decorate([
+    (0, common_1.Injectable)()
+], GoodsService);
+exports.GoodsService = GoodsService;
+//# sourceMappingURL=goods.service.js.map
