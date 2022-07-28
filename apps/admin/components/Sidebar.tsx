@@ -11,7 +11,7 @@ export const SideBar = () => {
     }
 
     return (
-        <div className="fixed grow-0 w-[320px] h-full p-8">
+        <aside className="fixed grow-0 w-[320px] h-full p-8">
             <Logo />
             <AsideMenu />
             <AsideUser />
@@ -21,6 +21,6 @@ export const SideBar = () => {
                     Выйти
                 </button>
             </div>
-        </div>
+        </aside>
     );
 };
