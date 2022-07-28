@@ -1,6 +1,8 @@
 import React from 'react';
 import {logout} from "../service/auth.service";
+import { Logo } from './Logo';
 import { AsideMenu } from './AsideMenu';
+import { AsideUser } from './AsideUser';
 
 export const SideBar = () => {
 
@@ -10,7 +12,9 @@ export const SideBar = () => {
 
     return (
         <div className="fixed grow-0 w-[320px] h-full p-8">
+            <Logo />
             <AsideMenu />
+            <AsideUser />
 
             <div>
                 <button onClick={onLogout}>
