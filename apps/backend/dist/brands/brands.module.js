@@ -6,25 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ApiModule = void 0;
+exports.BrandsModule = void 0;
 const common_1 = require("@nestjs/common");
-const user_module_1 = require("./user/user.module");
-const auth_module_1 = require("./auth/auth.module");
-const goods_module_1 = require("./goods/goods.module");
-const categories_module_1 = require("./categories/categories.module");
-const brands_module_1 = require("./brands/brands.module");
-let ApiModule = class ApiModule {
+const brands_service_1 = require("./brands.service");
+const brands_controller_1 = require("./brands.controller");
+let BrandsModule = class BrandsModule {
 };
-ApiModule = __decorate([
+BrandsModule = __decorate([
     (0, common_1.Module)({
-        imports: [
-            user_module_1.UserModule,
-            auth_module_1.AuthModule,
-            goods_module_1.GoodsModule,
-            categories_module_1.CategoriesModule,
-            brands_module_1.BrandsModule,
-        ],
+        controllers: [brands_controller_1.BrandsController],
+        providers: [brands_service_1.BrandsService]
     })
-], ApiModule);
-exports.ApiModule = ApiModule;
-//# sourceMappingURL=api.module.js.map
+], BrandsModule);
+exports.BrandsModule = BrandsModule;
+//# sourceMappingURL=brands.module.js.map
