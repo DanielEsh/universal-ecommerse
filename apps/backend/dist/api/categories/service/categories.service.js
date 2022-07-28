@@ -27,8 +27,11 @@ let CategoriesService = class CategoriesService {
     findOne(id) {
         return this.categoryRepository.findOne({ where: { id } });
     }
-    update(id, updateCategoryDto) {
-        return `This action updates a #${id} category`;
+    async update(id, body) {
+        const category = await this.findOne(id);
+        category.name = (body === null || body === void 0 ? void 0 : body.name) || category.name;
+        category.description = body.description || category.description;
+        return this.categoryRepository.save(category);
     }
     remove(id) {
         return `This action removes a #${id} category`;

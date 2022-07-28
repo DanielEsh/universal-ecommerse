@@ -27,8 +27,13 @@ export class CategoriesService {
     return this.categoryRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+  async update(id: number, body: UpdateCategoryDto) {
+    const category = await this.findOne(id);
+
+    category.name = body?.name || category.name;
+    category.description = body.description || category.description;
+
+    return this.categoryRepository.save(category);
   }
 
   remove(id: number) {
