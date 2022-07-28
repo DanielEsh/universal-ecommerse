@@ -7,5 +7,5 @@ export declare class CategoriesService {
     findAll(): Promise<Category[]>;
     findOne(id: number): Promise<Category>;
     update(id: number, body: UpdateCategoryDto): Promise<Category>;
-    remove(id: number): string;
+    remove(id: number): Promise<void>;
 }

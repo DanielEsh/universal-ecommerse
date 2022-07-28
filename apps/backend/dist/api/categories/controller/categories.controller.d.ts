@@ -8,5 +8,5 @@ export declare class CategoriesController {
     findAll(): Promise<import("../entities/category.entity").Category[]>;
     findOne(id: string): Promise<import("../entities/category.entity").Category>;
     update(id: string, updateCategoryDto: UpdateCategoryDto): Promise<import("../entities/category.entity").Category>;
-    remove(id: string): string;
+    remove(id: string): Promise<void>;
 }

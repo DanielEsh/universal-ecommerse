@@ -33,8 +33,8 @@ let CategoriesService = class CategoriesService {
         category.description = body.description || category.description;
         return this.categoryRepository.save(category);
     }
-    remove(id) {
-        return `This action removes a #${id} category`;
+    async remove(id) {
+        await this.categoryRepository.delete({ id });
     }
 };
 __decorate([

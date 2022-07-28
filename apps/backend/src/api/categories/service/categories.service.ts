@@ -36,7 +36,7 @@ export class CategoriesService {
     return this.categoryRepository.save(category);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} category`;
+  async remove(id: number) {
+    await this.categoryRepository.delete({ id });
   }
 }
