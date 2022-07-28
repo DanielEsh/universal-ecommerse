@@ -1,42 +1,14 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller } from '@nestjs/common';
+import { Crud, CrudController } from '@nestjsx/crud';
 import { BrandsService } from '@/api/brands/service/brands.service';
-import { CreateBrandDto } from '@/api/brands/dto/create-brand.dto';
-import { UpdateBrandDto } from '@/api/brands/dto/update-brand.dto';
+import { Brand } from '@/api/brands/entities/brand.entity';
 
+@Crud({
+  model: {
+    type: Brand,
+  },
+})
 @Controller('brands')
-export class BrandsController {
-  constructor(private readonly brandsService: BrandsService) {}
-
-  @Post()
-  create(@Body() createBrandDto: CreateBrandDto) {
-    return this.brandsService.create(createBrandDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.brandsService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.brandsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBrandDto: UpdateBrandDto) {
-    return this.brandsService.update(+id, updateBrandDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.brandsService.remove(+id);
-  }
+export class BrandsController implements CrudController<Brand> {
+  constructor(public service: BrandsService) {}
 }
