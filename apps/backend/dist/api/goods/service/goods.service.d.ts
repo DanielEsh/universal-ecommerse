@@ -1,9 +1,5 @@
-import { CreateGoodDto } from '@/api/goods/dto/create-good.dto';
-import { UpdateGoodDto } from '@/api/goods/dto/update-good.dto';
-export declare class GoodsService {
-    create(createGoodDto: CreateGoodDto): string;
-    findAll(): string;
-    findOne(id: number): string;
-    update(id: number, updateGoodDto: UpdateGoodDto): string;
-    remove(id: number): string;
+import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
+import { Good } from '@/api/goods/entities/good.entity';
+export declare class GoodsService extends TypeOrmCrudService<Good> {
+    constructor(repo: any);
 }

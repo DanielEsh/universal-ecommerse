@@ -1,26 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { CreateGoodDto } from '@/api/goods/dto/create-good.dto';
-import { UpdateGoodDto } from '@/api/goods/dto/update-good.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
+import { Good } from '@/api/goods/entities/good.entity';
 
 @Injectable()
-export class GoodsService {
-  create(createGoodDto: CreateGoodDto) {
-    return 'This action adds a new good';
-  }
-
-  findAll() {
-    return `This action returns all goods`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} good`;
-  }
-
-  update(id: number, updateGoodDto: UpdateGoodDto) {
-    return `This action updates a #${id} good`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} good`;
+export class GoodsService extends TypeOrmCrudService<Good> {
+  constructor(@InjectRepository(Good) repo) {
+    super(repo);
   }
 }
