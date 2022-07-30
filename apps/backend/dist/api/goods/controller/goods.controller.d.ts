@@ -4,4 +4,5 @@ import { Good } from '@/api/goods/entities/good.entity';
 export declare class GoodsController implements CrudController<Good> {
     service: GoodsService;
     constructor(service: GoodsService);
+    test(): Promise<any>;
 }

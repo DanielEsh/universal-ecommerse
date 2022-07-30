@@ -21,6 +21,17 @@ let GoodsService = class GoodsService extends crud_typeorm_1.TypeOrmCrudService 
     constructor(repo) {
         super(repo);
     }
+    async test() {
+        return await this.repo.manager.query(`
+      SELECT 
+        brand.name,
+        good.name,
+        brand.id,
+        good.id
+	    FROM public.good
+      JOIN brand ON "brandId="brand.id
+      `);
+    }
 };
 GoodsService = __decorate([
     (0, common_1.Injectable)(),

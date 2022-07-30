@@ -5,7 +5,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from 'typeorm';
+import { Brand } from '@/api/brands/entities/brand.entity';
 
 @Entity()
 export class Good extends BaseEntity {
@@ -17,6 +19,9 @@ export class Good extends BaseEntity {
 
   @Column({ type: 'varchar' })
   public description: string;
+
+  @ManyToOne(() => Brand, (brand) => brand.id)
+  public brand: Brand;
 
   @CreateDateColumn({
     type: 'timestamp',

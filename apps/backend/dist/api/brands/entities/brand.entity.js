@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Brand = void 0;
 const typeorm_1 = require("typeorm");
+const good_entity_1 = require("../../goods/entities/good.entity");
 let Brand = class Brand extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -25,6 +26,10 @@ __decorate([
     (0, typeorm_1.Column)({ type: 'varchar' }),
     __metadata("design:type", String)
 ], Brand.prototype, "description", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => good_entity_1.Good, (good) => good.id),
+    __metadata("design:type", Array)
+], Brand.prototype, "goods", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)({
         type: 'timestamp',
