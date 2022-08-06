@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Good = void 0;
 const typeorm_1 = require("typeorm");
 const brand_entity_1 = require("../../brands/entities/brand.entity");
+const category_entity_1 = require("../../categories/entities/category.entity");
 let Good = class Good extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -30,6 +31,10 @@ __decorate([
     (0, typeorm_1.ManyToOne)(() => brand_entity_1.Brand, (brand) => brand.id),
     __metadata("design:type", brand_entity_1.Brand)
 ], Good.prototype, "brand", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => category_entity_1.Category, (category) => category.id),
+    __metadata("design:type", category_entity_1.Category)
+], Good.prototype, "category", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)({
         type: 'timestamp',

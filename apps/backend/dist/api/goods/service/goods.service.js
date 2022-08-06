@@ -25,6 +25,7 @@ let GoodsService = class GoodsService extends crud_typeorm_1.TypeOrmCrudService 
         return await this.repo.find({
             relations: {
                 brand: true,
+                category: true,
             },
         });
     }

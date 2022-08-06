@@ -8,6 +8,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { Brand } from '@/api/brands/entities/brand.entity';
+import { Category } from '@/api/categories/entities/category.entity';
 
 @Entity()
 export class Good extends BaseEntity {
@@ -22,6 +23,9 @@ export class Good extends BaseEntity {
 
   @ManyToOne(() => Brand, (brand) => brand.id)
   public brand: Brand;
+
+  @ManyToOne(() => Category, (category) => category.id)
+  public category: Category;
 
   @CreateDateColumn({
     type: 'timestamp',

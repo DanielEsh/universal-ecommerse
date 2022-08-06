@@ -13,6 +13,7 @@ export class GoodsService extends TypeOrmCrudService<Good> {
     return await this.repo.find({
       relations: {
         brand: true,
+        category: true,
       },
     });
   }
