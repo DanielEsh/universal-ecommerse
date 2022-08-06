@@ -22,15 +22,11 @@ let GoodsService = class GoodsService extends crud_typeorm_1.TypeOrmCrudService 
         super(repo);
     }
     async test() {
-        return await this.repo.manager.query(`
-      SELECT 
-        brand.name,
-        good.name,
-        brand.id,
-        good.id
-	    FROM public.good
-      JOIN brand ON "brandId="brand.id
-      `);
+        return await this.repo.find({
+            relations: {
+                brand: true,
+            },
+        });
     }
 };
 GoodsService = __decorate([
