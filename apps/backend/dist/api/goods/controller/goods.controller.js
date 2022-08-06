@@ -18,16 +18,7 @@ let GoodsController = class GoodsController {
     constructor(service) {
         this.service = service;
     }
-    test() {
-        return this.service.test();
-    }
 };
-__decorate([
-    (0, common_1.Get)('/test'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], GoodsController.prototype, "test", null);
 GoodsController = __decorate([
     (0, crud_1.Crud)({
         model: {

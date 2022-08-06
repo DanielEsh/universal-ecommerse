@@ -21,7 +21,7 @@ let GoodsService = class GoodsService extends crud_typeorm_1.TypeOrmCrudService 
     constructor(repo) {
         super(repo);
     }
-    async test() {
+    async getMany() {
         return await this.repo.find({
             relations: {
                 brand: true,

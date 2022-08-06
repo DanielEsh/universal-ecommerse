@@ -9,7 +9,7 @@ export class GoodsService extends TypeOrmCrudService<Good> {
     super(repo);
   }
 
-  async test() {
+  async getMany() {
     return await this.repo.find({
       relations: {
         brand: true,
