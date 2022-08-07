@@ -1,19 +1,20 @@
-import { useRef } from "react";
+import { useState } from "react";
+import { Input } from '../components/ui/Input'
+import { InputPassword } from '../components/ui/InputPassword'
 
 import {signIn} from "../service/auth.service";
 
 export const SignInForm = () => {
-
-    const emailRef = useRef<any>(null);
-    const passwordRef = useRef<any>(null);
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
     // @ts-ignore
     const onSubmit = async (event) => {
         event.preventDefault();
 
        await onLoggin({
-            username: emailRef.current.value,
-            password: passwordRef.current.value
+            username: email,
+            password: password,
         })
 
         console.log('submit');
@@ -32,14 +33,20 @@ export const SignInForm = () => {
 
     return (
         <form onSubmit={onSubmit}>
-            <div>
-                Name
-                <input type="text" ref={emailRef} value="elon@gmail.com"/>
+            <div className="w-1/4">
+                <Input 
+                    defaultValue="elon@gmail.com"
+                    onChange={(value) => setEmail(value)}
+                />
             </div>
-            <div>
-                password
-                <input type="text" ref={passwordRef} value="12345678"/>
+
+            <div className="w-1/4">
+                <InputPassword 
+                    defaultValue="12345678"
+                    onChange={(value) => setPassword(value)}
+                />
             </div>
+
             <button type="submit">
                 Submit
             </button>
