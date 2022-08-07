@@ -8,6 +8,7 @@ const Auth = () => {
         <div>
             <div>
                 Auth Page
+                
             </div>
 
             <Link href="/">
