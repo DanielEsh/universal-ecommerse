@@ -24,6 +24,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         placeholder = '',
         disabled,
         readOnly,
+        addonAfter,
+        addonBefore,
         onChange,
         onFocus,
         onBlur,
@@ -54,13 +56,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       const labelClasses = classNames(
         'absolute bottom-[20px] left-0 transition-transform',
         {
-          ['-translate-y-[15px] -translate-x-[5px] scale-75']: isFocused || value,
+          ['-translate-y-[15px] -translate-x-[5px] scale-75']: isFocused || value || placeholder,
         },
       )
 
     return (
-        <div className="relative flex item-center w-full h-[64px] px-[24px] rounded-md bg-neutral-300">
-            <div className="relative w-full h-full pt-[16px]">
+        <div className="relative flex items-center w-full h-[64px] px-[24px] rounded-md bg-neutral-300">
+            <label className="relative w-full h-full pt-[16px]">
                 <input 
                     ref={defaultInputRef}
                     className="relative w-full h-full p-0 m-0 bg-transparent outline-none"
@@ -78,7 +80,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
                 <div className={labelClasses}>
                     Label
                 </div>
-            </div>
+            </label>
+
+            {
+                addonAfter && (
+                    addonAfter
+                )
+            }
         </div>
     )
 })
