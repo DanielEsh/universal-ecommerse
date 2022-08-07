@@ -32,11 +32,6 @@ export class UserController {
     return await this.userService.create(body);
   }
 
-  @Get(':id')
-  getById(@Param('id') id: number) {
-    return this.userService.findById(id);
-  }
-
   @Put(':id')
   async updateById(@Param('id') id: number, @Body() body: UpdateDto) {
     await this.userService.updateUserById(id, body);
@@ -56,12 +51,13 @@ export class UserController {
   @Get('profile')
   getProfile(@Request() req) {
     const { user } = req;
-    return this.userService.findById(user.id);
+    return 'Profile';
+    // return this.userService.findById(user.id);
   }
 
-  @Get('guest')
-  guest(@Request() req) {
-    const { user } = req;
+  @Get('/guest/')
+  guest() {
+    console.log('123');
     return 'Guest route';
   }
 
@@ -71,5 +67,10 @@ export class UserController {
   admin(@Request() req) {
     const { user } = req;
     return 'Admin route';
+  }
+
+  @Get(':id')
+  getById(@Param('id') id: number) {
+    return this.userService.findById(id);
   }
 }
