@@ -5,8 +5,8 @@ import { InputPassword } from '../components/ui/InputPassword'
 import {signIn} from "../service/auth.service";
 
 export const SignInForm = () => {
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
+    const [email, setEmail] = useState<string>('elon@gmail.com');
+    const [password, setPassword] = useState<string>('12345678');
 
     // @ts-ignore
     const onSubmit = async (event) => {
