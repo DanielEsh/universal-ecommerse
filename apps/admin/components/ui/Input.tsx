@@ -58,14 +58,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
       const rootClasses = classNames(
         className,
-        'relative flex items-center w-full h-[64px] px-[24px] border-[1px] rounded-md transition-colors bg-neutral-100 hover:border-neutral-300',
+        'relative flex items-center w-full h-[64px] px-[24px] border-[1px] rounded-md transition-colors bg-neutral-100 text-base hover:border-neutral-300',
         {
             ['border-blue-600 hover:border-blue-600']: isFocused,
           },
       )
 
       const labelClasses = classNames(
-        'absolute bottom-[20px] left-0 transition-transform',
+        'absolute bottom-[20px] left-0 text-base transition-transform',
         {
           ['-translate-y-[15px] -translate-x-[5px] scale-75']: isFocused || value || placeholder,
         },
