@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { SignInForm } from '../../components/SignInForm'
+import { Input } from '../../components/ui/Input'
 
 
 const Auth = () => {
@@ -10,6 +11,11 @@ const Auth = () => {
                 Auth Page
                 
             </div>
+
+            <div>
+                <Input />
+            </div>
+
 
             <Link href="/">
                 <a>to HOME</a>
