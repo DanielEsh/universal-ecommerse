@@ -14,7 +14,7 @@ const Auth = () => {
 
             <div>
                 <Input 
-                    defaultValue="123"
+                    defaultValue=""
                 />
             </div>
 

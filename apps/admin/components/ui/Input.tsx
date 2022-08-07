@@ -40,18 +40,27 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       }
 
     return (
-        <input 
-            ref={ref}
-            id={id}
-            name={name}
-            type="text" 
-            value={value}
-            disabled={disabled}
-            placeholder={placeholder}
-            onChange={handleChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-        />
+        <div className="relative flex item-center w-full h-[64px] px-[24px] rounded-md bg-neutral-300">
+            <div className="relative w-full h-full pt-[16px]">
+                <input 
+                    ref={ref}
+                    className="relative w-full h-full p-0 m-0"
+                    id={id}
+                    name={name}
+                    type="text" 
+                    value={value}
+                    disabled={disabled}
+                    placeholder={placeholder}
+                    onChange={handleChange}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
+                />
+
+                <div className="absolute bottom-[20px] left-0">
+                    Label
+                </div>
+            </div>
+        </div>
     )
 })
 
