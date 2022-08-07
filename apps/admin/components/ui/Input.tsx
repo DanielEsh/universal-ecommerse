@@ -12,8 +12,8 @@ export type InputProps = {
     addonAfter?: ReactNode
     addonBefore?: ReactNode
     autoFocus?: boolean
-    onBlur?: any
-    onFocus?: any
+    onBlur?: () => void
+    onFocus?: () => void
     onChange?: (value: string) => void
 }
 
@@ -45,13 +45,24 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         if (onChange) onChange(event.target.value)
       }
 
-      const handleFocus = () => {
-        setFocused(true)
+      const handleFocusManagment = (focus: boolean) => {
+        if (focus) {
+            setFocused(focus)
+            if (onFocus) onFocus()
+            return
+        }
+
+        setFocused(focus)
+        if (onBlur) onBlur()
       }
 
-      const handleBlur = () => {
-        setFocused(false);;
-      }
+      const rootClasses = classNames(
+        className,
+        'relative flex items-center w-full h-[64px] px-[24px] border-[1px] rounded-md transition-colors bg-neutral-100 hover:border-neutral-300',
+        {
+            ['border-blue-600 hover:border-blue-600']: isFocused,
+          },
+      )
 
       const labelClasses = classNames(
         'absolute bottom-[20px] left-0 transition-transform',
@@ -61,7 +72,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       )
 
     return (
-        <div className="relative flex items-center w-full h-[64px] px-[24px] rounded-md bg-neutral-300">
+        <div className={rootClasses}>
             <label className="relative w-full h-full pt-[16px]">
                 <input 
                     ref={defaultInputRef}
@@ -73,8 +84,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
                     disabled={disabled}
                     placeholder={placeholder}
                     onChange={handleChange}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
+                    onFocus={() => handleFocusManagment(true)}
+                    onBlur={() => handleFocusManagment(false)}
                 />
 
                 <div className={labelClasses}>
