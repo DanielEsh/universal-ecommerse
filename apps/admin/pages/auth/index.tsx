@@ -1,20 +1,10 @@
-import React from 'react'
-import Link from 'next/link'
+import { Logo } from '../../components/Logo'
 import { SignInForm } from '../../components/SignInForm'
 
 const Auth = () => {
     return (
-        <div>
-            <div>
-                Auth Page
-                
-            </div>
-
-
-            <Link href="/">
-                <a>to HOME</a>
-            </Link>
-
+        <div className="flex items-center justify-center flex-col w-screen h-screen">
+            <Logo />
             <SignInForm />
         </div>
     )

@@ -32,15 +32,18 @@ export const SignInForm = () => {
     }
 
     return (
-        <form onSubmit={onSubmit}>
-            <div className="w-1/4">
+        <form 
+            className="flex items-center justify-center flex-col gap-6 mt-6"
+            onSubmit={onSubmit}
+        >
+            <div className="w-[500px]">
                 <Input 
                     defaultValue="elon@gmail.com"
                     onChange={(value) => setEmail(value)}
                 />
             </div>
 
-            <div className="w-1/4">
+            <div className="w-[500px]">
                 <InputPassword 
                     defaultValue="12345678"
                     onChange={(value) => setPassword(value)}
