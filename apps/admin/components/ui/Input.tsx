@@ -4,8 +4,7 @@ export type InputProps = {
     className?: string
     id?: string
     name?: string
-    defaultValue: string
-    label?: string
+    defaultValue?: string
     placeholder?: string
     disabled?: boolean
     readOnly?: boolean
@@ -21,7 +20,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const {
         className,
         defaultValue = '',
-        label = '',
         placeholder = '',
         disabled,
         readOnly,
@@ -42,18 +40,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       }
 
     return (
-        <label>
-            <input 
-                ref={ref}
-                id={id}
-                name={name}
-                type="text"
-                value={value}
-                onChange={handleChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-            />
-        </label>
+        <input 
+            ref={ref}
+            id={id}
+            name={name}
+            type="text" 
+            value={value}
+            disabled={disabled}
+            placeholder={placeholder}
+            onChange={handleChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+        />
     )
 })
 
