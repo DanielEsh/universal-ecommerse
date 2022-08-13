@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Input } from '../components/ui/Input'
 import { InputPassword } from '../components/ui/InputPassword'
+import { Button } from "./ui/Button";
 
 import {signIn} from "../service/auth.service";
 
@@ -50,9 +51,9 @@ export const SignInForm = () => {
                 />
             </div>
 
-            <button type="submit">
+            <Button type="submit">
                 Submit
-            </button>
+            </Button>
         </form>
     )
 }
