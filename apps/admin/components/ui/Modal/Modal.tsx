@@ -17,9 +17,7 @@ export const Modal = forwardRef<HTMLElement, ModalProps>((props, forwardedRef) =
     return (
         <Portal container={containerEl}>
             <div className="fixed inset-0 bg-neutral-800/50 overflow-hidden">
-                <div className="absolute top-0 right-0 w-[750px] h-full bg-slate-50">
-                    {children}
-                </div>
+                {children}
             </div>
         </Portal>
         
