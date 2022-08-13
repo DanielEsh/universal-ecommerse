@@ -1,12 +1,12 @@
 import { getAllBrands } from "../../service/brands.service"
 
-const BrandsPage = ({brandsData}) => {
+const BrandsPage = ({data}) => {
     return (
         <div>
             BRANDS PAGE
 
             {
-                brandsData.map(brand => (
+                data.map(brand => (
                     <div key={brand.id}>
                         {brand.name}
                     </div>
@@ -18,10 +18,10 @@ const BrandsPage = ({brandsData}) => {
 
 export async function getServerSideProps() {
     // Fetch data from external API
-    const brandsData = await getAllBrands();
+    const {data} = await getAllBrands();
   
     // Pass data to the page via props
-    return { props: { brandsData } }
+    return { props: { data } }
   }
 
 export default BrandsPage
