@@ -1,7 +1,8 @@
 import { getAllBrands } from "../../service/brands.service"
 
 import { BrandCreator } from "../../components/BrandCreator";
-import { Table } from "../../components/ui/Table";
+import { Table } from "../../components/ui/inputs/Table/Table";
+// import { Table } from "../../components/ui/Table";
 
 const BrandsPage = ({data}) => {
     return (
@@ -17,7 +18,12 @@ const BrandsPage = ({data}) => {
             }
 
             <BrandCreator />
-            <Table/>
+            <Table>
+                <Table.Head />
+                <Table.Body />
+                <Table.Cell />
+                <Table.Row />
+            </Table>
         </div>
     )
 }
