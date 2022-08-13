@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app'
+import { ThemeProvider } from 'next-themes'
 import { DefaultLayout } from '../components/layouts/Default'
 
 import '../styles/globals.css'
@@ -6,14 +7,18 @@ import '../styles/globals.css'
 function MyApp({ Component, pageProps, router }: AppProps) {
     if (router.pathname.startsWith('/auth')) {
         return (
-            <Component {...pageProps}/>
+            <ThemeProvider>
+                <Component {...pageProps}/>
+            </ThemeProvider>
         )
     }
 
   return (
-      <DefaultLayout>
-        <Component {...pageProps} />
-      </DefaultLayout>
+    <ThemeProvider>
+        <DefaultLayout>
+            <Component {...pageProps} />
+        </DefaultLayout>
+    </ThemeProvider>
   )
 }
 
