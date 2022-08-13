@@ -2,7 +2,7 @@ import { useState, FormEvent } from 'react';
 
 import { createBrand } from '../service/brands.service';
 
-import { Input } from './ui/Input'
+import { BaseInput } from './ui/inputs/BaseInput'
 import { Button } from './ui/Button';
 
 export const BrandCreator = () => {
@@ -27,8 +27,14 @@ export const BrandCreator = () => {
         <form onSubmit={onSubmit}>
             CREATOR
 
-            <Input onChange={onChangeName} />
-            <Input onChange={onChangeDescription} />
+            <BaseInput 
+                label="Name"
+                onChange={onChangeName}
+            />
+            <BaseInput 
+                label="Description"
+                onChange={onChangeDescription}
+            />
 
             <Button 
                 type="submit"

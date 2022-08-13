@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Input } from '../components/ui/Input'
-import { InputPassword } from '../components/ui/InputPassword'
+import { BaseInput } from './ui/inputs/BaseInput'
+import { InputPassword } from './ui/inputs/InputPassword'
 import { Button } from "./ui/Button";
 
 import {signIn} from "../service/auth.service";
@@ -38,7 +38,7 @@ export const SignInForm = () => {
             onSubmit={onSubmit}
         >
             <div className="w-[500px]">
-                <Input 
+                <BaseInput 
                     defaultValue="elon@gmail.com"
                     onChange={(value) => setEmail(value)}
                 />

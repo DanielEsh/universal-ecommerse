@@ -1,12 +1,14 @@
 import { ReactNode, forwardRef, ChangeEvent, useState, useRef, } from 'react'
 import classNames from 'classnames'
 
-export type InputProps = {
+export type BaseInputProps = {
     className?: string
     id?: string
     name?: string
     defaultValue?: string
     placeholder?: string
+    label?: string
+    type?: string
     disabled?: boolean
     readOnly?: boolean
     addonAfter?: ReactNode
@@ -17,11 +19,15 @@ export type InputProps = {
     onChange?: (value: string) => void
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+const NAME = 'BaseInput';
+
+export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>((props, ref) => {
     const {
         className,
         defaultValue = '',
         placeholder = '',
+        label = '',
+        type = 'text',
         disabled,
         readOnly,
         addonAfter,
@@ -79,7 +85,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
                     className="relative w-full h-full p-0 m-0 bg-transparent outline-none"
                     id={id}
                     name={name}
-                    type="text" 
+                    type={type} 
                     value={value}
                     disabled={disabled}
                     placeholder={placeholder}
@@ -89,7 +95,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
                 />
 
                 <div className={labelClasses}>
-                    Label
+                    {label}
                 </div>
             </label>
 
@@ -102,4 +108,4 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     )
 })
 
-Input.displayName = 'Input'
+BaseInput.displayName = NAME
