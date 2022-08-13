@@ -1,5 +1,7 @@
 import { getAllBrands } from "../../service/brands.service"
 
+import { BrandCreator } from "../../components/BrandCreator";
+
 const BrandsPage = ({data}) => {
     return (
         <div>
@@ -12,6 +14,8 @@ const BrandsPage = ({data}) => {
                     </div>
                 ))
             }
+
+            <BrandCreator />
         </div>
     )
 }
