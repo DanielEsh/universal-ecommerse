@@ -3,7 +3,7 @@ import { BrandType, getAllBrands } from "../../service/brands.service"
 
 import { BrandCreator } from "../../components/BrandCreator";
 import { BrandsTable } from "../../components/BrandsTable";
-import { AsideModal } from '../../components/ui/Modal/AsideModal';
+import { SheetModal } from '../../components/ui/Modal/SheetModal';
 
 type Props = {
     data: BrandType[],
@@ -16,9 +16,9 @@ const BrandsPage: FC<Props> = ({data}) => {
             <BrandsTable data={data} />
             <BrandCreator />
 
-            <AsideModal>
+            <SheetModal>
                 MODAL
-            </AsideModal>
+            </SheetModal>
         </div>
     )
 }
