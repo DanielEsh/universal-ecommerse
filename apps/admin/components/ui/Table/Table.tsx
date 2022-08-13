@@ -1,4 +1,4 @@
-import React from 'react'
+import { ReactNode } from 'react'
 import { TableCaption } from './TableCaption'
 import { TableHead } from './TableHead'
 import { TableBody } from './TableBody'
@@ -7,11 +7,16 @@ import { TableCell } from './TableCell'
 
 const NAME = 'Table'
 
-export const TableRoot = ({children}) => {
+export type TableRootProps = {
+    children: ReactNode
+}
+
+
+export const TableRoot = ({children}: TableRootProps) => {
     return (
-        <>
+        <table>
             {children}
-        </>
+        </table>
     )
 }
 
