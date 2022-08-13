@@ -19,6 +19,7 @@ const BrandsPage = ({data}) => {
 
             <BrandCreator />
             <Table>
+                <Table.Caption />
                 <Table.Head />
                 <Table.Body />
                 <Table.Cell />

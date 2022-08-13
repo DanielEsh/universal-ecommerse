@@ -1,4 +1,5 @@
 import React from 'react'
+import { TableCaption } from './TableCaption'
 import { TableHead } from './TableHead'
 import { TableBody } from './TableBody'
 import { TableRow } from './TableRow'
@@ -15,6 +16,7 @@ export const TableRoot = ({children}) => {
 }
 
 export const Table = Object.assign(TableRoot, {
+    Caption: TableCaption,
     Head: TableHead,
     Body: TableBody,
     Row: TableRow,
