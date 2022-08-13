@@ -4,6 +4,7 @@ import { TableHead } from './TableHead'
 import { TableBody } from './TableBody'
 import { TableRow } from './TableRow'
 import { TableCell } from './TableCell'
+import { Table } from './Table'
 
 export {
     TableContext,
@@ -12,4 +13,5 @@ export {
     TableBody,
     TableRow,
     TableCell,
+    Table,
 }
