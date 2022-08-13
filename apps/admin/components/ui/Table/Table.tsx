@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { TableContext } from './TableContext'
 import { TableCaption } from './TableCaption'
 import { TableHead } from './TableHead'
 import { TableBody } from './TableBody'
@@ -13,10 +14,18 @@ export type TableRootProps = {
 
 
 export const TableRoot = ({children}: TableRootProps) => {
+    const context = {
+        color: 'primary',
+    }
+
     return (
-        <table>
-            {children}
-        </table>
+        <TableContext.Provider
+            value={context}
+        >
+            <table>
+                {children}
+            </table>
+        </TableContext.Provider>
     )
 }
 
