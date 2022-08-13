@@ -12,26 +12,14 @@ const BrandsPage: FC<Props> = ({data}) => {
     return (
         <div>
             BRANDS PAGE
-
-            {
-                data.map(brand => (
-                    <div key={brand.id}>
-                        {brand.name}
-                    </div>
-                ))
-            }
-
-            <BrandCreator />
             <BrandsTable data={data} />
+            <BrandCreator />
         </div>
     )
 }
 
 export async function getServerSideProps() {
-    // Fetch data from external API
     const {data} = await getAllBrands();
-  
-    // Pass data to the page via props
     return { props: { data } }
   }
 
