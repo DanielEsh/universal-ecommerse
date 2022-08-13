@@ -1,4 +1,6 @@
 import { ReactNode } from 'react'
+import classNames from 'classnames'
+
 import { TableContext } from './TableContext'
 import { TableCaption } from './TableCaption'
 import { TableHead } from './TableHead'
@@ -10,19 +12,27 @@ const NAME = 'Table'
 
 export type TableRootProps = {
     children: ReactNode
+    className?: string
 }
 
 
-export const TableRoot = ({children}: TableRootProps) => {
+export const TableRoot = (props: TableRootProps) => {
+    const {
+        children,
+        className,
+    } = props
+
     const context = {
         color: 'primary',
     }
+
+    const classes = classNames('w-full', className)
 
     return (
         <TableContext.Provider
             value={context}
         >
-            <table>
+            <table className={classes}>
                 {children}
             </table>
         </TableContext.Provider>

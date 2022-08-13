@@ -6,7 +6,7 @@ export type TableRowProps = {
 
 export const TableRow = ({children}: TableRowProps) => {
     return (
-        <tr>
+        <tr className="bg-slate-50 even:bg-gray-300">
             {children}
         </tr>
     )
