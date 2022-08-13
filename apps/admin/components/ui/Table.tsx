@@ -5,6 +5,9 @@ export const Table = () => {
             <thead>
                 <tr>
                     <th className="p-2 bg-blue-500 border border-stone-900">
+                        
+                    </th>
+                    <th className="p-2 bg-blue-500 border border-stone-900">
                         Имя
                     </th>
                     <th className="p-2 bg-blue-500 border border-stone-900">
@@ -18,6 +21,9 @@ export const Table = () => {
             <tbody>
                 <tr className="bg-sky-400 even:bg-gray-300">
                     <td className="p-2 border border-stone-900">
+                        1 
+                    </td>
+                    <td className="p-2 border border-stone-900">
                         Имя 1 
                     </td>
                     <td className="p-2 border border-stone-900">
@@ -29,6 +35,9 @@ export const Table = () => {
                 </tr>
 
                 <tr className="bg-sky-400 even:bg-gray-300">
+                    <td className="p-2 border border-stone-900">
+                        2
+                    </td>
                     <td className="p-2 border border-stone-900">
                         Имя 2
                     </td>
@@ -42,6 +51,9 @@ export const Table = () => {
 
                 <tr className="bg-sky-400 even:bg-gray-300">
                     <td className="p-2 border border-stone-900">
+                        3
+                    </td>
+                    <td className="p-2 border border-stone-900">
                         Имя 3
                     </td>
                     <td className="p-2 border border-stone-900">
@@ -53,6 +65,9 @@ export const Table = () => {
                 </tr>
 
                 <tr className="bg-sky-400 even:bg-gray-300">
+                    <td className="p-2 border border-stone-900">
+                        4
+                    </td>
                     <td className="p-2 border border-stone-900">
                         Имя 4
                     </td>
