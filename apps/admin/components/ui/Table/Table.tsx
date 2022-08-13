@@ -1,12 +1,14 @@
 import { ReactNode } from 'react'
 import classNames from 'classnames'
 
-import { TableContext } from './TableContext'
-import { TableCaption } from './TableCaption'
-import { TableHead } from './TableHead'
-import { TableBody } from './TableBody'
-import { TableRow } from './TableRow'
-import { TableCell } from './TableCell'
+import { 
+    TableContext, 
+    TableCaption,
+    TableHead,
+    TableBody,
+    TableRow,
+    TableCell,
+} from '../Table/'
 
 const NAME = 'Table'
 
