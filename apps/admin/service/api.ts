@@ -6,5 +6,8 @@ export const api = {
     },
     user: {
         all: '/user/'
-    }
+    },
+    brands: {
+        all: '/brands/',
+    },
 }

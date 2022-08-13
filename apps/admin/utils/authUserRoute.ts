@@ -9,12 +9,12 @@ export function authUserRoute(func: GetServerSideProps) {
     const token = cookies[REFRESH_TOKEN]
 
     if (!token) {
-      // return {
-      //   redirect: {
-      //     permanent: false,
-      //     destination: '/auth/',
-      //   },
-      // };
+      return {
+        redirect: {
+          permanent: false,
+          destination: '/auth/',
+        },
+      };
     }
 
     // @ts-ignore
