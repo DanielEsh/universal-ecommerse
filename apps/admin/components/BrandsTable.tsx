@@ -1,6 +1,12 @@
+import {FC} from "react";
+import { BrandType } from "../service/brands.service"
 import { Table } from "./ui/Table"
 
-export const BrandsTable = ({data}) => {
+type Props = {
+    data: BrandType[],
+}
+
+export const BrandsTable: FC<Props> = ({data}) => {
     return (
         <div>
             <Table>

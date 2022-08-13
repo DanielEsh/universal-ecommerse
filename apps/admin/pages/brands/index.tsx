@@ -1,11 +1,14 @@
-import { getAllBrands } from "../../service/brands.service"
+import {FC} from "react";
+import { BrandType, getAllBrands } from "../../service/brands.service"
 
 import { BrandCreator } from "../../components/BrandCreator";
-import { Table } from "../../components/ui/Table/Table";
 import { BrandsTable } from "../../components/BrandsTable";
-// import { Table } from "../../components/ui/Table";
 
-const BrandsPage = ({data}) => {
+type Props = {
+    data: BrandType[],
+}
+
+const BrandsPage: FC<Props> = ({data}) => {
     return (
         <div>
             BRANDS PAGE
