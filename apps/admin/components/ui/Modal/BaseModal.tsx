@@ -3,20 +3,20 @@ const { motion } = require("framer-motion");
 const { AnimatePresence } = require("framer-motion");
 import { Portal } from "../Portal";
 
-export type ModalProps = {
+export type BaseModalProps = {
   children: ReactNode;
   containerEl?: HTMLElement;
   isOpen?: boolean;
   onExit: () => void;
 };
 
-const NAME = "Modal";
+const NAME = "BaseModal";
 
-const swipeUp = {
-  hidden: {
+const fade = {
+  initial: {
     opacity: 0,
   },
-  visible: {
+  animate: {
     opacity: 1,
     transition: {
       duration: 0.3,
@@ -27,25 +27,27 @@ const swipeUp = {
   },
 };
 
-export const Modal = forwardRef<HTMLElement, ModalProps>(
+export const BaseModal = forwardRef<HTMLElement, BaseModalProps>(
   (props, forwardedRef) => {
     const { children, containerEl, isOpen, onExit } = props;
 
     return (
       <Portal container={containerEl}>
-        <motion.div
-          className="fixed inset-0 bg-neutral-800/50 overflow-hidden"
-          variants={swipeUp}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          onClick={onExit}
-        >
-          {children}
-        </motion.div>
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              className="fixed inset-0 bg-neutral-800/50 overflow-hidden"
+              onClick={onExit}
+              variants={fade}
+              {...fade}
+            >
+              {children}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Portal>
     );
   }
 );
 
-Modal.displayName = NAME;
+BaseModal.displayName = NAME;

@@ -1,5 +1,5 @@
 import { ReactNode, forwardRef } from 'react';
-import { Modal } from './Modal'
+import { BaseModal } from './BaseModal'
 
 export type AsideModalProps = {
     children: ReactNode,

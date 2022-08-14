@@ -1,7 +1,6 @@
 import { ReactNode, forwardRef } from "react";
 const { motion } = require("framer-motion");
-const { AnimatePresence } = require("framer-motion");
-import { Modal } from "./Modal";
+import { BaseModal } from "./BaseModal";
 
 export type SheetModalProps = {
   children: ReactNode;
@@ -13,10 +12,10 @@ export type SheetModalProps = {
 const NAME = "SheetModal";
 
 const swipeUp = {
-  hidden: {
+  initial: {
     y: "100%",
   },
-  visible: {
+  animate: {
     y: "0",
     transition: {
       delay: 0.1,
@@ -33,31 +32,15 @@ export const SheetModal = forwardRef<HTMLElement, SheetModalProps>(
     const { children, isOpen, onExit } = props;
 
     return (
-      <Modal isOpen={isOpen} onExit={onExit}>
-        <AnimatePresence
-          // Disable any initial animations on children that
-          // are present when the component is first rendered
-          initial={true}
-          // Only render one component at a time.
-          // The exiting component will finish its exit
-          // animation before entering component is rendered
-          exitBeforeEnter={false}
-          // Fires when all exiting nodes have completed animating out
-          onExitComplete={() => console.log('close')}
+      <BaseModal isOpen={isOpen} onExit={onExit}>
+        <motion.div
+          className="absolute bottom-0 w-full h-[90%] bg-slate-50 rounded-t-3xl"
+          variants={swipeUp}
+          {...swipeUp}
         >
-          {isOpen && (
-            <motion.div
-              className="absolute bottom-0 w-full h-[90%] bg-slate-50 rounded-t-3xl"
-              variants={swipeUp}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-            >
-              {children}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </Modal>
+          {children}
+        </motion.div>
+      </BaseModal>
     );
   }
 );
