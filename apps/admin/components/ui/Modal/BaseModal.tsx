@@ -1,6 +1,7 @@
-import { ReactNode, forwardRef, useState } from "react";
+import { ReactNode, forwardRef, useRef } from "react";
 const { motion } = require("framer-motion");
 const { AnimatePresence } = require("framer-motion");
+import { useEventListener } from "../../../utils/ui/useEventListener";
 import { Portal } from "../Portal";
 
 export type BaseModalProps = {
@@ -31,13 +32,23 @@ export const BaseModal = forwardRef<HTMLElement, BaseModalProps>(
   (props, forwardedRef) => {
     const { children, containerEl, isOpen, onExit } = props;
 
+    const defaultRef = useRef<HTMLElement>(null)
+
+    const onEscPress = event => {
+      if (event.key === 'Escape') {
+        console.log('Escape press')
+      }
+    }
+
+    useEventListener('keydown', onEscPress, defaultRef)
+
     return (
       <Portal container={containerEl}>
         <AnimatePresence>
           {isOpen && (
             <motion.div
+              ref={defaultRef}
               className="fixed inset-0 bg-neutral-800/50 overflow-hidden"
-              onClick={onExit}
               variants={fade}
               {...fade}
             >

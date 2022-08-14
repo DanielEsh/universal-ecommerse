@@ -41,10 +41,10 @@ export const SheetModal = forwardRef<HTMLElement, SheetModalProps>(
     useOnClickOutside(defaultRef, () => onExit())
 
     return (
-      <BaseModal isOpen={isOpen}>
+      <BaseModal isOpen={isOpen} onExit={onExit}>
         <motion.div
           ref={composedRef}  
-          className="absolute bottom-0 w-full h-[90%] bg-slate-50 rounded-t-3xl"
+          className="absolute bottom-0 w-full h-[90%] p-8 bg-slate-50 rounded-t-3xl"
           variants={swipeUp}
           {...swipeUp}
         >

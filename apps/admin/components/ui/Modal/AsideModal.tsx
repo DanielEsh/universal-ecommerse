@@ -44,7 +44,7 @@ export const AsideModal = forwardRef<HTMLElement, AsideModalProps>(
       <BaseModal isOpen={isOpen}>
         <motion.div 
             ref={composedRef}
-            className="absolute top-0 right-0 w-[750px] h-full bg-slate-50"
+            className="absolute top-0 right-0 w-[750px] h-full p-8 bg-slate-50"
             variants={swipeRight}
             {...swipeRight}
         >
