@@ -4,6 +4,7 @@ import { BrandType, getAllBrands } from "../../service/brands.service"
 import { BrandCreator } from "../../components/BrandCreator";
 import { BrandsTable } from "../../components/BrandsTable";
 import { SheetModal } from '../../components/ui/Modal/SheetModal';
+import { AsideModal } from '../../components/ui/Modal/AsideModal';
 
 type Props = {
     data: BrandType[],
@@ -11,6 +12,7 @@ type Props = {
 
 const BrandsPage: FC<Props> = ({data}) => {
     const [modal, setModal] = useState(false)
+    const [aside, setAside] = useState(false)
 
 
     return (
@@ -23,6 +25,10 @@ const BrandsPage: FC<Props> = ({data}) => {
                 Open modal
             </button>
 
+            <button onClick={() => {setAside(!aside)}}>
+                Open Aside
+            </button>
+
 
             <SheetModal 
                 isOpen={modal}
@@ -30,6 +36,13 @@ const BrandsPage: FC<Props> = ({data}) => {
             >
                 MODAL
             </SheetModal>
+
+            <AsideModal
+                isOpen={aside}
+                onExit={() => {setAside(!aside)}}
+            >
+                AsideModal
+            </AsideModal>
         </div>
     )
 }
