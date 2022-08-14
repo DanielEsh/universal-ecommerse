@@ -7,7 +7,7 @@ export type BaseModalProps = {
   children: ReactNode;
   containerEl?: HTMLElement;
   isOpen?: boolean;
-  onExit: () => void;
+  onExit?: () => void;
 };
 
 const NAME = "BaseModal";

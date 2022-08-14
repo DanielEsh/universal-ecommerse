@@ -1,5 +1,7 @@
-import { ReactNode, forwardRef } from "react";
+import { ReactNode, forwardRef, useRef } from "react";
 import { BaseModal } from "./BaseModal";
+import { useComposedRefs } from "../../../utils/ui/compose-refs/composeRefs";
+import { useOnClickOutside } from "../../../utils/ui/useClickOutside";
 const { motion } = require("framer-motion");
 
 export type AsideModalProps = {
@@ -31,9 +33,17 @@ export const AsideModal = forwardRef<HTMLElement, AsideModalProps>(
   (props, forwardedRef) => {
     const { children, isOpen, onExit } = props;
 
+    const defaultRef = useRef<HTMLElement>(null)
+
+    const composedRef = useComposedRefs(defaultRef, forwardedRef)
+
+    // @ts-ignore
+    useOnClickOutside(defaultRef, () => onExit())
+
     return (
-      <BaseModal isOpen={isOpen} onExit={onExit}>
+      <BaseModal isOpen={isOpen}>
         <motion.div 
+            ref={composedRef}
             className="absolute top-0 right-0 w-[750px] h-full bg-slate-50"
             variants={swipeRight}
             {...swipeRight}
