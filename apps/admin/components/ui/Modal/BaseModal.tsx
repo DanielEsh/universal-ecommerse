@@ -1,7 +1,6 @@
 import { ReactNode, forwardRef, useRef } from "react";
 const { motion } = require("framer-motion");
 const { AnimatePresence } = require("framer-motion");
-import { useEventListener } from "../../../utils/ui/useEventListener";
 import { Portal } from "../Portal";
 
 export type BaseModalProps = {
@@ -33,14 +32,6 @@ export const BaseModal = forwardRef<HTMLElement, BaseModalProps>(
     const { children, containerEl, isOpen, onExit } = props;
 
     const defaultRef = useRef<HTMLElement>(null)
-
-    const onEscPress = event => {
-      if (event.key === 'Escape') {
-        console.log('Escape press')
-      }
-    }
-
-    useEventListener('keydown', onEscPress, defaultRef)
 
     return (
       <Portal container={containerEl}>
