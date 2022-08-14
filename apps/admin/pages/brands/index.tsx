@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 import { BrandType, getAllBrands } from "../../service/brands.service"
 
 import { BrandCreator } from "../../components/BrandCreator";
@@ -10,13 +10,24 @@ type Props = {
 }
 
 const BrandsPage: FC<Props> = ({data}) => {
+    const [modal, setModal] = useState(false)
+
+
     return (
         <div>
             BRANDS PAGE
             <BrandsTable data={data} />
             <BrandCreator />
 
-            <SheetModal>
+            <button onClick={() => {setModal(!modal)}}>
+                Open modal
+            </button>
+
+
+            <SheetModal 
+                isOpen={modal}
+                onExit={() => {setModal(!modal)}}
+            >
                 MODAL
             </SheetModal>
         </div>
