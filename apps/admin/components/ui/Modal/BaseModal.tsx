@@ -1,9 +1,10 @@
-import { ReactNode, forwardRef, useRef } from "react";
+import { ReactNode, forwardRef, useRef, useEffect } from "react";
 const { motion } = require("framer-motion");
 const { AnimatePresence } = require("framer-motion");
 import { Portal } from "../Portal";
 import { useOnClickOutside } from "../../../utils/ui/useClickOutside";
 import { useKeyPress } from "../../../utils/ui/useKeyPress";
+import { useLockedBody } from "../../../utils/ui/useLockedBody";
 
 export type BaseModalProps = {
   children: ReactNode;
@@ -32,13 +33,15 @@ const fade = {
 export const BaseModal = forwardRef<HTMLElement, BaseModalProps>(
   (props, forwardedRef) => {
     const { children, containerEl, isOpen, onExit } = props;
+    const [locked, setLocked] = useLockedBody(isOpen)
 
     const defaultRef = useRef<HTMLElement>(null)
     const childrenRef = useRef(null)
 
     const Close = () => {
       if (!isOpen) return
-
+      
+      setLocked(isOpen);
       if (onExit) onExit();
     }
 
