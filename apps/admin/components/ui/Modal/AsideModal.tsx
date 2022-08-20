@@ -2,6 +2,7 @@ import { ReactNode, forwardRef, useRef } from "react";
 import { BaseModal } from "./BaseModal";
 import { useComposedRefs } from "../../../utils/ui/compose-refs/composeRefs";
 import { useOnClickOutside } from "../../../utils/ui/useClickOutside";
+import { useKeyPress } from "../../../utils/ui/useKeyPress";
 const { motion } = require("framer-motion");
 
 export type AsideModalProps = {
@@ -37,8 +38,18 @@ export const AsideModal = forwardRef<HTMLElement, AsideModalProps>(
 
     const composedRef = useComposedRefs(defaultRef, forwardedRef)
 
+
+    const Close = () => {
+      if (!isOpen) return
+
+      onExit();
+    }
+
+
     // @ts-ignore
     useOnClickOutside(defaultRef, () => onExit())
+
+    useKeyPress('Escape', Close)
 
     return (
       <BaseModal isOpen={isOpen}>

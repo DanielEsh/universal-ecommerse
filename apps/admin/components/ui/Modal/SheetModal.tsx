@@ -38,15 +38,15 @@ export const SheetModal = forwardRef<HTMLElement, SheetModalProps>(
 
     const composedRef = useComposedRefs(defaultRef, forwardedRef)
 
-    const onEscPress = event => {
-      if (event.key === 'Escape') {
-        console.log('Escape press')
-        onExit()
-      }
-    }
+    // const onEscPress = event => {
+    //   if (event.key === 'Escape') {
+    //     console.log('Escape press')
+    //     onExit()
+    //   }
+    // }
 
     // @ts-ignore
-    useEventListener('keydown', onEscPress, composedRef)
+    // useEventListener('keydown', onEscPress, composedRef)
 
     // @ts-ignore
     useOnClickOutside(defaultRef, () => onExit())
