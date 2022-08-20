@@ -1,5 +1,5 @@
 import { forwardRef, ReactNode, useRef } from 'react'
-import cn from 'classnames'
+import classNames from 'classnames'
 
 export type ButtonProps = {
     children: ReactNode

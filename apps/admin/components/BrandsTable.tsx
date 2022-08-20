@@ -1,14 +1,33 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 import { BrandType } from "../service/brands.service"
+import { Button } from "./ui/Button";
 import { Table } from "./ui/Table"
+import { SheetModal } from './ui/Modal/SheetModal';
+
 
 type Props = {
     data: BrandType[],
 }
 
 export const BrandsTable: FC<Props> = ({data}) => {
+    const [modal, setModal] = useState(false)
+
+    const onRowClick = (brand: BrandType) => {
+        console.log('CLICK', brand)
+    }
+
     return (
         <div>
+            <div className="flex items-center justify-end w-full my-4">
+                <div className="w-[160px]">
+                    <Button 
+                        type="button"
+                        onClick={() => {setModal(true)}}
+                    >
+                        Добавить
+                    </Button>
+                </div>
+            </div>
             <Table>
                 <Table.Head>
                     <Table.Row>
@@ -26,7 +45,10 @@ export const BrandsTable: FC<Props> = ({data}) => {
                 <Table.Body>
                     {
                         data.map((brand, idx) => (
-                            <Table.Row key={brand.id}>
+                            <Table.Row 
+                                key={brand.id}
+                                onClick={() => onRowClick(brand)}
+                            >
                                 <Table.Cell>
                                     {idx + 1}
                                 </Table.Cell>
@@ -41,6 +63,13 @@ export const BrandsTable: FC<Props> = ({data}) => {
                     }
                 </Table.Body>
             </Table>
+
+            <SheetModal 
+                isOpen={modal}
+                onExit={() => {setModal(false)}}
+            >
+                MODAL
+            </SheetModal>
         </div>
     )
 }
