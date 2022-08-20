@@ -4,6 +4,7 @@ import { BrandType, getAllBrands } from "../../service/brands.service"
 
 import { BrandsTable } from "../../components/BrandsTable";
 import { SheetModal } from '../../components/ui/Modal/SheetModal';
+import { BrandsDetail } from '../../components/BrandsDetail';
 
 type Props = {
     data: BrandType[],
@@ -30,7 +31,7 @@ const BrandsPage = ({data} : Props) => {
                 isOpen={!!router.query.brandId}
                 onExit={() => router.push("/brands")}
             >
-               BRANDS DETAIL PAGE
+               <BrandsDetail />
             </SheetModal>
         </div>
     )

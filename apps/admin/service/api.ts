@@ -9,5 +9,6 @@ export const api = {
     },
     brands: {
         all: '/brands/',
+        detail: (id: string) => `/brands/${id}`
     },
 }

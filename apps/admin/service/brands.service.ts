@@ -16,6 +16,10 @@ export const getAllBrands =  () => {
     return $axios.get(api.brands.all);
 }
 
+export const getBrandById = (id: string) => {
+    return $axios.get(api.brands.detail(id))
+}
+
 export const createBrand = (data: CreateBrandDto) => {
     return $axios.post(api.brands.all, data)
 }
