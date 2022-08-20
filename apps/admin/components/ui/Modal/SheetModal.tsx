@@ -2,7 +2,7 @@ import { ReactNode, forwardRef, useRef } from "react";
 const { motion } = require("framer-motion");
 import { useComposedRefs } from "../../../utils/ui/compose-refs/composeRefs";
 import { useOnClickOutside } from "../../../utils/ui/useClickOutside";
-import { useEventListener } from "../../../utils/ui/useEventListener";
+import { useKeyPress } from "../../../utils/ui/useKeyPress";
 import { BaseModal } from "./BaseModal";
 
 export type SheetModalProps = {
@@ -38,18 +38,16 @@ export const SheetModal = forwardRef<HTMLElement, SheetModalProps>(
 
     const composedRef = useComposedRefs(defaultRef, forwardedRef)
 
-    // const onEscPress = event => {
-    //   if (event.key === 'Escape') {
-    //     console.log('Escape press')
-    //     onExit()
-    //   }
-    // }
+    const Close = () => {
+      if (!isOpen) return
 
-    // @ts-ignore
-    // useEventListener('keydown', onEscPress, composedRef)
+      onExit();
+    }
 
     // @ts-ignore
     useOnClickOutside(defaultRef, () => onExit())
+
+    useKeyPress('Escape', Close)
 
     return (
       <BaseModal isOpen={isOpen} onExit={onExit}>
