@@ -36,23 +36,10 @@ export const AsideModal = forwardRef<HTMLElement, AsideModalProps>(
 
     const defaultRef = useRef<HTMLElement>(null)
 
-    const composedRef = useComposedRefs(defaultRef, forwardedRef)
-
-
-    const Close = () => {
-      if (!isOpen) return
-
-      onExit();
-    }
-
-
-    // @ts-ignore
-    useOnClickOutside(defaultRef, () => onExit())
-
-    useKeyPress('Escape', Close)
+    const composedRef = useComposedRefs(defaultRef, forwardedRef)    
 
     return (
-      <BaseModal isOpen={isOpen}>
+      <BaseModal isOpen={isOpen} onExit={onExit}>
         <motion.div 
             ref={composedRef}
             className="absolute top-0 right-0 w-[750px] h-full p-8 bg-slate-50"

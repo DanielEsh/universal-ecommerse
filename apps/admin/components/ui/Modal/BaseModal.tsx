@@ -2,6 +2,8 @@ import { ReactNode, forwardRef, useRef } from "react";
 const { motion } = require("framer-motion");
 const { AnimatePresence } = require("framer-motion");
 import { Portal } from "../Portal";
+import { useOnClickOutside } from "../../../utils/ui/useClickOutside";
+import { useKeyPress } from "../../../utils/ui/useKeyPress";
 
 export type BaseModalProps = {
   children: ReactNode;
@@ -32,6 +34,18 @@ export const BaseModal = forwardRef<HTMLElement, BaseModalProps>(
     const { children, containerEl, isOpen, onExit } = props;
 
     const defaultRef = useRef<HTMLElement>(null)
+    const childrenRef = useRef(null)
+
+    const Close = () => {
+      if (!isOpen) return
+
+      if (onExit) onExit();
+    }
+
+    // @ts-ignore
+    useOnClickOutside(childrenRef, () => Close())
+
+    useKeyPress('Escape', Close)
 
     return (
       <Portal container={containerEl}>
@@ -43,7 +57,9 @@ export const BaseModal = forwardRef<HTMLElement, BaseModalProps>(
               variants={fade}
               {...fade}
             >
-              {children}
+              <div ref={childrenRef}>
+                {children}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

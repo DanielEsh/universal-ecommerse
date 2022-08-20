@@ -38,17 +38,6 @@ export const SheetModal = forwardRef<HTMLElement, SheetModalProps>(
 
     const composedRef = useComposedRefs(defaultRef, forwardedRef)
 
-    const Close = () => {
-      if (!isOpen) return
-
-      onExit();
-    }
-
-    // @ts-ignore
-    useOnClickOutside(defaultRef, () => onExit())
-
-    useKeyPress('Escape', Close)
-
     return (
       <BaseModal isOpen={isOpen} onExit={onExit}>
         <motion.div
