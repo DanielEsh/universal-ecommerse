@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { BrandType, getAllBrands } from "../../service/brands.service"
 
 import { BrandsTable } from "../../components/BrandsTable";
-import { AsideModal } from '../../components/ui/Modal/AsideModal';
+import { SheetModal } from '../../components/ui/Modal/SheetModal';
 
 type Props = {
     data: BrandType[],
@@ -12,7 +12,7 @@ type Props = {
 const BrandsPage = ({data} : Props) => {
     const router = useRouter();
 
-    const [aside, setAside] = useState(false)
+    const [modal, setModal] = useState<boolean>(true)
 
     const refreshData = () => {
         router.replace(router.asPath);
@@ -26,16 +26,12 @@ const BrandsPage = ({data} : Props) => {
                 updateData={refreshData}
             />
 
-            <button onClick={() => {setAside(!aside)}}>
-                Open Aside
-            </button>
-
-            <AsideModal
-                isOpen={aside}
-                onExit={() => {setAside(!aside)}}
+            <SheetModal 
+                isOpen={!!router.query.brandId}
+                onExit={() => router.push("/brands")}
             >
-                AsideModal
-            </AsideModal>
+               BRANDS DETAIL PAGE
+            </SheetModal>
         </div>
     )
 }
