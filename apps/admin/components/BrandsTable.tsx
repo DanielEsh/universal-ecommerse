@@ -3,17 +3,23 @@ import { BrandType } from "../service/brands.service"
 import { Button } from "./ui/Button";
 import { Table } from "./ui/Table"
 import { SheetModal } from './ui/Modal/SheetModal';
-
+import { BrandsCreateForm } from './BrandsCreateForm';
 
 type Props = {
-    data: BrandType[],
+    data: BrandType[]
+    updateData: () => void
 }
 
-export const BrandsTable: FC<Props> = ({data}) => {
+export const BrandsTable: FC<Props> = ({data, updateData}) => {
     const [modal, setModal] = useState(false)
 
     const onRowClick = (brand: BrandType) => {
         console.log('CLICK', brand)
+    }
+
+    const update = () => {
+        setModal(false)
+        updateData();
     }
 
     return (
@@ -68,7 +74,9 @@ export const BrandsTable: FC<Props> = ({data}) => {
                 isOpen={modal}
                 onExit={() => {setModal(false)}}
             >
-                MODAL
+                <BrandsCreateForm
+                    onSuccess={update}
+                />
             </SheetModal>
         </div>
     )

@@ -1,7 +1,7 @@
-import {FC, useState} from "react";
+import {useState} from "react";
+import { useRouter } from 'next/router';
 import { BrandType, getAllBrands } from "../../service/brands.service"
 
-import { BrandCreator } from "../../components/BrandCreator";
 import { BrandsTable } from "../../components/BrandsTable";
 import { AsideModal } from '../../components/ui/Modal/AsideModal';
 
@@ -9,15 +9,22 @@ type Props = {
     data: BrandType[],
 }
 
-const BrandsPage: FC<Props> = ({data}) => {
+const BrandsPage = ({data} : Props) => {
+    const router = useRouter();
+
     const [aside, setAside] = useState(false)
 
+    const refreshData = () => {
+        router.replace(router.asPath);
+    }
 
     return (
         <div>
             BRANDS PAGE
-            <BrandsTable data={data} />
-            <BrandCreator />
+            <BrandsTable 
+                data={data}
+                updateData={refreshData}
+            />
 
             <button onClick={() => {setAside(!aside)}}>
                 Open Aside
