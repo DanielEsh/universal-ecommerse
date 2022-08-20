@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 
 import { getBrandById } from '../service/brands.service'
 
+import { BaseInput } from './ui/inputs/BaseInput'
+
 export const BrandsDetail = () => {
     const router = useRouter()
     const [data, setData] = useState(null)
@@ -21,6 +23,35 @@ export const BrandsDetail = () => {
     return (
         <div>
             DETAIL
+            {
+                data && (
+                    <>
+                        <form>
+                            <div className="w-[380px]">
+                                <BaseInput 
+                                    label="Name"
+                                    defaultValue={data.name}
+                                />
+                            </div>
+
+                            <div className="w-[380px]">
+                                <BaseInput 
+                                    label="Description"
+                                    defaultValue={data.description}
+                                />
+                            </div>
+                        </form>
+
+
+                        <div>
+                            {data.created_at}
+                        </div>
+                        <div>
+                            {data.updated_at}
+                        </div>
+                    </>
+                )
+            }
         </div>
     )
 }
