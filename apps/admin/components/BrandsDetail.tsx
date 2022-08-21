@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
 
 import { getBrandById } from '../service/brands.service'
+import { dateToString } from '../utils/dateToString'
 
 import { BaseInput } from './ui/inputs/BaseInput'
 
@@ -44,10 +45,10 @@ export const BrandsDetail = () => {
 
 
                         <div>
-                            {data.created_at}
+                            {dateToString(new Date(data.created_at))}
                         </div>
                         <div>
-                            {data.updated_at}
+                            {dateToString(new Date(data.updated_at))}
                         </div>
                     </>
                 )
