@@ -23,3 +23,7 @@ export const getBrandById = (id: string) => {
 export const createBrand = (data: CreateBrandDto) => {
     return $axios.post(api.brands.all, data)
 }
+
+export const updateBrand = (data: BrandType) => {
+    return $axios.patch(api.brands.detail(data.id), data)
+}
