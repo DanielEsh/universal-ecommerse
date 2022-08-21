@@ -1,13 +1,12 @@
 import { ReactNode } from 'react'
-import {SideBar} from "../Sidebar";
-import {ThemeSwitcher} from '../ThemeSwitcher'
+import { SideBar } from '../Sidebar'
+import { ThemeSwitcher } from '../ThemeSwitcher'
 
 type DefaultLayoutProps = {
-    children: ReactNode;
-};
+    children: ReactNode
+}
 
 export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
-
     return (
         <div className="relative flex w-full h-full">
             <SideBar />

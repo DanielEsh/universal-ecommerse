@@ -1,8 +1,8 @@
 import { ReactNode } from 'react'
 import classNames from 'classnames'
 
-import { 
-    TableContext, 
+import {
+    TableContext,
     TableCaption,
     TableHead,
     TableBody,
@@ -17,12 +17,8 @@ export type TableRootProps = {
     className?: string
 }
 
-
 export const TableRoot = (props: TableRootProps) => {
-    const {
-        children,
-        className,
-    } = props
+    const { children, className } = props
 
     const context = {
         color: 'primary',
@@ -31,12 +27,8 @@ export const TableRoot = (props: TableRootProps) => {
     const classes = classNames('w-full', className)
 
     return (
-        <TableContext.Provider
-            value={context}
-        >
-            <table className={classes}>
-                {children}
-            </table>
+        <TableContext.Provider value={context}>
+            <table className={classes}>{children}</table>
         </TableContext.Provider>
     )
 }
@@ -47,6 +39,6 @@ export const Table = Object.assign(TableRoot, {
     Body: TableBody,
     Row: TableRow,
     Cell: TableCell,
-  })
+})
 
 TableRoot.displayName = NAME

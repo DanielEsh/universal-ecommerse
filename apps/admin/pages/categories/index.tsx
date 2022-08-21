@@ -1,12 +1,7 @@
 import React from 'react'
 
 const CategoriesPage = () => {
-    return (
-        <>
-            CATEGORIES PAGE
-        </>
-    )
+    return <>CATEGORIES PAGE</>
 }
-
 
 export default CategoriesPage

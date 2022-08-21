@@ -1,5 +1,4 @@
 export const AsideMenu = () => {
-
     const list = [
         {
             id: 1,
@@ -18,16 +17,11 @@ export const AsideMenu = () => {
         },
     ]
 
-
     return (
         <div>
-          {
-            list.map(item => (
-                <div key={item.id}>
-                    {item.name}
-                </div>
-            ))
-          }
+            {list.map((item) => (
+                <div key={item.id}>{item.name}</div>
+            ))}
         </div>
     )
 }

@@ -5,9 +5,9 @@ export type TableRowProps = {
     onClick?: () => void
 }
 
-export const TableRow = ({children, onClick}: TableRowProps) => {
+export const TableRow = ({ children, onClick }: TableRowProps) => {
     return (
-        <tr 
+        <tr
             className="bg-slate-50 even:bg-slate-200 hover:bg-blue-500"
             onClick={onClick}
         >
@@ -15,4 +15,3 @@ export const TableRow = ({children, onClick}: TableRowProps) => {
         </tr>
     )
 }
-

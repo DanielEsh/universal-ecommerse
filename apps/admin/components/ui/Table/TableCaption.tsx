@@ -4,10 +4,6 @@ export type TableCaptionProps = {
     children: ReactNode
 }
 
-export const TableCaption = ({children}: TableCaptionProps) => {
-    return (
-        <caption>
-            {children}
-        </caption>
-    )
+export const TableCaption = ({ children }: TableCaptionProps) => {
+    return <caption>{children}</caption>
 }

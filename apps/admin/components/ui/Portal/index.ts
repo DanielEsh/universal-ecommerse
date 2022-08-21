@@ -1,2 +1,2 @@
-import { Portal } from "./Portal";
-export { Portal };
+import { Portal } from './Portal'
+export { Portal }

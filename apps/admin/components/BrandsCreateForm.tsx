@@ -1,18 +1,18 @@
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent } from 'react'
 
-import { createBrand } from '../service/brands.service';
+import { createBrand } from '../service/brands.service'
 
 import { BaseInput } from './ui/inputs/BaseInput'
-import { Button } from './ui/Button';
+import { Button } from './ui/Button'
 
 type Props = {
     onSuccess: () => void
 }
 
-export const BrandsCreateForm = ({onSuccess}: Props) => {
-    const [name, setName] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
-    
+export const BrandsCreateForm = ({ onSuccess }: Props) => {
+    const [name, setName] = useState<string>('')
+    const [description, setDescription] = useState<string>('')
+
     const onChangeName = (value: string) => {
         setName(value)
     }
@@ -22,37 +22,23 @@ export const BrandsCreateForm = ({onSuccess}: Props) => {
     }
 
     const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        createBrand({ name, description})
-        onSuccess();
+        event.preventDefault()
+        createBrand({ name, description })
+        onSuccess()
     }
 
     return (
-        <form 
-            className="flex flex-col gap-6"
-            onSubmit={onSubmit}
-        >
+        <form className="flex flex-col gap-6" onSubmit={onSubmit}>
             <div className="w-[380px]">
-                <BaseInput 
-                    label="Name"
-                    onChange={onChangeName}
-                />
+                <BaseInput label="Name" onChange={onChangeName} />
             </div>
 
             <div className="w-[380px]">
-                <BaseInput 
-                    label="Description"
-                    onChange={onChangeDescription}
-                />
+                <BaseInput label="Description" onChange={onChangeDescription} />
             </div>
-            
 
             <div className="w-[380px]">
-                <Button 
-                    type="submit"
-                >
-                    Добавить
-                </Button>
+                <Button type="submit">Добавить</Button>
             </div>
         </form>
     )

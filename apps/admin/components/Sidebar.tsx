@@ -1,13 +1,12 @@
-import React from 'react';
-import {logout} from "../service/auth.service";
-import { Logo } from './Logo';
-import { AsideMenu } from './AsideMenu';
-import { AsideUser } from './AsideUser';
+import React from 'react'
+import { logout } from '../service/auth.service'
+import { Logo } from './Logo'
+import { AsideMenu } from './AsideMenu'
+import { AsideUser } from './AsideUser'
 
 export const SideBar = () => {
-
     const onLogout = async () => {
-         await logout();
+        await logout()
     }
 
     return (
@@ -17,10 +16,8 @@ export const SideBar = () => {
             <AsideUser />
 
             <div>
-                <button onClick={onLogout}>
-                    Выйти
-                </button>
+                <button onClick={onLogout}>Выйти</button>
             </div>
         </aside>
-    );
-};
+    )
+}
