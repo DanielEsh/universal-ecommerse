@@ -1,28 +1,25 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router'
+import { GetServerSideProps } from 'next'
 
-import { SheetModal } from '../../components/ui/Modal/SheetModal';
+import { BrandType, getBrandById } from "../../service/brands.service"
 
-const BrandsDetailPage = () => {
-    const router = useRouter()
+type Props = {
+    data: BrandType,
+}
 
-    const [modal, setModal] = useState<boolean>(true)
-
-    const onExit = () => {
-        setModal(false)
-
-        // console.log(router.query)
-        // setTimeout(() => {
-        //     router.push('/brands/')
-        // }, 300)
-    }
+const BrandsDetailPage = ({data}: Props) => {
 
     return (
         <>
-            123
+            {data.name}
         </>
     )
 }
 
+
+  export const getServerSideProps: GetServerSideProps = async (context) => {
+    const { id } = context.query;
+    const {data} = await getBrandById(id as string);
+    return { props: { data } }
+  }
 
 export default BrandsDetailPage
