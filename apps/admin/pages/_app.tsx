@@ -8,18 +8,18 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     if (router.pathname.startsWith('/auth')) {
         return (
             <ThemeProvider>
-                <Component {...pageProps}/>
+                <Component {...pageProps} />
             </ThemeProvider>
         )
     }
 
-  return (
-    <ThemeProvider>
-        <DefaultLayout>
-            <Component {...pageProps} />
-        </DefaultLayout>
-    </ThemeProvider>
-  )
+    return (
+        <ThemeProvider>
+            <DefaultLayout>
+                <Component {...pageProps} />
+            </DefaultLayout>
+        </ThemeProvider>
+    )
 }
 
 export default MyApp

@@ -9,9 +9,9 @@ type Props = {
 const BrandsDetailPage = ({data}: Props) => {
 
     return (
-        <>
+        <div>
             {data.name}
-        </>
+        </div>
     )
 }
 
