@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { BrandType, getAllBrands } from '../../service/brands.service'
 
 import { BrandsTable } from '../../components/BrandsTable'
-import { SheetModal } from '../../components/ui/Modal/SheetModal'
+import { SheetModal } from '@/components/ui/Modal/SheetModal'
 import { BrandsDetail } from '../../components/BrandsDetail'
 
 type Props = {
