@@ -27,3 +27,7 @@ export const createBrand = (data: CreateBrandDto) => {
 export const updateBrand = (data: BrandType) => {
     return $axios.patch(api.brands.detail(data.id), data)
 }
+
+export const deleteBrand = (id: string) => {
+    return $axios.delete(api.brands.detail(id))
+}

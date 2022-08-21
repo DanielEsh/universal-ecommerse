@@ -1,7 +1,7 @@
 import { useEffect, useState, FormEvent } from "react";
 import { useRouter } from "next/router";
 
-import { getBrandById, updateBrand } from "../service/brands.service";
+import { getBrandById, updateBrand, deleteBrand } from "../service/brands.service";
 import { dateToString } from "../utils/dateToString";
 
 import { BaseInput } from "./ui/inputs/BaseInput";
@@ -41,6 +41,10 @@ export const BrandsDetail = () => {
         id: data.id,
         ...values,
     })
+  }
+
+  const handleDelete = () => {
+    deleteBrand(data.id) 
   }
 
   return (
@@ -94,6 +98,13 @@ export const BrandsDetail = () => {
             <span>Дата обновления</span>{" "}
             <span>{dateToString(new Date(data?.updated_at))}</span>
           </div>
+
+          <Button 
+            type="button"
+            onClick={handleDelete}
+            >
+            Delete brand
+          </Button>
         </div>
       </aside>
     </div>
