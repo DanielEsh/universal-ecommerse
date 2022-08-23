@@ -1,10 +1,12 @@
-import {$axios} from "../config/axios";
-import { api } from "./api";
+import { $axios } from '../config/axios'
+import { api } from './api'
 
 export type BrandType = {
     id: string
     name: string
     description: string
+    created_at: string
+    updated_at: string
 }
 
 type CreateBrandDto = {
@@ -12,8 +14,8 @@ type CreateBrandDto = {
     description: string
 }
 
-export const getAllBrands =  () => {
-    return $axios.get(api.brands.all);
+export const getAllBrands = () => {
+    return $axios.get(api.brands.all)
 }
 
 export const getBrandById = (id: string) => {

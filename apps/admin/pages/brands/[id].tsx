@@ -9,8 +9,7 @@ import {
 
 import { BrandEditableForm } from '@/components/brands/BrandEditableForm'
 import { BrandHeader } from '@/components/brands/BrandHeader'
-
-import { dateToString } from '../../utils/dateToString'
+import { TimestampPresenter } from '@/components/TimestampPresenter'
 import { Button } from '@/components/ui/Button'
 
 type Props = {
@@ -39,14 +38,15 @@ const BrandsDetailPage = ({ data }: Props) => {
 
             <aside className="w-[280px]">
                 <div className="flex flex-col gap-4">
-                    <div className="flex items-center justify-between bg-slate-200 p-4 rounded-md">
-                        <span>Дата создания</span>{' '}
-                        <span>{dateToString(new Date(data?.created_at))}</span>
-                    </div>
-                    <div className="flex items-center justify-between bg-slate-200 p-4 rounded-md">
-                        <span>Дата обновления</span>{' '}
-                        <span>{dateToString(new Date(data?.updated_at))}</span>
-                    </div>
+                    <TimestampPresenter
+                        label="Дата создания"
+                        date={new Date(data.created_at)}
+                    />
+
+                    <TimestampPresenter
+                        label="Дата обновления"
+                        date={new Date(data.updated_at)}
+                    />
 
                     <Button type="button" onClick={handleDelete}>
                         Delete brand
