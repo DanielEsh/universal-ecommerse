@@ -8,6 +8,7 @@ import {
 } from '../../service/brands.service'
 
 import { BrandEditableForm } from '@/components/brands/BrandEditableForm'
+import { BrandHeader } from '@/components/brands/BrandHeader'
 
 import { dateToString } from '../../utils/dateToString'
 import { Button } from '@/components/ui/Button'
@@ -17,7 +18,6 @@ type Props = {
 }
 
 const BrandsDetailPage = ({ data }: Props) => {
-
     const handleDelete = () => {
         deleteBrand(data.id)
     }
@@ -28,7 +28,13 @@ const BrandsDetailPage = ({ data }: Props) => {
                 <Link href="/brands">
                     <a>Ко всем брендам</a>
                 </Link>
-                {data && <BrandEditableForm brandData={data} />}
+
+                {data && (
+                    <>
+                        <BrandHeader name={data.name} />
+                        <BrandEditableForm brandData={data} />
+                    </>
+                )}
             </div>
 
             <aside className="w-[280px]">

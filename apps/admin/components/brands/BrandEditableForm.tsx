@@ -15,7 +15,7 @@ export const BrandEditableForm = ({ brandData }: Props) => {
     }
 
     return (
-        <form className="flex flex-col h-full" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-4 h-full" onSubmit={handleSubmit}>
             <div className="w-[380px]">
                 <BaseInput label="Name" defaultValue={brandData.name} />
             </div>
