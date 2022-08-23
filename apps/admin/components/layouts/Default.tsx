@@ -15,7 +15,7 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
                     Header
                     <ThemeSwitcher />
                 </div>
-                <div className="bg-gray-100 mt-4 p-4 h-[1200px] rounded-md">
+                <div className="bg-gray-100 mt-4 p-4 h-full min-h-[820px] rounded-md">
                     {children}
                 </div>
             </main>
