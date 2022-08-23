@@ -4,7 +4,8 @@ import classNames from 'classnames'
 export type ButtonProps = {
     children: ReactNode
     className?: string
-    type: 'button' | 'submit'
+    type?: 'button' | 'submit'
+    size?: 'large' | 'medium' | 'small' | 'block'
     onMouseDown?: () => void
     onMouseUp?: () => void
     onMouseEnter?: () => void
@@ -15,11 +16,12 @@ export type ButtonProps = {
 }
 
 export const Button = forwardRef<HTMLElement, ButtonProps>(
-    (props, innerRef) => {
+    (props, forwaredRef) => {
         const {
             children,
             className,
-            type,
+            size = 'medium',
+            type = 'button',
             onClick,
             onMouseLeave,
             onBlur,
@@ -37,9 +39,22 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(
             if (onMouseEnter) onMouseEnter()
         }
 
+        const sizes = {
+            small: 'py-1 px-2',
+            medium: 'py-4 px-8',
+            large: 'py-8 px-12',
+            block: 'w-full h-full',
+        }
+
+        const classes = classNames(
+            className,
+            'bg-black text-white rounded-md',
+            sizes[size],
+        )
+
         return (
             <button
-                className="bg-black text-white py-4 px-8 rounded-md w-full h-full"
+                className={classes}
                 type={type}
                 onClick={handleClick}
                 onMouseEnter={handleMouseEnter}

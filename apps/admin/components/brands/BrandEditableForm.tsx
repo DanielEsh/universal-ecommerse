@@ -27,7 +27,7 @@ export const BrandEditableForm = ({ brandData }: Props) => {
             </div>
 
             <div className="w-[380px] mt-5">
-                <Button type="submit">Update</Button>
+                <Button type="submit" size="large">Update</Button>
             </div>
         </form>
     )
