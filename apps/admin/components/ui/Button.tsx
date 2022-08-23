@@ -16,7 +16,7 @@ export type ButtonProps = {
 }
 
 export const Button = forwardRef<HTMLElement, ButtonProps>(
-    (props, forwaredRef) => {
+    (props, forwardedRef) => {
         const {
             children,
             className,
@@ -31,11 +31,13 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(
             onMouseEnter,
         } = props
 
-        const handleClick = (event) => {
+        const defaultRef = useRef<HTMLButtonElement>(null)
+
+        const handleClick = () => {
             if (onClick) onClick()
         }
 
-        const handleMouseEnter = (event) => {
+        const handleMouseEnter = () => {
             if (onMouseEnter) onMouseEnter()
         }
 
@@ -54,6 +56,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(
 
         return (
             <button
+                ref={defaultRef}
                 className={classes}
                 type={type}
                 onClick={handleClick}
