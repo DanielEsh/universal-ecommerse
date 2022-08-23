@@ -1,5 +1,6 @@
 import { useState, FormEvent } from 'react'
 import { GetServerSideProps } from 'next'
+import Link from 'next/link'
 
 import {
     BrandType,
@@ -45,6 +46,9 @@ const BrandsDetailPage = ({ data }: Props) => {
     return (
         <div className="flex h-full">
             <div className="flex-1">
+                <Link href="/brands">
+                    <a>Ко всем брендам</a>
+                </Link>
                 {data && (
                     <>
                         <form
