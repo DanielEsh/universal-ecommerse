@@ -1,6 +1,5 @@
 import { FC, useState } from 'react'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 
 import { BrandType } from '../service/brands.service'
 import { Button } from './ui/Button'
@@ -19,8 +18,7 @@ export const BrandsTable: FC<Props> = ({ data, updateData }) => {
     const [modal, setModal] = useState(false)
 
     const onRowClick = (id: string) => {
-        // router.push(`/brands/${id}`)
-        console.log(router)
+        router.push(`/brands/${id}`)
     }
 
     const update = () => {
@@ -45,7 +43,7 @@ export const BrandsTable: FC<Props> = ({ data, updateData }) => {
             <Table>
                 <Table.Head>
                     <Table.Row>
-                        <Table.Cell component="th"></Table.Cell>
+                        <Table.Cell component="th"> </Table.Cell>
                         <Table.Cell component="th">Имя</Table.Cell>
                         <Table.Cell component="th">Описание</Table.Cell>
                     </Table.Row>
@@ -59,14 +57,6 @@ export const BrandsTable: FC<Props> = ({ data, updateData }) => {
                             <Table.Cell>{idx + 1}</Table.Cell>
                             <Table.Cell>{brand.name}</Table.Cell>
                             <Table.Cell>{brand.description}</Table.Cell>
-                            <Table.Cell>
-                                <Link
-                                    href={`/brands?brandId=${brand.id}`}
-                                    as={`/brands/${brand.id}`}
-                                >
-                                    <a>Link</a>
-                                </Link>
-                            </Table.Cell>
                         </Table.Row>
                     ))}
                 </Table.Body>
