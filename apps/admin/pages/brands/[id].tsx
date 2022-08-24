@@ -8,7 +8,6 @@ import {
 } from '../../service/brands.service'
 
 import { BrandEditableForm } from '@/components/brands/BrandEditableForm'
-import { BrandHeader } from '@/components/brands/BrandHeader'
 import { TimestampPresenter } from '@/components/TimestampPresenter'
 import { Button } from '@/components/ui/Button'
 
@@ -22,37 +21,42 @@ const BrandsDetailPage = ({ data }: Props) => {
     }
 
     return (
-        <div className="flex h-full">
-            <div className="flex-1">
-                <Link href="/brands">
-                    <a>Ко всем брендам</a>
-                </Link>
+        <div>
+            <Link href="/brands">
+                <a>Ко всем брендам</a>
+            </Link>
 
-                {data && (
-                    <>
-                        <BrandHeader name={data.name} />
-                        <BrandEditableForm brandData={data} />
-                    </>
-                )}
+            <div className="flex items-center justify-between my-6">
+                <h1 className="text-2xl">Информация о бренде</h1>
             </div>
 
-            <aside className="w-[280px]">
-                <div className="flex flex-col gap-4">
-                    <TimestampPresenter
-                        label="Дата создания"
-                        date={new Date(data.created_at)}
-                    />
-
-                    <TimestampPresenter
-                        label="Дата обновления"
-                        date={new Date(data.updated_at)}
-                    />
-
-                    <Button type="button" onClick={handleDelete}>
-                        Delete brand
-                    </Button>
+            <div className="flex h-full">
+                <div className="flex-1">
+                    <BrandEditableForm brandData={data} />
                 </div>
-            </aside>
+
+                <aside className="w-[280px]">
+                    <div className="flex flex-col gap-4">
+                        <TimestampPresenter
+                            label="Дата создания"
+                            date={new Date(data.created_at)}
+                        />
+
+                        <TimestampPresenter
+                            label="Дата обновления"
+                            date={new Date(data.updated_at)}
+                        />
+
+                        <Button type="button" onClick={handleDelete}>
+                            Save brand
+                        </Button>
+
+                        <Button type="button" onClick={handleDelete}>
+                            Delete brand
+                        </Button>
+                    </div>
+                </aside>
+            </div>
         </div>
     )
 }

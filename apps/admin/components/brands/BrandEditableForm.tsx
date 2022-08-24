@@ -1,6 +1,5 @@
 import { FormEvent } from 'react'
 import { BaseInput } from '@/ui/inputs/BaseInput'
-import { Button } from '@/components/ui/Button'
 
 import { BrandType } from '../../service/brands.service'
 
@@ -24,10 +23,6 @@ export const BrandEditableForm = ({ brandData }: Props) => {
                     label="Description"
                     defaultValue={brandData.description}
                 />
-            </div>
-
-            <div className="w-[380px] mt-5">
-                <Button type="submit" size="large">Update</Button>
             </div>
         </form>
     )
