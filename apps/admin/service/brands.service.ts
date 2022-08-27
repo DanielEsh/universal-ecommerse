@@ -14,8 +14,13 @@ type CreateBrandDto = {
     description: string
 }
 
-export const getAllBrands = () => {
-    return $axios.get(api.brands.all)
+export const getAllBrands = (page: string) => {
+    return $axios.get(api.brands.all, {
+        params: {
+            limit: 3,
+            page: page ?? 1,
+        },
+    })
 }
 
 export const getBrandById = (id: string) => {

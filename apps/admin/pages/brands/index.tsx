@@ -1,30 +1,49 @@
+import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { BrandType, getAllBrands } from '../../service/brands.service'
 
 import { BrandsTable } from '../../components/BrandsTable'
 
 type Props = {
-    data: BrandType[]
+    pageInfo: pageInfo
 }
 
-const BrandsPage = ({ data }: Props) => {
+type pageInfo = {
+    data: BrandType[]
+    count: number
+    total: number
+    page: number
+    pageCount: number
+}
+
+const BrandsPage = ({ pageInfo }: Props) => {
     const router = useRouter()
 
     const refreshData = () => {
         router.replace(router.asPath)
     }
 
+    const handlePageChange = (page: any) => {
+        router.query.page = page
+        router.push(router)
+    }
+
     return (
         <div>
             BRANDS PAGE
-            <BrandsTable data={data} updateData={refreshData} />
+            <BrandsTable
+                info={pageInfo}
+                updateData={refreshData}
+                onPageChange={handlePageChange}
+            />
         </div>
     )
 }
 
-export async function getServerSideProps() {
-    const { data } = await getAllBrands()
-    return { props: { data } }
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const { page } = context.query
+    const { data } = await getAllBrands(page as string)
+    return { props: { pageInfo: data } }
 }
 
 export default BrandsPage

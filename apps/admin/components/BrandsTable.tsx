@@ -6,13 +6,25 @@ import { Button } from './ui/Button'
 import { Table } from './ui/Table'
 import { SheetModal } from './ui/Modal/SheetModal'
 import { BrandsCreateForm } from './BrandsCreateForm'
+import { BrandPaginationItem } from '@/components/brands/BrandPaginationItem'
 
 type Props = {
-    data: BrandType[]
+    info: pageInfo
     updateData: () => void
+    onPageChange: any
 }
 
-export const BrandsTable: FC<Props> = ({ data, updateData }) => {
+type pageInfo = {
+    data: BrandType[]
+    count: number
+    total: number
+    page: number
+    pageCount: number
+}
+
+export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
+    const { data, total, pageCount, page } = info
+
     const router = useRouter()
 
     const [modal, setModal] = useState(false)
@@ -26,9 +38,16 @@ export const BrandsTable: FC<Props> = ({ data, updateData }) => {
         updateData()
     }
 
+    console.log('ARR', Array(pageCount).fill(''))
+
+    const handleClick = (number) => {
+        onPageChange(number)
+    }
+
     return (
         <div>
-            <div className="flex items-center justify-end w-full my-4">
+            <div className="flex items-center justify-between w-full my-4">
+                <h2>Общее количество записей: {total}</h2>
                 <div className="w-[160px]">
                     <Button
                         type="button"
@@ -61,6 +80,18 @@ export const BrandsTable: FC<Props> = ({ data, updateData }) => {
                     ))}
                 </Table.Body>
             </Table>
+            <div className="flex gap-3 mt-6">
+                {Array(pageCount)
+                    .fill('')
+                    .map((_, index) => (
+                        <BrandPaginationItem
+                            key={index}
+                            number={index + 1}
+                            isActive={index + 1 === page}
+                            onClick={() => handleClick(index + 1)}
+                        />
+                    ))}
+            </div>
 
             <SheetModal
                 isOpen={modal}
