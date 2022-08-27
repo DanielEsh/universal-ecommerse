@@ -15,6 +15,7 @@ const crud_1 = require("@nestjsx/crud");
 const brands_service_1 = require("../service/brands.service");
 const brand_entity_1 = require("../entities/brand.entity");
 const create_brand_dto_1 = require("../dto/create-brand.dto");
+const update_brand_dto_1 = require("../dto/update-brand.dto");
 let BrandsController = class BrandsController {
     constructor(service) {
         this.service = service;
@@ -28,8 +29,10 @@ BrandsController = __decorate([
         query: {
             alwaysPaginate: true,
         },
-        serialize: {
+        dto: {
             create: create_brand_dto_1.CreateBrandDto,
+            update: update_brand_dto_1.UpdateBrandDto,
+            replace: update_brand_dto_1.UpdateBrandDto,
         },
     }),
     (0, common_1.Controller)('brands'),
