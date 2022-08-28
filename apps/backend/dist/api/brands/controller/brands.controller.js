@@ -11,30 +11,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BrandsController = void 0;
 const common_1 = require("@nestjs/common");
-const crud_1 = require("@nestjsx/crud");
 const brands_service_1 = require("../service/brands.service");
-const brand_entity_1 = require("../entities/brand.entity");
-const create_brand_dto_1 = require("../dto/create-brand.dto");
-const update_brand_dto_1 = require("../dto/update-brand.dto");
 let BrandsController = class BrandsController {
     constructor(service) {
         this.service = service;
     }
+    findAll() {
+        return brands_service_1.BrandsService.findAll();
+    }
 };
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], BrandsController.prototype, "findAll", null);
 BrandsController = __decorate([
-    (0, crud_1.Crud)({
-        model: {
-            type: brand_entity_1.Brand,
-        },
-        query: {
-            alwaysPaginate: true,
-        },
-        dto: {
-            create: create_brand_dto_1.CreateBrandDto,
-            update: update_brand_dto_1.UpdateBrandDto,
-            replace: update_brand_dto_1.UpdateBrandDto,
-        },
-    }),
     (0, common_1.Controller)('brands'),
     __metadata("design:paramtypes", [brands_service_1.BrandsService])
 ], BrandsController);

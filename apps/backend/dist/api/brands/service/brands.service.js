@@ -15,11 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BrandsService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const crud_typeorm_1 = require("@nestjsx/crud-typeorm");
 const brand_entity_1 = require("../entities/brand.entity");
-let BrandsService = class BrandsService extends crud_typeorm_1.TypeOrmCrudService {
-    constructor(repo) {
-        super(repo);
+let BrandsService = class BrandsService {
+    constructor(brandsRepository) { }
+    static findAll() {
+        return 'find all by service';
     }
 };
 BrandsService = __decorate([
