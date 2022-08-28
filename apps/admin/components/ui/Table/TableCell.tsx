@@ -4,10 +4,11 @@ import classNames from 'classnames'
 export type TableCellProps = {
     children: ReactNode
     component?: 'th' | 'td'
+    width?: string
 }
 
 export const TableCell = (props: TableCellProps) => {
-    const { children, component } = props
+    const { children, component, width } = props
 
     const Tag = component || 'td'
 
@@ -15,5 +16,9 @@ export const TableCell = (props: TableCellProps) => {
         'bg-blue-500': component === 'th',
     })
 
-    return <Tag className={classes}>{children}</Tag>
+    return (
+        <Tag width={width} className={classes}>
+            {children}
+        </Tag>
+    )
 }

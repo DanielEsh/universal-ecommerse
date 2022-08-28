@@ -38,9 +38,7 @@ export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
         updateData()
     }
 
-    console.log('ARR', Array(pageCount).fill(''))
-
-    const handleClick = (number) => {
+    const handleClick = (number: number) => {
         onPageChange(number)
     }
 
@@ -59,27 +57,32 @@ export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
                     </Button>
                 </div>
             </div>
-            <Table>
-                <Table.Head>
-                    <Table.Row>
-                        <Table.Cell component="th"> </Table.Cell>
-                        <Table.Cell component="th">Имя</Table.Cell>
-                        <Table.Cell component="th">Описание</Table.Cell>
-                    </Table.Row>
-                </Table.Head>
-                <Table.Body>
-                    {data.map((brand, idx) => (
-                        <Table.Row
-                            key={brand.id}
-                            onClick={() => onRowClick(brand.id)}
-                        >
-                            <Table.Cell>{idx + 1}</Table.Cell>
-                            <Table.Cell>{brand.name}</Table.Cell>
-                            <Table.Cell>{brand.description}</Table.Cell>
+            <div className="min-h-[536px]">
+                <Table>
+                    <Table.Head>
+                        <Table.Row>
+                            <Table.Cell width="10%" component="th">
+                                ID
+                            </Table.Cell>
+                            <Table.Cell width="30%" component="th">
+                                Имя
+                            </Table.Cell>
+                            <Table.Cell width="60%" component="th">
+                                Описание
+                            </Table.Cell>
                         </Table.Row>
-                    ))}
-                </Table.Body>
-            </Table>
+                    </Table.Head>
+                    <Table.Body>
+                        {data.map(({ id, name, description }) => (
+                            <Table.Row key={id} onClick={() => onRowClick(id)}>
+                                <Table.Cell>{id}</Table.Cell>
+                                <Table.Cell>{name}</Table.Cell>
+                                <Table.Cell>{description}</Table.Cell>
+                            </Table.Row>
+                        ))}
+                    </Table.Body>
+                </Table>
+            </div>
             <div className="flex gap-3 mt-6">
                 {Array(pageCount)
                     .fill('')
