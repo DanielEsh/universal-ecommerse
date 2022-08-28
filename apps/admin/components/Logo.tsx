@@ -1,11 +1,7 @@
 export const Logo = () => {
     return (
         <div>
-            <svg
-                width="320"
-                height="76.37194178772515"
-                viewBox="0 0 320 76.37194178772515"
-            >
+            <svg viewBox="0 0 320 76.37194178772515">
                 <defs id="SvgjsDefs1642"></defs>
                 <g
                     id="SvgjsG1643"
