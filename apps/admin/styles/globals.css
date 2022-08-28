@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .content {
-    width: calc(100% - 320px);
+    width: calc(100% - 280px);
 }

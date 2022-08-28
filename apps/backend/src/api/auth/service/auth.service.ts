@@ -1,81 +1,84 @@
-import {Injectable, Inject, HttpException, HttpStatus, ForbiddenException} from '@nestjs/common';
+import {
+  Injectable,
+  Inject,
+  HttpException,
+  HttpStatus,
+  ForbiddenException,
+} from '@nestjs/common';
 import { UserService } from '../../user/service/user.service';
-import {AuthHelper} from "@/api/auth/helpers/auth.helper";
-import {User} from "@/api/user/user.entity";
-import { Response } from "express";
-import {cookieOptions} from "@/utils/cookie";
-import * as bcrypt from "bcryptjs";
+import { AuthHelper } from '@/api/auth/helpers/auth.helper';
+import { User } from '@/api/user/user.entity';
+import { Response } from 'express';
+import { cookieOptions } from '@/utils/cookie';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class AuthService {
-    constructor(
-        private usersService: UserService,
-    ) {}
+  constructor(private usersService: UserService) {}
 
-    @Inject(AuthHelper)
-    private readonly authHelper: AuthHelper;
+  @Inject(AuthHelper)
+  private readonly authHelper: AuthHelper;
 
-    async validateUser(username: string, pass: string): Promise<any> {
-        const user = await this.usersService.findUserByEmailOrName(username);
+  async validateUser(username: string, pass: string): Promise<any> {
+    const user = await this.usersService.findUserByEmailOrName(username);
 
-        if (!user) {
-            throw new HttpException('No user found', HttpStatus.NOT_FOUND);
-        }
-
-        const isPasswordValid: boolean = this.authHelper.isPasswordValid(
-            pass,
-            user.password,
-        );
-
-        if (!isPasswordValid) {
-            throw new HttpException('password is not valid', HttpStatus.NOT_FOUND);
-        }
-
-        const {
-            password,
-            lastLoginAt,
-            ...result
-        } = user;
-
-        return result;
+    if (!user) {
+      throw new HttpException('No user found', HttpStatus.NOT_FOUND);
     }
 
-    async signIn(user: User, res: Response) {
-        const accessToken = await this.authHelper.generateAccessToken(user)
-        const refreshToken = await this.authHelper.generateRefreshToken(user)
-        await this.usersService.updateRefreshTokenHash(user.id, refreshToken)
-        res.cookie('accessToken', accessToken, cookieOptions);
-        res.cookie('refreshToken', refreshToken, cookieOptions);
+    const isPasswordValid: boolean = this.authHelper.isPasswordValid(
+      pass,
+      user.password,
+    );
 
-        return {
-            accessToken,
-            refreshToken
-        };
+    if (!isPasswordValid) {
+      throw new HttpException('password is not valid', HttpStatus.NOT_FOUND);
     }
 
-    public async refresh(userId: number, refreshToken: string, res: Response) {
-        const user = await this.usersService.findById(userId);
+    const { password, lastLoginAt, ...result } = user;
 
-        if (!user) throw new ForbiddenException('Access denied')
+    return result;
+  }
 
-        const matchTokens = await bcrypt.compare(refreshToken, user.hashedRefreshToken)
+  async signIn(user: User, res: Response) {
+    const accessToken = await this.authHelper.generateAccessToken(user);
+    const refreshToken = await this.authHelper.generateRefreshToken(user);
+    await this.usersService.updateRefreshTokenHash(user.id, refreshToken);
+    res.cookie('accessToken', accessToken, cookieOptions);
+    res.cookie('refreshToken', refreshToken, cookieOptions);
 
-        if(!matchTokens) throw new ForbiddenException('Access denied')
+    return {
+      accessToken,
+      refreshToken,
+    };
+  }
 
-        const accessToken = await this.authHelper.generateAccessToken(user)
-        res.cookie('accessToken', accessToken, cookieOptions);
+  public async refresh(userId: number, refreshToken: string, res: Response) {
+    const user = await this.usersService.findById(userId);
 
-        return {
-            accessToken,
-        }
-    }
+    if (!user) throw new ForbiddenException('Access denied');
 
-    public async logout(userId: number, response: Response) {
-        response.clearCookie('accessToken');
-        response.clearCookie('refreshToken');
+    const matchTokens = await bcrypt.compare(
+      refreshToken,
+      user.hashedRefreshToken,
+    );
 
-        await this.usersService.updateUserById(userId, {
-            hashedRefreshToken: null
-        })
-    }
+    if (!matchTokens) throw new ForbiddenException('Access denied');
+
+    const accessToken = await this.authHelper.generateAccessToken(user);
+    res.cookie('accessToken', accessToken, cookieOptions);
+
+    return {
+      accessToken,
+    };
+  }
+
+  public async logout(userId: number, response: Response) {
+    response.clearCookie('accessToken');
+    response.clearCookie('refreshToken');
+
+    await this.usersService.updateUserById(userId, {
+      hashedRefreshToken: null,
+    });
+  }
 }

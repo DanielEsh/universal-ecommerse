@@ -1,26 +1,14 @@
-import React from 'react';
-import {logout} from "../service/auth.service";
-import { Logo } from './Logo';
-import { AsideMenu } from './AsideMenu';
-import { AsideUser } from './AsideUser';
+import React from 'react'
+import { Logo } from './Logo'
+import { AsideMenu } from './AsideMenu'
 
 export const SideBar = () => {
-
-    const onLogout = async () => {
-         await logout();
-    }
-
     return (
-        <aside className="fixed grow-0 w-[320px] h-full p-8">
-            <Logo />
-            <AsideMenu />
-            <AsideUser />
-
-            <div>
-                <button onClick={onLogout}>
-                    Выйти
-                </button>
+        <aside className="fixed grow-0 w-[280px] h-full">
+            <div className="p-8">
+                <Logo />
             </div>
+            <AsideMenu />
         </aside>
-    );
-};
+    )
+}

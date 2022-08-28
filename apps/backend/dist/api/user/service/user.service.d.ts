@@ -1,5 +1,5 @@
 import { User } from '@/api/user/user.entity';
-import { UpdateDto } from "@/api/user/dto/updateDto";
+import { UpdateDto } from '@/api/user/dto/updateDto';
 export declare class UserService {
     private readonly userRepository;
     findAll(): Promise<User[]>;

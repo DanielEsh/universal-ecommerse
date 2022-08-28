@@ -30,9 +30,6 @@ let UserController = class UserController {
     async create(body) {
         return await this.userService.create(body);
     }
-    getById(id) {
-        return this.userService.findById(id);
-    }
     async updateById(id, body) {
         await this.userService.updateUserById(id, body);
         return 'Success update';
@@ -46,15 +43,18 @@ let UserController = class UserController {
     }
     getProfile(req) {
         const { user } = req;
-        return this.userService.findById(user.id);
+        return 'Profile';
     }
-    guest(req) {
-        const { user } = req;
+    guest() {
+        console.log('123');
         return 'Guest route';
     }
     admin(req) {
         const { user } = req;
         return 'Admin route';
+    }
+    getById(id) {
+        return this.userService.findById(id);
     }
 };
 __decorate([
@@ -72,13 +72,6 @@ __decorate([
     __metadata("design:paramtypes", [createDto_1.CreateDto]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "create", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
-], UserController.prototype, "getById", null);
 __decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
@@ -103,10 +96,9 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "getProfile", null);
 __decorate([
-    (0, common_1.Get)('guest'),
-    __param(0, (0, common_1.Request)()),
+    (0, common_1.Get)('/guest/'),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "guest", null);
 __decorate([
@@ -118,6 +110,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "admin", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "getById", null);
 UserController = __decorate([
     (0, common_1.Controller)('user'),
     __metadata("design:paramtypes", [user_service_1.UserService])

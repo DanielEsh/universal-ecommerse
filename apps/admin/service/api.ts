@@ -5,6 +5,10 @@ export const api = {
         logout: '/auth/logout',
     },
     user: {
-        all: '/user/'
-    }
+        all: '/user/',
+    },
+    brands: {
+        all: '/brands/',
+        detail: (id: string) => `/brands/${id}`,
+    },
 }

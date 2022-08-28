@@ -1,48 +1,56 @@
-import { useRef } from "react";
+import { useState } from 'react'
+import { BaseInput } from './ui/inputs/BaseInput'
+import { InputPassword } from './ui/inputs/InputPassword'
+import { Button } from './ui/Button'
 
-import {signIn} from "../service/auth.service";
+import { signIn } from '../service/auth.service'
 
 export const SignInForm = () => {
-
-    const emailRef = useRef<any>(null);
-    const passwordRef = useRef<any>(null);
+    const [email, setEmail] = useState<string>('elon@gmail.com')
+    const [password, setPassword] = useState<string>('12345678')
 
     // @ts-ignore
     const onSubmit = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
 
-       await onLoggin({
-            username: emailRef.current.value,
-            password: passwordRef.current.value
+        await onLoggin({
+            username: email,
+            password: password,
         })
 
-        console.log('submit');
+        console.log('submit')
     }
 
     async function onLoggin(data: any) {
         try {
-            await signIn(data)
-                .then(() => {
-                    console.log('then');
-                })
+            await signIn(data).then(() => {
+                console.log('then')
+            })
         } catch (error: any) {
             console.error(error)
         }
     }
 
     return (
-        <form onSubmit={onSubmit}>
-            <div>
-                Name
-                <input type="text" ref={emailRef} value="elon@gmail.com"/>
+        <form
+            className="flex items-center justify-center flex-col gap-6 mt-6"
+            onSubmit={onSubmit}
+        >
+            <div className="w-[500px]">
+                <BaseInput
+                    defaultValue="elon@gmail.com"
+                    onChange={(value) => setEmail(value)}
+                />
             </div>
-            <div>
-                password
-                <input type="text" ref={passwordRef} value="12345678"/>
+
+            <div className="w-[500px]">
+                <InputPassword
+                    defaultValue="12345678"
+                    onChange={(value) => setPassword(value)}
+                />
             </div>
-            <button type="submit">
-                Submit
-            </button>
+
+            <Button type="submit">Submit</Button>
         </form>
     )
 }

@@ -10,7 +10,7 @@ async function bootstrap() {
     const port = config.get('PORT');
     app.enableCors({
         origin: 'http://localhost:3000',
-        credentials: true
+        credentials: true,
     });
     app.use(cookieParser());
     app.setGlobalPrefix('api');

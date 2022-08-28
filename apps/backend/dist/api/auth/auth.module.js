@@ -27,7 +27,13 @@ AuthModule = __decorate([
             typeorm_1.TypeOrmModule.forFeature([user_entity_1.User]),
             jwt_1.JwtModule.register({}),
         ],
-        providers: [auth_service_1.AuthService, auth_helper_1.AuthHelper, strategy_1.LocalStrategy, strategy_1.AccessJwtStrategy, strategy_1.RefreshJwtStrategy],
+        providers: [
+            auth_service_1.AuthService,
+            auth_helper_1.AuthHelper,
+            strategy_1.LocalStrategy,
+            strategy_1.AccessJwtStrategy,
+            strategy_1.RefreshJwtStrategy,
+        ],
         controllers: [auth_controller_1.AuthController],
     })
 ], AuthModule);

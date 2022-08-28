@@ -20,7 +20,8 @@ let UserService = class UserService {
         return await this.userRepository.find();
     }
     async findUserByEmailOrName(payload) {
-        return await this.userRepository.findOne({ where: { email: payload } }) || this.userRepository.findOne({ where: { name: payload } });
+        return ((await this.userRepository.findOne({ where: { email: payload } })) ||
+            this.userRepository.findOne({ where: { name: payload } }));
     }
     async findById(id) {
         return await this.userRepository.findOne({ where: { id } });
@@ -30,7 +31,8 @@ let UserService = class UserService {
         user.name = (body === null || body === void 0 ? void 0 : body.name) || user.name;
         user.email = (body === null || body === void 0 ? void 0 : body.email) || user.email;
         user.roles = (body === null || body === void 0 ? void 0 : body.roles) || user.roles;
-        user.hashedRefreshToken = (body === null || body === void 0 ? void 0 : body.hashedRefreshToken) || user.hashedRefreshToken;
+        user.hashedRefreshToken =
+            (body === null || body === void 0 ? void 0 : body.hashedRefreshToken) || user.hashedRefreshToken;
         return this.userRepository.save(user);
     }
     async create(body) {

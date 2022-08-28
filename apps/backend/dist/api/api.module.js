@@ -10,11 +10,20 @@ exports.ApiModule = void 0;
 const common_1 = require("@nestjs/common");
 const user_module_1 = require("./user/user.module");
 const auth_module_1 = require("./auth/auth.module");
+const goods_module_1 = require("./goods/goods.module");
+const categories_module_1 = require("./categories/categories.module");
+const brands_module_1 = require("./brands/brands.module");
 let ApiModule = class ApiModule {
 };
 ApiModule = __decorate([
     (0, common_1.Module)({
-        imports: [user_module_1.UserModule, auth_module_1.AuthModule],
+        imports: [
+            user_module_1.UserModule,
+            auth_module_1.AuthModule,
+            goods_module_1.GoodsModule,
+            categories_module_1.CategoriesModule,
+            brands_module_1.BrandsModule,
+        ],
     })
 ], ApiModule);
 exports.ApiModule = ApiModule;
