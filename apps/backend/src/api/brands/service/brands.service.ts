@@ -1,6 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {Repository} from "typeorm";
+import {
+  paginate,
+  Pagination,
+  IPaginationOptions,
+} from 'nestjs-typeorm-paginate';
 import { Brand } from '@/api/brands/entities/brand.entity';
 import {CreateBrandDto} from "@/api/brands/dto/create-brand.dto";
 import {UpdateBrandDto} from "@/api/brands/dto/update-brand.dto";
@@ -19,8 +24,8 @@ export class BrandsService {
     return this.brandRepository.save(newBrand);
   }
 
-  public async findAll() {
-    return await this.brandRepository.find();
+  public async findAll(options: IPaginationOptions): Promise<Pagination<Brand>> {
+    return paginate<Brand>(this.brandRepository, options);
   }
 
   public findOne(id: number) {

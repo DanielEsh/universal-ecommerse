@@ -1,4 +1,6 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, Query, DefaultValuePipe, ParseIntPipe } from '@nestjs/common';
+import { Pagination } from 'nestjs-typeorm-paginate';
+import { Brand } from "@/api/brands/entities/brand.entity";
 import { BrandsService } from '@/api/brands/service/brands.service';
 import { CreateBrandDto } from '@/api/brands/dto/create-brand.dto';
 import { UpdateBrandDto } from '@/api/brands/dto/update-brand.dto';
@@ -14,9 +16,17 @@ export class BrandsController {
   }
 
   @Get()
-  findAll() {
-    return this.brandsService.findAll();
-  }
+  async findAll(
+      @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+      @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
+  ): Promise<Pagination<Brand>> {
+    limit = limit > 100 ? 100 : limit;
+    return this.brandsService.findAll({
+      page,
+      limit,
+      route: 'http://localhost:8000/api/brands',
+    });
+  };
 
   @Get(':id')
   findOneBrand(@Param('id') id: string) {
