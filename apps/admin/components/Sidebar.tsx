@@ -4,11 +4,11 @@ import { AsideMenu } from './AsideMenu'
 
 export const SideBar = () => {
     return (
-        <aside className="fixed grow-0 w-[320px] h-full p-8">
-            <Logo />
-            <div className="mt-8">
-                <AsideMenu />
+        <aside className="fixed grow-0 w-[280px] h-full">
+            <div className="p-8">
+                <Logo />
             </div>
+            <AsideMenu />
         </aside>
     )
 }

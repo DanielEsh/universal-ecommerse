@@ -24,10 +24,12 @@ export const AsideMenu = () => {
     ]
 
     const classes = (isActie: boolean) => {
+        const activeStyles = `before:content-[''] before:absolute before:left-0 before:w-2 before:h-full before:bg-black before:rounded-r-md`
+
         return classNames(
-            'flex items-center justify-center w-full h-[56px] border border-black rounded-md',
+            'relative flex items-center justify-center w-full h-[56px] rounded-md',
             {
-                ['bg-black text-white']: isActie,
+                [activeStyles]: isActie,
             },
         )
     }
