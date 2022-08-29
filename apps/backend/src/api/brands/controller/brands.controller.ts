@@ -18,6 +18,7 @@ export class BrandsController {
   @Get()
   async findAll(
       @Query('search') search,
+      @Query('sort') sort,
       @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
       @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
   ) {
@@ -25,6 +26,10 @@ export class BrandsController {
 
     if (search) {
       return this.brandsService.search(search);
+    }
+
+    if (sort) {
+      return this.brandsService.sort(sort);
     }
 
     return this.brandsService.findAll({

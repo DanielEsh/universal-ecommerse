@@ -56,4 +56,12 @@ export class BrandsService {
       items: await builder.getMany(),
     }
   }
+
+  public async sort(text: string) {
+    const builder = await this.queryBuilder('brands');
+    builder.orderBy('brands.id', 'ASC');
+    return {
+      items: await builder.getMany(),
+    }
+  }
 }
