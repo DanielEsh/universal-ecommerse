@@ -9,11 +9,24 @@ type Props = {
 }
 
 type pageInfo = {
-    data: BrandType[]
-    count: number
-    total: number
-    page: number
-    pageCount: number
+    items: BrandType[]
+    meta: metaType
+    links: Links
+}
+
+type metaType = {
+    itemCount: number
+    totalItems: number
+    itemsPerPage: number
+    totalPages: number
+    currentPage: number
+}
+
+type Links = {
+    first: string
+    previous: string
+    next: string
+    last: string
 }
 
 const BrandsPage = ({ pageInfo }: Props) => {

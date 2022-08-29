@@ -15,15 +15,28 @@ type Props = {
 }
 
 type pageInfo = {
-    data: BrandType[]
-    count: number
-    total: number
-    page: number
-    pageCount: number
+    items: BrandType[]
+    meta: metaType
+    links: Links
+}
+
+type metaType = {
+    itemCount: number
+    totalItems: number
+    itemsPerPage: number
+    totalPages: number
+    currentPage: number
+}
+
+type Links = {
+    first: string
+    previous: string
+    next: string
+    last: string
 }
 
 export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
-    const { data, total, pageCount, page } = info
+    const { items } = info
 
     const router = useRouter()
 
@@ -45,7 +58,7 @@ export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
     return (
         <div>
             <div className="flex items-center justify-between w-full my-4">
-                <h2>Общее количество записей: {total}</h2>
+                <h2>Общее количество записей: 10</h2>
                 <div className="w-[160px]">
                     <Button
                         type="button"
@@ -73,7 +86,7 @@ export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
                         </Table.Row>
                     </Table.Head>
                     <Table.Body>
-                        {data.map(({ id, name, description }) => (
+                        {items.map(({ id, name, description }) => (
                             <Table.Row key={id} onClick={() => onRowClick(id)}>
                                 <Table.Cell>{id}</Table.Cell>
                                 <Table.Cell>{name}</Table.Cell>
@@ -84,13 +97,13 @@ export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
                 </Table>
             </div>
             <div className="flex gap-3 mt-6">
-                {Array(pageCount)
+                {Array(10)
                     .fill('')
                     .map((_, index) => (
                         <BrandPaginationItem
                             key={index}
                             number={index + 1}
-                            isActive={index + 1 === page}
+                            isActive={index + 1 === 1}
                             onClick={() => handleClick(index + 1)}
                         />
                     ))}
