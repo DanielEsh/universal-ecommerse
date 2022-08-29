@@ -6,6 +6,7 @@ import { Button } from './ui/Button'
 import { Table } from './ui/Table'
 import { SheetModal } from './ui/Modal/SheetModal'
 import { BrandsCreateForm } from './BrandsCreateForm'
+import { Pagination } from '@/components/Pagination'
 import { BrandPaginationItem } from '@/components/brands/BrandPaginationItem'
 
 type Props = {
@@ -97,18 +98,7 @@ export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
                     </Table.Body>
                 </Table>
             </div>
-            <div className="flex gap-3 mt-6">
-                {Array(10)
-                    .fill('')
-                    .map((_, index) => (
-                        <BrandPaginationItem
-                            key={index}
-                            number={index + 1}
-                            isActive={index + 1 === 1}
-                            onClick={() => handleClick(index + 1)}
-                        />
-                    ))}
-            </div>
+            <Pagination />
 
             <SheetModal
                 isOpen={modal}
