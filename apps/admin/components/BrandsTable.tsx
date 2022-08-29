@@ -36,7 +36,8 @@ type Links = {
 }
 
 export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
-    const { items } = info
+    const { items, meta } = info
+    const { totalItems } = meta
 
     const router = useRouter()
 
@@ -58,7 +59,7 @@ export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
     return (
         <div>
             <div className="flex items-center justify-between w-full my-4">
-                <h2>Общее количество записей: 10</h2>
+                <h2>Общее количество записей: {totalItems}</h2>
                 <div className="w-[160px]">
                     <Button
                         type="button"
