@@ -24,19 +24,11 @@ export class BrandsController {
   ) {
     limit = limit > 100 ? 100 : limit;
 
-    if (search) {
-      return this.brandsService.search(search);
-    }
-
-    if (sort) {
-      return this.brandsService.sort(sort);
-    }
-
-    return this.brandsService.findAll({
-      page,
-      limit,
-      route: 'http://localhost:8000/api/brands',
-    });
+    return this.brandsService.findAll(
+      search,
+      sort,
+      {page, limit, route: 'http://localhost:8000/api/brands',}
+    );
   };
 
   @Get(':id')

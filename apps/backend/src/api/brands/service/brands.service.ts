@@ -15,6 +15,20 @@ export class BrandsService {
   @InjectRepository(Brand)
   private readonly brandRepository: Repository<Brand>;
 
+  public async findAll(search, sort, options: IPaginationOptions): Promise<Pagination<Brand>> {
+    const builder = await this.brandRepository.createQueryBuilder('brands');
+
+    if (search) {
+      builder.where("brands.name LIKE :s OR brands.description LIKE :s", {s: `%${search}%`})
+    }
+
+    if (sort) {
+      builder.orderBy('brands.id', 'ASC');
+    }
+
+    return paginate<Brand>(builder, options);
+  }
+
   public create(body: CreateBrandDto) {
     const newBrand = new Brand();
 
@@ -22,10 +36,6 @@ export class BrandsService {
     newBrand.description = body?.description;
 
     return this.brandRepository.save(newBrand);
-  }
-
-  public async findAll(options: IPaginationOptions): Promise<Pagination<Brand>> {
-    return paginate<Brand>(this.brandRepository, options);
   }
 
   public findOne(id: number) {
@@ -43,25 +53,5 @@ export class BrandsService {
 
   public async delete(id: number) {
     await this.brandRepository.delete({ id });
-  }
-
-  private async queryBuilder(alias: string) {
-    return this.brandRepository.createQueryBuilder(alias);
-  }
-
-  public async search(text: string) {
-    const builder = await this.queryBuilder('brands');
-    builder.where("brands.name LIKE :s OR brands.description LIKE :s", {s: `%${text}%`})
-    return {
-      items: await builder.getMany(),
-    }
-  }
-
-  public async sort(text: string) {
-    const builder = await this.queryBuilder('brands');
-    builder.orderBy('brands.id', 'ASC');
-    return {
-      items: await builder.getMany(),
-    }
   }
 }
