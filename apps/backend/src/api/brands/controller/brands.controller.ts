@@ -17,10 +17,16 @@ export class BrandsController {
 
   @Get()
   async findAll(
+      @Query('search') search,
       @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
       @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
-  ): Promise<Pagination<Brand>> {
+  ) {
     limit = limit > 100 ? 100 : limit;
+
+    if (search) {
+      return this.brandsService.search(search);
+    }
+
     return this.brandsService.findAll({
       page,
       limit,

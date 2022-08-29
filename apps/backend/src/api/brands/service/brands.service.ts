@@ -44,4 +44,16 @@ export class BrandsService {
   public async delete(id: number) {
     await this.brandRepository.delete({ id });
   }
+
+  private async queryBuilder(alias: string) {
+    return this.brandRepository.createQueryBuilder(alias);
+  }
+
+  public async search(text: string) {
+    const builder = await this.queryBuilder('brands');
+    builder.where("brands.name LIKE :s OR brands.description LIKE :s", {s: `%${text}%`})
+    return {
+      items: await builder.getMany(),
+    }
+  }
 }
