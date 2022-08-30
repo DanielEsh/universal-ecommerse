@@ -1,7 +1,9 @@
 type Props = {
+    pageCount: number
+    // events
     onFirstClick: () => void
     onLastClick: () => void
-    onItemClick: () => void
+    onItemClick: (pageNumber: number) => void
     onPrevClick: () => void
     onNextClick: () => void
 }
@@ -15,8 +17,8 @@ export const Pagination = (props: Props) => {
         props.onPrevClick()
     }
 
-    const handleItemClick = () => {
-        props.onItemClick()
+    const handleItemClick = (pageNumber: number) => {
+        props.onItemClick(pageNumber)
     }
 
     const handleNextClick = () => {
@@ -31,11 +33,13 @@ export const Pagination = (props: Props) => {
         <ul className="flex gap-3 mt-6">
             <li onClick={handleFirstClick}> {'<<'} </li>
             <li onClick={handlePrevClick}> {'<'} </li>
-            <li onClick={handleItemClick}>1</li>
-            <li onClick={handleItemClick}>2</li>
-            <li onClick={handleItemClick}>3</li>
-            <li onClick={handleItemClick}>4</li>
-            <li onClick={handleItemClick}>5</li>
+            {Array(props.pageCount)
+                .fill('')
+                .map((_, index) => (
+                    <li key={index} onClick={() => handleItemClick(index + 1)}>
+                        {index + 1}
+                    </li>
+                ))}
             <li onClick={handleNextClick}> {'>'} </li>
             <li onClick={handleLastClick}> {'>>'} </li>
         </ul>

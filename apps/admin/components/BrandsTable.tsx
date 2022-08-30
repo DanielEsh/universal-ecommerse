@@ -38,7 +38,7 @@ type Links = {
 
 export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
     const { items, meta, links } = info
-    const { totalItems } = meta
+    const { totalItems, totalPages } = meta
 
     const router = useRouter()
 
@@ -57,10 +57,10 @@ export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
         onPageChange(number)
     }
 
-    const handlePagination = (value) => {
+    const handlePagination = (value, number) => {
         console.log(value)
         if (value === 'item') {
-            onPageChange(2)
+            onPageChange(number)
         }
     }
 
@@ -109,9 +109,10 @@ export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
             <Pagination
                 onFirstClick={() => handlePagination('first')}
                 onPrevClick={() => handlePagination('prev')}
-                onItemClick={() => handlePagination('item')}
+                onItemClick={(number) => handlePagination('item', number)}
                 onLastClick={() => handlePagination('last')}
                 onNextClick={() => handlePagination('next')}
+                pageCount={totalPages}
             />
 
             <SheetModal
