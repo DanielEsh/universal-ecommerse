@@ -1,22 +1,30 @@
-export const Pagination = () => {
+type Props = {
+    onFirstClick: () => void
+    onLastClick: () => void
+    onItemClick: () => void
+    onPrevClick: () => void
+    onNextClick: () => void
+}
+
+export const Pagination = (props: Props) => {
     const handleFirstClick = () => {
-        console.log('FIRST')
+        props.onFirstClick()
     }
 
     const handlePrevClick = () => {
-        console.log('PREV')
+        props.onPrevClick()
     }
 
     const handleItemClick = () => {
-        console.log('ITEM')
+        props.onItemClick()
     }
 
     const handleNextClick = () => {
-        console.log('NEXT')
+        props.onNextClick()
     }
 
     const handleLastClick = () => {
-        console.log('LAST')
+        props.onLastClick()
     }
 
     return (
