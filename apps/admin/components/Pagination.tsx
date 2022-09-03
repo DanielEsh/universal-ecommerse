@@ -1,5 +1,8 @@
+import classnames from 'classnames'
+
 type Props = {
     pageCount: number
+    currentPage: number
     // events
     onFirstClick: () => void
     onLastClick: () => void
@@ -29,6 +32,11 @@ export const Pagination = (props: Props) => {
         props.onLastClick()
     }
 
+    const pagesClasses = (page: number) =>
+        classnames('flex items-center justify-center w-8 h-8 border', {
+            ['bg-blue-500']: page === props.currentPage,
+        })
+
     return (
         <ul className="flex gap-3 mt-6">
             <li onClick={handleFirstClick}> {'<<'} </li>
@@ -36,7 +44,11 @@ export const Pagination = (props: Props) => {
             {Array(props.pageCount)
                 .fill('')
                 .map((_, index) => (
-                    <li key={index} onClick={() => handleItemClick(index + 1)}>
+                    <li
+                        key={index}
+                        className={pagesClasses(index + 1)}
+                        onClick={() => handleItemClick(index + 1)}
+                    >
                         {index + 1}
                     </li>
                 ))}

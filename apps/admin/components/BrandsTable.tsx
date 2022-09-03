@@ -7,7 +7,6 @@ import { Table } from './ui/Table'
 import { SheetModal } from './ui/Modal/SheetModal'
 import { BrandsCreateForm } from './BrandsCreateForm'
 import { Pagination } from '@/components/Pagination'
-import { BrandPaginationItem } from '@/components/brands/BrandPaginationItem'
 
 type Props = {
     info: pageInfo
@@ -18,7 +17,6 @@ type Props = {
 type pageInfo = {
     items: BrandType[]
     meta: metaType
-    links: Links
 }
 
 type metaType = {
@@ -27,18 +25,13 @@ type metaType = {
     itemsPerPage: number
     totalPages: number
     currentPage: number
-}
-
-type Links = {
-    first: string
-    previous: string
-    next: string
-    last: string
+    previous: number
+    next: number
 }
 
 export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
-    const { items, meta, links } = info
-    const { totalItems, totalPages } = meta
+    const { items, meta } = info
+    const { totalItems, totalPages, currentPage } = meta
 
     const router = useRouter()
 
@@ -58,10 +51,15 @@ export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
     }
 
     const handlePagination = (value, number) => {
-        console.log(value)
-        if (value === 'item') {
-            onPageChange(number)
+        const list = {
+            item: () => onPageChange(number),
+            prev: () => meta.previous && onPageChange(meta.previous),
+            next: () => meta.next && onPageChange(meta.next),
+            last: () => onPageChange(meta.totalPages),
+            first: () => onPageChange(1),
         }
+
+        list[value]()
     }
 
     return (
@@ -113,6 +111,7 @@ export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
                 onLastClick={() => handlePagination('last')}
                 onNextClick={() => handlePagination('next')}
                 pageCount={totalPages}
+                currentPage={currentPage}
             />
 
             <SheetModal
