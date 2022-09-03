@@ -1,8 +1,17 @@
 import classnames from 'classnames'
 
-type Props = {
-    pageCount: number
+type metaType = {
+    itemCount: number
+    totalItems: number
+    itemsPerPage: number
+    totalPages: number
     currentPage: number
+    previous: number
+    next: number
+}
+
+type Props = {
+    meta: metaType
     // events
     onFirstClick: () => void
     onLastClick: () => void
@@ -12,6 +21,8 @@ type Props = {
 }
 
 export const Pagination = (props: Props) => {
+    const { totalPages, currentPage, next, previous } = props.meta
+
     const handleFirstClick = () => {
         props.onFirstClick()
     }
@@ -34,14 +45,26 @@ export const Pagination = (props: Props) => {
 
     const pagesClasses = (page: number) =>
         classnames('flex items-center justify-center w-8 h-8 border', {
-            ['bg-blue-500']: page === props.currentPage,
+            ['bg-blue-500']: page === currentPage,
+        })
+
+    const itemsClasses = (interactive = true) =>
+        classnames('flex items-center justify-center w-8 h-8 border', {
+            ['bg-red-500']: !interactive,
         })
 
     return (
         <ul className="flex gap-3 mt-6">
-            <li onClick={handleFirstClick}> {'<<'} </li>
-            <li onClick={handlePrevClick}> {'<'} </li>
-            {Array(props.pageCount)
+            <li className={itemsClasses()} onClick={handleFirstClick}>
+                {'<<'}
+            </li>
+            <li
+                className={itemsClasses(Boolean(previous))}
+                onClick={handlePrevClick}
+            >
+                {'<'}
+            </li>
+            {Array(totalPages)
                 .fill('')
                 .map((_, index) => (
                     <li
@@ -52,8 +75,15 @@ export const Pagination = (props: Props) => {
                         {index + 1}
                     </li>
                 ))}
-            <li onClick={handleNextClick}> {'>'} </li>
-            <li onClick={handleLastClick}> {'>>'} </li>
+            <li
+                className={itemsClasses(Boolean(next))}
+                onClick={handleNextClick}
+            >
+                {'>'}
+            </li>
+            <li className={itemsClasses()} onClick={handleLastClick}>
+                {'>>'}
+            </li>
         </ul>
     )
 }

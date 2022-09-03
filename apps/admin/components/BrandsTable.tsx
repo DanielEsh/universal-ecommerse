@@ -110,8 +110,7 @@ export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
                 onItemClick={(number) => handlePagination('item', number)}
                 onLastClick={() => handlePagination('last')}
                 onNextClick={() => handlePagination('next')}
-                pageCount={totalPages}
-                currentPage={currentPage}
+                meta={meta}
             />
 
             <SheetModal
