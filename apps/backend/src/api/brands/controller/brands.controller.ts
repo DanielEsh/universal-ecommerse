@@ -27,7 +27,7 @@ export class BrandsController {
     return this.brandsService.findAll(
       search,
       sort,
-      {page, limit, route: 'http://localhost:8000/api/brands',}
+      {page, limit, route: ' ',}
     );
   };
 
