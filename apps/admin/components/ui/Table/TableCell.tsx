@@ -13,7 +13,7 @@ export const TableCell = (props: TableCellProps) => {
     const Tag = component || 'td'
 
     const classes = classNames('p-2  border border-stone-900', {
-        'bg-blue-500': component === 'th',
+        'bg-black text-white border-stone-600': component === 'th',
     })
 
     return (

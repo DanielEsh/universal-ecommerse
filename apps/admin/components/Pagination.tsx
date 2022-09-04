@@ -39,14 +39,20 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
     }
 
     const pagesClasses = (page: number) =>
-        classnames('flex items-center justify-center w-8 h-8 border', {
-            ['bg-blue-500']: page === currentPage,
-        })
+        classnames(
+            'flex items-center justify-center w-8 h-8 border border-black',
+            {
+                ['bg-black text-white']: page === currentPage,
+            },
+        )
 
     const itemsClasses = (interactive = true) =>
-        classnames('flex items-center justify-center w-8 h-8 border', {
-            ['bg-red-500']: !interactive,
-        })
+        classnames(
+            'flex items-center justify-center w-8 h-8 border border-black',
+            {
+                ['opacity-60']: !interactive,
+            },
+        )
 
     return (
         <ul className="flex gap-3 mt-6">
