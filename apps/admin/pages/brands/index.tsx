@@ -11,7 +11,6 @@ type Props = {
 type pageInfo = {
     items: BrandType[]
     meta: metaType
-    links: Links
 }
 
 type metaType = {
@@ -20,13 +19,8 @@ type metaType = {
     itemsPerPage: number
     totalPages: number
     currentPage: number
-}
-
-type Links = {
-    first: string
-    previous: string
-    next: string
-    last: string
+    previous: number
+    next: number
 }
 
 const BrandsPage = ({ pageInfo }: Props) => {
@@ -54,8 +48,11 @@ const BrandsPage = ({ pageInfo }: Props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const { page } = context.query
-    const { data } = await getAllBrands(page as string)
+    const { page, search } = context.query
+    const { data } = await getAllBrands({
+        page: page as string,
+        search: search as string,
+    })
     return { props: { pageInfo: data } }
 }
 

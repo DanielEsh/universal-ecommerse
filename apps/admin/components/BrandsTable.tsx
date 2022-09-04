@@ -7,6 +7,7 @@ import { Table } from './ui/Table'
 import { SheetModal } from './ui/Modal/SheetModal'
 import { BrandsCreateForm } from './BrandsCreateForm'
 import { Pagination } from '@/components/Pagination'
+import { BaseInput } from '@/ui/inputs/BaseInput'
 
 type Props = {
     info: pageInfo
@@ -46,11 +47,23 @@ export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
         updateData()
     }
 
+    const handleSearch = (value: string) => {
+        router.query.search = value
+        router.push(router)
+    }
+
     return (
         <div>
             <div className="flex items-center justify-between w-full my-4">
                 <h2>Общее количество записей: {totalItems}</h2>
-                <div className="w-[160px]">
+                <div className="flex gap-6">
+                    <BaseInput
+                        className="basis-[460px]"
+                        label="Поиск"
+                        defaultValue={router.query.search as string}
+                        onChange={handleSearch}
+                    />
+
                     <Button
                         type="button"
                         onClick={() => {
