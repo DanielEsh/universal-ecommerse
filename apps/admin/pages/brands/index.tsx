@@ -15,7 +15,7 @@ type pageInfo = {
 
 type metaType = {
     itemCount: number
-    totalItems: number
+    totalItemsCount: number
     itemsPerPage: number
     totalPages: number
     currentPage: number
@@ -23,7 +23,7 @@ type metaType = {
     next: number
 }
 
-const BrandsPage = ({ pageInfo, children }: Props) => {
+const BrandsPage = ({ pageInfo }: Props) => {
     const router = useRouter()
 
     const refreshData = () => {

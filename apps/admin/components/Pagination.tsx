@@ -2,7 +2,7 @@ import classnames from 'classnames'
 
 type metaType = {
     itemCount: number
-    totalItems: number
+    totalItemsCount: number
     itemsPerPage: number
     totalPages: number
     currentPage: number
