@@ -80,8 +80,8 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
         )
 
         return (
-            <div className={rootClasses}>
-                <label className="relative w-full h-full pt-[16px]">
+            <label className={rootClasses}>
+                <div className="relative w-full h-full pt-[16px]">
                     <input
                         ref={defaultInputRef}
                         className="relative w-full h-full p-0 m-0 bg-transparent outline-none"
@@ -97,10 +97,10 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
                     />
 
                     <div className={labelClasses}>{label}</div>
-                </label>
+                </div>
 
                 {addonAfter && addonAfter}
-            </div>
+            </label>
         )
     },
 )
