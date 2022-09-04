@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { BrandType } from '../service/brands.service'
@@ -30,7 +30,7 @@ type metaType = {
     next: number
 }
 
-export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
+export const BrandsTable = ({ info, updateData, onPageChange }: Props) => {
     const { items, meta } = info
     const { totalItems } = meta
 
