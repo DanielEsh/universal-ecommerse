@@ -10,37 +10,32 @@ type metaType = {
     next: number
 }
 
-type Props = {
-    meta: metaType
-    // events
-    onFirstClick: () => void
-    onLastClick: () => void
-    onItemClick: (pageNumber: number) => void
-    onPrevClick: () => void
-    onNextClick: () => void
+enum PageChangeEventType {
+    first,
+    previous,
+    item,
+    next,
+    last,
 }
 
-export const Pagination = (props: Props) => {
-    const { totalPages, currentPage, next, previous } = props.meta
+type Props = {
+    meta: metaType
+    onPageChange: (pageNumber: number) => void
+}
 
-    const handleFirstClick = () => {
-        props.onFirstClick()
-    }
+export const Pagination = ({ meta, onPageChange }: Props) => {
+    const { totalPages, currentPage, next, previous } = meta
 
-    const handlePrevClick = () => {
-        props.onPrevClick()
-    }
+    const onClick = (eventType: PageChangeEventType, pageNumber?: number) => {
+        const actionsList = {
+            0: () => onPageChange(1),
+            1: () => meta.previous && onPageChange(meta.previous),
+            2: () => pageNumber && onPageChange(pageNumber),
+            3: () => meta.next && onPageChange(meta.next),
+            4: () => onPageChange(meta.totalPages),
+        }
 
-    const handleItemClick = (pageNumber: number) => {
-        props.onItemClick(pageNumber)
-    }
-
-    const handleNextClick = () => {
-        props.onNextClick()
-    }
-
-    const handleLastClick = () => {
-        props.onLastClick()
+        actionsList[eventType]()
     }
 
     const pagesClasses = (page: number) =>
@@ -55,12 +50,15 @@ export const Pagination = (props: Props) => {
 
     return (
         <ul className="flex gap-3 mt-6">
-            <li className={itemsClasses()} onClick={handleFirstClick}>
+            <li
+                className={itemsClasses(currentPage !== 1)}
+                onClick={() => onClick(PageChangeEventType.first)}
+            >
                 {'<<'}
             </li>
             <li
                 className={itemsClasses(Boolean(previous))}
-                onClick={handlePrevClick}
+                onClick={() => onClick(PageChangeEventType.previous)}
             >
                 {'<'}
             </li>
@@ -70,18 +68,23 @@ export const Pagination = (props: Props) => {
                     <li
                         key={index}
                         className={pagesClasses(index + 1)}
-                        onClick={() => handleItemClick(index + 1)}
+                        onClick={() =>
+                            onClick(PageChangeEventType.item, index + 1)
+                        }
                     >
                         {index + 1}
                     </li>
                 ))}
             <li
                 className={itemsClasses(Boolean(next))}
-                onClick={handleNextClick}
+                onClick={() => onClick(PageChangeEventType.next)}
             >
                 {'>'}
             </li>
-            <li className={itemsClasses()} onClick={handleLastClick}>
+            <li
+                className={itemsClasses(currentPage !== totalPages)}
+                onClick={() => onClick(PageChangeEventType.last)}
+            >
                 {'>>'}
             </li>
         </ul>

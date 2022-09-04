@@ -31,7 +31,7 @@ type metaType = {
 
 export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
     const { items, meta } = info
-    const { totalItems, totalPages, currentPage } = meta
+    const { totalItems } = meta
 
     const router = useRouter()
 
@@ -44,22 +44,6 @@ export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
     const update = () => {
         setModal(false)
         updateData()
-    }
-
-    const handleClick = (number: number) => {
-        onPageChange(number)
-    }
-
-    const handlePagination = (value, number) => {
-        const list = {
-            item: () => onPageChange(number),
-            prev: () => meta.previous && onPageChange(meta.previous),
-            next: () => meta.next && onPageChange(meta.next),
-            last: () => onPageChange(meta.totalPages),
-            first: () => onPageChange(1),
-        }
-
-        list[value]()
     }
 
     return (
@@ -104,14 +88,7 @@ export const BrandsTable: FC<Props> = ({ info, updateData, onPageChange }) => {
                 </Table>
             </div>
 
-            <Pagination
-                onFirstClick={() => handlePagination('first')}
-                onPrevClick={() => handlePagination('prev')}
-                onItemClick={(number) => handlePagination('item', number)}
-                onLastClick={() => handlePagination('last')}
-                onNextClick={() => handlePagination('next')}
-                meta={meta}
-            />
+            <Pagination meta={meta} onPageChange={onPageChange} />
 
             <SheetModal
                 isOpen={modal}
