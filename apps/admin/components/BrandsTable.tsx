@@ -22,7 +22,7 @@ type pageInfo = {
 
 type metaType = {
     itemCount: number
-    totalItems: number
+    totalItemsCount: number
     itemsPerPage: number
     totalPages: number
     currentPage: number
@@ -32,7 +32,7 @@ type metaType = {
 
 export const BrandsTable = ({ info, updateData, onPageChange }: Props) => {
     const { items, meta } = info
-    const { totalItems } = meta
+    const { totalItemsCount } = meta
 
     const router = useRouter()
 
@@ -55,7 +55,7 @@ export const BrandsTable = ({ info, updateData, onPageChange }: Props) => {
     return (
         <div>
             <div className="flex items-center justify-between w-full my-4">
-                <h2>Общее количество записей: {totalItems}</h2>
+                <h2>Общее количество записей: {totalItemsCount}</h2>
                 <div className="flex gap-6">
                     <BaseInput
                         className="basis-[460px]"

@@ -23,7 +23,7 @@ type metaType = {
     next: number
 }
 
-const BrandsPage = ({ pageInfo }: Props) => {
+const BrandsPage = ({ pageInfo, children }: Props) => {
     const router = useRouter()
 
     const refreshData = () => {
