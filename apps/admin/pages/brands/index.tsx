@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { BrandType, getAllBrands } from '../../service/brands.service'
+import { paginate } from "@/ui/paginate";
 
 import { BrandsTable } from '../../components/BrandsTable'
 
@@ -34,6 +35,8 @@ const BrandsPage = ({ pageInfo }: Props) => {
         router.query.page = page
         router.push(router)
     }
+
+    paginate()
 
     return (
         <div>
