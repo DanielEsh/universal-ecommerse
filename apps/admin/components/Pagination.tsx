@@ -1,4 +1,5 @@
 import classnames from 'classnames'
+import { paginationFactory } from '@/ui/Pagination/paginate'
 
 type metaType = {
     itemCount: number
@@ -25,6 +26,16 @@ type Props = {
 
 export const Pagination = ({ meta, onPageChange }: Props) => {
     const { totalPages, currentPage, next, previous } = meta
+
+    const paginationItems = paginationFactory({
+        boundaryPagesRange: 1,
+        siblingPagesRange: 1,
+        ellipsisSize: 1,
+        totalPages: totalPages,
+        currentPage: currentPage,
+    })
+
+    console.log('ITEMS', paginationItems)
 
     const onClick = (eventType: PageChangeEventType, pageNumber?: number) => {
         const actionsList = {

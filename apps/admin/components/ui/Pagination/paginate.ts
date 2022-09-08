@@ -1,50 +1,36 @@
-export const pagination = () => {
-    const boundaryPagesRange = 2
-    const siblingPagesRange = 2
-    const ellipsisSize = 1
-    const totalPages = 18
-    const currentPage = 8
+import {
+    createRange,
+    createFirstEllipsis,
+    createSecondEllipsis,
+    createPageFactory,
+} from '@/ui/Pagination/pagination.utils'
+
+type PaginationOptionsType = {
+    boundaryPagesRange: number
+    siblingPagesRange: number
+    ellipsisSize: number
+    totalPages: number
+    currentPage: number
+}
+
+export const paginationFactory = (options: PaginationOptionsType) => {
+    const {
+        boundaryPagesRange,
+        siblingPagesRange,
+        ellipsisSize,
+        totalPages,
+        currentPage,
+    } = options
+
+    // const boundaryPagesRange = 2
+    // const siblingPagesRange = 2
+    // const ellipsisSize = 1
+    // const totalPages = 18
+    // const currentPage = 8
 
     const paginationModel = []
 
-    const createRange = (start: number, end: number): number[] => {
-        const range: number[] = []
-        for (let i = start; i <= end; i++) {
-            range.push(i)
-        }
-        return range
-    }
-
-    const createPageFunctionFactory = (currentPage?: number) => {
-        return (pageNumber: number) => {
-            return {
-                type: 'PAGE',
-                key: pageNumber,
-                value: pageNumber,
-                isActive: pageNumber === currentPage,
-            }
-        }
-    }
-
-    const createFirstEllipsis = (pageNumber: number) => {
-        return {
-            type: 'ELLIPSIS',
-            key: 'FIRST_ELLIPSIS',
-            value: pageNumber,
-            isActive: false,
-        }
-    }
-
-    const createSecondEllipsis = (pageNumber: number) => {
-        return {
-            type: 'ELLIPSIS',
-            key: 'SECOND_ELLIPSIS',
-            value: pageNumber,
-            isActive: false,
-        }
-    }
-
-    const createPage = createPageFunctionFactory()
+    const createPage = createPageFactory()
 
     // Calculate group of first pages
     const firstPagesStart = 1
@@ -66,10 +52,6 @@ export const pagination = () => {
     const mainPagesEnd = mainPagesStart + 2 * siblingPagesRange
     const mainPages = createRange(mainPagesStart, mainPagesEnd).map(createPage)
 
-    console.log('startPages', firstPages)
-    console.log('lastPages', lastPages)
-    console.log('mainPages', mainPages)
-    // console.log("endPages", endPages);
     paginationModel.push(...firstPages)
 
     const firstEllipsisPageNumber = mainPagesStart - 1
@@ -98,5 +80,5 @@ export const pagination = () => {
     paginationModel.push(...lastPages)
 
     // return [1, 2, '...', 4, <5> '...', 17, 18]
-    console.log('pag', paginationModel)
+    return paginationModel
 }
