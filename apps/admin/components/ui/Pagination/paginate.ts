@@ -1,8 +1,10 @@
 import {
-    createRange,
     createFirstEllipsis,
-    createSecondEllipsis,
+    createNextPageLink,
     createPageFactory,
+    createPreviousPageLink,
+    createRange,
+    createSecondEllipsis,
 } from '@/ui/Pagination/pagination.utils'
 
 type PaginationOptionsType = {
@@ -25,7 +27,19 @@ type PaginationOptionsType = {
      * number of always visible pages before and after the current one
      */
     siblingPagesRange?: number
-    ellipsisSize?: number
+
+    middleware?: any
+}
+
+export const paginationPrevNext = (
+    items: any,
+    currentPage: number,
+    totalPages: number,
+) => {
+    const prev = createPreviousPageLink(currentPage)
+    const next = createNextPageLink(currentPage, totalPages)
+
+    return [prev, ...items, next]
 }
 
 export function paginationFactory(options: PaginationOptionsType) {
@@ -38,7 +52,6 @@ export function paginationFactory(options: PaginationOptionsType) {
     const {
         boundaryPagesRange = 1,
         siblingPagesRange = 1,
-        ellipsisSize = 1,
         totalPages,
         currentPage,
     } = options
@@ -89,6 +102,7 @@ export function paginationFactory(options: PaginationOptionsType) {
         )
     }
 
+    const ellipsisSize = 1
     const paginationModel = []
     const createPage = createPageFactory(currentPage)
 
@@ -109,8 +123,7 @@ export function paginationFactory(options: PaginationOptionsType) {
 
         // Calculate group of last pages
         const lastPagesStart = totalPages + 1 - boundaryPagesRange
-        const lastPagesEnd = totalPages
-        const lastPages = createRange(lastPagesStart, lastPagesEnd).map(
+        const lastPages = createRange(lastPagesStart, totalPages).map(
             createPage,
         )
 

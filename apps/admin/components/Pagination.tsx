@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { paginationFactory } from '@/ui/Pagination/paginate'
+import { paginationFactory, paginationPrevNext } from '@/ui/Pagination/paginate'
 
 type metaType = {
     itemCount: number
@@ -29,13 +29,18 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
 
     const paginationItems = paginationFactory({
         boundaryPagesRange: 2,
-        siblingPagesRange: 1,
-        ellipsisSize: 1,
+        siblingPagesRange: 3,
         totalPages: 100,
         currentPage: currentPage,
     })
 
-    console.log('ITEMS', paginationItems)
+    const paginationWithPrevNext = paginationPrevNext(
+        paginationItems,
+        currentPage,
+        100,
+    )
+
+    console.log('ITEMS', paginationWithPrevNext)
 
     const onClick = (eventType: PageChangeEventType, pageNumber?: number) => {
         const actionsList = {
@@ -73,13 +78,7 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
             >
                 {'<<'}
             </li>
-            <li
-                className={itemsClasses(Boolean(previous))}
-                onClick={() => onClick(PageChangeEventType.previous)}
-            >
-                {'<'}
-            </li>
-            {paginationItems.map((item, index) => {
+            {paginationWithPrevNext.map((item, index) => {
                 if (item.type === 'ELLIPSIS') {
                     return <li key={index}>...</li>
                 }
@@ -97,13 +96,33 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
                         </li>
                     )
                 }
+
+                if (item.type === 'PREVIOUS_PAGE_LINK') {
+                    return (
+                        <li
+                            key={index}
+                            onClick={() =>
+                                onClick(PageChangeEventType.item, item.value)
+                            }
+                        >
+                            {'<'}
+                        </li>
+                    )
+                }
+
+                if (item.type === 'NEXT_PAGE_LINK') {
+                    return (
+                        <li
+                            key={index}
+                            onClick={() =>
+                                onClick(PageChangeEventType.item, item.value)
+                            }
+                        >
+                            {'>'}
+                        </li>
+                    )
+                }
             })}
-            <li
-                className={itemsClasses(Boolean(next))}
-                onClick={() => onClick(PageChangeEventType.next)}
-            >
-                {'>'}
-            </li>
             <li
                 className={itemsClasses(currentPage !== totalPages)}
                 onClick={() => onClick(PageChangeEventType.last)}
