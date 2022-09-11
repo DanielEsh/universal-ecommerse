@@ -6,7 +6,7 @@ export const createRange = (start: number, end: number): number[] => {
     return range
 }
 
-export const createPageFactory = (currentPage?: number) => {
+export const createPageFactory = (currentPage: number) => {
     return (pageNumber: number) => {
         return {
             type: 'PAGE',

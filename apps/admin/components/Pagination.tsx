@@ -28,10 +28,10 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
     const { totalPages, currentPage, next, previous } = meta
 
     const paginationItems = paginationFactory({
-        boundaryPagesRange: 1,
-        siblingPagesRange: 1,
+        boundaryPagesRange: 2,
+        siblingPagesRange: 4,
         ellipsisSize: 1,
-        totalPages: totalPages,
+        totalPages: 100,
         currentPage: currentPage,
     })
 
@@ -49,11 +49,11 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
         actionsList[eventType]()
     }
 
-    const pagesClasses = (page: number) =>
+    const pagesClasses = (isActive: boolean) =>
         classnames(
             'flex items-center justify-center w-8 h-8 border border-black',
             {
-                ['bg-black text-white']: page === currentPage,
+                ['bg-black text-white']: isActive,
             },
         )
 
@@ -79,19 +79,25 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
             >
                 {'<'}
             </li>
-            {Array(totalPages)
-                .fill('')
-                .map((_, index) => (
-                    <li
-                        key={index}
-                        className={pagesClasses(index + 1)}
-                        onClick={() =>
-                            onClick(PageChangeEventType.item, index + 1)
-                        }
-                    >
-                        {index + 1}
-                    </li>
-                ))}
+            {paginationItems.map((item, index) => {
+                if (item.type === 'ELLIPSIS') {
+                    return <li key={index}>...</li>
+                }
+
+                if (item.type === 'PAGE') {
+                    return (
+                        <li
+                            key={index}
+                            className={pagesClasses(item.isActive)}
+                            onClick={() =>
+                                onClick(PageChangeEventType.item, item.value)
+                            }
+                        >
+                            {item.value}
+                        </li>
+                    )
+                }
+            })}
             <li
                 className={itemsClasses(Boolean(next))}
                 onClick={() => onClick(PageChangeEventType.next)}
