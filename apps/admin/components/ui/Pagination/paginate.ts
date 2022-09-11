@@ -6,11 +6,26 @@ import {
 } from '@/ui/Pagination/pagination.utils'
 
 type PaginationOptionsType = {
-    boundaryPagesRange: number
-    siblingPagesRange: number
-    ellipsisSize: number
+    /**
+     * total number of pages
+     */
     totalPages: number
+
+    /**
+     * currentPage number
+     */
     currentPage: number
+
+    /**
+     * number of always visible pages at the beginning and end
+     */
+    boundaryPagesRange?: number
+
+    /**
+     * number of always visible pages before and after the current one
+     */
+    siblingPagesRange?: number
+    ellipsisSize?: number
 }
 
 export function paginationFactory(options: PaginationOptionsType) {
