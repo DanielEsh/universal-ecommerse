@@ -29,7 +29,7 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
 
     const paginationItems = paginationFactory({
         boundaryPagesRange: 2,
-        siblingPagesRange: 4,
+        siblingPagesRange: 1,
         ellipsisSize: 1,
         totalPages: 100,
         currentPage: currentPage,

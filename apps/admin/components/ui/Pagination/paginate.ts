@@ -14,77 +14,68 @@ type PaginationOptionsType = {
 }
 
 export function paginationFactory(options: PaginationOptionsType) {
-    // if (options == null) {
-    //     throw new Error(
-    //         'getPaginationModel(): options object should be a passed',
-    //     )
-    // }
+    if (options == null) {
+        throw new Error(
+            '[paginationFactory]: options object should be a passed',
+        )
+    }
 
-    const totalPages = Number(options.totalPages)
-    // if (isNaN(totalPages)) {
-    //     throw new Error('getPaginationModel(): totalPages should be a number')
-    // }
-    // if (totalPages < 0) {
-    //     throw new Error(
-    //         "getPaginationModel(): totalPages shouldn't be a negative number",
-    //     )
-    // }
+    const {
+        boundaryPagesRange = 1,
+        siblingPagesRange = 1,
+        ellipsisSize = 1,
+        totalPages,
+        currentPage,
+    } = options
 
-    const currentPage = Number(options.currentPage)
-    // if (isNaN(currentPage)) {
-    //     throw new Error('getPaginationModel(): currentPage should be a number')
-    // }
-    // if (currentPage < 0) {
-    //     throw new Error(
-    //         "getPaginationModel(): currentPage shouldn't be a negative number",
-    //     )
-    // }
-    // if (currentPage > totalPages) {
-    //     throw new Error(
-    //         "getPaginationModel(): currentPage shouldn't be greater than totalPages",
-    //     )
-    // }
+    if (isNaN(totalPages)) {
+        throw new Error('[paginationFactory]: totalPages should be a number')
+    }
+    if (totalPages < 0) {
+        throw new Error(
+            "[paginationFactory]: totalPages shouldn't be a negative number",
+        )
+    }
 
-    const boundaryPagesRange =
-        options.boundaryPagesRange == null
-            ? 1
-            : Number(options.boundaryPagesRange)
-    // if (isNaN(boundaryPagesRange)) {
-    //     throw new Error(
-    //         'getPaginationModel(): boundaryPagesRange should be a number',
-    //     )
-    // }
-    // if (boundaryPagesRange < 0) {
-    //     throw new Error(
-    //         "getPaginationModel(): boundaryPagesRange shouldn't be a negative number",
-    //     )
-    // }
+    if (isNaN(currentPage)) {
+        throw new Error('[paginationFactory]: currentPage should be a number')
+    }
+    if (currentPage < 0) {
+        throw new Error(
+            "[paginationFactory]: currentPage shouldn't be a negative number",
+        )
+    }
 
-    const siblingPagesRange =
-        options.siblingPagesRange == null
-            ? 1
-            : Number(options.siblingPagesRange)
-    // if (isNaN(siblingPagesRange)) {
-    //     throw new Error(
-    //         'getPaginationModel(): siblingPagesRange should be a number',
-    //     )
-    // }
-    // if (siblingPagesRange < 0) {
-    //     throw new Error(
-    //         "getPaginationModel(): siblingPagesRange shouldn't be a negative number",
-    //     )
-    // }
-    const ellipsisSize = 1
+    if (currentPage > totalPages) {
+        throw new Error(
+            "[paginationFactory]: currentPage shouldn't be greater than totalPages",
+        )
+    }
+
+    if (isNaN(boundaryPagesRange)) {
+        throw new Error(
+            '[paginationFactory]: boundaryPagesRange should be a number',
+        )
+    }
+    if (boundaryPagesRange < 0) {
+        throw new Error(
+            "[paginationFactory]: boundaryPagesRange shouldn't be a negative number",
+        )
+    }
+
+    if (isNaN(siblingPagesRange)) {
+        throw new Error(
+            '[paginationFactory]: siblingPagesRange should be a number',
+        )
+    }
+    if (siblingPagesRange < 0) {
+        throw new Error(
+            "[paginationFactory]: siblingPagesRange shouldn't be a negative number",
+        )
+    }
+
     const paginationModel = []
     const createPage = createPageFactory(currentPage)
-
-    // if (!hideFirstAndLastPageLinks) {
-    //     paginationModel.push(createFirstPageLink(options))
-    // }
-    //
-    // if (!hidePreviousAndNextPageLinks) {
-    //     paginationModel.push(createPreviousPageLink(options))
-    // }
 
     // Simplify generation of pages if number of available items is equal or greater than total pages to show
     if (
@@ -152,14 +143,6 @@ export function paginationFactory(options: PaginationOptionsType) {
         // Add group of last pages
         paginationModel.push(...lastPages)
     }
-
-    // if (!hidePreviousAndNextPageLinks) {
-    //     paginationModel.push(createNextPageLink(options))
-    // }
-    //
-    // if (!hideFirstAndLastPageLinks) {
-    //     paginationModel.push(createLastPageLink(options))
-    // }
 
     return paginationModel
 }
