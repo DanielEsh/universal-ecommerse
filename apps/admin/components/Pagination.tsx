@@ -84,7 +84,11 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
         <ul className="flex gap-3 mt-6">
             {resultPag.map((item, index) => {
                 if (item.type === 'ELLIPSIS') {
-                    return <li key={index}>...</li>
+                    return (
+                        <li className={pagesClasses(false)} key={index}>
+                            ...
+                        </li>
+                    )
                 }
 
                 if (item.type === 'PAGE') {
@@ -105,6 +109,7 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
                     return (
                         <li
                             key={index}
+                            className={pagesClasses(item.isActive)}
                             onClick={() =>
                                 onClick(PageChangeEventType.item, item.value)
                             }
@@ -118,6 +123,7 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
                     return (
                         <li
                             key={index}
+                            className={pagesClasses(item.isActive)}
                             onClick={() =>
                                 onClick(PageChangeEventType.item, item.value)
                             }
@@ -131,6 +137,7 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
                     return (
                         <li
                             key={index}
+                            className={pagesClasses(item.isActive)}
                             onClick={() =>
                                 onClick(PageChangeEventType.item, item.value)
                             }
@@ -144,6 +151,7 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
                     return (
                         <li
                             key={index}
+                            className={pagesClasses(item.isActive)}
                             onClick={() =>
                                 onClick(PageChangeEventType.item, item.value)
                             }
