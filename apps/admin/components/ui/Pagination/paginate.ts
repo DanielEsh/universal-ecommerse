@@ -1,5 +1,7 @@
 import {
     createFirstEllipsis,
+    createFirstPageLink,
+    createLastPageLink,
     createNextPageLink,
     createPageFactory,
     createPreviousPageLink,
@@ -40,6 +42,17 @@ export const paginationPrevNext = (
     const next = createNextPageLink(currentPage, totalPages)
 
     return [prev, ...items, next]
+}
+
+export const paginationFirstLast = (
+    items: any,
+    currentPage: number,
+    totalPages: number,
+) => {
+    const first = createFirstPageLink(currentPage)
+    const last = createLastPageLink(currentPage, totalPages)
+
+    return [first, ...items, last]
 }
 
 export function paginationFactory(options: PaginationOptionsType) {

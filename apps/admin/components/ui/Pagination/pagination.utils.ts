@@ -52,3 +52,21 @@ export const createNextPageLink = (currentPage: number, totalPages: number) => {
         isActive: currentPage === totalPages,
     }
 }
+
+export const createFirstPageLink = (currentPage: number) => {
+    return {
+        type: 'FIRST_PAGE_LINK',
+        key: 'FIRST_PAGE_LINK',
+        value: 1,
+        isActive: currentPage === 1,
+    }
+}
+
+export const createLastPageLink = (currentPage: number, totalPages: number) => {
+    return {
+        type: 'LAST_PAGE_LINK',
+        key: 'LAST_PAGE_LINK',
+        value: totalPages,
+        isActive: currentPage === totalPages,
+    }
+}

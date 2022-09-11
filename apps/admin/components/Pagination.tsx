@@ -1,5 +1,9 @@
 import classnames from 'classnames'
-import { paginationFactory, paginationPrevNext } from '@/ui/Pagination/paginate'
+import {
+    paginationFactory,
+    paginationPrevNext,
+    paginationFirstLast,
+} from '@/ui/Pagination/paginate'
 
 type metaType = {
     itemCount: number
@@ -40,6 +44,12 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
         100,
     )
 
+    const resultPag = paginationFirstLast(
+        paginationWithPrevNext,
+        currentPage,
+        100,
+    )
+
     console.log('ITEMS', paginationWithPrevNext)
 
     const onClick = (eventType: PageChangeEventType, pageNumber?: number) => {
@@ -72,13 +82,7 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
 
     return (
         <ul className="flex gap-3 mt-6">
-            <li
-                className={itemsClasses(currentPage !== 1)}
-                onClick={() => onClick(PageChangeEventType.first)}
-            >
-                {'<<'}
-            </li>
-            {paginationWithPrevNext.map((item, index) => {
+            {resultPag.map((item, index) => {
                 if (item.type === 'ELLIPSIS') {
                     return <li key={index}>...</li>
                 }
@@ -122,13 +126,33 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
                         </li>
                     )
                 }
+
+                if (item.type === 'FIRST_PAGE_LINK') {
+                    return (
+                        <li
+                            key={index}
+                            onClick={() =>
+                                onClick(PageChangeEventType.item, item.value)
+                            }
+                        >
+                            {'|<<'}
+                        </li>
+                    )
+                }
+
+                if (item.type === 'LAST_PAGE_LINK') {
+                    return (
+                        <li
+                            key={index}
+                            onClick={() =>
+                                onClick(PageChangeEventType.item, item.value)
+                            }
+                        >
+                            {'>>|'}
+                        </li>
+                    )
+                }
             })}
-            <li
-                className={itemsClasses(currentPage !== totalPages)}
-                onClick={() => onClick(PageChangeEventType.last)}
-            >
-                {'>>'}
-            </li>
         </ul>
     )
 }
