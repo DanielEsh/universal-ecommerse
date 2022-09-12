@@ -45,27 +45,17 @@ export const PrevNextMiddleware = () => ({
     },
 })
 
-export const paginationPrevNext = (
-    items: any,
-    currentPage: number,
-    totalPages: number,
-) => {
-    const prev = createPreviousPageLink(currentPage)
-    const next = createNextPageLink(currentPage, totalPages)
+export const FirstLastMiddleware = () => ({
+    name: 'FirstLastMiddleware',
+    fn(middlewareArguments: any) {
+        const { items, currentPage, totalPages } = middlewareArguments
 
-    return [prev, ...items, next]
-}
+        const first = createFirstPageLink(currentPage)
+        const last = createLastPageLink(currentPage, totalPages)
 
-export const paginationFirstLast = (
-    items: any,
-    currentPage: number,
-    totalPages: number,
-) => {
-    const first = createFirstPageLink(currentPage)
-    const last = createLastPageLink(currentPage, totalPages)
-
-    return [first, ...items, last]
-}
+        return [first, ...items, last]
+    },
+})
 
 export function paginationFactory(options: PaginationOptionsType) {
     if (options == null) {
@@ -129,7 +119,7 @@ export function paginationFactory(options: PaginationOptionsType) {
     }
 
     const ellipsisSize = 1
-    const paginationModel = []
+    let paginationModel = []
     const createPage = createPageFactory(currentPage)
 
     // Simplify generation of pages if number of available items is equal or greater than total pages to show
@@ -201,11 +191,7 @@ export function paginationFactory(options: PaginationOptionsType) {
     for (let i = 0; i < middleware.length; i++) {
         const { name, fn } = middleware[i]
 
-        const testArgument = 'testArgument'
-
-        console.log('NAME', name)
-
-        return fn({
+        paginationModel = fn({
             items: paginationModel,
             currentPage,
             totalPages,

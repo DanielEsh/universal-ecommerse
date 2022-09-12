@@ -1,9 +1,8 @@
 import classnames from 'classnames'
 import {
     paginationFactory,
-    paginationPrevNext,
-    paginationFirstLast,
     PrevNextMiddleware,
+    FirstLastMiddleware,
 } from '@/ui/Pagination/paginate'
 
 type metaType = {
@@ -38,7 +37,7 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
         totalPages: 100,
         currentPage: currentPage,
 
-        middleware: [PrevNextMiddleware()],
+        middleware: [PrevNextMiddleware(), FirstLastMiddleware()],
     })
 
     // const paginationWithPrevNext = paginationPrevNext(
