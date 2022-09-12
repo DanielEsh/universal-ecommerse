@@ -33,30 +33,6 @@ type PaginationOptionsType = {
     middleware?: any
 }
 
-export const PrevNextMiddleware = () => ({
-    name: 'PrevNextMiddleware',
-    fn(middlewareArguments: any) {
-        const { items, currentPage, totalPages } = middlewareArguments
-
-        const prev = createPreviousPageLink(currentPage)
-        const next = createNextPageLink(currentPage, totalPages)
-
-        return [prev, ...items, next]
-    },
-})
-
-export const FirstLastMiddleware = () => ({
-    name: 'FirstLastMiddleware',
-    fn(middlewareArguments: any) {
-        const { items, currentPage, totalPages } = middlewareArguments
-
-        const first = createFirstPageLink(currentPage)
-        const last = createLastPageLink(currentPage, totalPages)
-
-        return [first, ...items, last]
-    },
-})
-
 export function paginationFactory(options: PaginationOptionsType) {
     if (options == null) {
         throw new Error(
@@ -189,9 +165,7 @@ export function paginationFactory(options: PaginationOptionsType) {
     }
 
     for (let i = 0; i < middleware.length; i++) {
-        const { name, fn } = middleware[i]
-
-        paginationModel = fn({
+        paginationModel = middleware[i]({
             items: paginationModel,
             currentPage,
             totalPages,
