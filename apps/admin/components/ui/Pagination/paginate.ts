@@ -1,10 +1,6 @@
 import {
     createFirstEllipsis,
-    createFirstPageLink,
-    createLastPageLink,
-    createNextPageLink,
     createPageFactory,
-    createPreviousPageLink,
     createRange,
     createSecondEllipsis,
 } from '@/ui/Pagination/pagination.utils'
