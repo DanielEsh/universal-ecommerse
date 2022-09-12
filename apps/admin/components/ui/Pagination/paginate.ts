@@ -33,6 +33,15 @@ type PaginationOptionsType = {
     middleware?: any
 }
 
+export const middleware = () => ({
+    name: 'middleware',
+    fn(middlewareArguments: any) {
+        console.log('middleware', middlewareArguments)
+
+        return [1,2,3]
+    },
+})
+
 export const paginationPrevNext = (
     items: any,
     currentPage: number,
@@ -67,6 +76,7 @@ export function paginationFactory(options: PaginationOptionsType) {
         siblingPagesRange = 1,
         totalPages,
         currentPage,
+        middleware = [],
     } = options
 
     if (isNaN(totalPages)) {
@@ -183,6 +193,16 @@ export function paginationFactory(options: PaginationOptionsType) {
 
         // Add group of last pages
         paginationModel.push(...lastPages)
+    }
+
+    for (let i = 0; i < middleware.length; i++) {
+        const { name, fn } = middleware[i]
+
+        const testArgument = 'testArgument'
+
+        console.log('NAME', name)
+
+        return fn({ paginationModel })
     }
 
     return paginationModel

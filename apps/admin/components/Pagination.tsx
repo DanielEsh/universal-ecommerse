@@ -3,6 +3,7 @@ import {
     paginationFactory,
     paginationPrevNext,
     paginationFirstLast,
+    middleware,
 } from '@/ui/Pagination/paginate'
 
 type metaType = {
@@ -36,6 +37,8 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
         siblingPagesRange: 3,
         totalPages: 100,
         currentPage: currentPage,
+
+        middleware: [middleware()],
     })
 
     const paginationWithPrevNext = paginationPrevNext(
