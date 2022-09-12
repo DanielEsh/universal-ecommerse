@@ -33,12 +33,15 @@ type PaginationOptionsType = {
     middleware?: any
 }
 
-export const middleware = () => ({
-    name: 'middleware',
+export const PrevNextMiddleware = () => ({
+    name: 'PrevNextMiddleware',
     fn(middlewareArguments: any) {
-        console.log('middleware', middlewareArguments)
+        const { items, currentPage, totalPages } = middlewareArguments
 
-        return [1,2,3]
+        const prev = createPreviousPageLink(currentPage)
+        const next = createNextPageLink(currentPage, totalPages)
+
+        return [prev, ...items, next]
     },
 })
 
@@ -202,7 +205,11 @@ export function paginationFactory(options: PaginationOptionsType) {
 
         console.log('NAME', name)
 
-        return fn({ paginationModel })
+        return fn({
+            items: paginationModel,
+            currentPage,
+            totalPages,
+        })
     }
 
     return paginationModel

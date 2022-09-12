@@ -3,7 +3,7 @@ import {
     paginationFactory,
     paginationPrevNext,
     paginationFirstLast,
-    middleware,
+    PrevNextMiddleware,
 } from '@/ui/Pagination/paginate'
 
 type metaType = {
@@ -32,28 +32,28 @@ type Props = {
 export const Pagination = ({ meta, onPageChange }: Props) => {
     const { totalPages, currentPage, next, previous } = meta
 
-    const paginationItems = paginationFactory({
+    const resultPag = paginationFactory({
         boundaryPagesRange: 2,
         siblingPagesRange: 3,
         totalPages: 100,
         currentPage: currentPage,
 
-        middleware: [middleware()],
+        middleware: [PrevNextMiddleware()],
     })
 
-    const paginationWithPrevNext = paginationPrevNext(
-        paginationItems,
-        currentPage,
-        100,
-    )
+    // const paginationWithPrevNext = paginationPrevNext(
+    //     paginationItems,
+    //     currentPage,
+    //     100,
+    // )
+    //
+    // const resultPag = paginationFirstLast(
+    //     paginationWithPrevNext,
+    //     currentPage,
+    //     100,
+    // )
 
-    const resultPag = paginationFirstLast(
-        paginationWithPrevNext,
-        currentPage,
-        100,
-    )
-
-    console.log('ITEMS', paginationWithPrevNext)
+    console.log('ITEMS', resultPag)
 
     const onClick = (eventType: PageChangeEventType, pageNumber?: number) => {
         const actionsList = {
