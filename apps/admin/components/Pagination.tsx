@@ -26,6 +26,67 @@ type Props = {
     onPageChange: (pageNumber: number) => void
 }
 
+type PaginationItemsProps = {
+    disabled: boolean
+    onClick: () => void
+}
+
+type PaginationPageProps = {
+    active: boolean
+    disabled: boolean
+    value: number
+    onClick: () => void
+}
+
+const FirstPageLink = ({ onClick, disabled }: PaginationItemsProps) => (
+    <li>
+        <button onClick={onClick} disabled={disabled}>
+            First
+        </button>
+    </li>
+)
+
+const PreviousPageLink = ({ onClick, disabled }: PaginationItemsProps) => (
+    <li>
+        <button onClick={onClick} disabled={disabled}>
+            Previous
+        </button>
+    </li>
+)
+
+const NextPageLink = ({ onClick, disabled }: PaginationItemsProps) => (
+    <li>
+        <button onClick={onClick} disabled={disabled}>
+            Next
+        </button>
+    </li>
+)
+
+const LastPageLink = ({ onClick, disabled }: PaginationItemsProps) => (
+    <li>
+        <button onClick={onClick} disabled={disabled}>
+            Next
+        </button>
+    </li>
+)
+
+const PageLink = ({
+    active,
+    value,
+    disabled,
+    onClick,
+}: PaginationPageProps) => (
+    <li>
+        <button
+            style={active ? { fontWeight: 'bold' } : {}}
+            onClick={onClick}
+            disabled={disabled}
+        >
+            {value}
+        </button>
+    </li>
+)
+
 export const Pagination = ({ meta, onPageChange }: Props) => {
     const { totalPages, currentPage, next, previous } = meta
 
