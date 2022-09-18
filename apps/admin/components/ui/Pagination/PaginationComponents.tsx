@@ -10,7 +10,7 @@ type PaginationItemsProps = {
 }
 
 type PaginationPageProps = {
-    active: boolean
+    isActive: boolean
     disabled: boolean
     value: number
     onClick: () => void
@@ -90,14 +90,14 @@ export const Ellipsis = ({ onClick, disabled }: PaginationItemsProps) => (
 )
 
 export const PageLink = ({
-    active,
+    isActive,
     value,
     disabled,
     onClick,
 }: PaginationPageProps) => (
     <li>
         <button
-            className={pagesClasses(active)}
+            className={pagesClasses(isActive)}
             onClick={onClick}
             disabled={disabled}
         >

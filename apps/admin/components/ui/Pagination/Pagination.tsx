@@ -48,7 +48,7 @@ const renderItemComponentFunctionFactory = (
 }
 
 export const Pagination = ({ meta, boundaryPagesRange = 2, siblingPagesRange = 1, onPageChange }: Props) => {
-    const { totalPages, currentPage, next, previous } = meta
+    const { totalPages, currentPage } = meta
 
     const disabled = false
 
