@@ -8,7 +8,7 @@ export const Header = () => {
             <Breadcrumbs>
                 <Breadcrumbs.Item>Item 1</Breadcrumbs.Item>
                 <Breadcrumbs.Item>Item 2</Breadcrumbs.Item>
-                <Breadcrumbs.Item>Item 3</Breadcrumbs.Item>
+                <Breadcrumbs.Item isLast>Item 3</Breadcrumbs.Item>
             </Breadcrumbs>
             <ThemeSwitcher />
         </div>
