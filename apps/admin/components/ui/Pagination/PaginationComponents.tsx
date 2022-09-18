@@ -1,4 +1,8 @@
 import classnames from 'classnames'
+import LeftIcon from 'public/icons/left.svg'
+import ChevronLeftIcon from 'public/icons/chevron-left.svg'
+import ChevronRightIcon from 'public/icons/chevron-right.svg'
+import RightIcon from 'public/icons/right.svg'
 
 type PaginationItemsProps = {
     disabled: boolean
@@ -29,7 +33,7 @@ export const FirstPageLink = ({ onClick, disabled }: PaginationItemsProps) => (
             disabled={disabled}
             onClick={onClick}
         >
-            First
+          <LeftIcon />
         </button>
     </li>
 )
@@ -44,7 +48,7 @@ export const PreviousPageLink = ({
             disabled={disabled}
             onClick={onClick}
         >
-            Previous
+          <ChevronLeftIcon />
         </button>
     </li>
 )
@@ -56,7 +60,7 @@ export const NextPageLink = ({ onClick, disabled }: PaginationItemsProps) => (
             disabled={disabled}
             onClick={onClick}
         >
-            Next
+            <ChevronRightIcon />
         </button>
     </li>
 )
@@ -68,7 +72,7 @@ export const LastPageLink = ({ onClick, disabled }: PaginationItemsProps) => (
             disabled={disabled}
             onClick={onClick}
         >
-            Last
+            <RightIcon />
         </button>
     </li>
 )
