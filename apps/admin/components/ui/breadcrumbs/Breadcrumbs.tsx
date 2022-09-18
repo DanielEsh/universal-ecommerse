@@ -1,6 +1,44 @@
 import { useRouter } from 'next/router'
 import ChevronRightIcon from 'public/icons/chevron-right.svg'
 
+type BreadcrumbsItemPropsType = {
+    id: number
+    link: string
+    title: string
+    isLast: boolean
+}
+
+const BreadcrumbsItem = ({
+    id,
+    link,
+    title,
+    isLast,
+}: BreadcrumbsItemPropsType) => {
+    if (isLast) {
+        return (
+            <li key={id}>
+                <a href={link}>{title}</a>
+            </li>
+        )
+    }
+
+    return (
+        <>
+            <li key={id}>
+                <a href={link} className="text-blue-500 hover:text-blue-700">
+                    {title}
+                </a>
+            </li>
+
+            <li aria-hidden="true">
+                <div className="text-gray-800">
+                    <ChevronRightIcon />
+                </div>
+            </li>
+        </>
+    )
+}
+
 export const Breadcrumbs = () => {
     const router = useRouter()
 
@@ -38,22 +76,14 @@ export const Breadcrumbs = () => {
     return (
         <nav className="bg-grey-light rounded-md w-full">
             <ol className="list-reset flex items-center gap-3">
-                {renderBreadcrumbs.map(({ id, title, link }) => (
-                    <li key={id}>
-                        <a
-                            href={link}
-                            className="text-blue-500 hover:text-blue-700"
-                        >
-                            {title}
-                        </a>
-                    </li>
+                {renderBreadcrumbs.map(({ id, title, link }, index) => (
+                    <BreadcrumbsItem
+                        id={id}
+                        title={title}
+                        link={link}
+                        isLast={index === renderBreadcrumbs.length - 1}
+                    />
                 ))}
-
-                <li aria-hidden="true">
-                    <div className="text-gray-800">
-                        <ChevronRightIcon />
-                    </div>
-                </li>
             </ol>
         </nav>
     )
