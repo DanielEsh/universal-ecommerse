@@ -89,3 +89,21 @@ export const Breadcrumbs = () => {
         </nav>
     )
 }
+
+/**
+ * TEMPLATE
+ * <Breadcrumbs
+ *  color={color}
+ *  separator=ReactComponent
+ *  >
+ *   <Breadcrumbs.Item>
+ *     title
+ *   </Breadcrumbs.Item>
+ *   <Breadcrumbs.Item>
+ *     title 2
+ *   </Breadcrumbs.Item>
+ *   <Breadcrumbs.Item>
+ *     title 3
+ *   </Breadcrumbs.Item>
+ * </Breadcrumbs>
+ */
