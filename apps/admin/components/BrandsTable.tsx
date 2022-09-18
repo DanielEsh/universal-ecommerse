@@ -6,7 +6,7 @@ import { Button } from './ui/Button'
 import { Table } from './ui/Table'
 import { SheetModal } from './ui/Modal/SheetModal'
 import { BrandsCreateForm } from './BrandsCreateForm'
-import { Pagination } from '@/components/Pagination'
+import { Pagination } from '@/ui/Pagination/Pagination'
 import { BaseInput } from '@/ui/inputs/BaseInput'
 
 type Props = {

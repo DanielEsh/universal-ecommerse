@@ -1,7 +1,14 @@
-import classnames from 'classnames'
 import { paginationFactory } from '@/ui/Pagination/paginate'
 import { prevNext } from '@/ui/Pagination/middleware/prevNext'
 import { firstLast } from '@/ui/Pagination/middleware/firstLast'
+import {
+    Ellipsis,
+    LastPageLink,
+    NextPageLink,
+    PreviousPageLink,
+    FirstPageLink,
+    PageLink,
+} from '@/ui/Pagination/PaginationComponents'
 
 type metaType = {
     itemCount: number
@@ -13,87 +20,10 @@ type metaType = {
     next: number
 }
 
-enum PageChangeEventType {
-    first,
-    previous,
-    item,
-    next,
-    last,
-}
-
 type Props = {
     meta: metaType
     onPageChange: (pageNumber: number) => void
 }
-
-type PaginationItemsProps = {
-    disabled: boolean
-    onClick: () => void
-}
-
-type PaginationPageProps = {
-    active: boolean
-    disabled: boolean
-    value: number
-    onClick: () => void
-}
-
-const FirstPageLink = ({ onClick, disabled }: PaginationItemsProps) => (
-    <li>
-        <button onClick={onClick} disabled={disabled}>
-            First
-        </button>
-    </li>
-)
-
-const PreviousPageLink = ({ onClick, disabled }: PaginationItemsProps) => (
-    <li>
-        <button onClick={onClick} disabled={disabled}>
-            Previous
-        </button>
-    </li>
-)
-
-const NextPageLink = ({ onClick, disabled }: PaginationItemsProps) => (
-    <li>
-        <button onClick={onClick} disabled={disabled}>
-            Next
-        </button>
-    </li>
-)
-
-const LastPageLink = ({ onClick, disabled }: PaginationItemsProps) => (
-    <li>
-        <button onClick={onClick} disabled={disabled}>
-            Last
-        </button>
-    </li>
-)
-
-const Ellipsis = ({ onClick, disabled }: PaginationItemsProps) => (
-    <li>
-        <button onClick={onClick} disabled={disabled}>
-            ...
-        </button>
-    </li>
-)
-
-const PageLink = ({
-    active,
-    value,
-    disabled,
-    onClick,
-}: PaginationPageProps) => (
-    <li>
-        <button
-            style={active ? { fontWeight: 'bold' } : {}}
-            onClick={onClick}
-            disabled={disabled}
-        >
-            {value}
-        </button>
-    </li>
-)
 
 const renderItemComponentFunctionFactory = (
     itemTypeToComponent,
@@ -145,22 +75,6 @@ export const Pagination = ({ meta, onPageChange }: Props) => {
         currentPage,
         onPageChange,
     )
-
-    // const pagesClasses = (isActive: boolean) =>
-    //     classnames(
-    //         'flex items-center justify-center w-8 h-8 border border-black',
-    //         {
-    //             ['bg-black text-white']: isActive,
-    //         },
-    //     )
-    //
-    // const itemsClasses = (interactive = true) =>
-    //     classnames(
-    //         'flex items-center justify-center w-8 h-8 border border-black',
-    //         {
-    //             ['opacity-60']: !interactive,
-    //         },
-    //     )
 
     return (
         <ul className="flex gap-3 mt-6">
