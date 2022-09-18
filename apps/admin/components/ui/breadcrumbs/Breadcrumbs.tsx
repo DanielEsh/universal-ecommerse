@@ -9,7 +9,7 @@ export const Breadcrumbs = () => {
                         Home
                     </a>
                 </li>
-                <li>
+                <li aria-hidden="true">
                     <div className="text-gray-800">
                         <ChevronRightIcon />
                     </div>
@@ -19,12 +19,12 @@ export const Breadcrumbs = () => {
                         Library
                     </a>
                 </li>
-                <li>
+                <li aria-hidden="true">
                     <div className="text-gray-500">
                         <ChevronRightIcon />
                     </div>
                 </li>
-                <li className="text-gray-500">Data</li>
+                <li className="text-black">Data</li>
             </ol>
         </nav>
     )
