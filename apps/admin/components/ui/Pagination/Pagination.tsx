@@ -21,6 +21,8 @@ type metaType = {
 }
 
 type Props = {
+    boundaryPagesRange?: number
+    siblingPagesRange?: number
     meta: metaType
     onPageChange: (pageNumber: number) => void
 }
@@ -45,15 +47,15 @@ const renderItemComponentFunctionFactory = (
     }
 }
 
-export const Pagination = ({ meta, onPageChange }: Props) => {
+export const Pagination = ({ meta, boundaryPagesRange = 2, siblingPagesRange = 1, onPageChange }: Props) => {
     const { totalPages, currentPage, next, previous } = meta
 
     const disabled = false
 
     const paginationModel = paginationFactory({
-        boundaryPagesRange: 2,
-        siblingPagesRange: 3,
-        totalPages: 100,
+        boundaryPagesRange: boundaryPagesRange,
+        siblingPagesRange: siblingPagesRange,
+        totalPages: totalPages,
         currentPage: currentPage,
 
         middleware: [prevNext(), firstLast()],

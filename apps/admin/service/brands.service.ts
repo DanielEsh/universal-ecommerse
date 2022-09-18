@@ -24,8 +24,7 @@ export const getAllBrands = (params: ParamsType) => {
 
     return $axios.get(api.brands.all, {
         params: {
-            // limit: 12,
-            limit: 2,
+            limit: 12,
             page: page ?? 1,
             search: search ?? '',
         },
