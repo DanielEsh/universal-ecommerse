@@ -3,5 +3,5 @@
 // }
 
 export const Breadcrumbs = () => {
-    return <div>123</div>
+    return <div>Breadcrumbs</div>
 }
