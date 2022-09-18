@@ -61,8 +61,6 @@ export const Pagination = ({ meta, boundaryPagesRange = 2, siblingPagesRange = 1
         middleware: [prevNext(), firstLast()],
     })
 
-    console.log('ITEMS', paginationModel)
-
     const itemTypeToComponent = {
         PAGE: PageLink,
         ELLIPSIS: Ellipsis,

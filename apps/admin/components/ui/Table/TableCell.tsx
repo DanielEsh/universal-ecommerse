@@ -1,5 +1,6 @@
-import { ReactNode } from 'react'
+import { ReactNode, useContext } from 'react'
 import classNames from 'classnames'
+import { TableContext } from '@/ui/Table/TableContext'
 
 export type TableCellProps = {
     children: ReactNode
@@ -12,7 +13,17 @@ export const TableCell = (props: TableCellProps) => {
 
     const Tag = component || 'td'
 
-    const classes = classNames('p-2  border border-stone-900', {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const { color } = useContext(TableContext)
+
+    const colorsList = {
+        primary: 'p-2',
+    }
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const classes = classNames(colorsList[color], {
         'bg-black text-white border-stone-600': component === 'th',
     })
 

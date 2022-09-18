@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { BrandType, getAllBrands } from '../../service/brands.service'
 
-import { BrandsTable } from '../../components/BrandsTable'
+import { BrandsTable } from '@/components/BrandsTable'
 
 type Props = {
     pageInfo: pageInfo
@@ -37,7 +37,8 @@ const BrandsPage = ({ pageInfo }: Props) => {
 
     return (
         <div>
-            BRANDS PAGE
+            <h1 className="text-3xl">Бренды</h1>
+
             <BrandsTable
                 info={pageInfo}
                 updateData={refreshData}
