@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { useRouter } from 'next/router'
 import ChevronRightIcon from 'public/icons/chevron-right.svg'
 
@@ -23,8 +24,8 @@ const BreadcrumbsItem = ({
     }
 
     return (
-        <>
-            <li key={id}>
+        <Fragment key={id}>
+            <li>
                 <a href={link} className="text-blue-500 hover:text-blue-700">
                     {title}
                 </a>
@@ -35,7 +36,7 @@ const BreadcrumbsItem = ({
                     <ChevronRightIcon />
                 </div>
             </li>
-        </>
+        </Fragment>
     )
 }
 
