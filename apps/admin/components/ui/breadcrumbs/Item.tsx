@@ -4,26 +4,25 @@ import type { BreadcrumbsContextType } from '@/ui/breadcrumbs/Context'
 
 type BreadcrumbsItemPropsType = {
     children: ReactNode
-    id?: number
     link?: string
     isLast?: boolean
 }
 
 export const BreadcrumbsItem = (props: BreadcrumbsItemPropsType) => {
-    const { children, link, isLast, id } = props
+    const { children, link, isLast } = props
 
     const { color, separator } = useContext<BreadcrumbsContextType>(BreadcrumbsContext)
 
     if (isLast) {
         return (
-            <li key={id}>
+            <li>
                 <a href={link}>{children}</a>
             </li>
         )
     }
 
     return (
-        <Fragment key={id}>
+        <Fragment>
             <li>
                 <a href={link} className="text-blue-500 hover:text-blue-700">
                     {children}

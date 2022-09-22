@@ -1,44 +1,5 @@
-import { Fragment } from 'react'
 import { useRouter } from 'next/router'
-import ChevronRightIcon from 'public/icons/chevron-right.svg'
-
-type BreadcrumbsItemPropsType = {
-    id: number
-    link: string
-    title: string
-    isLast: boolean
-}
-
-const BreadcrumbsItem = ({
-    id,
-    link,
-    title,
-    isLast,
-}: BreadcrumbsItemPropsType) => {
-    if (isLast) {
-        return (
-            <li key={id}>
-                <a href={link}>{title}</a>
-            </li>
-        )
-    }
-
-    return (
-        <Fragment key={id}>
-            <li>
-                <a href={link} className="text-blue-500 hover:text-blue-700">
-                    {title}
-                </a>
-            </li>
-
-            <li aria-hidden="true">
-                <div className="text-gray-800">
-                    <ChevronRightIcon />
-                </div>
-            </li>
-        </Fragment>
-    )
-}
+import { Breadcrumbs } from '@/ui/breadcrumbs/Breadcrumbs'
 
 export const HeaderBreadcrumbs = () => {
     const router = useRouter()
@@ -51,9 +12,7 @@ export const HeaderBreadcrumbs = () => {
 
         // Break down the path between "/"s, removing empty entities
         // Ex:"/my/nested/path" --> ["my", "nested", "path"]
-        const asPathNestedRoutes = asPathWithoutQuery
-            .split('/')
-            .filter((v) => v.length > 0)
+        const asPathNestedRoutes = asPathWithoutQuery.split('/').filter((v) => v.length > 0)
 
         // Iterate over the list of nested route parts and build
         // a "crumb" object for each one.
@@ -75,17 +34,12 @@ export const HeaderBreadcrumbs = () => {
     const renderBreadcrumbs = generateBreadcrumbs()
 
     return (
-        <nav className="bg-grey-light rounded-md w-full">
-            <ol className="list-reset flex items-center gap-3">
-                {renderBreadcrumbs.map(({ id, title, link }, index) => (
-                    <BreadcrumbsItem
-                        id={id}
-                        title={title}
-                        link={link}
-                        isLast={index === renderBreadcrumbs.length - 1}
-                    />
-                ))}
-            </ol>
-        </nav>
+        <Breadcrumbs>
+            {renderBreadcrumbs.map(({ id, title, link }, index) => (
+                <Breadcrumbs.Item key={id} link={link} isLast={index === renderBreadcrumbs.length - 1}>
+                    {title}
+                </Breadcrumbs.Item>
+            ))}
+        </Breadcrumbs>
     )
 }
