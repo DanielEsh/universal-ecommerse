@@ -9,6 +9,7 @@ const COMPONENT_NAME = 'BreadcrumbsContext'
 
 export const BreadcrumbsContext = createContext<BreadcrumbsContextType>({
     color: 'primary',
+    separator: 'DEFAULT SEPARATOR',
 })
 
 BreadcrumbsContext.displayName = COMPONENT_NAME

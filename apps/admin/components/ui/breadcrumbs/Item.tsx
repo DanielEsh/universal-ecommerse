@@ -1,7 +1,6 @@
 import { ReactNode, useContext, Fragment } from 'react'
 import { BreadcrumbsContext } from '@/ui/breadcrumbs/Context'
 import type { BreadcrumbsContextType } from '@/ui/breadcrumbs/Context'
-import ChevronRightIcon from 'public/icons/chevron-right.svg'
 
 type BreadcrumbsItemPropsType = {
     children: ReactNode
@@ -13,9 +12,8 @@ type BreadcrumbsItemPropsType = {
 export const BreadcrumbsItem = (props: BreadcrumbsItemPropsType) => {
     const { children, link, isLast, id } = props
 
-    const { color } = useContext<BreadcrumbsContextType>(BreadcrumbsContext)
+    const { color, separator } = useContext<BreadcrumbsContextType>(BreadcrumbsContext)
 
-    console.log('COLOR', color)
     if (isLast) {
         return (
             <li key={id}>
@@ -33,9 +31,7 @@ export const BreadcrumbsItem = (props: BreadcrumbsItemPropsType) => {
             </li>
 
             <li aria-hidden="true">
-                <div className="text-gray-800">
-                    <ChevronRightIcon />
-                </div>
+                <div className="text-gray-800">{separator}</div>
             </li>
         </Fragment>
     )
