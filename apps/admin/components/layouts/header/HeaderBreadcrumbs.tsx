@@ -1,10 +1,13 @@
+import { useMemo } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { Breadcrumbs } from '@/ui/breadcrumbs/Breadcrumbs'
 
 export const HeaderBreadcrumbs = () => {
     const router = useRouter()
 
     const generateBreadcrumbs = () => {
+        console.log('generateBreadcrumbs')
         // Remove any query parameters, as those aren't included in breadcrumbs
         const asPathWithoutQuery = router.asPath.split('?')[0]
 
@@ -31,13 +34,13 @@ export const HeaderBreadcrumbs = () => {
         return [{ id: 0, link: '/', title: 'Home' }, ...breadcrumbsList]
     }
 
-    const renderBreadcrumbs = generateBreadcrumbs()
+    const renderBreadcrumbs = useMemo(() => generateBreadcrumbs(), [router.asPath])
 
     return (
         <Breadcrumbs>
             {renderBreadcrumbs.map(({ id, title, link }, index) => (
-                <Breadcrumbs.Item key={id} link={link} isLast={index === renderBreadcrumbs.length - 1}>
-                    {title}
+                <Breadcrumbs.Item key={id} isLast={index === renderBreadcrumbs.length - 1}>
+                    <Link href={link}>{title}</Link>
                 </Breadcrumbs.Item>
             ))}
         </Breadcrumbs>
