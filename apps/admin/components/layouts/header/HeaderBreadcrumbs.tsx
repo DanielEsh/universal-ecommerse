@@ -7,7 +7,6 @@ export const HeaderBreadcrumbs = () => {
     const router = useRouter()
 
     const generateBreadcrumbs = () => {
-        console.log('generateBreadcrumbs')
         // Remove any query parameters, as those aren't included in breadcrumbs
         const asPathWithoutQuery = router.asPath.split('?')[0]
 
