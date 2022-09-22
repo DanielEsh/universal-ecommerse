@@ -1,5 +1,6 @@
 import { ReactNode, useContext, Fragment } from 'react'
 import { BreadcrumbsContext } from '@/ui/breadcrumbs/Context'
+import type { BreadcrumbsContextType } from '@/ui/breadcrumbs/Context'
 import ChevronRightIcon from 'public/icons/chevron-right.svg'
 
 type BreadcrumbsItemPropsType = {
@@ -12,9 +13,7 @@ type BreadcrumbsItemPropsType = {
 export const BreadcrumbsItem = (props: BreadcrumbsItemPropsType) => {
     const { children, link, isLast, id } = props
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const { color } = useContext(BreadcrumbsContext)
+    const { color } = useContext<BreadcrumbsContextType>(BreadcrumbsContext)
 
     console.log('COLOR', color)
     if (isLast) {

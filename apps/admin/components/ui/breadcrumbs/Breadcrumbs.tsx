@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import { BreadcrumbsItem } from '@/ui/breadcrumbs/Item'
+import type { BreadcrumbsContextType } from '@/ui/breadcrumbs/Context'
 import { BreadcrumbsContext } from '@/ui/breadcrumbs/Context'
 
 export type BreadcrumbsRootPropsType = {
@@ -11,7 +12,7 @@ const COMPONENT_NAME = 'Breadcrumbs'
 const BreadcrumbsRoot = (props: BreadcrumbsRootPropsType) => {
     const { children } = props
 
-    const context = {
+    const context: BreadcrumbsContextType = {
         color: 'primary',
     }
 

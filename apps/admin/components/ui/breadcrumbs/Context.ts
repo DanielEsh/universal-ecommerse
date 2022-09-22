@@ -7,8 +7,8 @@ export type BreadcrumbsContextType = {
 
 const COMPONENT_NAME = 'BreadcrumbsContext'
 
-export const BreadcrumbsContext = createContext<BreadcrumbsContextType | null>(
-    null,
-)
+export const BreadcrumbsContext = createContext<BreadcrumbsContextType>({
+    color: 'primary',
+})
 
 BreadcrumbsContext.displayName = COMPONENT_NAME
