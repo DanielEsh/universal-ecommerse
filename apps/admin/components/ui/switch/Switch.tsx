@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, forwardRef } from 'react'
 import classnames from 'classnames'
 
 const COMPONENT_NAME = 'Switch'
@@ -6,27 +6,29 @@ const COMPONENT_NAME = 'Switch'
 export type SwitchPropsType = {
     checked: boolean
     disabled: boolean
-    required: boolean
-    name: string
-    value: string
+    onChange?: () => void
+    onCheckedChange?: (checked: boolean) => void
 }
 
-export const Switch = (props: SwitchPropsType) => {
+export const Switch = forwardRef<HTMLButtonElement, SwitchPropsType>((props, forwardedRef) => {
+    const { onCheckedChange } = props
+
     const [toggle, setToggle] = useState<boolean>(false)
 
     const handleClick = () => {
         setToggle(!toggle)
+        onCheckedChange && onCheckedChange(toggle)
     }
 
     const classes = classnames('inline-block h-6 w-6 transform rounded-full bg-white transition', {
-        ['translate-x-6']: toggle,
+        ['translate-x-full']: toggle,
     })
 
     return (
-        <button type="button" role="button" className="relative inline-flex h-6 w-12 items-center rounded-full bg-black" onClick={handleClick}>
+        <button ref={forwardedRef} type="button" role="button" className="relative inline-flex h-6 w-12 items-center rounded-full bg-black" onClick={handleClick}>
             <span className={classes}></span>
         </button>
     )
-}
+})
 
 Switch.displayName = COMPONENT_NAME
