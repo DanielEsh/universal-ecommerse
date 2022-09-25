@@ -1,26 +1,12 @@
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
-import { BrandType, getAllBrands } from '../../service/brands.service'
+import { getAllBrands } from '../../service/brands.service'
+import type { pageInfoType } from '@/ui/Pagination/types'
 
 import { BrandsTable } from '@/components/BrandsTable'
 
 type Props = {
-    pageInfo: pageInfo
-}
-
-type pageInfo = {
-    items: BrandType[]
-    meta: metaType
-}
-
-type metaType = {
-    itemCount: number
-    totalItemsCount: number
-    itemsPerPage: number
-    totalPages: number
-    currentPage: number
-    previous: number
-    next: number
+    pageInfo: pageInfoType
 }
 
 const BrandsPage = ({ pageInfo }: Props) => {
