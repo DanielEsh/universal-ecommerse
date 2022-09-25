@@ -160,8 +160,12 @@ export function paginationFactory(options: PaginationOptionsType) {
         paginationModel.push(...lastPages)
     }
 
-    for (let i = 0; i < middleware.length; i++) {
-        paginationModel = middleware[i]({
+    for (
+        let middlewareIndex = 0;
+        middlewareIndex < middleware.length;
+        middlewareIndex++
+    ) {
+        paginationModel = middleware[middlewareIndex]({
             items: paginationModel,
             currentPage,
             totalPages,

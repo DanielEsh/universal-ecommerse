@@ -54,6 +54,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         page: page as string,
         search: search as string,
     })
+
+    if (!data.items.length) {
+        return {
+            notFound: true,
+        }
+    }
+
     return { props: { pageInfo: data } }
 }
 
