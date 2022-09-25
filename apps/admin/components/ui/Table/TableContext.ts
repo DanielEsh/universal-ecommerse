@@ -6,6 +6,8 @@ export type TableContextType = {
 
 const NAME = 'TableContext'
 
-export const TableContext = createContext<TableContextType | null>(null)
+export const TableContext = createContext<TableContextType>({
+    color: 'primary',
+})
 
 TableContext.displayName = NAME

@@ -13,16 +13,12 @@ export const TableCell = (props: TableCellProps) => {
 
     const Tag = component || 'td'
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     const { color } = useContext(TableContext)
 
-    const colorsList = {
-        primary: 'p-2',
+    const colorsList: any = {
+        primary: 'p-2 border',
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     const classes = classNames(colorsList[color], {
         'bg-black text-white border-stone-600': component === 'th',
     })

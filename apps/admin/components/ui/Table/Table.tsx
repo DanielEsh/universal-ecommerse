@@ -9,6 +9,7 @@ import {
     TableRow,
     TableCell,
 } from '../Table/'
+import { TableContextType } from '@/ui/Table/TableContext'
 
 const NAME = 'Table'
 
@@ -20,7 +21,7 @@ export type TableRootProps = {
 export const TableRoot = (props: TableRootProps) => {
     const { children, className } = props
 
-    const context = {
+    const context: TableContextType = {
         color: 'primary',
     }
 

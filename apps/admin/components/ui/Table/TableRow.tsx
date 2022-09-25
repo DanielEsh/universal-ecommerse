@@ -1,6 +1,6 @@
 import { ReactNode, useContext } from 'react'
 import classNames from 'classnames'
-import { TableContext } from '@/ui/Table/TableContext'
+import { TableContext, TableContextType } from '@/ui/Table/TableContext'
 
 export type TableRowProps = {
     children: ReactNode
@@ -8,16 +8,12 @@ export type TableRowProps = {
 }
 
 export const TableRow = ({ children, onClick }: TableRowProps) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const { color } = useContext(TableContext)
+    const { color } = useContext<TableContextType>(TableContext)
 
-    const colorsList = {
-        primary: 'bg-slate-50 border-stone-300 cursor-pointer border-b',
+    const colorsList: any = {
+        primary: 'bg-white border border-stone-300 cursor-pointer',
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     const classes = classNames(colorsList[color])
 
     return (
