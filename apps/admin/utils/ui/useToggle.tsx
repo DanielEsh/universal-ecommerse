@@ -5,5 +5,9 @@ export const useToggle = (initialState = false) => {
 
     const toggle = useCallback(() => setState((state) => !state), [])
 
-    return [state, toggle]
+    const toggleProps = {
+        'aria-checked': state,
+    }
+
+    return [state, toggle, toggleProps]
 }
