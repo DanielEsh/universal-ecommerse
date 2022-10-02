@@ -1,12 +1,13 @@
-import { useTheme } from 'next-themes'
+import { canUseDom } from '../utils/ui/canUseDom'
 
 export const ThemeSwitcher = () => {
-    const { systemTheme, theme, setTheme } = useTheme()
-    const currentTheme = theme === 'system' ? systemTheme : theme
+    if (!canUseDom()) return ''
+
+    const DOCUMENT_ELEMENT = document.documentElement
+    const THEME_CLASS_TOGGLE_TOKEN = 'dark'
 
     const handleSwitchTheme = () => {
-        const switcherTheme = currentTheme === 'light' ? 'dark' : 'light'
-        setTheme(switcherTheme)
+        DOCUMENT_ELEMENT.classList.toggle(THEME_CLASS_TOGGLE_TOKEN)
     }
 
     return <div onClick={handleSwitchTheme}>Theme switcher</div>
