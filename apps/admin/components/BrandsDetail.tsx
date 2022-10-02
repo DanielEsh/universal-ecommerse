@@ -48,7 +48,7 @@ export const BrandsDetail = () => {
     }
 
     const handleDelete = () => {
-        deleteBrand(data.id)
+        // deleteBrand(data.id)
     }
 
     return (

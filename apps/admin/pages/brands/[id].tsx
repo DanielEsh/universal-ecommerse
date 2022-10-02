@@ -1,5 +1,7 @@
 import { GetServerSideProps } from 'next'
 import Link from 'next/link'
+import { Dialog } from '@/ui/Modal/Dialog'
+import { useState } from 'react'
 
 import {
     BrandType,
@@ -16,8 +18,11 @@ type Props = {
 }
 
 const BrandsDetailPage = ({ data }: Props) => {
+    const [open, setOpen] = useState<boolean>(false)
+
     const handleDelete = () => {
-        deleteBrand(data.id)
+        setOpen(true)
+        // deleteBrand(data.id)
     }
 
     return (
@@ -56,6 +61,10 @@ const BrandsDetailPage = ({ data }: Props) => {
                         </Button>
                     </div>
                 </aside>
+
+                <Dialog isOpen={open} onExit={() => setOpen(false)}>
+                    Dialog
+                </Dialog>
             </div>
         </div>
     )
