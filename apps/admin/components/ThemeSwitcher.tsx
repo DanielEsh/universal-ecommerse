@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { canUseDom } from '../utils/ui/canUseDom'
 
 enum Theme {
@@ -20,6 +20,17 @@ export const ThemeSwitcher = () => {
     const [resolvedTheme, setResolvedTheme] = useState(() =>
         getTheme(STORAGE_KEY),
     )
+
+    function applyTheme(theme) {
+        setThemeState(theme)
+
+        // Save to storage
+        try {
+            localStorage.setItem(STORAGE_KEY, theme)
+        } catch (e) {
+            // Unsupported
+        }
+    }
 
     if (!canUseDom()) return ''
 
@@ -43,14 +54,29 @@ export const ThemeSwitcher = () => {
 
     // const resolvedTheme = getSystemTheme()
 
-    const handleSwitchTheme = () => {
-        DOCUMENT_ELEMENT.classList.toggle(THEME_CLASS_TOGGLE_TOKEN)
-        const currentColorScheme = COLORS_SCHEMES_LIST.includes(resolvedTheme)
-            ? resolvedTheme
-            : DEFAULT_THEME
-
-        DOCUMENT_ELEMENT.style.colorScheme = currentColorScheme
+    const handleLight = () => {
+        applyTheme('light')
+        DOCUMENT_ELEMENT.classList.remove(THEME_CLASS_TOGGLE_TOKEN)
     }
 
-    return <div onClick={handleSwitchTheme}>Theme switcher</div>
+    const handleDark = () => {
+        applyTheme('dark')
+        DOCUMENT_ELEMENT.classList.add(THEME_CLASS_TOGGLE_TOKEN)
+        const currentColorScheme = COLORS_SCHEMES_LIST.includes(theme)
+            ? resolvedTheme
+            : DEFAULT_THEME
+        DOCUMENT_ELEMENT.style.colorScheme = currentColorScheme as string
+    }
+
+    const handleSystem = () => {
+        applyTheme('system')
+    }
+
+    return (
+        <div className="flex gap-3">
+            <button onClick={handleLight}>Light</button>
+            <button onClick={handleDark}>Dark</button>
+            <button onClick={handleSystem}>System</button>
+        </div>
+    )
 }
