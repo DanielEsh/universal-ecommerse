@@ -17,9 +17,6 @@ export const ThemeSwitcher = () => {
     const [theme, setThemeState] = useState(() =>
         getTheme(STORAGE_KEY, DEFAULT_THEME),
     )
-    const [resolvedTheme, setResolvedTheme] = useState(() =>
-        getTheme(STORAGE_KEY),
-    )
 
     function applyTheme(theme) {
         setThemeState(theme)
@@ -57,19 +54,28 @@ export const ThemeSwitcher = () => {
     const handleLight = () => {
         applyTheme('light')
         DOCUMENT_ELEMENT.classList.remove(THEME_CLASS_TOGGLE_TOKEN)
+        const currentColorScheme = COLORS_SCHEMES_LIST.includes(theme)
+            ? theme
+            : DEFAULT_THEME
+        DOCUMENT_ELEMENT.style.colorScheme = currentColorScheme as string
     }
 
     const handleDark = () => {
         applyTheme('dark')
         DOCUMENT_ELEMENT.classList.add(THEME_CLASS_TOGGLE_TOKEN)
         const currentColorScheme = COLORS_SCHEMES_LIST.includes(theme)
-            ? resolvedTheme
+            ? theme
             : DEFAULT_THEME
         DOCUMENT_ELEMENT.style.colorScheme = currentColorScheme as string
     }
 
+    useEffect(() => {
+        console.log('mounted')
+        applyTheme(getTheme(STORAGE_KEY, DEFAULT_THEME))
+    }, [])
+
     const handleSystem = () => {
-        applyTheme('system')
+        applyTheme(getSystemTheme())
     }
 
     return (
