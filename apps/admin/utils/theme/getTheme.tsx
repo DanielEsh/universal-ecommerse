@@ -1,9 +1,11 @@
-export const getTheme = (key: string, fallback?: string) => {
+import { Theme } from './useTheme'
+
+export const getTheme = (key: string, fallback: string) => {
     let theme
     try {
-        theme = localStorage.getItem(key) || undefined
+        theme = localStorage.getItem(key) || fallback
     } catch (e) {
         // Unsupported
     }
-    return theme || fallback
+    return (theme || fallback) as Theme
 }

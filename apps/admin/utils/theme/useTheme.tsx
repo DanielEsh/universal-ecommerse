@@ -1,10 +1,8 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { getTheme } from './getTheme'
 import { getSystemTheme } from './getSystemTheme'
-import { Simulate } from 'react-dom/test-utils'
-import change = Simulate.change
 
-enum Theme {
+export enum Theme {
     light = 'light',
     dark = 'dark',
     system = 'system',
@@ -19,28 +17,20 @@ export const useTheme = () => {
         getTheme(STORAGE_KEY, DEFAULT_THEME),
     )
 
-    const changeResolvedTheme = (theme) => {
-        const IS_DARK = theme === 'dark'
-        const d = document.documentElement
-
-        if (IS_DARK) {
-            d.classList.add('dark')
-        } else {
-            d.classList.remove('dark')
-        }
-
+    const changeResolvedTheme = (theme: Theme) => {
+        const DOCUMENT = document.documentElement
         const colorScheme = colorSchemes.includes(theme) ? theme : DEFAULT_THEME
 
-        d.style.colorScheme = colorScheme
+        DOCUMENT.className = theme
+        DOCUMENT.style.colorScheme = colorScheme
     }
 
-    const applyTheme = (theme) => {
-        let resolved = theme
+    const applyTheme = (theme: Theme) => {
+        let resolved: Theme = theme
         setThemeState(theme)
         if (!resolved) return
 
-        // If theme is system, resolve it before setting theme
-        if (theme === 'system') {
+        if (theme === Theme.system) {
             resolved = getSystemTheme()
         }
 
