@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import { getTheme } from './getTheme'
 import { getSystemTheme } from './getSystemTheme'
+import { Simulate } from 'react-dom/test-utils'
+import change = Simulate.change
 
 enum Theme {
     light = 'light',
@@ -17,7 +19,22 @@ export const useTheme = () => {
         getTheme(STORAGE_KEY, DEFAULT_THEME),
     )
 
-    const applyTheme = useCallback((theme) => {
+    const changeResolvedTheme = (theme) => {
+        const IS_DARK = theme === 'dark'
+        const d = document.documentElement
+
+        if (IS_DARK) {
+            d.classList.add('dark')
+        } else {
+            d.classList.remove('dark')
+        }
+
+        const colorScheme = colorSchemes.includes(theme) ? theme : DEFAULT_THEME
+
+        d.style.colorScheme = colorScheme
+    }
+
+    const applyTheme = (theme) => {
         let resolved = theme
         setThemeState(theme)
         if (!resolved) return
@@ -27,34 +44,12 @@ export const useTheme = () => {
             resolved = getSystemTheme()
         }
 
-        const d = document.documentElement
-
-        d.classList.add('dark')
-
-        const fallback = colorSchemes.includes(DEFAULT_THEME)
-            ? DEFAULT_THEME
-            : null
-        const colorScheme = colorSchemes.includes(resolved) ? theme : fallback
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        d.style.colorScheme = colorScheme
-    }, [])
-
-    const changeTheme = (changedTheme) => {
-        const themesActions = {
-            dark: () => console.log('DARK CHANGE'),
-            light: () => console.log('LIGHT CHANGE'),
-            system: () => console.log('SYSTEM CHANGE'),
-        }
-
-        themesActions[changedTheme]()
-
-        applyTheme(changedTheme)
+        changeResolvedTheme(resolved)
     }
 
     useEffect(() => {
         applyTheme(theme)
     }, [])
 
-    return { theme, changeTheme }
+    return { theme, applyTheme }
 }
