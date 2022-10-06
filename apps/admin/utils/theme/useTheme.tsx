@@ -28,6 +28,7 @@ export const useTheme = () => {
     const applyTheme = (theme: Theme) => {
         let resolved: Theme = theme
         setThemeState(theme)
+        localStorage.setItem(STORAGE_KEY, theme)
         if (!resolved) return
 
         if (theme === Theme.system) {
