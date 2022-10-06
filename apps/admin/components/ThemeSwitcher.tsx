@@ -1,13 +1,18 @@
-import { useTheme } from 'next-themes'
+import { useEffect } from 'react'
+import { useTheme } from '../utils/theme/useTheme'
 
 export const ThemeSwitcher = () => {
-    const { systemTheme, theme, setTheme } = useTheme()
-    const currentTheme = theme === 'system' ? systemTheme : theme
+    const { theme, applyTheme } = useTheme()
 
-    const handleSwitchTheme = () => {
-        const switcherTheme = currentTheme === 'light' ? 'dark' : 'light'
-        setTheme(switcherTheme)
-    }
+    useEffect(() => {
+        console.log('THEME', theme)
+    }, [theme])
 
-    return <div onClick={handleSwitchTheme}>Theme switcher</div>
+    return (
+        <div className="flex gap-3">
+            <button onClick={() => applyTheme('light')}>Light</button>
+            <button onClick={() => applyTheme('dark')}>Dark</button>
+            <button onClick={() => applyTheme('system')}>System</button>
+        </div>
+    )
 }
