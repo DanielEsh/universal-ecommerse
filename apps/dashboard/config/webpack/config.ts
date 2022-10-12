@@ -3,7 +3,7 @@ import {BuildOptions} from "./types";
 import {devServer, loaders, plugins, resolve} from "../webpack/index";
 
 export const webpackConfigFactory = (options: BuildOptions): Configuration => {
-    const {mode, paths} = options;
+    const {mode, paths, isDev} = options;
 
     return {
         mode,
@@ -13,8 +13,8 @@ export const webpackConfigFactory = (options: BuildOptions): Configuration => {
             path: paths.output,
             clean: true,
         },
-        devtool: 'inline-source-map',
-        devServer: devServer(options),
+        devtool: isDev ? 'inline-source-map' : undefined,
+        devServer: isDev ? devServer(options) : undefined,
         resolve: resolve,
         module: {
             rules: loaders(),
