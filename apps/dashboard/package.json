@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack serve"
+    "dev": "webpack serve --env port=3000",
+    "build": "webpack --env mode=production"
   },
   "license": "MIT",
   "devDependencies": {
