@@ -1,6 +1,6 @@
 import {Configuration} from "webpack";
 import {BuildOptions} from "./types";
-import {loaders, plugins, resolve} from "../webpack/index";
+import {devServer, loaders, plugins, resolve} from "../webpack/index";
 
 export const webpackConfigFactory = (options: BuildOptions): Configuration => {
     const {mode, paths} = options;
@@ -13,6 +13,8 @@ export const webpackConfigFactory = (options: BuildOptions): Configuration => {
             path: paths.output,
             clean: true,
         },
+        devtool: 'inline-source-map',
+        devServer: devServer(options),
         resolve: resolve,
         module: {
             rules: loaders(),

@@ -11,10 +11,12 @@ const paths: BuildPaths = {
 
 const mode = 'development'
 const isDev = mode === 'development';
+const port = 3000
 
 const config: Configuration = webpackConfigFactory({
-    mode: 'development',
+    mode,
     paths,
+    port,
     isDev,
 })
 
