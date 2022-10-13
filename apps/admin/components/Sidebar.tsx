@@ -1,6 +1,6 @@
 import React from 'react'
 import { Logo } from './Logo'
-import { AsideMenu } from './AsideMenu'
+import { SidebarMenu } from '@/src/widgets/sidebar/SidebarMenu'
 
 export const SideBar = () => {
     return (
@@ -8,7 +8,7 @@ export const SideBar = () => {
             <div className="p-8">
                 <Logo />
             </div>
-            <AsideMenu />
+            <SidebarMenu />
         </aside>
     )
 }

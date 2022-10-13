@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
-import { SideBar } from '../Sidebar'
-import { Header } from '@/components/layouts/header/Header'
+import { SideBar } from '@/components/Sidebar'
+import { Header } from '@/src/widgets/header/Header'
 
 type DefaultLayoutProps = {
     children: ReactNode

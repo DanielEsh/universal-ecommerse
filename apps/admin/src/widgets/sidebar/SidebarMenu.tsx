@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import classNames from 'classnames'
 
-export const AsideMenu = () => {
+export const SidebarMenu = () => {
     const router = useRouter()
 
     const list = [

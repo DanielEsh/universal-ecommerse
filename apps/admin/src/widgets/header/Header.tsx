@@ -1,4 +1,4 @@
-import { HeaderBreadcrumbs } from '@/components/layouts/header/HeaderBreadcrumbs'
+import { HeaderBreadcrumbs } from '@/src/widgets/header/HeaderBreadcrumbs'
 import { Switch } from '@/src/shared/ui/switch/Switch'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 
