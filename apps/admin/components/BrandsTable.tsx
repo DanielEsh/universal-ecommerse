@@ -2,12 +2,12 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { BrandType } from '../service/brands.service'
-import { Button } from './ui/Button'
-import { Table } from './ui/Table'
-import { SheetModal } from './ui/Modal/SheetModal'
+import { Button } from '../src/shared/ui/Button'
+import { Table } from '../src/shared/ui/Table'
+import { SheetModal } from '../src/shared/ui/Modal/SheetModal'
 import { BrandsCreateForm } from './BrandsCreateForm'
-import { Pagination } from '@/ui/Pagination/Pagination'
-import { BaseInput } from '@/ui/inputs/BaseInput'
+import { Pagination } from '@/src/shared/ui/Pagination/Pagination'
+import { BaseInput } from '@/src/shared/ui/inputs/BaseInput'
 
 type Props = {
     info: pageInfo

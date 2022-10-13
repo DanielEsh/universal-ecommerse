@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { Breadcrumbs } from '@/ui/breadcrumbs/Breadcrumbs'
+import { Breadcrumbs } from '@/src/shared/ui/breadcrumbs/Breadcrumbs'
 
 export const HeaderBreadcrumbs = () => {
     const router = useRouter()

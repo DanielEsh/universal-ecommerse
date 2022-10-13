@@ -1,7 +1,7 @@
 import {
     createFirstPageLink,
     createLastPageLink,
-} from '@/ui/Pagination/pagination.utils'
+} from '@/src/shared/ui/Pagination/pagination.utils'
 
 export const firstLast = () =>
     function (middlewareArguments: any) {

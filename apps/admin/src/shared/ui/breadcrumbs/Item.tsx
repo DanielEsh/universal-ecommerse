@@ -1,6 +1,6 @@
 import { ReactNode, useContext, Fragment } from 'react'
-import { BreadcrumbsContext } from '@/ui/breadcrumbs/Context'
-import type { BreadcrumbsContextType } from '@/ui/breadcrumbs/Context'
+import { BreadcrumbsContext } from '@/src/shared/ui/breadcrumbs/Context'
+import type { BreadcrumbsContextType } from '@/src/shared/ui/breadcrumbs/Context'
 
 type BreadcrumbsItemPropsType = {
     children: ReactNode

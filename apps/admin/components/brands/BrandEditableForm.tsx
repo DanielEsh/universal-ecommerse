@@ -1,5 +1,5 @@
 import { FormEvent } from 'react'
-import { BaseInput } from '@/ui/inputs/BaseInput'
+import { BaseInput } from '@/src/shared/ui/inputs/BaseInput'
 
 import { BrandType } from '../../service/brands.service'
 

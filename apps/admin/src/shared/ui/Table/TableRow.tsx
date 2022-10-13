@@ -1,6 +1,6 @@
 import { ReactNode, useContext } from 'react'
 import classNames from 'classnames'
-import { TableContext, TableContextType } from '@/ui/Table/TableContext'
+import { TableContext, TableContextType } from '@/src/shared/ui/Table/TableContext'
 
 export type TableRowProps = {
     children: ReactNode

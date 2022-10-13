@@ -1,6 +1,6 @@
-import { paginationFactory } from '@/ui/Pagination/paginate'
-import { prevNext } from '@/ui/Pagination/middleware/prevNext'
-import { firstLast } from '@/ui/Pagination/middleware/firstLast'
+import { paginationFactory } from '@/src/shared/ui/Pagination/paginate'
+import { prevNext } from '@/src/shared/ui/Pagination/middleware/prevNext'
+import { firstLast } from '@/src/shared/ui/Pagination/middleware/firstLast'
 import {
     Ellipsis,
     LastPageLink,
@@ -8,7 +8,7 @@ import {
     PreviousPageLink,
     FirstPageLink,
     PageLink,
-} from '@/ui/Pagination/PaginationComponents'
+} from '@/src/shared/ui/Pagination/PaginationComponents'
 
 type metaType = {
     itemCount: number

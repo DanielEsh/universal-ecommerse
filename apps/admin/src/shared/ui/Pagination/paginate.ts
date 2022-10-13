@@ -3,7 +3,7 @@ import {
     createPageFactory,
     createRange,
     createSecondEllipsis,
-} from '@/ui/Pagination/pagination.utils'
+} from '@/src/shared/ui/Pagination/pagination.utils'
 
 type PaginationOptionsType = {
     /**

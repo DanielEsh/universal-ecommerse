@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
-import { BreadcrumbsItem } from '@/ui/breadcrumbs/Item'
-import type { BreadcrumbsContextType } from '@/ui/breadcrumbs/Context'
-import { BreadcrumbsContext } from '@/ui/breadcrumbs/Context'
+import { BreadcrumbsItem } from '@/src/shared/ui/breadcrumbs/Item'
+import type { BreadcrumbsContextType } from '@/src/shared/ui/breadcrumbs/Context'
+import { BreadcrumbsContext } from '@/src/shared/ui/breadcrumbs/Context'
 import ChevronRightIcon from 'public/icons/chevron-right.svg'
 
 export type BreadcrumbsRootPropsType = {

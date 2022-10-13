@@ -8,8 +8,8 @@ import {
     TableBody,
     TableRow,
     TableCell,
-} from '../Table/'
-import { TableContextType } from '@/ui/Table/TableContext'
+} from './index'
+import { TableContextType } from '@/src/shared/ui/Table/TableContext'
 
 const NAME = 'Table'
 

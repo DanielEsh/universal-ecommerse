@@ -1,5 +1,5 @@
 import { HeaderBreadcrumbs } from '@/components/layouts/header/HeaderBreadcrumbs'
-import { Switch } from '@/ui/switch/Switch'
+import { Switch } from '@/src/shared/ui/switch/Switch'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 
 export const Header = () => {

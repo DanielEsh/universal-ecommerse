@@ -1,6 +1,8 @@
 import { ReactNode, forwardRef, useRef } from 'react'
 const { motion } = require('framer-motion')
-import { useComposedRefs } from '../../../utils/ui/compose-refs/composeRefs'
+import { useComposedRefs } from '../../../../utils/ui/compose-refs/composeRefs'
+import { useOnClickOutside } from '../../../../utils/ui/useClickOutside'
+import { useKeyPress } from '../../../../utils/ui/useKeyPress'
 import { BaseModal } from './BaseModal'
 
 export type SheetModalProps = {
@@ -10,7 +12,7 @@ export type SheetModalProps = {
     onExit: () => void
 }
 
-const COMPONENT_NAME = 'Dialog'
+const NAME = 'SheetModal'
 
 const swipeUp = {
     initial: {
@@ -28,7 +30,7 @@ const swipeUp = {
     },
 }
 
-export const Dialog = forwardRef<HTMLElement, SheetModalProps>(
+export const SheetModal = forwardRef<HTMLElement, SheetModalProps>(
     (props, forwardedRef) => {
         const { children, isOpen, onExit } = props
 
@@ -40,9 +42,10 @@ export const Dialog = forwardRef<HTMLElement, SheetModalProps>(
             <BaseModal isOpen={isOpen} onExit={onExit}>
                 <motion.div
                     ref={composedRef}
-                    className="absolute top-1/2 left-1/2 -translate-1/2 p-8 bg-slate-50"
+                    className="absolute bottom-0 w-full h-[90%] p-8 bg-slate-50 rounded-t-3xl"
                     variants={swipeUp}
-                    {...swipeUp}>
+                    {...swipeUp}
+                >
                     {children}
                 </motion.div>
             </BaseModal>
@@ -50,4 +53,4 @@ export const Dialog = forwardRef<HTMLElement, SheetModalProps>(
     },
 )
 
-Dialog.displayName = COMPONENT_NAME
+SheetModal.displayName = NAME

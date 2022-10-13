@@ -2,8 +2,8 @@ import { useState, FormEvent } from 'react'
 
 import { createBrand } from '../service/brands.service'
 
-import { BaseInput } from './ui/inputs/BaseInput'
-import { Button } from './ui/Button'
+import { BaseInput } from '../src/shared/ui/inputs/BaseInput'
+import { Button } from '../src/shared/ui/Button'
 
 type Props = {
     onSuccess: () => void

@@ -8,8 +8,8 @@ import {
 } from '../service/brands.service'
 import { dateToString } from '../utils/dateToString'
 
-import { BaseInput } from './ui/inputs/BaseInput'
-import { Button } from './ui/Button'
+import { BaseInput } from '../src/shared/ui/inputs/BaseInput'
+import { Button } from '../src/shared/ui/Button'
 
 type formValuesType = {
     name?: string

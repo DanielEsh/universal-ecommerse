@@ -1,7 +1,7 @@
 import {
     createNextPageLink,
     createPreviousPageLink,
-} from '@/ui/Pagination/pagination.utils'
+} from '@/src/shared/ui/Pagination/pagination.utils'
 
 // export const prevNext = () => ({
 //     fn(middlewareArguments: any) {

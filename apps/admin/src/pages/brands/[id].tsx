@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next'
 import Link from 'next/link'
-import { Dialog } from '@/ui/Modal/Dialog'
+import { Dialog } from '@/src/shared/ui/Modal/Dialog'
 import { useState } from 'react'
 
 import {
@@ -11,7 +11,7 @@ import {
 
 import { BrandEditableForm } from '@/components/brands/BrandEditableForm'
 import { TimestampPresenter } from '@/components/TimestampPresenter'
-import { Button } from '@/ui/Button'
+import { Button } from '@/src/shared/ui/Button'
 
 type Props = {
     data: BrandType
