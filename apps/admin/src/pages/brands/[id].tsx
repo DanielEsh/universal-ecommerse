@@ -9,7 +9,7 @@ import {
     deleteBrand,
 } from '../../../service/brands.service'
 
-import { BrandEditableForm } from '@/components/brands/BrandEditableForm'
+import { BrandEditableForm } from '@/src/entities/brands/ui/BrandEditableForm'
 import { TimestampPresenter } from '@/components/TimestampPresenter'
 import { Button } from '@/src/shared/ui/Button'
 

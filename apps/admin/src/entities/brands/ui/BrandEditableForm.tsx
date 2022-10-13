@@ -1,7 +1,7 @@
 import { FormEvent } from 'react'
 import { BaseInput } from '@/src/shared/ui/inputs/BaseInput'
 
-import { BrandType } from '../../service/brands.service'
+import { BrandType } from '../../../../service/brands.service'
 
 type Props = {
     brandData: BrandType

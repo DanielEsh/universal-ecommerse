@@ -5,11 +5,11 @@ import {
     getBrandById,
     updateBrand,
     deleteBrand,
-} from '../service/brands.service'
-import { dateToString } from '../utils/dateToString'
+} from '../../../../service/brands.service'
+import { dateToString } from '../../../../utils/dateToString'
 
-import { BaseInput } from '../src/shared/ui/inputs/BaseInput'
-import { Button } from '../src/shared/ui/Button'
+import { BaseInput } from '../../../shared/ui/inputs/BaseInput'
+import { Button } from '../../../shared/ui/Button'
 
 type formValuesType = {
     name?: string

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { getAllBrands } from '../../../service/brands.service'
 import type { pageInfoType } from '@/src/shared/ui/Pagination/types'
 
-import { BrandsTable } from '@/components/BrandsTable'
+import { BrandsTable } from '@/src/entities/brands/ui/BrandsTable'
 
 type Props = {
     pageInfo: pageInfoType
