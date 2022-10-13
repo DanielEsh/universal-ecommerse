@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
-import { getAllBrands } from '../../service/brands.service'
+import { getAllBrands } from '../../../service/brands.service'
 import type { pageInfoType } from '@/ui/Pagination/types'
 
 import { BrandsTable } from '@/components/BrandsTable'

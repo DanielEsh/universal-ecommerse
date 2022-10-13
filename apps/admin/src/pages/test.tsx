@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { GetServerSideProps } from 'next'
-import { authUserRoute } from '../utils/authUserRoute'
+import { authUserRoute } from '../../utils/authUserRoute'
 import Head from 'next/head'
 
 const Test = () => {
@@ -9,12 +9,12 @@ const Test = () => {
         <div>
             <Head>
                 <title>Test</title>
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/public/favicon.ico" />
             </Head>
 
             <div>Test Page</div>
 
-            <Link href="/">
+            <Link href="/src/pages">
                 <a>to HOME</a>
             </Link>
         </div>

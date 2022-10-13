@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app'
 import { DefaultLayout } from '@/components/layouts/Default'
 
-import '../styles/globals.css'
+import '../app/globals.css'
 
 function MyApp({ Component, pageProps, router }: AppProps) {
     if (router.pathname.startsWith('/auth')) {

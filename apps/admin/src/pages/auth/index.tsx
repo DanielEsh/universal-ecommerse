@@ -1,5 +1,5 @@
-import { Logo } from '../../components/Logo'
-import { SignInForm } from '../../components/SignInForm'
+import { Logo } from '@/components/Logo'
+import { SignInForm } from '@/components/SignInForm'
 
 const Auth = () => {
     return (

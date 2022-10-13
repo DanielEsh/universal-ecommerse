@@ -7,11 +7,11 @@ import {
     BrandType,
     getBrandById,
     deleteBrand,
-} from '../../service/brands.service'
+} from '../../../service/brands.service'
 
 import { BrandEditableForm } from '@/components/brands/BrandEditableForm'
 import { TimestampPresenter } from '@/components/TimestampPresenter'
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/ui/Button'
 
 type Props = {
     data: BrandType
