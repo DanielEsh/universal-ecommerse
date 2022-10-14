@@ -3,7 +3,7 @@ import { BaseInput } from '../ui/inputs/BaseInput'
 import { InputPassword } from '../ui/inputs/InputPassword'
 import { Button } from '../ui/Button'
 
-import { signIn } from '../../../service/auth.service'
+import { signIn } from '../api/auth.service'
 
 export const SignInForm = () => {
     const [email, setEmail] = useState<string>('elon@gmail.com')

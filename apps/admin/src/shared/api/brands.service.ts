@@ -1,4 +1,4 @@
-import { $axios } from '../config/axios'
+import { $axios } from '../../../config/axios'
 import { api } from './api'
 
 export type BrandType = {

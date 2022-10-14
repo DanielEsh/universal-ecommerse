@@ -2,8 +2,8 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { GetServerSideProps } from 'next'
-import { authUserRoute } from '../../utils/authUserRoute'
-import { getUser } from '../../service/user.service'
+import { authUserRoute } from '../shared/utils/authUserRoute'
+import { getUser } from '../shared/api/user.service'
 
 const onButtonClick = async () => {
     const user = await getUser()

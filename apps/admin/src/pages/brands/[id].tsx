@@ -7,7 +7,7 @@ import {
     BrandType,
     getBrandById,
     deleteBrand,
-} from '../../../service/brands.service'
+} from '../../shared/api/brands.service'
 
 import { BrandEditableForm } from '@/src/entities/brands/components/BrandEditableForm'
 import { TimestampPresenter } from '@/src/shared/components/TimestampPresenter'

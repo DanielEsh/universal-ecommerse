@@ -1,8 +1,8 @@
 import { ReactNode, forwardRef, useRef } from 'react'
 const { motion } = require('framer-motion')
-import { useComposedRefs } from '../../../../utils/ui/compose-refs/composeRefs'
-import { useOnClickOutside } from '../../../../utils/ui/useClickOutside'
-import { useKeyPress } from '../../../../utils/ui/useKeyPress'
+import { useComposedRefs } from '../../utils/ui/compose-refs/composeRefs'
+import { useOnClickOutside } from '../../utils/ui/useClickOutside'
+import { useKeyPress } from '../../utils/ui/useKeyPress'
 import { BaseModal } from './BaseModal'
 
 export type SheetModalProps = {

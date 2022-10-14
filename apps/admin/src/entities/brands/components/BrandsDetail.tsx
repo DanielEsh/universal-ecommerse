@@ -5,8 +5,8 @@ import {
     getBrandById,
     updateBrand,
     deleteBrand,
-} from '../../../../service/brands.service'
-import { dateToString } from '../../../../utils/dateToString'
+} from '../../../shared/api/brands.service'
+import { dateToString } from '../../../shared/utils/dateToString'
 
 import { BaseInput } from '../../../shared/ui/inputs/BaseInput'
 import { Button } from '../../../shared/ui/Button'

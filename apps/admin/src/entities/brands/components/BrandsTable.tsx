@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { BrandType } from '../../../../service/brands.service'
+import { BrandType } from '../../../shared/api/brands.service'
 import { Button } from '../../../shared/ui/Button'
 import { Table } from '../../../shared/ui/Table'
 import { SheetModal } from '../../../shared/ui/Modal/SheetModal'

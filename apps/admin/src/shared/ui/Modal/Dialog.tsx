@@ -1,6 +1,6 @@
 import { ReactNode, forwardRef, useRef } from 'react'
 const { motion } = require('framer-motion')
-import { useComposedRefs } from '../../../../utils/ui/compose-refs/composeRefs'
+import { useComposedRefs } from '../../utils/ui/compose-refs/composeRefs'
 import { BaseModal } from './BaseModal'
 
 export type SheetModalProps = {

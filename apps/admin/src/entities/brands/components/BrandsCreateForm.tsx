@@ -1,6 +1,6 @@
 import { useState, FormEvent } from 'react'
 
-import { createBrand } from '../../../../service/brands.service'
+import { createBrand } from '../../../shared/api/brands.service'
 
 import { BaseInput } from '../../../shared/ui/inputs/BaseInput'
 import { Button } from '../../../shared/ui/Button'

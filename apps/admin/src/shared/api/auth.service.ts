@@ -1,5 +1,5 @@
 import Router from "next/router";
-import { $axios } from "../config/axios";
+import { $axios } from "../../../config/axios";
 import { api } from "./api";
 
 export async function signIn({ username, password }: any) {

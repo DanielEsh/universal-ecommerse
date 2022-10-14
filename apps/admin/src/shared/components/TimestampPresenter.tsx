@@ -1,5 +1,5 @@
 import React from 'react'
-import { dateToString } from 'utils/dateToString'
+import { dateToString } from 'src/shared/utils/dateToString'
 
 type Props = {
     label: string

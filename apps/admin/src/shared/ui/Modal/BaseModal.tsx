@@ -2,9 +2,9 @@ import { ReactNode, forwardRef, useRef, useEffect } from 'react'
 const { motion } = require('framer-motion')
 const { AnimatePresence } = require('framer-motion')
 import { Portal } from '../Portal'
-import { useOnClickOutside } from '../../../../utils/ui/useClickOutside'
-import { useKeyPress } from '../../../../utils/ui/useKeyPress'
-import { useLockedBody } from '../../../../utils/ui/useLockedBody'
+import { useOnClickOutside } from '../../utils/ui/useClickOutside'
+import { useKeyPress } from '../../utils/ui/useKeyPress'
+import { useLockedBody } from '../../utils/ui/useLockedBody'
 
 export type BaseModalProps = {
     children: ReactNode

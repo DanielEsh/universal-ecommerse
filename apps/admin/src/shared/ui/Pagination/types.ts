@@ -1,4 +1,4 @@
-import { BrandType } from '../../../../service/brands.service'
+import { BrandType } from '../../api/brands.service'
 
 export type pageInfoType = {
     items: BrandType[]
