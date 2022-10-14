@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { SideBar } from '@/components/Sidebar'
+import { SideBar } from '@/src/shared/components/Sidebar'
 import { Header } from '@/src/widgets/header/Header'
 
 type DefaultLayoutProps = {

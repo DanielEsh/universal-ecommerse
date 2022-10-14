@@ -5,7 +5,7 @@ import { BrandType } from '../../../../service/brands.service'
 import { Button } from '../../../shared/ui/Button'
 import { Table } from '../../../shared/ui/Table'
 import { SheetModal } from '../../../shared/ui/Modal/SheetModal'
-import { BrandsCreateForm } from '@/src/entities/brands/ui/BrandsCreateForm'
+import { BrandsCreateForm } from '@/src/entities/brands/components/BrandsCreateForm'
 import { Pagination } from '@/src/shared/ui/Pagination/Pagination'
 import { BaseInput } from '@/src/shared/ui/inputs/BaseInput'
 

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useTheme } from '../utils/theme/useTheme'
+import { useTheme } from '../../../utils/theme/useTheme'
 
 export const ThemeSwitcher = () => {
     const { theme, applyTheme } = useTheme()

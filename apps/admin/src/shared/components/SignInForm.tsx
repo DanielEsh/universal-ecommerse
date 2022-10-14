@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { BaseInput } from '../src/shared/ui/inputs/BaseInput'
-import { InputPassword } from '../src/shared/ui/inputs/InputPassword'
-import { Button } from '../src/shared/ui/Button'
+import { BaseInput } from '../ui/inputs/BaseInput'
+import { InputPassword } from '../ui/inputs/InputPassword'
+import { Button } from '../ui/Button'
 
-import { signIn } from '../service/auth.service'
+import { signIn } from '../../../service/auth.service'
 
 export const SignInForm = () => {
     const [email, setEmail] = useState<string>('elon@gmail.com')

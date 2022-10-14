@@ -1,6 +1,6 @@
 import { HeaderBreadcrumbs } from '@/src/widgets/header/HeaderBreadcrumbs'
 import { Switch } from '@/src/shared/ui/switch/Switch'
-import { ThemeSwitcher } from '@/components/ThemeSwitcher'
+import { ThemeSwitcher } from '@/src/shared/components/ThemeSwitcher'
 
 export const Header = () => {
     const handleChange = (value: boolean) => {

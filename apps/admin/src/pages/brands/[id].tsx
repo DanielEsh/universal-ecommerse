@@ -9,8 +9,8 @@ import {
     deleteBrand,
 } from '../../../service/brands.service'
 
-import { BrandEditableForm } from '@/src/entities/brands/ui/BrandEditableForm'
-import { TimestampPresenter } from '@/components/TimestampPresenter'
+import { BrandEditableForm } from '@/src/entities/brands/components/BrandEditableForm'
+import { TimestampPresenter } from '@/src/shared/components/TimestampPresenter'
 import { Button } from '@/src/shared/ui/Button'
 
 type Props = {
