@@ -21,7 +21,7 @@ module.exports = {
                     200: 'var(--secondary-200)',
                     100: 'var(--secondary-100)',
                 },
-            }
+            },
         },
     },
     plugins: [],

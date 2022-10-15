@@ -8,6 +8,8 @@ html {
     --primary-300: #ffe592;
     --primary-200: #ffedb3;
     --primary-100: #fff5d5;
+
+    --gray-100: #f3f4f6;
 }
 
 html.light {
