@@ -1,7 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
-import { GetServerSideProps } from 'next'
-import { authUserRoute } from '../shared/utils/authUserRoute'
 import Head from 'next/head'
 
 const Test = () => {
@@ -12,23 +9,26 @@ const Test = () => {
                 <link rel="icon" href="/public/favicon.ico" />
             </Head>
 
-            <div>Test Page</div>
+            <div className="flex">
+                <div className="flex flex-col">
+                    <div className="w-24 h-24 bg-primary-500"></div>
+                    <div className="w-24 h-24 bg-primary-400"></div>
+                    <div className="w-24 h-24 bg-primary-300"></div>
+                    <div className="w-24 h-24 bg-primary-200"></div>
+                    <div className="w-24 h-24 bg-primary-100"></div>
+                </div>
+                <div className="flex flex-col">
+                    <div className="w-24 h-24 bg-secondary-500"></div>
+                    <div className="w-24 h-24 bg-secondary-400"></div>
+                    <div className="w-24 h-24 bg-secondary-300"></div>
+                    <div className="w-24 h-24 bg-secondary-200"></div>
+                    <div className="w-24 h-24 bg-secondary-100"></div>
+                </div>
+            </div>
 
-            <Link href="/src/pages">
-                <a>to HOME</a>
-            </Link>
+            <div>Test Page</div>
         </div>
     )
 }
-
-export const getServerSideProps: GetServerSideProps = authUserRoute(
-    async (ctx) => {
-        return {
-            props: {
-                user: true,
-            },
-        }
-    },
-)
 
 export default Test

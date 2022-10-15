@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    --primary-500: #ffd54f;
+    --primary-400: #ffdd70;
+    --primary-300: #ffe592;
+    --primary-200: #ffedb3;
+    --primary-100: #fff5d5;
+}
+
+html.light {
+    --secondary-500: #1a1a1a;
+    --secondary-400: #282828;
+    --secondary-300: #3a3a3a;
+    --secondary-200: #484848;
+    --secondary-100: #636363;
+}
+
+html.dark {
+    --secondary-500: #1a1a1a;
+    --secondary-400: #282828;
+    --secondary-300: #3a3a3a;
+    --secondary-200: #484848;
+    --secondary-100: #636363;
+}
+
 .content {
     width: calc(100% - 280px);
 }
