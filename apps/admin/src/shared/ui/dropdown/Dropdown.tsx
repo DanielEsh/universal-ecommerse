@@ -1,14 +1,17 @@
 /**
- * <Dropdown.Provider>
- *     <Dropdown.Root>
- *       <Dropdown.Trigger />
- *       <Dropdown.Portal>
- *         <Dropdown.Content>
- *           <Dropdown.Arrow />
- *         </Dropdown.Content>
- *       </Dropdown.Portal>
- *     </Dropdown.Root>
- *   </Dropdown.Provider>
+ * <Dropdown>
+ *   <Dropdown.Trigger />
+ *   <Dropdown.Menu>
+ *      <Dropdown.Arrow />
+ *      <Dropdown.Title>Variants:</Dropdown.Title>
+ *      <Dropdown.Item key="new" disabled>New file</Dropdown.Item>
+ *      <Dropdown.Item key="copy">Copy link</Dropdown.Item>
+ *      <Dropdown.Item key="edit">Edit file</Dropdown.Item>
+ *      <Divider />
+ *      <Dropdown.Item key="delete">
+ *           Delete file
+ *      </Dropdown.Item>
+ *   </Dropdown.Menu>
  */
 import { forwardRef, ReactNode, useRef } from 'react'
 
