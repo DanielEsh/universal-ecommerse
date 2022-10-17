@@ -13,7 +13,8 @@
  *      </Dropdown.Item>
  *   </Dropdown.Menu>
  */
-import { forwardRef, ReactNode, useRef } from 'react'
+import { forwardRef, ReactNode, useState, useRef } from 'react'
+import { useFloating } from '@floating-ui/react-dom-interactions'
 
 export type DropdownProps = {}
 
@@ -21,7 +22,31 @@ const COMPONENT_NAME = 'Dropdown'
 
 export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
     (props, forwardedRef) => {
-        return <div>Dropdown</div>
+        const [open, setOpen] = useState(false)
+        const { x, y, reference, floating, strategy } = useFloating({
+            open,
+            onOpenChange: setOpen,
+            placement: 'top',
+        })
+
+        return (
+            <>
+                <button ref={reference} onClick={() => setOpen(!open)}>
+                    Dropdown
+                </button>
+                {open && (
+                    <div
+                        ref={floating}
+                        style={{
+                            position: strategy,
+                            top: y ?? 0,
+                            left: x ?? 0,
+                        }}>
+                        Tooltip
+                    </div>
+                )}
+            </>
+        )
     },
 )
 

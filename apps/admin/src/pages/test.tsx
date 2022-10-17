@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import { Dropdown } from '@/src/shared/ui/dropdown/Dropdown'
 
 const Test = () => {
     return (
@@ -27,6 +28,10 @@ const Test = () => {
             </div>
 
             <div>Test Page</div>
+
+            <div className="flex justify-center items-center">
+              <Dropdown />
+            </div>
         </div>
     )
 }
