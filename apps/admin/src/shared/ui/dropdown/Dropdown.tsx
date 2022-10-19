@@ -14,7 +14,8 @@
  *   </Dropdown.Menu>
  */
 import { forwardRef, ReactNode, useState, useRef } from 'react'
-import { useFloating } from '@floating-ui/react-dom-interactions'
+// import { useFloating, flip } from '@floating-ui/react-dom-interactions'
+import { usePopover } from '@/src/shared/ui/dropdown/usePopover'
 
 export type DropdownProps = {}
 
@@ -23,10 +24,17 @@ const COMPONENT_NAME = 'Dropdown'
 export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
     (props, forwardedRef) => {
         const [open, setOpen] = useState(false)
-        const { x, y, reference, floating, strategy } = useFloating({
-            open,
-            onOpenChange: setOpen,
-            placement: 'top',
+        // const { x, y, reference, floating, strategy } = useFloating({
+        //     open,
+        //     onOpenChange: setOpen,
+        //     placement: 'top',
+        //     middleware: [flip()],
+        // })
+
+        const { styles, reference, floating } = usePopover({
+            placement: 'right',
+            offset: { x: 5, y: 5 },
+            isVisible: open,
         })
 
         return (
@@ -35,13 +43,7 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
                     Dropdown
                 </button>
                 {open && (
-                    <div
-                        ref={floating}
-                        style={{
-                            position: strategy,
-                            top: y ?? 0,
-                            left: x ?? 0,
-                        }}>
+                    <div ref={floating} style={styles}>
                         Tooltip
                     </div>
                 )}
