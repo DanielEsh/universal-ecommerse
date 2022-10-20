@@ -1,5 +1,11 @@
 import { RefObject, useState, useEffect } from 'react'
-import { useFloating, flip, offset, Placement } from '@floating-ui/react-dom'
+import {
+    useFloating,
+    flip,
+    offset,
+    Placement,
+    autoUpdate,
+} from '@floating-ui/react-dom'
 // import {
 //     useFloating,
 //     flip,
@@ -22,6 +28,11 @@ export const usePopover = (options?: OptionsType) => {
     const [open, setOpen] = useState<boolean>(false)
     const { x, y, reference, floating, strategy } = useFloating({
         placement: options?.placement,
+        whileElementsMounted: (reference, floating, update) => {
+            return autoUpdate(reference, floating, update, {
+                animationFrame: true,
+            })
+        },
         middleware: [
             flip(),
             offset({
