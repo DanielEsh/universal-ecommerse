@@ -47,7 +47,6 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
     (props, forwardedRef) => {
         const { containerEl } = props
 
-        const [open, setOpen] = useState(false)
         // const { x, y, reference, floating, strategy } = useFloating({
         //     open,
         //     onOpenChange: setOpen,
@@ -55,15 +54,15 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
         //     middleware: [flip()],
         // })
 
-        const { styles, reference, floating } = usePopover({
-            placement: 'right',
-            offset: { x: 0, y: 5 },
-            isVisible: open,
-        })
+        const { open, onOpenChange, reference, floating, popoverStyles } =
+            usePopover({
+                placement: 'right',
+                offset: { x: 0, y: 5 },
+            })
 
         return (
             <>
-                <button ref={reference} onClick={() => setOpen(!open)}>
+                <button ref={reference} onClick={() => onOpenChange(!open)}>
                     Dropdown
                 </button>
                 {open && (
@@ -72,7 +71,7 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
                             <div
                                 ref={floating}
                                 className="bg-primary-500 py-2 px-5 rounded-md"
-                                style={styles}>
+                                style={popoverStyles}>
                                 Tooltip
                             </div>
                         </motion.div>
