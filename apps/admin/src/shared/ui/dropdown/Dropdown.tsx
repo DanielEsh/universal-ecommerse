@@ -17,12 +17,31 @@ import { forwardRef, ReactNode, useState, useRef } from 'react'
 // import { useFloating, flip } from '@floating-ui/react-dom-interactions'
 import { usePopover } from '@/src/shared/ui/dropdown/usePopover'
 import { Portal } from '@/src/shared/ui/Portal'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { motion } = require('framer-motion')
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { AnimatePresence } = require('framer-motion')
 
 export type DropdownProps = {
     containerEl?: HTMLElement
 }
 
 const COMPONENT_NAME = 'Dropdown'
+
+const fade = {
+    initial: {
+        opacity: 0,
+    },
+    animate: {
+        opacity: 1,
+        transition: {
+            duration: 0.3,
+        },
+    },
+    exit: {
+        opacity: 0,
+    },
+}
 
 export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
     (props, forwardedRef) => {
@@ -49,9 +68,14 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
                 </button>
                 {open && (
                     <Portal container={containerEl}>
-                        <div ref={floating} style={styles}>
-                            Tooltip
-                        </div>
+                        <motion.div variants={fade} {...fade}>
+                            <div
+                                ref={floating}
+                                className="bg-primary-500 py-2 px-5 rounded-md"
+                                style={styles}>
+                                Tooltip
+                            </div>
+                        </motion.div>
                     </Portal>
                 )}
             </>
