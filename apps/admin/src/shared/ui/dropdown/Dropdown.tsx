@@ -24,6 +24,7 @@ import { forwardRef, ReactNode, useState, useRef } from 'react'
 // import { useFloating, flip } from '@floating-ui/react-dom-interactions'
 import { usePopover } from '@/src/shared/ui/dropdown/usePopover'
 import { Portal } from '@/src/shared/ui/Portal'
+import { Menu } from '@/src/shared/ui/dropdown/Menu'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { motion } = require('framer-motion')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -87,10 +88,7 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
                                 ref={floating}
                                 className="bg-gray-300 py-2 px-5 rounded-md"
                                 style={popoverStyles}>
-                                <div>Item 1 Item 1</div>
-                                <div>Item 2 Item 2</div>
-                                <div>Item 3 Item 3</div>
-                                <div>Divider</div>
+                                <Menu />
                                 <div
                                     ref={arrowRef}
                                     className="arrow"

@@ -1,13 +1,31 @@
-import { forwardRef } from 'react'
+import { forwardRef, ReactNode } from 'react'
 
 export type Props = {}
 
-const COMPONENT_NAME = 'component'
+export type ItemProps = {
+    children: ReactNode
+}
 
-export const Component = forwardRef<HTMLElement, Props>(
-    (props, forwardedRef) => {
-        return <div>Component</div>
-    },
-)
+const COMPONENT_NAME = 'Menu'
 
-Component.displayName = 'Button'
+const MenuItem = ({ children }: ItemProps) => {
+    return <div>{children}</div>
+}
+
+const MenuGroup = ({ children }: ItemProps) => {
+    return <div>{children}</div>
+}
+
+export const Menu = forwardRef<HTMLElement, Props>((props, forwardedRef) => {
+    return (
+        <div>
+            <MenuGroup>Group name</MenuGroup>
+            <MenuItem>Item 1</MenuItem>
+            <MenuItem>Item 2</MenuItem>
+            <MenuItem>Item 3</MenuItem>
+            <MenuItem>Item 4</MenuItem>
+        </div>
+    )
+})
+
+Menu.displayName = 'Menu'
