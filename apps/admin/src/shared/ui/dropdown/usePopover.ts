@@ -41,6 +41,13 @@ export const usePopover = (options?: OptionsType) => {
         ],
     })
 
+    // const { x, y, reference, floating, strategy } = useFloating({
+    //     open,
+    //     onOpenChange: setOpen,
+    //     placement: 'top',
+    //     middleware: [flip()],
+    // })
+
     const styles = {
         position: strategy,
         top: y ?? '',

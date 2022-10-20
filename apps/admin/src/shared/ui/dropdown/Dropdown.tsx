@@ -16,13 +16,18 @@
 import { forwardRef, ReactNode, useState, useRef } from 'react'
 // import { useFloating, flip } from '@floating-ui/react-dom-interactions'
 import { usePopover } from '@/src/shared/ui/dropdown/usePopover'
+import { Portal } from '@/src/shared/ui/Portal'
 
-export type DropdownProps = {}
+export type DropdownProps = {
+    containerEl?: HTMLElement
+}
 
 const COMPONENT_NAME = 'Dropdown'
 
 export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
     (props, forwardedRef) => {
+        const { containerEl } = props
+
         const [open, setOpen] = useState(false)
         // const { x, y, reference, floating, strategy } = useFloating({
         //     open,
@@ -33,7 +38,7 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
 
         const { styles, reference, floating } = usePopover({
             placement: 'right',
-            offset: { x: 5, y: 5 },
+            offset: { x: 0, y: 5 },
             isVisible: open,
         })
 
@@ -43,9 +48,11 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
                     Dropdown
                 </button>
                 {open && (
-                    <div ref={floating} style={styles}>
-                        Tooltip
-                    </div>
+                    <Portal container={containerEl}>
+                        <div ref={floating} style={styles}>
+                            Tooltip
+                        </div>
+                    </Portal>
                 )}
             </>
         )
