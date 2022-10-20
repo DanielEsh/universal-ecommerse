@@ -12,6 +12,13 @@
  *           Delete file
  *      </Dropdown.Item>
  *   </Dropdown.Menu>
+ *
+ *   <Menu.Group>Category 1</Menu.Group>
+ *   <Menu.Item value={1}>Option 1</Menu.Item>
+ *   <Menu.Item value={2}>Option 2</Menu.Item>
+ *   <Menu.Group>Category 2</Menu.Group>
+ *   <Menu.Item value={3}>Option 3</Menu.Item>
+ *   <Menu.Item value={4}>Option 4</Menu.Item>
  */
 import { forwardRef, ReactNode, useState, useRef } from 'react'
 // import { useFloating, flip } from '@floating-ui/react-dom-interactions'
@@ -63,7 +70,7 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
             popoverStyles,
             arrowStyles,
         } = usePopover({
-            placement: 'left',
+            placement: 'bottom',
             arrow: arrowRef,
             offset: { x: 0, y: 10 },
         })
@@ -78,9 +85,12 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
                         <motion.div variants={fade} {...fade}>
                             <div
                                 ref={floating}
-                                className="bg-primary-500 py-2 px-5 rounded-md"
+                                className="bg-gray-300 py-2 px-5 rounded-md"
                                 style={popoverStyles}>
-                                Tooltip
+                                <div>Item 1 Item 1</div>
+                                <div>Item 2 Item 2</div>
+                                <div>Item 3 Item 3</div>
+                                <div>Divider</div>
                                 <div
                                     ref={arrowRef}
                                     className="arrow"
