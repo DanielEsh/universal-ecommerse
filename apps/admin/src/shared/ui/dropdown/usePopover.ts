@@ -1,10 +1,11 @@
-import { RefObject, useState, useEffect } from 'react'
+import { RefObject, useState, useRef } from 'react'
 import {
     useFloating,
     flip,
     offset,
     Placement,
     autoUpdate,
+    arrow,
 } from '@floating-ui/react-dom'
 // import {
 //     useFloating,
@@ -21,12 +22,20 @@ export type Offset = {
 export type OptionsType = {
     placement?: Placement
     offset: Offset
-    arrow?: RefObject<HTMLElement>
+    arrow?: any
 }
 
 export const usePopover = (options?: OptionsType) => {
     const [open, setOpen] = useState<boolean>(false)
-    const { x, y, reference, floating, strategy } = useFloating({
+
+    const {
+        x,
+        y,
+        reference,
+        floating,
+        strategy,
+        middlewareData: { arrow: { x: arrowX, y: arrowY, centerOffset } = {} },
+    } = useFloating({
         placement: options?.placement,
         whileElementsMounted: (reference, floating, update) => {
             return autoUpdate(reference, floating, update, {
@@ -39,6 +48,7 @@ export const usePopover = (options?: OptionsType) => {
                 mainAxis: options?.offset?.y,
                 crossAxis: options?.offset?.x,
             }),
+            arrow({ element: options?.arrow }),
         ],
     })
 
@@ -61,10 +71,26 @@ export const usePopover = (options?: OptionsType) => {
         left: x ?? '',
     }
 
-    // const arrowStyles = {
-    //     top: arrowY ?? '',
-    //     left: arrowX ?? '',
-    // }
+    console.log('ARROW', arrowX, arrowY, centerOffset)
+
+    const currentPlacement = options?.placement
+        ? options.placement.split('-')[0]
+        : ''
+
+    const staticSide: any = {
+        top: 'bottom',
+        right: 'left',
+        bottom: 'top',
+        left: 'right',
+    }[currentPlacement]
+
+    const arrowStyles = {
+        left: arrowX != null ? `${arrowX}px` : '',
+        top: arrowY != null ? `${arrowY}px` : '',
+        right: '',
+        bottom: '',
+        [staticSide]: '-4px',
+    }
 
     // useEffect(() => {
     //     if (!refs.reference.current || !refs.floating.current) return
@@ -89,6 +115,7 @@ export const usePopover = (options?: OptionsType) => {
         open,
         onOpenChange: setOpen,
         popoverStyles: styles,
+        arrowStyles,
         reference,
         floating,
     }

@@ -47,6 +47,7 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
     (props, forwardedRef) => {
         const { containerEl } = props
 
+        const arrowRef = useRef(null)
         // const { x, y, reference, floating, strategy } = useFloating({
         //     open,
         //     onOpenChange: setOpen,
@@ -54,11 +55,18 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
         //     middleware: [flip()],
         // })
 
-        const { open, onOpenChange, reference, floating, popoverStyles } =
-            usePopover({
-                placement: 'right',
-                offset: { x: 0, y: 5 },
-            })
+        const {
+            open,
+            onOpenChange,
+            reference,
+            floating,
+            popoverStyles,
+            arrowStyles,
+        } = usePopover({
+            placement: 'left',
+            arrow: arrowRef,
+            offset: { x: 0, y: 10 },
+        })
 
         return (
             <>
@@ -73,6 +81,11 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
                                 className="bg-primary-500 py-2 px-5 rounded-md"
                                 style={popoverStyles}>
                                 Tooltip
+                                <div
+                                    ref={arrowRef}
+                                    className="arrow"
+                                    style={arrowStyles}
+                                />
                             </div>
                         </motion.div>
                     </Portal>
