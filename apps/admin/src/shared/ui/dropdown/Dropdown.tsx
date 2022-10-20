@@ -86,7 +86,7 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
                         <motion.div variants={fade} {...fade}>
                             <div
                                 ref={floating}
-                                className="bg-gray-300 py-2 px-5 rounded-md"
+                                className="bg-gray-300 rounded-md"
                                 style={popoverStyles}>
                                 <Menu />
                                 <div
