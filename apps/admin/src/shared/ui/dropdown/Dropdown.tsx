@@ -25,6 +25,7 @@ import { forwardRef, ReactNode, useState, useRef } from 'react'
 import { usePopover } from '@/src/shared/ui/dropdown/usePopover'
 import { Portal } from '@/src/shared/ui/Portal'
 import { Menu } from '@/src/shared/ui/dropdown/Menu'
+import { Divider } from '@/src/shared/ui/Divider/Divider'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { motion } = require('framer-motion')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -85,7 +86,15 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
                     <Portal container={containerEl}>
                         <motion.div variants={fade} {...fade}>
                             <div ref={floating} style={popoverStyles}>
-                                <Menu />
+                                <Menu>
+                                    <Menu.Group>User</Menu.Group>
+                                    <Menu.Item>User Name</Menu.Item>
+                                    <Divider />
+                                    <Menu.Group>Actions</Menu.Group>
+                                    <Menu.Item>Delete</Menu.Item>
+                                    <Menu.Item>Edit</Menu.Item>
+                                    <Menu.Item>Create</Menu.Item>
+                                </Menu>
                                 <div
                                     ref={arrowRef}
                                     className="arrow"

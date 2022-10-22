@@ -10,4 +10,4 @@ export const Component = forwardRef<HTMLElement, Props>(
     },
 )
 
-Component.displayName = 'Button'
+Component.displayName = COMPONENT_NAME
