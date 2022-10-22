@@ -21,7 +21,7 @@
  *   <Menu.Item value={4}>Option 4</Menu.Item>
  */
 import { forwardRef, ReactNode, useState, useRef } from 'react'
-// import { useFloating, flip } from '@floating-ui/react-dom-interactions'
+import type { Placement } from '@floating-ui/react-dom-interactions'
 import { usePopover } from '@/src/shared/ui/dropdown/usePopover'
 import { Portal } from '@/src/shared/ui/Portal'
 import { Menu } from '@/src/shared/ui/dropdown/Menu'
@@ -33,6 +33,10 @@ const { AnimatePresence } = require('framer-motion')
 
 export type DropdownProps = {
     containerEl?: HTMLElement
+    placement?: Placement
+    offsetX?: number
+    offsetY?: number
+    withArrow?: boolean
 }
 
 const COMPONENT_NAME = 'Dropdown'
@@ -54,7 +58,13 @@ const fade = {
 
 export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
     (props, forwardedRef) => {
-        const { containerEl } = props
+        const {
+            containerEl,
+            placement = 'bottom',
+            offsetX = 0,
+            offsetY = 10,
+            withArrow = true,
+        } = props
 
         const arrowRef = useRef(null)
         // const { x, y, reference, floating, strategy } = useFloating({
@@ -72,9 +82,9 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
             popoverStyles,
             arrowStyles,
         } = usePopover({
-            placement: 'bottom',
+            placement: placement,
             arrow: arrowRef,
-            offset: { x: 0, y: 10 },
+            offset: { x: offsetX, y: offsetY },
         })
 
         return (
@@ -95,11 +105,13 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
                                     <Menu.Item>Edit</Menu.Item>
                                     <Menu.Item>Create</Menu.Item>
                                 </Menu>
-                                <div
-                                    ref={arrowRef}
-                                    className="arrow"
-                                    style={arrowStyles}
-                                />
+                                {withArrow && (
+                                    <div
+                                        ref={arrowRef}
+                                        className="arrow"
+                                        style={arrowStyles}
+                                    />
+                                )}
                             </div>
                         </motion.div>
                     </Portal>
