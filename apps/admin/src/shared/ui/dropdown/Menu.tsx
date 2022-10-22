@@ -9,41 +9,24 @@ export type ItemProps = {
 const COMPONENT_NAME = 'Menu'
 
 const MenuItem = ({ children }: ItemProps) => {
-    return <div className="py-1 px-3 hover:bg-gray-500">{children}</div>
+    return <div className="py-1 px-3 hover:bg-blue-500">{children}</div>
 }
 
 const MenuGroup = ({ children }: ItemProps) => {
-    return <div className="py-1  px-3 hover:bg-gray-500">{children}</div>
+    return <div className="py-1 px-3 hover:bg-blue-500">{children}</div>
 }
-
-const MENU_ITEMS = [
-    {
-        label: 'User:',
-        items: [
-            {
-                label: 'User Name',
-            },
-        ],
-    },
-]
 
 export const Menu = forwardRef<HTMLElement, Props>((props, forwardedRef) => {
     return (
-        <div>
+        <div className="relative bg-white rounded-md shadow-md z-10">
             <MenuGroup>User:</MenuGroup>
             <MenuItem>User Name</MenuItem>
-            <hr className="border-red-500" />
+            <hr className="border-gray-300" />
             <MenuGroup>Actions</MenuGroup>
             <MenuItem>Edit </MenuItem>
             <MenuItem>Copy</MenuItem>
             <MenuItem>Save</MenuItem>
             <MenuItem>Delete</MenuItem>
-            <hr className="border-red-500" />
-            <MenuGroup>Group name</MenuGroup>
-            <MenuItem>Item 1</MenuItem>
-            <MenuItem>Item 2</MenuItem>
-            <MenuItem>Item 3</MenuItem>
-            <MenuItem>Item 4</MenuItem>
         </div>
     )
 })

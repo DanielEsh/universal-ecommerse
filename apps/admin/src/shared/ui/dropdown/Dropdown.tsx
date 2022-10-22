@@ -84,10 +84,7 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
                 {open && (
                     <Portal container={containerEl}>
                         <motion.div variants={fade} {...fade}>
-                            <div
-                                ref={floating}
-                                className="bg-gray-300 rounded-md"
-                                style={popoverStyles}>
+                            <div ref={floating} style={popoverStyles}>
                                 <Menu />
                                 <div
                                     ref={arrowRef}
