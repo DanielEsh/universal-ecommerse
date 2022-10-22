@@ -1,4 +1,5 @@
 import { forwardRef, ReactNode } from 'react'
+import { Divider } from '@/src/shared/ui/Divider/Divider'
 
 export type Props = {}
 
@@ -21,7 +22,7 @@ export const Menu = forwardRef<HTMLElement, Props>((props, forwardedRef) => {
         <div className="relative bg-white rounded-md shadow-md z-10">
             <MenuGroup>User:</MenuGroup>
             <MenuItem>User Name</MenuItem>
-            <hr className="border-gray-300" />
+            <Divider />
             <MenuGroup>Actions</MenuGroup>
             <MenuItem>Edit </MenuItem>
             <MenuItem>Copy</MenuItem>
