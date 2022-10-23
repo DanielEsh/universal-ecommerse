@@ -31,17 +31,3 @@ html.dark {
 .content {
     width: calc(100% - 280px);
 }
-
-.test {
-    z-index: -1;
-}
-
-.arrow {
-    @apply bg-white shadow-md;
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    /*right: 90%;*/
-    z-index: 0;
-    transform: rotate(45deg);
-}
