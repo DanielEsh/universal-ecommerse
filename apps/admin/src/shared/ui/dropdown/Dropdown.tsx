@@ -20,7 +20,7 @@
  *   <Menu.Item value={3}>Option 3</Menu.Item>
  *   <Menu.Item value={4}>Option 4</Menu.Item>
  */
-import { forwardRef, ReactNode, useState, useRef } from 'react'
+import { forwardRef, ReactNode, useRef } from 'react'
 import type { Placement } from '@floating-ui/react-dom-interactions'
 import { usePopover } from '@/src/shared/ui/dropdown/usePopover'
 import { Portal } from '@/src/shared/ui/Portal'
@@ -68,7 +68,7 @@ export const Dropdown = forwardRef<any, DropdownProps>(
             withArrow = true,
         } = props
 
-        const menuRef = useRef<any>(null)
+        const dropdownRef = useRef<any>(null)
         const arrowRef = useRef<any>(null)
 
         const {
@@ -84,10 +84,10 @@ export const Dropdown = forwardRef<any, DropdownProps>(
             offset: { x: offsetX, y: offsetY },
         })
 
-        useOnClickOutside(menuRef, () => onOpenChange(false))
+        useOnClickOutside(dropdownRef, () => onOpenChange(false))
 
         return (
-            <>
+            <div ref={dropdownRef}>
                 <button
                     ref={composeRefs(forwardedRef, reference)}
                     onClick={() => onOpenChange(!open)}>
@@ -96,9 +96,7 @@ export const Dropdown = forwardRef<any, DropdownProps>(
                 {open && (
                     <Portal container={containerEl}>
                         <motion.div variants={fade} {...fade}>
-                            <div
-                                ref={composeRefs(menuRef, floating)}
-                                style={popoverStyles}>
+                            <div ref={floating} style={popoverStyles}>
                                 <Menu>
                                     <Menu.Group>User</Menu.Group>
                                     <Menu.Item>User Name</Menu.Item>
@@ -119,7 +117,7 @@ export const Dropdown = forwardRef<any, DropdownProps>(
                         </motion.div>
                     </Portal>
                 )}
-            </>
+            </div>
         )
     },
 )
