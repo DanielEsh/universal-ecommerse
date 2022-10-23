@@ -30,6 +30,7 @@ import { Divider } from '@/src/shared/ui/Divider/Divider'
 const { motion } = require('framer-motion')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { AnimatePresence } = require('framer-motion')
+import { composeRefs } from '@/src/shared/utils/ui/compose-refs/composeRefs'
 
 export type DropdownProps = {
     containerEl?: HTMLElement
@@ -56,7 +57,7 @@ const fade = {
     },
 }
 
-export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
+export const Dropdown = forwardRef<any, DropdownProps>(
     (props, forwardedRef) => {
         const {
             containerEl,
@@ -67,12 +68,6 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
         } = props
 
         const arrowRef = useRef(null)
-        // const { x, y, reference, floating, strategy } = useFloating({
-        //     open,
-        //     onOpenChange: setOpen,
-        //     placement: 'top',
-        //     middleware: [flip()],
-        // })
 
         const {
             open,
@@ -89,7 +84,9 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
 
         return (
             <>
-                <button ref={reference} onClick={() => onOpenChange(!open)}>
+                <button
+                    ref={composeRefs(forwardedRef, reference)}
+                    onClick={() => onOpenChange(!open)}>
                     Dropdown
                 </button>
                 {open && (
