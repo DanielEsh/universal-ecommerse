@@ -30,7 +30,7 @@ const Test = () => {
             <div>Test Page</div>
 
             <div className="flex justify-center items-center">
-                <Dropdown clickable={false} />
+                <Dropdown />
             </div>
 
             <div className="h-[1000px]"></div>

@@ -32,6 +32,8 @@ const { motion } = require('framer-motion')
 const { AnimatePresence } = require('framer-motion')
 import { composeRefs } from '@/src/shared/utils/ui/compose-refs/composeRefs'
 import { useOnClickOutside } from '@/src/shared/utils/ui/useClickOutside'
+import { DropdownContext } from '@/src/shared/ui/dropdown/DropdownContext'
+import { DropdownArrow } from '@/src/shared/ui/dropdown/DropdownArrow'
 
 type PopoverOffset = {
     x?: number
@@ -147,43 +149,50 @@ export const Dropdown = forwardRef<any, DropdownProps>(
             hidePopover()
         }
 
+        const context: DropdownContext = {
+            color: 'primary',
+            popoverStyles: popoverStyles,
+            arrowStyles: arrowStyles,
+        }
+
         return (
             <div ref={dropdownRef}>
-                <button
-                    ref={composeRefs(forwardedRef, reference)}
-                    onClick={handleReferenceClick}
-                    onMouseEnter={handleReferenceMouseEnter}
-                    onMouseLeave={handleReferenceMouseLeave}>
-                    Dropdown
-                </button>
-                {open && (
-                    <Portal container={containerEl}>
-                        <motion.div variants={fade} {...fade}>
-                            <div
-                                ref={floating}
-                                style={popoverStyles}
-                                onMouseEnter={handleFloatingEnter}
-                                onMouseLeave={handleFloatingLeave}>
-                                <Menu>
-                                    <Menu.Group>User</Menu.Group>
-                                    <Menu.Item>User Name</Menu.Item>
-                                    <Divider />
-                                    <Menu.Group>Actions</Menu.Group>
-                                    <Menu.Item>Delete</Menu.Item>
-                                    <Menu.Item>Edit</Menu.Item>
-                                    <Menu.Item>Create</Menu.Item>
-                                </Menu>
-                                {withArrow && (
+                <DropdownContext.Provider value={context}>
+                    <>
+                        <button
+                            ref={composeRefs(forwardedRef, reference)}
+                            onClick={handleReferenceClick}
+                            onMouseEnter={handleReferenceMouseEnter}
+                            onMouseLeave={handleReferenceMouseLeave}>
+                            Dropdown
+                        </button>
+
+                        {open && (
+                            <Portal container={containerEl}>
+                                <motion.div variants={fade} {...fade}>
                                     <div
-                                        ref={arrowRef}
-                                        className="arrow"
-                                        style={arrowStyles}
-                                    />
-                                )}
-                            </div>
-                        </motion.div>
-                    </Portal>
-                )}
+                                        ref={floating}
+                                        style={popoverStyles}
+                                        onMouseEnter={handleFloatingEnter}
+                                        onMouseLeave={handleFloatingLeave}>
+                                        <Menu>
+                                            <Menu.Group>User</Menu.Group>
+                                            <Menu.Item>User Name</Menu.Item>
+                                            <Divider />
+                                            <Menu.Group>Actions</Menu.Group>
+                                            <Menu.Item>Delete</Menu.Item>
+                                            <Menu.Item>Edit</Menu.Item>
+                                            <Menu.Item>Create</Menu.Item>
+                                        </Menu>
+                                        {withArrow && (
+                                            <DropdownArrow ref={arrowRef} />
+                                        )}
+                                    </div>
+                                </motion.div>
+                            </Portal>
+                        )}
+                    </>
+                </DropdownContext.Provider>
             </div>
         )
     },
