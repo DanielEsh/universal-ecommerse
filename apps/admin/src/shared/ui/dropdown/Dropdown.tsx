@@ -20,7 +20,7 @@
  *   <Menu.Item value={3}>Option 3</Menu.Item>
  *   <Menu.Item value={4}>Option 4</Menu.Item>
  */
-import { forwardRef, ReactNode, useRef } from 'react'
+import { forwardRef, ReactNode, useState, useRef } from 'react'
 import type { Placement } from '@floating-ui/react-dom-interactions'
 import { usePopover } from '@/src/shared/ui/dropdown/usePopover'
 import { Portal } from '@/src/shared/ui/Portal'
@@ -33,12 +33,23 @@ const { AnimatePresence } = require('framer-motion')
 import { composeRefs } from '@/src/shared/utils/ui/compose-refs/composeRefs'
 import { useOnClickOutside } from '@/src/shared/utils/ui/useClickOutside'
 
+type PopoverOffset = {
+    x?: number
+    y?: number
+}
+
+type PopoverDelay = {
+    enter?: number
+    leave?: number
+}
+
 export type DropdownProps = {
     containerEl?: HTMLElement
     placement?: Placement
-    offsetX?: number
-    offsetY?: number
+    offset?: PopoverOffset
+    delay?: PopoverDelay
     withArrow?: boolean
+    clickable?: boolean
 }
 
 const COMPONENT_NAME = 'Dropdown'
@@ -63,13 +74,19 @@ export const Dropdown = forwardRef<any, DropdownProps>(
         const {
             containerEl,
             placement = 'bottom',
-            offsetX = 0,
-            offsetY = 10,
+            offset = { x: 0, y: 10 },
+            delay = { enter: 300, leave: 300 },
             withArrow = true,
+            clickable = true,
         } = props
+
+        const { enter: enterDelay, leave: leaveDelay } = delay
+
+        const [timeout, setCloseTimout] = useState<any>(null)
 
         const dropdownRef = useRef<any>(null)
         const arrowRef = useRef<any>(null)
+        let activeElement: any
 
         const {
             open,
@@ -81,22 +98,72 @@ export const Dropdown = forwardRef<any, DropdownProps>(
         } = usePopover({
             placement: placement,
             arrow: arrowRef,
-            offset: { x: offsetX, y: offsetY },
+            offset,
         })
 
         useOnClickOutside(dropdownRef, () => onOpenChange(false))
+
+        const showPopover = () => {
+            if (document.activeElement) activeElement = document.activeElement
+
+            setTimeout(() => {
+                onOpenChange(true)
+            }, enterDelay)
+        }
+
+        const hidePopover = () => {
+            const timeout = setTimeout(() => {
+                onOpenChange(false)
+                if (activeElement) activeElement.focus()
+            }, leaveDelay)
+            setCloseTimout(timeout)
+        }
+
+        const handleReferenceClick = () => {
+            if (clickable) {
+                showPopover()
+            }
+        }
+
+        const handleReferenceMouseEnter = () => {
+            if (!clickable) {
+                showPopover()
+            }
+        }
+
+        const handleReferenceMouseLeave = () => {
+            if (!clickable) {
+                hidePopover()
+            }
+        }
+
+        const handleFloatingEnter = () => {
+            if (clickable) return
+            clearTimeout(timeout)
+        }
+
+        const handleFloatingLeave = () => {
+            if (clickable) return
+            hidePopover()
+        }
 
         return (
             <div ref={dropdownRef}>
                 <button
                     ref={composeRefs(forwardedRef, reference)}
-                    onClick={() => onOpenChange(!open)}>
+                    onClick={handleReferenceClick}
+                    onMouseEnter={handleReferenceMouseEnter}
+                    onMouseLeave={handleReferenceMouseLeave}>
                     Dropdown
                 </button>
                 {open && (
                     <Portal container={containerEl}>
                         <motion.div variants={fade} {...fade}>
-                            <div ref={floating} style={popoverStyles}>
+                            <div
+                                ref={floating}
+                                style={popoverStyles}
+                                onMouseEnter={handleFloatingEnter}
+                                onMouseLeave={handleFloatingLeave}>
                                 <Menu>
                                     <Menu.Group>User</Menu.Group>
                                     <Menu.Item>User Name</Menu.Item>
