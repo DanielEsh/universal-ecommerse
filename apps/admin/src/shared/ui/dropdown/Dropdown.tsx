@@ -34,6 +34,7 @@ import { composeRefs } from '@/src/shared/utils/ui/compose-refs/composeRefs'
 import { useOnClickOutside } from '@/src/shared/utils/ui/useClickOutside'
 import { DropdownContext } from '@/src/shared/ui/dropdown/DropdownContext'
 import { DropdownArrow } from '@/src/shared/ui/dropdown/DropdownArrow'
+import { DropdownTrigger } from '@/src/shared/ui/dropdown/DropdownTrigger'
 
 type PopoverOffset = {
     x?: number
@@ -77,7 +78,7 @@ export const Dropdown = forwardRef<any, DropdownProps>(
             containerEl,
             placement = 'bottom',
             offset = { x: 0, y: 10 },
-            delay = { enter: 300, leave: 300 },
+            delay = { enter: 0, leave: 300 },
             withArrow = true,
             clickable = true,
         } = props
@@ -121,24 +122,6 @@ export const Dropdown = forwardRef<any, DropdownProps>(
             setCloseTimout(timeout)
         }
 
-        const handleReferenceClick = () => {
-            if (clickable) {
-                showPopover()
-            }
-        }
-
-        const handleReferenceMouseEnter = () => {
-            if (!clickable) {
-                showPopover()
-            }
-        }
-
-        const handleReferenceMouseLeave = () => {
-            if (!clickable) {
-                hidePopover()
-            }
-        }
-
         const handleFloatingEnter = () => {
             if (clickable) return
             clearTimeout(timeout)
@@ -150,22 +133,23 @@ export const Dropdown = forwardRef<any, DropdownProps>(
         }
 
         const context: DropdownContext = {
+            open,
             color: 'primary',
             popoverStyles: popoverStyles,
             arrowStyles: arrowStyles,
+            isClickable: clickable,
+            hidePopover,
+            showPopover,
         }
 
         return (
             <div ref={dropdownRef}>
                 <DropdownContext.Provider value={context}>
                     <>
-                        <button
-                            ref={composeRefs(forwardedRef, reference)}
-                            onClick={handleReferenceClick}
-                            onMouseEnter={handleReferenceMouseEnter}
-                            onMouseLeave={handleReferenceMouseLeave}>
+                        <DropdownTrigger
+                            ref={composeRefs(forwardedRef, reference)}>
                             Dropdown
-                        </button>
+                        </DropdownTrigger>
 
                         {open && (
                             <Portal container={containerEl}>
