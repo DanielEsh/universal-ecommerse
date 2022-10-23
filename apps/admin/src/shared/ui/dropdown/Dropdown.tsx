@@ -31,6 +31,7 @@ const { motion } = require('framer-motion')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { AnimatePresence } = require('framer-motion')
 import { composeRefs } from '@/src/shared/utils/ui/compose-refs/composeRefs'
+import { useOnClickOutside } from '@/src/shared/utils/ui/useClickOutside'
 
 export type DropdownProps = {
     containerEl?: HTMLElement
@@ -67,7 +68,8 @@ export const Dropdown = forwardRef<any, DropdownProps>(
             withArrow = true,
         } = props
 
-        const arrowRef = useRef(null)
+        const menuRef = useRef<any>(null)
+        const arrowRef = useRef<any>(null)
 
         const {
             open,
@@ -82,6 +84,8 @@ export const Dropdown = forwardRef<any, DropdownProps>(
             offset: { x: offsetX, y: offsetY },
         })
 
+        useOnClickOutside(menuRef, () => onOpenChange(false))
+
         return (
             <>
                 <button
@@ -92,7 +96,9 @@ export const Dropdown = forwardRef<any, DropdownProps>(
                 {open && (
                     <Portal container={containerEl}>
                         <motion.div variants={fade} {...fade}>
-                            <div ref={floating} style={popoverStyles}>
+                            <div
+                                ref={composeRefs(menuRef, floating)}
+                                style={popoverStyles}>
                                 <Menu>
                                     <Menu.Group>User</Menu.Group>
                                     <Menu.Item>User Name</Menu.Item>
