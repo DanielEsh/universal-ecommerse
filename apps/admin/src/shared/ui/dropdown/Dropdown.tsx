@@ -26,15 +26,12 @@ import { usePopover } from '@/src/shared/ui/dropdown/usePopover'
 import { Portal } from '@/src/shared/ui/Portal'
 import { Menu } from '@/src/shared/ui/dropdown/Menu'
 import { Divider } from '@/src/shared/ui/Divider/Divider'
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { motion } = require('framer-motion')
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { AnimatePresence } = require('framer-motion')
 import { composeRefs } from '@/src/shared/utils/ui/compose-refs/composeRefs'
 import { useOnClickOutside } from '@/src/shared/utils/ui/useClickOutside'
 import { DropdownContext } from '@/src/shared/ui/dropdown/DropdownContext'
 import { DropdownArrow } from '@/src/shared/ui/dropdown/DropdownArrow'
 import { DropdownTrigger } from '@/src/shared/ui/dropdown/DropdownTrigger'
+import { DropdownContent } from '@/src/shared/ui/dropdown/DropdownContent'
 
 type PopoverOffset = {
     x?: number
@@ -56,21 +53,6 @@ export type DropdownProps = {
 }
 
 const COMPONENT_NAME = 'Dropdown'
-
-const fade = {
-    initial: {
-        opacity: 0,
-    },
-    animate: {
-        opacity: 1,
-        transition: {
-            duration: 0.3,
-        },
-    },
-    exit: {
-        opacity: 0,
-    },
-}
 
 export const Dropdown = forwardRef<any, DropdownProps>(
     (props, forwardedRef) => {
@@ -153,26 +135,24 @@ export const Dropdown = forwardRef<any, DropdownProps>(
 
                         {open && (
                             <Portal container={containerEl}>
-                                <motion.div variants={fade} {...fade}>
-                                    <div
-                                        ref={floating}
-                                        style={popoverStyles}
-                                        onMouseEnter={handleFloatingEnter}
-                                        onMouseLeave={handleFloatingLeave}>
-                                        <Menu>
-                                            <Menu.Group>User</Menu.Group>
-                                            <Menu.Item>User Name</Menu.Item>
-                                            <Divider />
-                                            <Menu.Group>Actions</Menu.Group>
-                                            <Menu.Item>Delete</Menu.Item>
-                                            <Menu.Item>Edit</Menu.Item>
-                                            <Menu.Item>Create</Menu.Item>
-                                        </Menu>
-                                        {withArrow && (
-                                            <DropdownArrow ref={arrowRef} />
-                                        )}
-                                    </div>
-                                </motion.div>
+                                <DropdownContent
+                                    ref={floating}
+                                    onMouseEnter={handleFloatingEnter}
+                                    onMouseLeave={handleFloatingLeave}>
+                                    <Menu>
+                                        <Menu.Group>User</Menu.Group>
+                                        <Menu.Item>User Name</Menu.Item>
+                                        <Divider />
+                                        <Menu.Group>Actions</Menu.Group>
+                                        <Menu.Item>Delete</Menu.Item>
+                                        <Menu.Item>Edit</Menu.Item>
+                                        <Menu.Item>Create</Menu.Item>
+                                    </Menu>
+
+                                    {withArrow && (
+                                        <DropdownArrow ref={arrowRef} />
+                                    )}
+                                </DropdownContent>
                             </Portal>
                         )}
                     </>
