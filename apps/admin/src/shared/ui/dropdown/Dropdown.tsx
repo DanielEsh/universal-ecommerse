@@ -1,25 +1,3 @@
-/**
- * <Dropdown>
- *   <Dropdown.Trigger />
- *   <Dropdown.Menu>
- *      <Dropdown.Arrow />
- *      <Dropdown.Title>Variants:</Dropdown.Title>
- *      <Dropdown.Item key="new" disabled>New file</Dropdown.Item>
- *      <Dropdown.Item key="copy">Copy link</Dropdown.Item>
- *      <Dropdown.Item key="edit">Edit file</Dropdown.Item>
- *      <Divider />
- *      <Dropdown.Item key="delete">
- *           Delete file
- *      </Dropdown.Item>
- *   </Dropdown.Menu>
- *
- *   <Menu.Group>Category 1</Menu.Group>
- *   <Menu.Item value={1}>Option 1</Menu.Item>
- *   <Menu.Item value={2}>Option 2</Menu.Item>
- *   <Menu.Group>Category 2</Menu.Group>
- *   <Menu.Item value={3}>Option 3</Menu.Item>
- *   <Menu.Item value={4}>Option 4</Menu.Item>
- */
 import { forwardRef, ReactNode, useState, useRef } from 'react'
 import type { Placement } from '@floating-ui/react-dom-interactions'
 import { usePopover } from '@/src/shared/ui/dropdown/usePopover'
