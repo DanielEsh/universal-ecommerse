@@ -98,25 +98,23 @@ export const Dropdown = forwardRef<any, DropdownProps>(
             popoverStyles: popoverStyles,
             arrowStyles: arrowStyles,
             isClickable: clickable,
+            referenceRef: reference,
+            floatingRef: floating,
             hidePopover,
             showPopover,
+            handleFloatingEnter,
+            handleFloatingLeave,
         }
 
         return (
             <div ref={dropdownRef}>
                 <DropdownContext.Provider value={context}>
                     <>
-                        <DropdownTrigger
-                            ref={composeRefs(forwardedRef, reference)}>
-                            Dropdown
-                        </DropdownTrigger>
+                        <DropdownTrigger>Dropdown</DropdownTrigger>
 
                         {open && (
                             <Portal container={containerEl}>
-                                <DropdownContent
-                                    ref={floating}
-                                    onMouseEnter={handleFloatingEnter}
-                                    onMouseLeave={handleFloatingLeave}>
+                                <DropdownContent>
                                     <Menu>
                                         <Menu.Group>User</Menu.Group>
                                         <Menu.Item>User Name</Menu.Item>

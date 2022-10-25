@@ -1,5 +1,6 @@
 import { forwardRef, ReactNode, useContext } from 'react'
 import { DropdownContext } from '@/src/shared/ui/dropdown/DropdownContext'
+import { composeRefs } from '@/src/shared/utils/ui/compose-refs/composeRefs'
 
 export type Props = {
     children: ReactNode
@@ -11,7 +12,7 @@ export const DropdownTrigger = forwardRef<HTMLButtonElement, Props>(
     (props, forwardedRef) => {
         const { children } = props
 
-        const { isClickable, showPopover, hidePopover } =
+        const { isClickable, showPopover, hidePopover, referenceRef } =
             useContext(DropdownContext)
 
         const handleClick = () => {
@@ -33,7 +34,7 @@ export const DropdownTrigger = forwardRef<HTMLButtonElement, Props>(
         }
         return (
             <button
-                ref={forwardedRef}
+                ref={composeRefs(referenceRef, forwardedRef)}
                 onClick={handleClick}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}>

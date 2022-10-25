@@ -1,12 +1,16 @@
-import { createContext, type CSSProperties } from 'react'
+import { createContext, type CSSProperties, } from 'react'
 
 export type DropdownContext = {
     open: boolean
     color: string
     popoverStyles: CSSProperties
     arrowStyles: CSSProperties
+    referenceRef?: any
+    floatingRef?: any
     hidePopover?: () => void
     showPopover?: () => void
+    handleFloatingEnter?: () => void
+    handleFloatingLeave?: () => void
     isClickable: boolean
 }
 

@@ -5,6 +5,8 @@ const { motion } = require('framer-motion')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { AnimatePresence } = require('framer-motion')
 
+import { composeRefs } from '@/src/shared/utils/ui/compose-refs/composeRefs'
+
 export type Props = {
     children: ReactNode
     onMouseEnter?: () => void
@@ -32,15 +34,15 @@ export const DropdownContent = forwardRef<HTMLDivElement, Props>(
     (props, forwardedRef) => {
         const { children, onMouseEnter, onMouseLeave } = props
 
-        const { popoverStyles } = useContext(DropdownContext)
+        const { popoverStyles, floatingRef, handleFloatingEnter, handleFloatingLeave } = useContext(DropdownContext)
 
         return (
             <motion.div variants={fade} {...fade}>
                 <div
-                    ref={forwardedRef}
+                    ref={composeRefs(floatingRef, forwardedRef)}
                     style={popoverStyles}
-                    onMouseEnter={onMouseEnter}
-                    onMouseLeave={onMouseLeave}>
+                    onMouseEnter={handleFloatingEnter}
+                    onMouseLeave={handleFloatingLeave}>
                     {children}
                 </div>
             </motion.div>
