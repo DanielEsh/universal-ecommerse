@@ -26,10 +26,7 @@ const renderColors = () => {
                         <div>{color}</div>
                         {Object.keys(colors[color]).map((colorNumber) => {
                             return (
-                                <div
-                                    className={
-                                        'bg-' + color + '-' + colorNumber
-                                    }>
+                                <div style={{background: colors[color][colorNumber]}} >
                                     {colorNumber} : {colors[color][colorNumber]}
                                 </div>
                             )

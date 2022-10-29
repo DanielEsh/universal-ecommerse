@@ -15,11 +15,6 @@ const Test = () => {
 
             <div className="flex p-2 bg-white">
                 <div className="flex flex-col">
-                    <div className="w-24 h-24 bg-primary-500"></div>
-                    <div className="w-24 h-24 bg-primary-400"></div>
-                    <div className="w-24 h-24 bg-primary-300"></div>
-                    <div className="w-24 h-24 bg-primary-200"></div>
-                    <div className="w-24 h-24 bg-primary-100"></div>
                 </div>
                 <div className="flex flex-col">
                     <div className="w-24 h-24 bg-secondary-500"></div>
