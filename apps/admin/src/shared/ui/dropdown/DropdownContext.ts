@@ -3,6 +3,7 @@ import { createContext, type CSSProperties, } from 'react'
 export type DropdownContext = {
     open: boolean
     color: string
+    containerEl: HTMLElement | undefined
     popoverStyles: CSSProperties
     withArrow: boolean
     arrowStyles: CSSProperties
@@ -20,6 +21,7 @@ const COMPONENT_NAME = 'DropdownContext'
 
 export const DropdownContext = createContext<DropdownContext>({
     open: false,
+    containerEl: undefined,
     color: 'primary',
     popoverStyles: {},
     withArrow: true,

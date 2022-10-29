@@ -7,6 +7,7 @@ const { AnimatePresence } = require('framer-motion')
 import { DropdownArrow } from '@/src/shared/ui/dropdown/DropdownArrow'
 
 import { composeRefs } from '@/src/shared/utils/ui/compose-refs/composeRefs'
+import { Portal } from '@/src/shared/ui/Portal'
 
 export type Props = {
     children: ReactNode
@@ -42,21 +43,25 @@ export const DropdownContent = forwardRef<HTMLDivElement, Props>(
             handleFloatingLeave,
             withArrow,
             arrowRef,
+            containerEl,
+            open,
         } = useContext(DropdownContext)
 
-        return (
-            <motion.div variants={fade} {...fade}>
-                <div
-                    ref={composeRefs(floatingRef, forwardedRef)}
-                    style={popoverStyles}
-                    onMouseEnter={handleFloatingEnter}
-                    onMouseLeave={handleFloatingLeave}>
-                    {children}
+        return open ? (
+            <Portal container={containerEl}>
+                <motion.div variants={fade} {...fade}>
+                    <div
+                        ref={composeRefs(floatingRef, forwardedRef)}
+                        style={popoverStyles}
+                        onMouseEnter={handleFloatingEnter}
+                        onMouseLeave={handleFloatingLeave}>
+                        {children}
 
-                    {withArrow && <DropdownArrow ref={arrowRef} />}
-                </div>
-            </motion.div>
-        )
+                        {withArrow && <DropdownArrow ref={arrowRef} />}
+                    </div>
+                </motion.div>
+            </Portal>
+        ) : null
     },
 )
 

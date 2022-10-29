@@ -114,21 +114,17 @@ export const Dropdown = forwardRef<any, DropdownProps>(
                     <>
                         <DropdownTrigger>Dropdown</DropdownTrigger>
 
-                        {open && (
-                            <Portal container={containerEl}>
-                                <DropdownContent>
-                                    <Menu>
-                                        <Menu.Group>User</Menu.Group>
-                                        <Menu.Item>User Name</Menu.Item>
-                                        <Divider />
-                                        <Menu.Group>Actions</Menu.Group>
-                                        <Menu.Item>Delete</Menu.Item>
-                                        <Menu.Item>Edit</Menu.Item>
-                                        <Menu.Item>Create</Menu.Item>
-                                    </Menu>
-                                </DropdownContent>
-                            </Portal>
-                        )}
+                        <DropdownContent>
+                            <Menu>
+                                <Menu.Group>User</Menu.Group>
+                                <Menu.Item>User Name</Menu.Item>
+                                <Divider />
+                                <Menu.Group>Actions</Menu.Group>
+                                <Menu.Item>Delete</Menu.Item>
+                                <Menu.Item>Edit</Menu.Item>
+                                <Menu.Item>Create</Menu.Item>
+                            </Menu>
+                        </DropdownContent>
                     </>
                 </DropdownContext.Provider>
             </div>
