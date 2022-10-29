@@ -12,7 +12,7 @@ const Test = () => {
                 <link rel="icon" href="/public/favicon.ico" />
             </Head>
 
-            <div className="flex">
+            <div className="flex p-2 bg-white">
                 <div className="flex flex-col">
                     <div className="w-24 h-24 bg-primary-500"></div>
                     <div className="w-24 h-24 bg-primary-400"></div>
@@ -26,6 +26,27 @@ const Test = () => {
                     <div className="w-24 h-24 bg-secondary-300"></div>
                     <div className="w-24 h-24 bg-secondary-200"></div>
                     <div className="w-24 h-24 bg-secondary-100"></div>
+                </div>
+                <div className="flex flex-col">
+                    <div className="w-24 h-24 bg-highlight-500"></div>
+                    <div className="w-24 h-24 bg-highlight-400"></div>
+                    <div className="w-24 h-24 bg-highlight-300"></div>
+                    <div className="w-24 h-24 bg-highlight-200"></div>
+                    <div className="w-24 h-24 bg-highlight-100"></div>
+                </div>
+                <div className="flex flex-col">
+                    <div className="w-24 h-24 bg-surface-500"></div>
+                    <div className="w-24 h-24 bg-surface-400"></div>
+                    <div className="w-24 h-24 bg-surface-300"></div>
+                    <div className="w-24 h-24 bg-surface-200"></div>
+                    <div className="w-24 h-24 bg-surface-100"></div>
+                </div>
+                <div className="flex flex-col">
+                    <div className="w-24 h-24 bg-link-500"></div>
+                    <div className="w-24 h-24 bg-link-400"></div>
+                    <div className="w-24 h-24 bg-link-300"></div>
+                    <div className="w-24 h-24 bg-link-200"></div>
+                    <div className="w-24 h-24 bg-link-100"></div>
                 </div>
             </div>
 
