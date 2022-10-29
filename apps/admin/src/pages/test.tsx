@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { Dropdown } from '@/src/shared/ui/dropdown/Dropdown'
 import { Menu } from '@/src/shared/ui/dropdown/Menu'
 import { Divider } from '@/src/shared/ui/Divider/Divider'
+import { Colors } from '@/src/shared/ui/Colors'
 
 const Test = () => {
     return (
@@ -14,11 +15,7 @@ const Test = () => {
 
             <div className="flex p-2 bg-white">
                 <div className="flex flex-col">
-                    <div className="w-24 h-24 bg-primary-500"></div>
-                    <div className="w-24 h-24 bg-primary-400"></div>
-                    <div className="w-24 h-24 bg-primary-300"></div>
-                    <div className="w-24 h-24 bg-primary-200"></div>
-                    <div className="w-24 h-24 bg-primary-100"></div>
+
                 </div>
                 <div className="flex flex-col">
                     <div className="w-24 h-24 bg-secondary-500"></div>
@@ -71,6 +68,7 @@ const Test = () => {
                 </div>
             </div>
 
+            <Colors />
             <div>Test Page</div>
 
             <div className="flex justify-center items-center">
