@@ -1,10 +1,19 @@
-import { forwardRef, ReactNode, useState, useRef } from 'react'
+import {
+    forwardRef,
+    ReactNode,
+    useState,
+    useRef,
+    MutableRefObject,
+} from 'react'
 import type { Placement } from '@floating-ui/react-dom-interactions'
 import { usePopover } from '@/src/shared/ui/dropdown/usePopover'
 import { Portal } from '@/src/shared/ui/Portal'
 import { Menu } from '@/src/shared/ui/dropdown/Menu'
 import { Divider } from '@/src/shared/ui/Divider/Divider'
-import { composeRefs } from '@/src/shared/utils/ui/compose-refs/composeRefs'
+import {
+    composeRefs,
+    useComposedRefs,
+} from '@/src/shared/utils/ui/compose-refs/composeRefs'
 import { useOnClickOutside } from '@/src/shared/utils/ui/useClickOutside'
 import { DropdownContext } from '@/src/shared/ui/dropdown/DropdownContext'
 import { DropdownArrow } from '@/src/shared/ui/dropdown/DropdownArrow'
@@ -47,7 +56,6 @@ export const Dropdown = forwardRef<any, DropdownProps>(
 
         const [timeout, setCloseTimout] = useState<any>(null)
 
-        const dropdownRef = useRef<any>(null)
         const arrowRef = useRef<any>(null)
         let activeElement: any
 
@@ -64,13 +72,11 @@ export const Dropdown = forwardRef<any, DropdownProps>(
             offset,
         })
 
-        useOnClickOutside(dropdownRef, () => onOpenChange(false))
-
         const showPopover = () => {
             if (document.activeElement) activeElement = document.activeElement
 
             setTimeout(() => {
-                onOpenChange(true)
+                onOpenChange(!open)
             }, enterDelay)
         }
 
@@ -95,6 +101,7 @@ export const Dropdown = forwardRef<any, DropdownProps>(
         const context: DropdownContext = {
             open,
             color: 'primary',
+            containerEl: containerEl,
             popoverStyles: popoverStyles,
             withArrow: withArrow,
             arrowRef: arrowRef,
@@ -109,25 +116,21 @@ export const Dropdown = forwardRef<any, DropdownProps>(
         }
 
         return (
-            <div ref={dropdownRef}>
-                <DropdownContext.Provider value={context}>
-                    <>
-                        <DropdownTrigger>Dropdown</DropdownTrigger>
+            <DropdownContext.Provider value={context}>
+                <DropdownTrigger>Dropdown</DropdownTrigger>
 
-                        <DropdownContent>
-                            <Menu>
-                                <Menu.Group>User</Menu.Group>
-                                <Menu.Item>User Name</Menu.Item>
-                                <Divider />
-                                <Menu.Group>Actions</Menu.Group>
-                                <Menu.Item>Delete</Menu.Item>
-                                <Menu.Item>Edit</Menu.Item>
-                                <Menu.Item>Create</Menu.Item>
-                            </Menu>
-                        </DropdownContent>
-                    </>
-                </DropdownContext.Provider>
-            </div>
+                <DropdownContent>
+                    <Menu>
+                        <Menu.Group>User</Menu.Group>
+                        <Menu.Item>User Name</Menu.Item>
+                        <Divider />
+                        <Menu.Group>Actions</Menu.Group>
+                        <Menu.Item>Delete</Menu.Item>
+                        <Menu.Item>Edit</Menu.Item>
+                        <Menu.Item>Create</Menu.Item>
+                    </Menu>
+                </DropdownContent>
+            </DropdownContext.Provider>
         )
     },
 )
