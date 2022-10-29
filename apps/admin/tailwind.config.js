@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
     darkMode: 'class',
     content: [
@@ -41,6 +43,27 @@ module.exports = {
                     300: 'var(--brand-300)',
                     200: 'var(--brand-200)',
                     100: 'var(--brand-100)',
+                },
+                success: {
+                    500: 'var(--success-500)',
+                    400: 'var(--success-400)',
+                    300: 'var(--success-300)',
+                    200: 'var(--success-200)',
+                    100: 'var(--success-100)',
+                },
+                error: {
+                    500: 'var(--error-500)',
+                    400: 'var(--error-400)',
+                    300: 'var(--error-300)',
+                    200: 'var(--error-200)',
+                    100: 'var(--error-100)',
+                },
+                warning: {
+                    500: 'var(--warning-500)',
+                    400: 'var(--warning-400)',
+                    300: 'var(--warning-300)',
+                    200: 'var(--warning-200)',
+                    100: 'var(--warning-100)',
                 },
                 link: {
                     500: 'var(--link-500)',

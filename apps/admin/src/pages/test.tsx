@@ -42,6 +42,27 @@ const Test = () => {
                     <div className="w-24 h-24 bg-surface-100"></div>
                 </div>
                 <div className="flex flex-col">
+                    <div className="w-24 h-24 bg-success-500"></div>
+                    <div className="w-24 h-24 bg-success-400"></div>
+                    <div className="w-24 h-24 bg-success-300"></div>
+                    <div className="w-24 h-24 bg-success-200"></div>
+                    <div className="w-24 h-24 bg-success-100"></div>
+                </div>
+                <div className="flex flex-col">
+                    <div className="w-24 h-24 bg-error-500"></div>
+                    <div className="w-24 h-24 bg-error-400"></div>
+                    <div className="w-24 h-24 bg-error-300"></div>
+                    <div className="w-24 h-24 bg-error-200"></div>
+                    <div className="w-24 h-24 bg-error-100"></div>
+                </div>
+                <div className="flex flex-col">
+                    <div className="w-24 h-24 bg-warning-500"></div>
+                    <div className="w-24 h-24 bg-warning-400"></div>
+                    <div className="w-24 h-24 bg-warning-300"></div>
+                    <div className="w-24 h-24 bg-warning-200"></div>
+                    <div className="w-24 h-24 bg-warning-100"></div>
+                </div>
+                <div className="flex flex-col">
                     <div className="w-24 h-24 bg-link-500"></div>
                     <div className="w-24 h-24 bg-link-400"></div>
                     <div className="w-24 h-24 bg-link-300"></div>

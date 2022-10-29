@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 html {
+    /*
+        Root colors
+    */
     --primary-500: #ffd54f;
     --primary-400: #ffdd70;
     --primary-300: #ffe592;
@@ -27,17 +30,43 @@ html {
     --surface-200: #e5e7eb;
     --surface-100: #f3f4f6;
 
+    /*
+        Static colors
+    */
+
     --brand-500: #ffd54f;
     --brand-400: #ffdd70;
     --brand-300: #ffe592;
     --brand-200: #ffedb3;
     --brand-100: #fff5d5;
 
+    /*
+        Utilities colors
+    */
+
     --link-500: #3b82f6;
     --link-400: #60a5fa;
     --link-300: #93c5fd;
     --link-200: #bfdbfe;
     --link-100: #dbeafe;
+
+    --success-500: #22c55e;
+    --success-400: #4ade80;
+    --success-300: #86efac;
+    --success-200: #bbf7d0;
+    --success-100: #dcfce7;
+
+    --error-500: #ef4444;
+    --error-400: #f87171;
+    --error-300: #fca5a5;
+    --error-200: #fecaca;
+    --error-100: #fee2e2;
+
+    --warning-500: #f59e0b;
+    --warning-400: #fbbf24;
+    --warning-300: #fcd34d;
+    --warning-200: #fde68a;
+    --warning-100: #fef3c7;
 
     --gray-100: #f3f4f6;
 }
