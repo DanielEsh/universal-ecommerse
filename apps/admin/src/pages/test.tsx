@@ -1,6 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
 import { Dropdown } from '@/src/shared/ui/dropdown/Dropdown'
+import { Menu } from '@/src/shared/ui/dropdown/Menu'
+import { Divider } from '@/src/shared/ui/Divider/Divider'
 
 const Test = () => {
     return (
@@ -30,7 +32,21 @@ const Test = () => {
             <div>Test Page</div>
 
             <div className="flex justify-center items-center">
-                <Dropdown />
+                <Dropdown>
+                    <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+
+                    <Dropdown.Content>
+                        <Menu>
+                            <Menu.Group>User</Menu.Group>
+                            <Menu.Item>User Name</Menu.Item>
+                            <Divider />
+                            <Menu.Group>Actions</Menu.Group>
+                            <Menu.Item>Delete</Menu.Item>
+                            <Menu.Item>Edit</Menu.Item>
+                            <Menu.Item>Create</Menu.Item>
+                        </Menu>
+                    </Dropdown.Content>
+                </Dropdown>
             </div>
 
             <div className="h-[1000px]"></div>
