@@ -1,7 +1,9 @@
 import { forwardRef, ReactNode } from 'react'
+import { clsx } from 'clsx'
 
 export type Props = {
     children: ReactNode
+    className?: string
 }
 
 const COMPONENT_NAME = 'Menu'
@@ -17,11 +19,14 @@ const MenuItem = ({ children }: Props) => {
 }
 
 export const MenuRoot = forwardRef<HTMLDivElement, Props>(
-    ({ children }, forwardedRef) => {
+    ({ children, className }, forwardedRef) => {
+        const classes = clsx(
+            className,
+            'relative bg-white rounded-md shadow-md z-10 overflow-hidden',
+        )
+
         return (
-            <div
-                ref={forwardedRef}
-                className="relative bg-white rounded-md shadow-md z-10 overflow-hidden">
+            <div ref={forwardedRef} className={classes}>
                 {children}
             </div>
         )
