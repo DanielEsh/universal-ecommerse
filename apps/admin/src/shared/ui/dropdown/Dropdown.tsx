@@ -96,6 +96,8 @@ export const Dropdown = forwardRef<any, DropdownProps>(
             open,
             color: 'primary',
             popoverStyles: popoverStyles,
+            withArrow: withArrow,
+            arrowRef: arrowRef,
             arrowStyles: arrowStyles,
             isClickable: clickable,
             referenceRef: reference,
@@ -124,10 +126,6 @@ export const Dropdown = forwardRef<any, DropdownProps>(
                                         <Menu.Item>Edit</Menu.Item>
                                         <Menu.Item>Create</Menu.Item>
                                     </Menu>
-
-                                    {withArrow && (
-                                        <DropdownArrow ref={arrowRef} />
-                                    )}
                                 </DropdownContent>
                             </Portal>
                         )}

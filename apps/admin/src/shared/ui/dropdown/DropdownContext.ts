@@ -4,7 +4,9 @@ export type DropdownContext = {
     open: boolean
     color: string
     popoverStyles: CSSProperties
+    withArrow: boolean
     arrowStyles: CSSProperties
+    arrowRef?: any
     referenceRef?: any
     floatingRef?: any
     hidePopover?: () => void
@@ -20,6 +22,7 @@ export const DropdownContext = createContext<DropdownContext>({
     open: false,
     color: 'primary',
     popoverStyles: {},
+    withArrow: true,
     arrowStyles: {},
     isClickable: true,
 })

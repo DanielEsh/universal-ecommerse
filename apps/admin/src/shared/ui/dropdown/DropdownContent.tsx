@@ -4,6 +4,7 @@ import { DropdownContext } from '@/src/shared/ui/dropdown/DropdownContext'
 const { motion } = require('framer-motion')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { AnimatePresence } = require('framer-motion')
+import { DropdownArrow } from '@/src/shared/ui/dropdown/DropdownArrow'
 
 import { composeRefs } from '@/src/shared/utils/ui/compose-refs/composeRefs'
 
@@ -34,7 +35,14 @@ export const DropdownContent = forwardRef<HTMLDivElement, Props>(
     (props, forwardedRef) => {
         const { children, onMouseEnter, onMouseLeave } = props
 
-        const { popoverStyles, floatingRef, handleFloatingEnter, handleFloatingLeave } = useContext(DropdownContext)
+        const {
+            popoverStyles,
+            floatingRef,
+            handleFloatingEnter,
+            handleFloatingLeave,
+            withArrow,
+            arrowRef,
+        } = useContext(DropdownContext)
 
         return (
             <motion.div variants={fade} {...fade}>
@@ -44,6 +52,8 @@ export const DropdownContent = forwardRef<HTMLDivElement, Props>(
                     onMouseEnter={handleFloatingEnter}
                     onMouseLeave={handleFloatingLeave}>
                     {children}
+
+                    {withArrow && <DropdownArrow ref={arrowRef} />}
                 </div>
             </motion.div>
         )
