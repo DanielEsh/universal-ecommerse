@@ -21,7 +21,7 @@ const BreadcrumbsRoot = (props: BreadcrumbsRootPropsType) => {
 
     return (
         <BreadcrumbsContext.Provider value={context}>
-            <nav className="bg-grey-light rounded-md w-full">
+            <nav className="bg-grey-light rounded-md">
                 <ol className="list-reset flex items-center gap-3">{children}</ol>
             </nav>
         </BreadcrumbsContext.Provider>
