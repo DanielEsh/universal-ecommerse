@@ -11,17 +11,19 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body>
-        <Sidebar />
-        <div>GLOBAL LAYOUT</div>
-        <div className="p-6 bg-stone-900 text-white">
-            {children}
-        </div>
-        <footer>
-            <div>
-                footer
+        <div className="flex">
+            <Sidebar />
+
+            <div className="content">
+                <header className="fixed w-full h-[64px] bg-green-400">
+                    HEADER
+                </header>
+
+                <div className="mt-[64px] p-6 bg-stone-900 text-white">
+                    {children}
+                </div>
             </div>
-            <Link href="/">To Home</Link>
-        </footer>
+        </div>
       </body>
     </html>
   )

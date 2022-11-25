@@ -1,9 +1,6 @@
 export const Sidebar = () => {
     return (
-        <div className="sidebar open h-full">
-            <div className="toggle">
-                T
-            </div>
+        <div className="sidebar open fixed h-screen bg-blue-500">
 
             <div className="logo">
                 LOGO
