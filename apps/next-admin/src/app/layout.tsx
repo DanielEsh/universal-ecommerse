@@ -1,5 +1,4 @@
 import './globals.css'
-import Link from "next/link";
 import { Sidebar } from "../components/sidebar/sidebar";
 
 export default function RootLayout({
