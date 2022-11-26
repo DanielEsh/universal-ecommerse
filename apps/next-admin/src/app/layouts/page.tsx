@@ -1,10 +1,12 @@
-import { Button } from 'ui';
+'use client'
 
 export default function Layout() {
+
     return (
         <div>
-            <Button />
-            LAYOUT PAGE
+            <div>
+                Layout page
+            </div>
         </div>
     )
 }

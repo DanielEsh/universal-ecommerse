@@ -15,6 +15,12 @@ export default async function LayoutsLayput({ children }: Props) {
                 </div>
             </div>
 
+            <Link
+                href='/layouts/modal'
+            >
+                Open modal
+            </Link>
+
             <div>{children}</div>
         </div>
     );
