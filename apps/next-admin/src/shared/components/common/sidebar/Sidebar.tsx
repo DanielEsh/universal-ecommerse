@@ -1,11 +1,12 @@
-import { SidebarList } from "@/src/components/common/sidebar/SidebarList";
-import { SidebarList as SidebarListType } from "@/src/components/common/sidebar/types";
+import { SidebarList } from "@/src/shared/components/common/sidebar/SidebarList";
+import { SidebarList as SidebarListType } from "@/src/shared/components/common/sidebar/types";
 
 const list: SidebarListType[] = [
     {
         title: 'Supports',
         items: [
             {
+                icon: 'chart',
                 label: 'Dashboard',
             },
             {

@@ -1,4 +1,5 @@
 export type SidebarListItem = {
+    icon?: string
     label: string
 }
 
