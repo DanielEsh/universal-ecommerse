@@ -1,11 +1,12 @@
-import { FC, ReactElement, useState, useEffect } from 'react'
+import { ReactElement, useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 
-import { canUseDom } from '../../utils/ui/canUseDom'
+import { canUseDOM } from '../../utils/canUseDOM'
 
 const DEFAULT_APP_INSTANCE_ID = 'app'
 
-const app = canUseDom()
+
+const app = canUseDOM()
     ? document.getElementById(DEFAULT_APP_INSTANCE_ID)
     : null
 
@@ -14,13 +15,16 @@ export type PortalProps = {
     container?: HTMLElement
 }
 
-export const Portal: FC<PortalProps> = (props) => {
+export const Portal = (props: PortalProps) => {
     const { children, container } = props
-    const [node, setNode] = useState<HTMLElement | null>(app)
+    const [portalNode, setPortalNode] = useState<HTMLElement | null>(null)
 
     useEffect(() => {
-        if (container) setNode(container)
+        const app = document.getElementById(DEFAULT_APP_INSTANCE_ID)
+        setPortalNode(app)
+
+        if (container) setPortalNode(app)
     }, [container])
 
-    return node ? createPortal(children, node) : null
+    return portalNode ? createPortal(children, portalNode) : null
 }
