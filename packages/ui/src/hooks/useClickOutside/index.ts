@@ -1,4 +1,4 @@
-import {useClickOutside} from "@/src/hooks/useClickOutside/useClickOutside";
+import {useClickOutside} from "./useClickOutside";
 
 export {
     useClickOutside

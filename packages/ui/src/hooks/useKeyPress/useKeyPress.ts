@@ -1,4 +1,4 @@
-import { useEventListener } from '@/src/hooks/useEventListener'
+import { useEventListener } from '../useEventListener'
 
 export type KeyPredicate = (event: KeyboardEvent) => boolean
 export type KeyFilter = null | undefined | string | string[] | KeyPredicate

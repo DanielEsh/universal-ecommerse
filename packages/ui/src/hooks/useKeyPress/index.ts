@@ -1,4 +1,4 @@
-import { useKeyPress } from "@/src/hooks/useKeyPress/useKeyPress";
+import { useKeyPress } from "./useKeyPress";
 
 export {
     useKeyPress

@@ -1,8 +1,7 @@
-import {ReactNode, forwardRef, useRef, MutableRefObject} from 'react'
-import { Portal } from '@/src/components/portal'
-import { useKeyPress } from "@/src/hooks/useKeyPress";
-import { useClickOutside } from "@/src/hooks/useClickOutside";
-import {useOnClickOutside} from "admin/src/shared/utils/ui/useClickOutside";
+import {ReactNode, forwardRef, useRef} from 'react'
+import { Portal } from '../portal'
+import { useKeyPress } from "../../hooks/useKeyPress";
+import { useClickOutside } from "../../hooks/useClickOutside";
 
 export type BaseModalProps = {
     children: ReactNode
@@ -17,8 +16,8 @@ export const BaseModal = forwardRef<HTMLElement, BaseModalProps>(
     (props, forwardedRef) => {
         const { children, containerEl, isOpen, onExit } = props
 
-        const defaultRef = useRef<any>(null)
-        const childrenRef = useRef(null)
+        const defaultRef = useRef<HTMLDivElement | null>(null)
+        const childrenRef = useRef<HTMLDivElement | null>(null)
 
         const Close = () => {
             if (!isOpen) return
@@ -26,7 +25,7 @@ export const BaseModal = forwardRef<HTMLElement, BaseModalProps>(
             if (onExit) onExit()
         }
 
-        useOnClickOutside(childrenRef, () => Close())
+        useClickOutside(childrenRef, () => Close())
 
         useKeyPress('Escape', Close)
 

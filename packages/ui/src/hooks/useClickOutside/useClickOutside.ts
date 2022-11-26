@@ -1,10 +1,10 @@
 import {MutableRefObject} from 'react'
 
-import { useEventListener } from '@/src/hooks/useEventListener'
+import { useEventListener } from '../useEventListener'
 
 type Handler = (event: MouseEvent) => void;
 
-export function useClickOutside<T extends HTMLElement = HTMLElement>(
+export function useClickOutside<T extends HTMLElement | null = HTMLElement | null>(
     ref: MutableRefObject<T>,
     handler: Handler,
     mouseEvent: 'mousedown' | 'mouseup' = 'mousedown',
