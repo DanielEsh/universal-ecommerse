@@ -1,11 +1,11 @@
 'use client'
-import { getCurrentUser } from "@/src/shared/api/user";
+import { useFetchCurrentUser } from "@/src/shared/api/user/queries";
 
 export const TestPage = () => {
+    const { isLoading, data } = useFetchCurrentUser()
 
-    const handleFetch = async () => {
-        const {data} = await getCurrentUser();
-        console.log('DATA', data);
+    const handleFetch = () => {
+        console.log('data', data);
     }
 
     return (

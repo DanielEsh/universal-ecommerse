@@ -1,5 +1,6 @@
 import { $axios } from '@/src/shared/lib/axios'
 
 export const getCurrentUser = async () => {
-    return await $axios.get('/test');
+    const {data} =  await $axios.get('/test');
+    return data
 }
