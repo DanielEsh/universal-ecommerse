@@ -10,9 +10,29 @@ export const TestPage = () => {
 
     return (
         <div>
-            Test component
-
+            <div>
+                Test component
+            </div>
             <button onClick={handleFetch}>fetch</button>
+
+            {
+                isLoading && (
+                    <div>
+                        isLoading
+                    </div>
+                )
+            }
+
+            {
+                data?.map((item) => (
+                    <div key={item.id} className="flex gap-3">
+                        <div>{item.id}</div>
+                        <div>{item.name}</div>
+                        <div>{item.description}</div>
+                    </div>
+                ))
+            }
+
         </div>
     )
 }

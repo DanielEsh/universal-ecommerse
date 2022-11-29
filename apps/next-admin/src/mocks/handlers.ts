@@ -3,12 +3,33 @@ import { rest } from 'msw'
 export const handlers = [
     rest.get('https://my.backend/book', (_req, res, ctx) => {
         return res(
-            ctx.json({
-                title: 'Lord of the Rings',
-                imageUrl: '/book-cover.jpg',
-                description:
-                    'The Lord of the Rings is an epic high-fantasy novel written by English author and scholar J. R. R. Tolkien.',
-            })
+            ctx.json([
+                {
+                    "id": 1,
+                    "name": "test1",
+                    "description": "description1"
+                },
+                {
+                    "id": 2,
+                    "name": "test2",
+                    "description": "description2"
+                },
+                {
+                    "id": 3,
+                    "name": "test3",
+                    "description": "description3"
+                },
+                {
+                    "id": 4,
+                    "name": "test3",
+                    "description": "description3"
+                },
+                {
+                    "id": 5,
+                    "name": "test4",
+                    "description": "description4"
+                }
+            ])
         )
     }),
     rest.get('/reviews', (_req, res, ctx) => {

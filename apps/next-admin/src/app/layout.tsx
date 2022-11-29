@@ -1,6 +1,6 @@
 import './globals.css'
 import { Sidebar } from "@/src/shared/components/common/sidebar/Sidebar";
-import { ReactQueryWrapper } from "@/src/app/ReactQueryWrapper";
+import { App } from "@/src/app/App";
 
 export default function RootLayout({
   children,
@@ -11,7 +11,7 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body>
-        <ReactQueryWrapper>
+        <App>
             <div className="flex">
                 <Sidebar />
 
@@ -25,7 +25,7 @@ export default function RootLayout({
                     </div>
                 </div>
             </div>
-        </ReactQueryWrapper>
+        </App>
 
         <div id="app" />
       </body>
