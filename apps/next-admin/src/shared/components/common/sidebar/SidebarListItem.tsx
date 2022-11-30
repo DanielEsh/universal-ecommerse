@@ -7,8 +7,8 @@ type SidebarListItemProps = {
 
 export const SidebarListItem = ({ label, icon }: SidebarListItemProps) => {
   return (
-    <li className="flex justify-start items-center gap-2 mx-4 my-2 rounded text-black">
-      {icon && <Icon name={icon} className="w-6 h-6" />}
+    <li className="mx-4 my-2 flex items-center justify-start gap-2 rounded text-black">
+      {icon && <Icon name={icon} className="h-6 w-6" />}
       <span>{label}</span>
     </li>
   )

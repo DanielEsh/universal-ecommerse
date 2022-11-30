@@ -16,7 +16,7 @@ export default function ModalPage() {
         setModal(false)
         router.push('/layouts')
       }}>
-      <div className="absolute top-1/2 left-1/2 -translate-1/2 h-28 bg-white rounded">
+      <div className="-translate-1/2 absolute top-1/2 left-1/2 h-28 rounded bg-white">
         Modal
         <button
           onClick={() => {
