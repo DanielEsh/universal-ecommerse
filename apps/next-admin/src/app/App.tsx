@@ -1,18 +1,15 @@
-'use client';
+'use client'
 
 import { ReactNode, useEffect } from 'react'
-import { ReactQueryWrapper } from "@/src/app/ReactQueryWrapper";
-import { initMsw } from "@/src/mocks";
-
+import { ReactQueryWrapper } from '@/src/app/ReactQueryWrapper'
+import { initMsw } from '@/src/mocks'
 
 type Props = {
-    children: ReactNode
+  children: ReactNode
 }
 
 export const App = ({ children }: Props) => {
-    initMsw()
+  initMsw()
 
-    return (
-        <ReactQueryWrapper>{children}</ReactQueryWrapper>
-    )
+  return <ReactQueryWrapper>{children}</ReactQueryWrapper>
 }
