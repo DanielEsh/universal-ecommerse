@@ -1,12 +1,13 @@
-'use client'
+import { TestPage } from '@/src/app/layouts/testPage'
 
-export default function Layout() {
+export default async function Layout() {
+  return (
+    <div>
+      <div>
+        <button>click</button>
 
-    return (
-        <div>
-            <div>
-                Layout page
-            </div>
-        </div>
-    )
+        <TestPage />
+      </div>
+    </div>
+  )
 }
