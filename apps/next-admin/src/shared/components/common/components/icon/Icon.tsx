@@ -2,7 +2,6 @@ import Chart from 'public/icons/Chart.svg'
 
 type IconProps = {
   name: string
-  className: string
 }
 
 const iconsList: any = {

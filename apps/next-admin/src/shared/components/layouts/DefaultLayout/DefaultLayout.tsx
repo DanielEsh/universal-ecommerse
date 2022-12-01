@@ -1,5 +1,6 @@
-import { Sidebar } from '@/src/shared/components/common/components/sidebar/Sidebar'
 import { PropsWithChildren } from 'react'
+import { Sidebar } from '@/src/shared/components/common/components/sidebar/Sidebar'
+import { Header } from '@/src/shared/components/common/components/header/Header'
 
 export const DefaultLayout = ({ children }: PropsWithChildren) => {
   return (
@@ -7,7 +8,7 @@ export const DefaultLayout = ({ children }: PropsWithChildren) => {
       <Sidebar />
 
       <div className="content">
-        <header className="fixed h-[64px] w-full bg-green-400">HEADER</header>
+        <Header />
 
         <div className="mt-[64px] bg-stone-900 p-6 text-white">{children}</div>
       </div>
