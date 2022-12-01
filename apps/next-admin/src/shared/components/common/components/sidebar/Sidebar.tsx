@@ -1,5 +1,5 @@
-import { SidebarList } from '@/src/shared/components/common/sidebar/SidebarList'
-import { SidebarList as SidebarListType } from '@/src/shared/components/common/sidebar/types'
+import { SidebarList } from '@/src/shared/components/common/components/sidebar/SidebarList'
+import { SidebarList as SidebarListType } from '@/src/shared/components/common/components/sidebar/types'
 
 const list: SidebarListType[] = [
   {

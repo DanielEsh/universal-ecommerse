@@ -1,4 +1,4 @@
-import { Icon } from '@/src/shared/components/common/icon/Icon'
+import { Icon } from '@/src/shared/components/common/components/icon/Icon'
 
 type SidebarListItemProps = {
   label: string
