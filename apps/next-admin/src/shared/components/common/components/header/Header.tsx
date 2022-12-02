@@ -1,14 +1,15 @@
 'use client'
+import { toggleSidebar } from '@/src/shared/model'
 
 export const Header = () => {
   const handleButtonClick = () => {
-    console.log('Click')
+    toggleSidebar()
   }
 
   return (
     <header className="fixed flex h-[64px] w-full items-center bg-green-400 px-6">
       <button onClick={handleButtonClick}>TOGGLE SIDEBAR</button>
-      <div>HEADER</div>
+      <div className="ml-6">HEADER</div>
     </header>
   )
 }

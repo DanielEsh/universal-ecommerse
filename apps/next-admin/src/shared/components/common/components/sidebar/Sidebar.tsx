@@ -1,3 +1,5 @@
+'use client'
+import { useSidebar } from '@/src/shared/model'
 import { SidebarList } from '@/src/shared/components/common/components/sidebar/SidebarList'
 import { SidebarList as SidebarListType } from '@/src/shared/components/common/components/sidebar/types'
 
@@ -40,6 +42,8 @@ const list2: SidebarListType[] = [
 ]
 
 export const Sidebar = () => {
+  const sidebar = useSidebar()
+
   return (
     <div className="sidebar open fixed h-screen bg-white">
       <div className="py-6 px-12">
@@ -58,6 +62,8 @@ export const Sidebar = () => {
           </g>
         </svg>
       </div>
+
+      <div>{sidebar ? <div>Toggled</div> : <div>Full</div>}</div>
 
       <nav className="">
         <SidebarList list={list} />
