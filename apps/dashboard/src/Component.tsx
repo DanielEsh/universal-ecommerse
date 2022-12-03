@@ -1,5 +1,5 @@
 export const Component = () => {
     return (
-        <div>Component</div>
+        <div className="bg-red-500">Component</div>
     )
 }
