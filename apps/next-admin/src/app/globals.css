@@ -91,7 +91,8 @@ a {
   /*
     Global variables
   */
-  --opened-sidebar-width: 360px;
+  --small-sidebar-width: 120px;
+  --toggled-sidebar-width: 360px;
 }
 
 html.light {
@@ -111,18 +112,18 @@ html.dark {
 }
 
 .content {
-  width: calc(100% - var(--opened-sidebar-width));
+  width: calc(100% - var(--toggled-sidebar-widtht));
 }
 
 .sidebar {
-  width: 120px;
+  width: var(--small-sidebar-width);
 }
 
 .content {
-  width: calc(100% - var(--opened-sidebar-width));
-  margin-left: var(--opened-sidebar-width);
+  width: calc(100% - var(--toggled-sidebar-width));
+  margin-left: var(--toggled-sidebar-width);
 }
 
-.sidebar.open {
-  width: var(--opened-sidebar-width);
+.sidebar.toggled {
+  width: var(--toggled-sidebar-width);
 }

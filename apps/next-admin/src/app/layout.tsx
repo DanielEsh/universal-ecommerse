@@ -1,3 +1,5 @@
+'use client'
+
 import './globals.css'
 import { App } from '@/src/app/App'
 import { DefaultLayout } from '@/src/shared/components/layouts/DefaultLayout'
