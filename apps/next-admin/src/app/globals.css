@@ -120,13 +120,4 @@ html.dark {
 .content.toggled {
   width: calc(100% - var(--small-sidebar-width));
   margin-left: var(--small-sidebar-width);
-} 
-
-.sidebar {
-  width: var(--small-sidebar-width);
-  transition: width .4s ease-in-out;
-}
-
-.sidebar.toggled {
-  width: var(--toggled-sidebar-width);
 }

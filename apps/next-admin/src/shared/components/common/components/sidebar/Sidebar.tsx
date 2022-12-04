@@ -5,6 +5,8 @@ import { SidebarLogo } from '@/src/shared/components/common/components/sidebar/S
 import { SidebarList } from '@/src/shared/components/common/components/sidebar/SidebarList'
 import { SidebarList as SidebarListType } from '@/src/shared/components/common/components/sidebar/types'
 
+import styles from './sidebar.module.css'
+
 const list: SidebarListType[] = [
   {
     title: 'Supports',
@@ -14,15 +16,19 @@ const list: SidebarListType[] = [
         label: 'Dashboard',
       },
       {
+        icon: 'chart',
         label: 'Analytics',
       },
       {
+        icon: 'chart',
         label: 'Wallet',
       },
       {
+        icon: 'chart',
         label: 'Notifications',
       },
       {
+        icon: 'chart',
         label: 'Settings',
       },
     ],
@@ -34,9 +40,11 @@ const list2: SidebarListType[] = [
     title: 'Management',
     items: [
       {
+        icon: 'chart',
         label: 'Get Help',
       },
       {
+        icon: 'chart',
         label: 'Send Feedback',
       },
     ],
@@ -46,8 +54,8 @@ const list2: SidebarListType[] = [
 export const Sidebar = () => {
   const sidebar = useSidebar()
 
-  const classes = clsx('sidebar fixed h-screen bg-white', {
-    toggled: sidebar,
+  const classes = clsx(styles.sidebar, {
+    [styles.toggled]: sidebar,
   })
 
   return (
@@ -56,7 +64,7 @@ export const Sidebar = () => {
 
       <div>{sidebar ? <div>Toggled</div> : <div>Full</div>}</div>
 
-      <nav className="">
+      <nav>
         <SidebarList list={list} />
         <hr />
         <SidebarList list={list2} />
