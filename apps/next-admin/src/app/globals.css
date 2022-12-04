@@ -117,6 +117,10 @@ html.dark {
   transition: width .4s ease-in-out, margin-left .4s ease-in-out;
 }
 
+.content-w {
+  width: calc(100% - var(--toggled-sidebar-width));
+}
+
 .content.toggled {
   width: calc(100% - var(--small-sidebar-width));
   margin-left: var(--small-sidebar-width);
