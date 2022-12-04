@@ -1,7 +1,7 @@
 import { ReactElement, useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 
-import { canUseDOM } from '../../utils/canUseDOM'
+import { canUseDOM } from '../../utils/canUseDOM/canUseDOM'
 
 const DEFAULT_APP_INSTANCE_ID = 'app'
 
