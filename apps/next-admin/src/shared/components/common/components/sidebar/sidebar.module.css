@@ -1,0 +1,26 @@
+.sidebar {
+    width: var(--small-sidebar-width);
+    transition: width .4s ease-in-out;
+        
+    @apply fixed h-screen bg-white
+}
+
+.toggled {
+    width: var(--toggled-sidebar-width);
+}
+
+.sidebarListItem {
+    @apply flex items-center flex-col justify-center gap-2 rounded my-2 text-black
+}
+
+.toggled .sidebarListItem {
+    @apply justify-start flex-row
+}
+
+.sidebarListTitle {
+    @apply hidden
+}
+
+.toggled .sidebarListTitle {
+    @apply inline text-2xl
+}
