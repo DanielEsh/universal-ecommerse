@@ -9,7 +9,7 @@ export const Header = () => {
   }
 
   return (
-    <header className="content-w fixed flex h-[64px] items-center justify-between px-6">
+    <header className="content-w fixed flex h-[64px] items-center justify-between border-b border-gray-500 bg-white/50 px-6 backdrop-blur backdrop-saturate-150">
       <div>
         <button onClick={handleButtonClick}>TOGGLE SIDEBAR</button>
         <HeaderBreadcrumbs />
