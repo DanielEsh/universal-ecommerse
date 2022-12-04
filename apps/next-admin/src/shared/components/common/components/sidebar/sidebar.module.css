@@ -2,7 +2,7 @@
     width: var(--small-sidebar-width);
     transition: width .4s ease-in-out;
         
-    @apply fixed h-screen bg-white border-r border-gray-500
+    @apply fixed h-screen bg-white border-r border-gray-300
 }
 
 .toggled {
