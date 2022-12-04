@@ -1,11 +1,9 @@
 import { useMemo } from 'react'
-import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { Breadcrumbs } from 'ui'
 
 export const HeaderBreadcrumbs = () => {
-  const router = useRouter()
   const pathname = usePathname()
 
   const generateBreadcrumbs = () => {
@@ -36,11 +34,6 @@ export const HeaderBreadcrumbs = () => {
     // Add in a default "Home" crumb for the top-level
     return [{ link: '/', title: 'Home' }, ...breadcrumbsList]
   }
-
-  //   const renderBreadcrumbs = [
-  //     { link: '/', title: 'Home' },
-  //     { link: '/', title: 'Test' },
-  //   ]
 
   const renderBreadcrumbs = useMemo(() => generateBreadcrumbs(), [pathname])
 
