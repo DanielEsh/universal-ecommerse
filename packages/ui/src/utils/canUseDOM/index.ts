@@ -1,5 +1,3 @@
-import { canUseDOM } from "./canUseDOM";
+import { canUseDOM } from './canUseDOM'
 
-export {
-    canUseDOM
-}
+export { canUseDOM }

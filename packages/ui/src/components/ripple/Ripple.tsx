@@ -1,5 +1,3 @@
 export const Ripple = () => {
-    return (
-        <div>Ripple</div>
-    )
+  return <div>Ripple</div>
 }

@@ -6,111 +6,111 @@ import { DropdownTrigger } from './DropdownTrigger'
 import { DropdownContent } from './DropdownContent'
 
 type PopoverOffset = {
-    x?: number
-    y?: number
+  x?: number
+  y?: number
 }
 
 type PopoverDelay = {
-    enter?: number
-    leave?: number
+  enter?: number
+  leave?: number
 }
 
 export type DropdownProps = {
-    containerEl?: HTMLElement
-    placement?: Placement
-    offset?: PopoverOffset
-    delay?: PopoverDelay
-    withArrow?: boolean
-    clickable?: boolean
-    children: ReactNode
+  containerEl?: HTMLElement
+  placement?: Placement
+  offset?: PopoverOffset
+  delay?: PopoverDelay
+  withArrow?: boolean
+  clickable?: boolean
+  children: ReactNode
 }
 
 const COMPONENT_NAME = 'Dropdown'
 
 export const DropdownRoot = (props: DropdownProps) => {
-    const {
-        containerEl,
-        placement = 'bottom',
-        offset = { x: 0, y: 10 },
-        delay = { enter: 0, leave: 300 },
-        withArrow = true,
-        clickable = true,
-        children,
-    } = props
+  const {
+    containerEl,
+    placement = 'bottom',
+    offset = { x: 0, y: 10 },
+    delay = { enter: 0, leave: 300 },
+    withArrow = true,
+    clickable = true,
+    children,
+  } = props
 
-    const { enter: enterDelay, leave: leaveDelay } = delay
+  const { enter: enterDelay, leave: leaveDelay } = delay
 
-    const [timeout, setCloseTimout] = useState<any>(null)
+  const [timeout, setCloseTimout] = useState<any>(null)
 
-    const arrowRef = useRef<any>(null)
-    let activeElement: any
+  const arrowRef = useRef<any>(null)
+  let activeElement: any
 
-    const {
-        open,
-        onOpenChange,
-        reference,
-        floating,
-        popoverStyles,
-        arrowStyles,
-    } = usePopover({
-        placement: placement,
-        arrow: arrowRef,
-        offset,
-    })
+  const {
+    open,
+    onOpenChange,
+    reference,
+    floating,
+    popoverStyles,
+    arrowStyles,
+  } = usePopover({
+    placement: placement,
+    arrow: arrowRef,
+    offset,
+  })
 
-    const showPopover = () => {
-        if (document.activeElement) activeElement = document.activeElement
+  const showPopover = () => {
+    if (document.activeElement) activeElement = document.activeElement
 
-        setTimeout(() => {
-            onOpenChange(!open)
-        }, enterDelay)
-    }
+    setTimeout(() => {
+      onOpenChange(!open)
+    }, enterDelay)
+  }
 
-    const hidePopover = () => {
-        const timeout = setTimeout(() => {
-            onOpenChange(false)
-            if (activeElement) activeElement.focus()
-        }, leaveDelay)
-        setCloseTimout(timeout)
-    }
+  const hidePopover = () => {
+    const timeout = setTimeout(() => {
+      onOpenChange(false)
+      if (activeElement) activeElement.focus()
+    }, leaveDelay)
+    setCloseTimout(timeout)
+  }
 
-    const handleFloatingEnter = () => {
-        if (clickable) return
-        clearTimeout(timeout)
-    }
+  const handleFloatingEnter = () => {
+    if (clickable) return
+    clearTimeout(timeout)
+  }
 
-    const handleFloatingLeave = () => {
-        if (clickable) return
-        hidePopover()
-    }
+  const handleFloatingLeave = () => {
+    if (clickable) return
+    hidePopover()
+  }
 
-    const context: DropdownContext = {
-        open,
-        color: 'primary',
-        containerEl: containerEl,
-        popoverStyles: popoverStyles,
-        withArrow: withArrow,
-        arrowRef: arrowRef,
-        arrowStyles: arrowStyles,
-        isClickable: clickable,
-        referenceRef: reference,
-        floatingRef: floating,
-        hidePopover,
-        showPopover,
-        handleFloatingEnter,
-        handleFloatingLeave,
-    }
+  const context: DropdownContext = {
+    open,
+    color: 'primary',
+    containerEl: containerEl,
+    popoverStyles: popoverStyles,
+    withArrow: withArrow,
+    arrowRef: arrowRef,
+    arrowStyles: arrowStyles,
+    isClickable: clickable,
+    referenceRef: reference,
+    floatingRef: floating,
+    hidePopover,
+    showPopover,
+    handleFloatingEnter,
+    handleFloatingLeave,
+  }
 
-    return (
-        <DropdownContext.Provider value={context}>
-            {children}
-        </DropdownContext.Provider>
-    )
+  return (
+    <DropdownContext.Provider value={context}>
+      {children}
+    </DropdownContext.Provider>
+  )
 }
 
 export const Dropdown = Object.assign(DropdownRoot, {
-    Trigger: DropdownTrigger,
-    Content: DropdownContent,
+  Trigger: DropdownTrigger,
+  Content: DropdownContent,
 })
 
 DropdownRoot.displayName = COMPONENT_NAME

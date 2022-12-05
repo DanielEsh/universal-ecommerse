@@ -7,67 +7,67 @@ import { Portal } from '../portal'
 import { useClickOutside } from '../../hooks/useClickOutside'
 
 export type Props = {
-    children: ReactNode
-    onMouseEnter?: () => void
-    onMouseLeave?: () => void
+  children: ReactNode
+  onMouseEnter?: () => void
+  onMouseLeave?: () => void
 }
 
 const fade = {
-    initial: {
-        opacity: 0,
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
     },
-    animate: {
-        opacity: 1,
-        transition: {
-            duration: 0.3,
-        },
-    },
-    exit: {
-        opacity: 0,
-    },
+  },
+  exit: {
+    opacity: 0,
+  },
 }
 
 const COMPONENT_NAME = 'DropdownContent'
 
 export const DropdownContent = forwardRef<HTMLDivElement, Props>(
-    (props, forwardedRef) => {
-        const { children, onMouseEnter, onMouseLeave } = props
+  (props, forwardedRef) => {
+    const { children, onMouseEnter, onMouseLeave } = props
 
-        const {
-            popoverStyles,
-            floatingRef,
-            handleFloatingEnter,
-            handleFloatingLeave,
-            withArrow,
-            arrowRef,
-            containerEl,
-            open,
-            hidePopover,
-        } = useContext(DropdownContext)
+    const {
+      popoverStyles,
+      floatingRef,
+      handleFloatingEnter,
+      handleFloatingLeave,
+      withArrow,
+      arrowRef,
+      containerEl,
+      open,
+      hidePopover,
+    } = useContext(DropdownContext)
 
-        const defaultRef = useRef<any>()
+    const defaultRef = useRef<any>()
 
-        const ref = composeRefs(defaultRef, floatingRef, forwardedRef)
-        useClickOutside(defaultRef, () => {
-            if (open && hidePopover) {
-                hidePopover()
-            }
-        })
+    const ref = composeRefs(defaultRef, floatingRef, forwardedRef)
+    useClickOutside(defaultRef, () => {
+      if (open && hidePopover) {
+        hidePopover()
+      }
+    })
 
-        return open ? (
-            <Portal container={containerEl}>
-                <div
-                        ref={ref}
-                        style={popoverStyles}
-                        onMouseEnter={handleFloatingEnter}
-                        onMouseLeave={handleFloatingLeave}>
-                        {children}
+    return open ? (
+      <Portal container={containerEl}>
+        <div
+          ref={ref}
+          style={popoverStyles}
+          onMouseEnter={handleFloatingEnter}
+          onMouseLeave={handleFloatingLeave}>
+          {children}
 
-                        {withArrow && <DropdownArrow ref={arrowRef} />}
-                    </div>
-            </Portal>
-        ) : null
-    },
+          {withArrow && <DropdownArrow ref={arrowRef} />}
+        </div>
+      </Portal>
+    ) : null
+  },
 )
 
 DropdownContent.displayName = COMPONENT_NAME
