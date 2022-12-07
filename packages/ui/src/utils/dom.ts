@@ -17,13 +17,14 @@ export const getOffset = (element: HTMLElement) => {
   }
 }
 
-export const getOuterWidth = (element: HTMLElement) =>
-  element.offsetWidth || element.getBoundingClientRect().width
+export const getOuterWidth = (element: HTMLElement | null) =>
+  element ? element.offsetWidth || element.getBoundingClientRect().width : 0
 
-export const getOuterHeight = (element: HTMLElement) =>
-  element.offsetHeight || element.getBoundingClientRect().height
+export const getOuterHeight = (element: HTMLElement | null) =>
+  element ? element.offsetHeight || element.getBoundingClientRect().height : 0
 
-export const getHeight = (element: HTMLElement) => {
+export const getHeight = (element: HTMLElement | null) => {
+  if (!element) return 0
   let height = element.offsetHeight
   const style = getComputedStyle(element)
 
@@ -36,7 +37,8 @@ export const getHeight = (element: HTMLElement) => {
   return height
 }
 
-export const getWidth = (element: HTMLElement) => {
+export const getWidth = (element: HTMLElement | null) => {
+  if (!element) return 0
   let width = element.offsetWidth
   const style = getComputedStyle(element)
 

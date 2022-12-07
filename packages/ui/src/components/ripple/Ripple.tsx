@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, MouseEvent } from 'react'
 import { clsx } from 'clsx'
 import { useEventListener } from '@/src/hooks/useEventListener'
 import {
@@ -11,8 +11,8 @@ import {
 
 export const Ripple = () => {
   const [effect, setEffect] = useState(false)
-  const targetRef = useRef(null)
-  const rippleRef = useRef(null)
+  const targetRef = useRef<HTMLDivElement | null>(null)
+  const rippleRef = useRef<HTMLElement | null>(null)
 
   const bindEvents = () => {
     if (targetRef.current) {
@@ -26,8 +26,9 @@ export const Ripple = () => {
     }
   }
 
-  const onMouseDown = (event) => {
-    console.log('onMouseDown')
+  const onMouseDown = (event: MouseEvent) => {
+    if (!targetRef.current) return
+
     const offset = getOffset(targetRef.current)
     const offsetX =
       event.pageX -
@@ -43,23 +44,21 @@ export const Ripple = () => {
     activateRipple(offsetX, offsetY)
   }
 
-  const activateRipple = (offsetX, offsetY) => {
+  const activateRipple = (offsetX: number, offsetY: number) => {
     if (!rippleRef.current) {
       return
     }
-    console.log('activateRipple', offsetX, offsetY)
+
     setEffect(false)
 
     if (!getHeight(rippleRef.current) && !getWidth(rippleRef.current)) {
-      const d = Math.max(
+      const maxRippleValue = Math.max(
         getOuterWidth(targetRef.current),
         getOuterHeight(targetRef.current),
       )
 
-      console.log('D', d)
-
-      rippleRef.current.style.height = d + 'px'
-      rippleRef.current.style.width = d + 'px'
+      rippleRef.current.style.height = `${maxRippleValue}px`
+      rippleRef.current.style.width = `${maxRippleValue}px`
     }
 
     rippleRef.current.style.top = offsetY + 'px'
