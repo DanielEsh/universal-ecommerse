@@ -1,98 +1,13 @@
 import { useRef, useState, useEffect } from 'react'
 import { clsx } from 'clsx'
-import { useEventListener } from '../../hooks/useEventListener'
-
-const getOffset = (el) => {
-  if (el) {
-    const rect = el.getBoundingClientRect()
-
-    return {
-      top:
-        rect.top +
-        (window.pageYOffset ||
-          document.documentElement.scrollTop ||
-          document.body.scrollTop ||
-          0),
-      left:
-        rect.left +
-        (window.pageXOffset ||
-          document.documentElement.scrollLeft ||
-          document.body.scrollLeft ||
-          0),
-    }
-  }
-
-  return {
-    top: 'auto',
-    left: 'auto',
-  }
-}
-
-const getHeight = (el) => {
-  if (el) {
-    let height = el.offsetHeight
-    const style = getComputedStyle(el)
-
-    height -=
-      parseFloat(style.paddingTop) +
-      parseFloat(style.paddingBottom) +
-      parseFloat(style.borderTopWidth) +
-      parseFloat(style.borderBottomWidth)
-
-    return height
-  }
-
-  return 0
-}
-
-const getWidth = (el) => {
-  if (el) {
-    let width = el.offsetWidth
-    const style = getComputedStyle(el)
-
-    width -=
-      parseFloat(style.paddingLeft) +
-      parseFloat(style.paddingRight) +
-      parseFloat(style.borderLeftWidth) +
-      parseFloat(style.borderRightWidth)
-
-    return width
-  }
-
-  return 0
-}
-
-const getOuterWidth = (el, margin?) => {
-  if (el) {
-    let width = el.offsetWidth || el.getBoundingClientRect().width
-
-    if (margin) {
-      const style = getComputedStyle(el)
-
-      width += parseFloat(style.marginLeft) + parseFloat(style.marginRight)
-    }
-
-    return width
-  }
-
-  return 0
-}
-
-const getOuterHeight = (el, margin?) => {
-  if (el) {
-    let height = el.offsetHeight || el.getBoundingClientRect().height
-
-    if (margin) {
-      const style = getComputedStyle(el)
-
-      height += parseFloat(style.marginTop) + parseFloat(style.marginBottom)
-    }
-
-    return height
-  }
-
-  return 0
-}
+import { useEventListener } from '@/src/hooks/useEventListener'
+import {
+  getOffset,
+  getWidth,
+  getHeight,
+  getOuterWidth,
+  getOuterHeight,
+} from '../../utils/dom'
 
 export const Ripple = () => {
   const [effect, setEffect] = useState(false)
@@ -141,7 +56,7 @@ export const Ripple = () => {
         getOuterHeight(targetRef.current),
       )
 
-      console.log('D', d);
+      console.log('D', d)
 
       rippleRef.current.style.height = d + 'px'
       rippleRef.current.style.width = d + 'px'
