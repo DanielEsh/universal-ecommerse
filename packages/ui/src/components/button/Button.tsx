@@ -1,5 +1,6 @@
 import { forwardRef, ReactNode, useRef } from 'react'
 import { clsx } from 'clsx'
+import { Ripple } from '../ripple'
 
 export type ButtonProps = {
   children: ReactNode
@@ -40,7 +41,7 @@ export const BaseButton = forwardRef<HTMLElement, ButtonProps>(
 
     const classes = clsx(
       className,
-      'bg-black text-white rounded-md',
+      'ripple-root bg-black text-white rounded-md',
       sizes[size],
     )
 
@@ -53,6 +54,8 @@ export const BaseButton = forwardRef<HTMLElement, ButtonProps>(
         onMouseEnter={handleMouseEnter}
         {...props}>
         {children}
+
+        <Ripple />
       </button>
     )
   },
