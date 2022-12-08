@@ -69,6 +69,17 @@ const tailwindConfig = {
           100: 'var(--link-100)',
         },
       },
+      keyframes: {
+        ripple: {
+          '100%': {
+            opacity: 0,
+            transform: 'scale(2.5)',
+          },
+        },
+      },
+      animation: {
+        ripple: 'ripple 0.4s linear',
+      },
     },
   },
   plugins: [],

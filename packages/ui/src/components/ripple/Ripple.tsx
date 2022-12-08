@@ -1,6 +1,6 @@
-import { useRef, useState, useEffect, MouseEvent } from 'react'
+import { ReactNode, useRef, useState, MouseEvent } from 'react'
 import { clsx } from 'clsx'
-import { useEventListener } from '@/src/hooks/useEventListener'
+import { useEventListener } from '../../hooks/useEventListener'
 import {
   getOffset,
   getWidth,
@@ -9,22 +9,14 @@ import {
   getOuterHeight,
 } from '../../utils/dom'
 
-export const Ripple = () => {
+export type RippleProps = {
+  children?: ReactNode
+}
+
+export const Ripple = ({ children }: RippleProps) => {
   const [effect, setEffect] = useState(false)
   const targetRef = useRef<HTMLDivElement | null>(null)
   const rippleRef = useRef<HTMLElement | null>(null)
-
-  const bindEvents = () => {
-    if (targetRef.current) {
-      targetRef.current.addEventListener('mousedown', onMouseDown)
-    }
-  }
-
-  const unbindEvents = () => {
-    if (targetRef.current) {
-      targetRef.current.removeEventListener('mousedown', onMouseDown)
-    }
-  }
 
   const onMouseDown = (event: MouseEvent) => {
     if (!targetRef.current) return
@@ -66,27 +58,21 @@ export const Ripple = () => {
     setEffect(true)
   }
 
-  useEffect(() => {
-    bindEvents()
-
-    return () => {
-      unbindEvents()
-    }
-  }, [])
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  useEventListener('mousedown', onMouseDown)
 
   const onAnimationEnd = () => {
     setEffect(false)
   }
 
-  const classes = clsx('ripple', {
-    'ripple-active': effect,
+  const classes = clsx('ripple-effect absolute block rounded-full', {
+    'animate-ripple': effect,
   })
 
   return (
-    <div
-      ref={targetRef}
-      className="relative overflow-hidden w-24 h-24 bg-primary-500">
-      Ripple
+    <div ref={targetRef} className="ripple-root w-24 h-24 bg-primary-500">
+      {children}
       <span
         role="presentation"
         ref={rippleRef}
