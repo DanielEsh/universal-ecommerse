@@ -96,3 +96,6 @@ html.dark {
   transform: scale(0);
 }
 
+button + button {
+  margin: 0 !important;
+}
