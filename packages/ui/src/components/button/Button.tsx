@@ -1,6 +1,7 @@
 import { forwardRef, ReactNode, useRef } from 'react'
 import { clsx } from 'clsx'
 import { Ripple } from '../ripple'
+import { useComposedRefs } from '../../hooks/useComposedRefs'
 
 export type ButtonProps = {
   children: ReactNode
@@ -22,7 +23,8 @@ export const BaseButton = forwardRef<HTMLElement, ButtonProps>(
   (props, forwardedRef) => {
     const { children, className, size = 'medium', type = 'button' } = props
 
-    const defaultRef = useRef<HTMLButtonElement>(null)
+    const defaultRef = useRef<HTMLButtonElement | null>(null)
+    const buttonRef = useComposedRefs(defaultRef, forwardedRef)
 
     const handleClick = () => {
       if (props?.onClick) props.onClick()
@@ -47,7 +49,7 @@ export const BaseButton = forwardRef<HTMLElement, ButtonProps>(
 
     return (
       <button
-        ref={defaultRef}
+        ref={buttonRef}
         className={classes}
         type={type}
         onClick={handleClick}
