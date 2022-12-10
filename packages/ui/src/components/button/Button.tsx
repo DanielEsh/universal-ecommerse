@@ -8,7 +8,7 @@ import { useComposedRefs } from '../../hooks/useComposedRefs'
 
 export type ButtonProps = {
   children: ReactNode
-  className?: string
+  classes?: string
   type?: 'button' | 'submit'
   size?: 'large' | 'medium' | 'small' | 'block'
   onMouseDown?: () => void
@@ -24,7 +24,7 @@ const COMPONENT_NAME = 'BaseButton'
 
 export const BaseButton = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, forwardedRef) => {
-    const { children, className, size = 'medium', type = 'button' } = props
+    const { children, classes, size = 'medium', type = 'button' } = props
 
     const defaultRef = useRef<HTMLButtonElement | null>(null)
     const buttonRef = useComposedRefs(defaultRef, forwardedRef)
@@ -44,16 +44,18 @@ export const BaseButton = forwardRef<HTMLButtonElement, ButtonProps>(
       block: 'w-full h-full',
     }
 
-    const classes = clsx(
-      className,
+    const className = clsx(
+      classes,
       'ripple-root bg-black text-white rounded-md',
       sizes[size],
     )
 
+    console.log('classes', classes)
+
     return (
       <button
         ref={buttonRef}
-        className={classes}
+        className={className}
         type={type}
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
