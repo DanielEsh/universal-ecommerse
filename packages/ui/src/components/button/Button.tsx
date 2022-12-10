@@ -2,6 +2,9 @@ import { forwardRef, ReactNode, useRef } from 'react'
 import { clsx } from 'clsx'
 import { Ripple } from '../ripple'
 import { useComposedRefs } from '../../hooks/useComposedRefs'
+/**
+ * variants: default, ghost, outlined, contained
+ */
 
 export type ButtonProps = {
   children: ReactNode
@@ -19,7 +22,7 @@ export type ButtonProps = {
 
 const COMPONENT_NAME = 'BaseButton'
 
-export const BaseButton = forwardRef<HTMLElement, ButtonProps>(
+export const BaseButton = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, forwardedRef) => {
     const { children, className, size = 'medium', type = 'button' } = props
 
@@ -36,7 +39,7 @@ export const BaseButton = forwardRef<HTMLElement, ButtonProps>(
 
     const sizes = {
       small: 'py-1 px-2',
-      medium: 'py-4 px-8',
+      medium: 'py-2 px-4',
       large: 'py-8 px-12',
       block: 'w-full h-full',
     }
