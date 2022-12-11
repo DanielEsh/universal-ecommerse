@@ -3,7 +3,7 @@ import { BaseButton } from '../Button'
 const Default = () => {
   return (
     <div>
-      <BaseButton className="button" variants="ghost">
+      <BaseButton className="button" variant="ghost">
         Button
       </BaseButton>
     </div>
