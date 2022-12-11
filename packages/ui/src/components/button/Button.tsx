@@ -2,15 +2,17 @@ import { forwardRef, ReactNode, useRef } from 'react'
 import { clsx } from 'clsx'
 import { Ripple } from '../ripple'
 import { useComposedRefs } from '../../hooks/useComposedRefs'
-/**
- * variants: default, ghost, outlined, contained
- */
+
+type ButtonVariant = 'default' | 'ghost' | 'outlined'
+
+type ButtonSizes = 'large' | 'medium' | 'small' | 'full'
 
 export type ButtonProps = {
   children: ReactNode
   className?: string
   type?: 'button' | 'submit'
-  size?: 'large' | 'medium' | 'small' | 'block'
+  size?: ButtonSizes
+  variant?: ButtonVariant
   onMouseDown?: () => void
   onMouseUp?: () => void
   onMouseEnter?: () => void
@@ -24,7 +26,14 @@ const COMPONENT_NAME = 'BaseButton'
 
 export const BaseButton = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, forwardedRef) => {
-    const { children, className, size = 'medium', type = 'button' } = props
+    const {
+      children,
+      className,
+      size = 'medium',
+      type = 'button',
+      variant = 'default',
+      ...otherProps
+    } = props
 
     const defaultRef = useRef<HTMLButtonElement | null>(null)
     const buttonRef = useComposedRefs(defaultRef, forwardedRef)
@@ -41,16 +50,19 @@ export const BaseButton = forwardRef<HTMLButtonElement, ButtonProps>(
       small: 'py-1 px-2',
       medium: 'py-2 px-4',
       large: 'py-8 px-12',
-      block: 'w-full h-full',
+      full: 'w-full h-full',
     }
 
     const classes = clsx(
       className,
-      'ripple-root bg-black text-white rounded-md',
+      'ripple-root bg-black text-white rounded-md ',
       sizes[size],
+      {
+        'bg-transparent text-black border border-black rounded-md':
+          variant === 'outlined',
+        'bg-transparent text-black border-none': variant === 'ghost',
+      },
     )
-
-    console.log('classes', classes)
 
     return (
       <button
@@ -58,7 +70,8 @@ export const BaseButton = forwardRef<HTMLButtonElement, ButtonProps>(
         className={classes}
         type={type}
         onClick={handleClick}
-        onMouseEnter={handleMouseEnter}>
+        onMouseEnter={handleMouseEnter}
+        {...otherProps}>
         {children}
 
         <Ripple />
