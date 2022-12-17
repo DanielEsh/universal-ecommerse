@@ -9,3 +9,4 @@ export default {
 
 export { default as Default } from './__examples__/Default'
 export { default as ButtonGroup } from './__examples__/ButtonGroup'
+export { default as Example } from '../slots/Example'
