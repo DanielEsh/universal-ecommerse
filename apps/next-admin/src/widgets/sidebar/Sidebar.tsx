@@ -1,6 +1,6 @@
 'use client'
 import { clsx } from 'clsx'
-import { useSidebar } from '@/src/shared/model'
+import { useMainStore } from '@/src/shared/model'
 import { SidebarLogo } from '@/src/widgets/sidebar/SidebarLogo'
 import { SidebarList } from '@/src/widgets/sidebar/SidebarList'
 import { SidebarList as SidebarListType } from '@/src/widgets/sidebar/types'
@@ -52,17 +52,15 @@ const list2: SidebarListType[] = [
 ]
 
 export const Sidebar = () => {
-  const sidebar = useSidebar()
+  const sideBarIsToggled = useMainStore()
 
   const classes = clsx(styles.sidebar, {
-    [styles.toggled]: sidebar,
+    [styles.toggled]: sideBarIsToggled,
   })
 
   return (
     <div className={classes}>
       <SidebarLogo />
-
-      <div>{sidebar ? <div>Toggled</div> : <div>Full</div>}</div>
 
       <nav>
         <SidebarList list={list} />
