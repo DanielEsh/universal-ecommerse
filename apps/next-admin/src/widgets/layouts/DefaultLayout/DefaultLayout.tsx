@@ -1,9 +1,9 @@
 import { PropsWithChildren } from 'react'
 import { clsx } from 'clsx'
-import { Sidebar } from '@/src/shared/components/common/components/sidebar/Sidebar'
+import { Sidebar } from '@/src/widgets/sidebar/Sidebar'
 import { useSidebar } from '@/src/shared/model'
-import { Header } from '@/src/shared/components/common/components/header/Header'
-import { Footer } from '@/src/shared/components/common/components/footer/Footer'
+import { Header } from '@/src/widgets/header/Header'
+import { Footer } from '@/src/widgets/footer/Footer'
 
 export const DefaultLayout = ({ children }: PropsWithChildren) => {
   const sidebarToggled = useSidebar()

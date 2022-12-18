@@ -1,9 +1,9 @@
 'use client'
 import { clsx } from 'clsx'
 import { useSidebar } from '@/src/shared/model'
-import { SidebarLogo } from '@/src/shared/components/common/components/sidebar/SidebarLogo'
-import { SidebarList } from '@/src/shared/components/common/components/sidebar/SidebarList'
-import { SidebarList as SidebarListType } from '@/src/shared/components/common/components/sidebar/types'
+import { SidebarLogo } from '@/src/widgets/sidebar/SidebarLogo'
+import { SidebarList } from '@/src/widgets/sidebar/SidebarList'
+import { SidebarList as SidebarListType } from '@/src/widgets/sidebar/types'
 
 import styles from './sidebar.module.css'
 

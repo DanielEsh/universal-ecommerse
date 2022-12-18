@@ -1,5 +1,5 @@
-import { SidebarListItem } from '@/src/shared/components/common/components/sidebar/SidebarListItem'
-import { SidebarList as SidebarListType } from '@/src/shared/components/common/components/sidebar/types'
+import { SidebarListItem } from '@/src/widgets/sidebar/SidebarListItem'
+import { SidebarList as SidebarListType } from '@/src/widgets/sidebar/types'
 
 import styles from './sidebar.module.css'
 
