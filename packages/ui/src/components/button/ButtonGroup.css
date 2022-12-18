@@ -1,0 +1,19 @@
+.ButtonGroup {
+    @apply inline-flex rounded-md shadow-sm
+}
+
+.ButtonGroup .BaseButton.BaseButton:not(:last-child) {
+    border-right: none;
+}
+
+.ButtonGroup .BaseButton:first-child {
+    @apply rounded-r-none border-r
+}
+
+.ButtonGroup .BaseButton:not(:first-child).BaseButton:not(:last-child) {
+    @apply rounded-none border-r border-black
+}
+
+.ButtonGroup .BaseButton:last-child {
+    @apply rounded-l-none border-r border-black
+}

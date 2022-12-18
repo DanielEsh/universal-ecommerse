@@ -1,6 +1,8 @@
 import { ReactNode } from 'react'
 import { BaseButton } from './Button'
 
+import './ButtonGroup.css'
+
 export const GroupedButton = BaseButton
 
 export type ButtonGroupProps = {
@@ -9,7 +11,7 @@ export type ButtonGroupProps = {
 
 export const ButtonGroup = ({ children }: ButtonGroupProps) => {
   return (
-    <div role="group" className="inline-flex rounded-md shadow-sm">
+    <div role="group" className="ButtonGroup">
       {children}
     </div>
   )
