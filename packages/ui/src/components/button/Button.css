@@ -1,0 +1,11 @@
+.BaseButton {
+    @apply bg-black text-white rounded-md
+}
+
+.BaseButton._outlined {
+    @apply bg-transparent text-black border border-black rounded-md
+}
+
+.BaseButton._ghost {
+    @apply bg-transparent text-black border-none
+}

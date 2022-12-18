@@ -1,10 +1,12 @@
 import { createEvent, createStore } from 'effector'
 import { useStore } from 'effector-react'
 
-export const toggleSidebar = createEvent()
+export const toggleSidebarFx = createEvent<boolean>()
 
-export const $sidebar = createStore(true).on(toggleSidebar, (state) => !state)
+export const $isSidebarToggled = createStore(true)
 
-export const useSidebar = () => {
-  return useStore($sidebar)
+$isSidebarToggled.on(toggleSidebarFx, (state) => !state)
+
+export const useMainStore = () => {
+  return useStore($isSidebarToggled)
 }

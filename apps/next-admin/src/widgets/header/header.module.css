@@ -1,0 +1,7 @@
+.header {
+    width: calc(100% - var(--toggled-sidebar-width));
+}
+
+.toggled {
+    width: calc(100% - var(--small-sidebar-width));
+}

@@ -1,5 +1,5 @@
 import { Dropdown } from 'ui'
-import { Menu } from 'ui/src/components/dropdown/Menu'
+import { Menu } from 'ui'
 
 export const HeaderUser = () => {
   return (

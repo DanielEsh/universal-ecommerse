@@ -1,5 +1,3 @@
-import { useKeyPress } from "./useKeyPress";
+import { useKeyPress } from './useKeyPress'
 
-export {
-    useKeyPress
-}
+export { useKeyPress }

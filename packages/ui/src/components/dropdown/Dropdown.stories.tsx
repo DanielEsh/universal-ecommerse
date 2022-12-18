@@ -1,12 +1,10 @@
+import { Meta } from '@storybook/react'
 
-
-import { Meta } from '@storybook/react';
-
-import {Dropdown} from './index';
+import { Dropdown } from './index'
 
 export default {
-    title: 'Components/Dropdown',
-    component: Dropdown,
-} as Meta;
+  title: 'Components/Dropdown',
+  component: Dropdown,
+} as Meta
 
-export { default as Default } from './__examples__/Default';
+export { default as Default } from './__examples__/Default'

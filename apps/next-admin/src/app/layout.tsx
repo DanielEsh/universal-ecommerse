@@ -1,9 +1,10 @@
 'use client'
 
-import './globals.css'
 import { App } from '@/src/app/App'
-import { DefaultLayout } from '@/src/shared/components/layouts/DefaultLayout'
+import { DefaultLayout } from '@/src/widgets/layouts/DefaultLayout'
 import { PropsWithChildren } from 'react'
+
+import './globals.css'
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
