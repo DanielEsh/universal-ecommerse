@@ -27,7 +27,7 @@ export type DropdownProps = {
 
 const COMPONENT_NAME = 'Dropdown'
 
-export const DropdownRoot = (props: DropdownProps) => {
+const DropdownRoot = (props: DropdownProps) => {
   const {
     containerEl,
     placement = 'bottom',

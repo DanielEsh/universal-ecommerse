@@ -12,7 +12,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
-    "@floating-ui/react-dom-interactions": "^0.13.0",
+    "@floating-ui/react-dom": "^1.0.1",
+    "@floating-ui/react-dom-interactions": "^0.13.3",
     "@storybook/addon-actions": "^6.5.14",
     "@storybook/addon-essentials": "^6.5.14",
     "@storybook/addon-interactions": "^6.5.14",
