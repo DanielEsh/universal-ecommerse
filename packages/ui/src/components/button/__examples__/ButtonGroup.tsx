@@ -2,28 +2,47 @@ import { ButtonGroup, GroupedButton } from '../ButtonGroup'
 
 export default function () {
   return (
-    <div>
+    <div className="inline-flex flex-col gap-3">
       <ButtonGroup>
-        <GroupedButton
-          className="rounded-r-none border-r border-black"
-          variant="outlined">
-          Button 1
-        </GroupedButton>
-        <GroupedButton
-          className="rounded-none border-r border-black"
-          variant="outlined">
-          Button 2
-        </GroupedButton>
-        <GroupedButton
-          className="rounded-none border-r border-black"
-          variant="outlined">
-          Button 2
-        </GroupedButton>
-        <GroupedButton
-          className="rounded-l-none border-r border-black"
-          variant="outlined">
-          Button 3
-        </GroupedButton>
+        <GroupedButton variant="outlined">Button 1</GroupedButton>
+        <GroupedButton variant="outlined">Button 2</GroupedButton>
+        <GroupedButton variant="outlined">Button 2</GroupedButton>
+        <GroupedButton variant="outlined">Button 3</GroupedButton>
+      </ButtonGroup>
+
+      <ButtonGroup>
+        <GroupedButton>Button 1</GroupedButton>
+        <GroupedButton>Button 2</GroupedButton>
+        <GroupedButton>Button 2</GroupedButton>
+        <GroupedButton>Button 3</GroupedButton>
+      </ButtonGroup>
+
+      <ButtonGroup className="test classes">
+        <GroupedButton variant="ghost">Button 1</GroupedButton>
+        <GroupedButton variant="ghost">Button 2</GroupedButton>
+        <GroupedButton variant="ghost">Button 2</GroupedButton>
+        <GroupedButton variant="ghost">Button 3</GroupedButton>
+      </ButtonGroup>
+
+      <ButtonGroup className="w-[200px]" direction="vertical">
+        <GroupedButton>Button 1</GroupedButton>
+        <GroupedButton>Button 2</GroupedButton>
+        <GroupedButton>Button 2</GroupedButton>
+        <GroupedButton>Button 3</GroupedButton>
+      </ButtonGroup>
+
+      <ButtonGroup className="w-[200px]" direction="vertical">
+        <GroupedButton variant="outlined">Button 1</GroupedButton>
+        <GroupedButton variant="outlined">Button 2</GroupedButton>
+        <GroupedButton variant="outlined">Button 2</GroupedButton>
+        <GroupedButton variant="outlined">Button 3</GroupedButton>
+      </ButtonGroup>
+
+      <ButtonGroup className="w-[200px]" direction="vertical">
+        <GroupedButton variant="ghost">Button 1</GroupedButton>
+        <GroupedButton variant="ghost">Button 2</GroupedButton>
+        <GroupedButton variant="ghost">Button 2</GroupedButton>
+        <GroupedButton variant="ghost">Button 3</GroupedButton>
       </ButtonGroup>
     </div>
   )

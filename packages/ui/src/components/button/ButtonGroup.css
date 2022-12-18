@@ -1,19 +1,44 @@
 .ButtonGroup {
-    @apply inline-flex rounded-md shadow-sm
+    @apply inline-flex rounded-md
 }
 
-.ButtonGroup .BaseButton.BaseButton:not(:last-child) {
+.ButtonGroup._horizontal {
+    @apply flex-row
+}
+
+.ButtonGroup._horizontal .BaseButton.BaseButton:not(:last-child) {
     border-right: none;
 }
 
-.ButtonGroup .BaseButton:first-child {
+.ButtonGroup._horizontal .BaseButton:first-child {
     @apply rounded-r-none border-r
 }
 
-.ButtonGroup .BaseButton:not(:first-child).BaseButton:not(:last-child) {
+.ButtonGroup._horizontal .BaseButton:not(:first-child).BaseButton:not(:last-child) {
     @apply rounded-none border-r border-black
 }
 
-.ButtonGroup .BaseButton:last-child {
+.ButtonGroup._horizontal .BaseButton:last-child {
     @apply rounded-l-none border-r border-black
 }
+
+.ButtonGroup._vertical {
+    @apply flex-col
+}
+
+.ButtonGroup._vertical .BaseButton.BaseButton:not(:last-child) {
+    border-bottom: none;
+}
+
+.ButtonGroup._vertical .BaseButton:first-child {
+    @apply rounded-b-none
+}
+
+.ButtonGroup._vertical .BaseButton:not(:first-child).BaseButton:not(:last-child) {
+    @apply rounded-t-none rounded-b-none
+}
+
+.ButtonGroup._vertical .BaseButton:last-child {
+    @apply rounded-t-none
+}
+
