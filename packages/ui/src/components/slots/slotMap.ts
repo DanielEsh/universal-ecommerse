@@ -18,8 +18,6 @@ export class SlotMap {
 
     this.slots = new Map()
 
-    console.log('SLOTS MAP', this.slots)
-
     if (defaultSlot && !isSlotComponent(defaultSlot)) {
       throw new Error(
         'Invalid default slot component. Should be a component created using "createSlot".',
