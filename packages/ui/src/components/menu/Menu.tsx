@@ -20,7 +20,7 @@ export const MenuRoot = forwardRef<HTMLDivElement, Props>(
   ({ children, className }, forwardedRef) => {
     const classes = clsx(
       className,
-      'relative bg-white rounded-md shadow-md z-10 overflow-hidden',
+      'relative bg-white rounded-md shadow-md z-10 overflow-hidden py-2',
     )
 
     return (

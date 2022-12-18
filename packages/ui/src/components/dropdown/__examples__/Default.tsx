@@ -1,5 +1,5 @@
 import { Dropdown } from '../Dropdown'
-import { Menu } from '../Menu'
+import { Menu } from '../../menu/Menu'
 
 const Default = () => {
   return (
