@@ -7,6 +7,8 @@ type ButtonVariant = 'default' | 'ghost' | 'outlined'
 
 type ButtonSizes = 'large' | 'medium' | 'small' | 'full'
 
+import './Button.css'
+
 export type ButtonProps = {
   children: ReactNode
   className?: string
@@ -53,16 +55,10 @@ export const BaseButton = forwardRef<HTMLButtonElement, ButtonProps>(
       full: 'w-full h-full',
     }
 
-    const classes = clsx(
-      className,
-      'ripple-root bg-black text-white rounded-md ',
-      sizes[size],
-      {
-        'bg-transparent text-black border border-black rounded-md':
-          variant === 'outlined',
-        'bg-transparent text-black border-none': variant === 'ghost',
-      },
-    )
+    const classes = clsx(className, 'BaseButton ripple-root', sizes[size], {
+      _outlined: variant === 'outlined',
+      _ghost: variant === 'ghost',
+    })
 
     return (
       <button
