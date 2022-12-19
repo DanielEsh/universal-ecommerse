@@ -3,14 +3,14 @@
   "version": "0.0.0",
   "main": "build/index.js",
   "module": "build/index.es.js",
-  "types": "src/index.tsx",
+  "types": "build/index.d.ts",
   "license": "MIT",
   "scripts": {
     "lint": "eslint *.ts*",
     "lint:fix": "eslint ./ --fix",
     "dev": "start-storybook -p 3000",
     "build-storybook": "build-storybook",
-    "build": "rollup -c"
+    "build": "rollup -c --bundleConfigAsCjs"
   },
   "peerDependencies": {
     "react": ">=18.2.0",
