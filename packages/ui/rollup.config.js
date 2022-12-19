@@ -6,8 +6,10 @@ import postcss from 'rollup-plugin-postcss'
 
 import pkg from './package.json'
 
-export default {
-  input: 'src/index.ts',
+const input = 'src/index.ts'
+
+const rollUpConfig = {
+  input,
   output: [
     {
       file: pkg.main,
@@ -29,40 +31,4 @@ export default {
   ],
 }
 
-// // const extensions = ['.js', '.jsx', '.ts', '.tsx']
-// const input = 'src/index.ts'
-// const external = [
-//   ...Object.keys(pkg.dependencies || {}),
-//   ...Object.keys(pkg.peerDependencies || {}),
-// ]
-
-// const plugins = [
-//   peerDepsExternal(),
-//   resolve(),
-//   commonjs(),
-//   typescript({ useTsconfigDeclarationDir: true, abortOnError: false }),
-//   postcss(),
-// ]
-
-// export default [
-//   {
-//     input,
-//     output: {
-//       file: pkg.module,
-//       format: 'esm',
-//       sourcemap: true,
-//     },
-//     plugins,
-//     external,
-//   },
-//   {
-//     input,
-//     output: {
-//       file: pkg.main,
-//       format: 'cjs',
-//       sourcemap: true,
-//     },
-//     plugins,
-//     external,
-//   },
-// ]
+export default rollUpConfig
