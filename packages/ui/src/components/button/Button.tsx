@@ -1,13 +1,13 @@
 import { forwardRef, ReactNode, useRef } from 'react'
 import { clsx } from 'clsx'
-import { Ripple } from '../ripple'
-import { useComposedRefs } from '../../hooks/useComposedRefs'
+import { Ripple } from '@/components/ripple'
+import { useComposedRefs } from '@/hooks/useComposedRefs'
+
+import '@/components/button/Button.styles.css'
 
 type ButtonVariant = 'default' | 'ghost' | 'outlined'
 
 type ButtonSizes = 'large' | 'medium' | 'small' | 'full'
-
-import './Button.css'
 
 export type ButtonProps = {
   children: ReactNode
@@ -15,6 +15,7 @@ export type ButtonProps = {
   type?: 'button' | 'submit'
   size?: ButtonSizes
   variant?: ButtonVariant
+  disabled?: boolean
   onMouseDown?: () => void
   onMouseUp?: () => void
   onMouseEnter?: () => void
@@ -34,6 +35,7 @@ export const BaseButton = forwardRef<HTMLButtonElement, ButtonProps>(
       size = 'medium',
       type = 'button',
       variant = 'default',
+      disabled,
       ...otherProps
     } = props
 
@@ -41,10 +43,12 @@ export const BaseButton = forwardRef<HTMLButtonElement, ButtonProps>(
     const buttonRef = useComposedRefs(defaultRef, forwardedRef)
 
     const handleClick = () => {
+      if (disabled) return
       if (props?.onClick) props.onClick()
     }
 
     const handleMouseEnter = () => {
+      if (disabled) return
       if (props.onMouseEnter) props.onMouseEnter()
     }
 
@@ -65,6 +69,7 @@ export const BaseButton = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={buttonRef}
         className={classes}
         type={type}
+        disabled={disabled}
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         {...otherProps}>
