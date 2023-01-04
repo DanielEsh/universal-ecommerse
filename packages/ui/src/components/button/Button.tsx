@@ -3,6 +3,9 @@ import { clsx } from 'clsx'
 import { Ripple } from '@/components/ripple'
 import { useComposedRefs } from '@/hooks/useComposedRefs'
 
+// @ts-ignore
+import { LeftIcon } from '../../../../icons/dist/cjs/index'
+
 import '@/components/button/Button.styles.css'
 
 type ButtonVariant = 'default' | 'ghost' | 'outlined'
@@ -74,6 +77,8 @@ export const BaseButton = forwardRef<HTMLButtonElement, ButtonProps>(
         onMouseEnter={handleMouseEnter}
         {...otherProps}>
         {children}
+
+        <LeftIcon />
 
         <Ripple />
       </button>
