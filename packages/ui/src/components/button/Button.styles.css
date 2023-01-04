@@ -1,5 +1,5 @@
 .BaseButton {
-    @apply bg-secondary-500 text-white rounded-md transition-colors duration-300 hover:bg-secondary-300 disabled:bg-secondary-200 disabled:cursor-not-allowed
+    @apply flex gap-1 bg-secondary-500 text-white rounded-md transition-colors duration-300 hover:bg-secondary-300 disabled:bg-secondary-200 disabled:cursor-not-allowed
 }
 
 .BaseButton._outlined {

@@ -25,7 +25,7 @@ export const Colors = () => {
 
   return (
     <div>
-      colors
+      <h1 className="text-2xl">Colors</h1>
       <div>
         {render.map((color) => (
           <div style={{ background: color.style }}>
