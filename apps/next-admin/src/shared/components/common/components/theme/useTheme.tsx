@@ -10,7 +10,6 @@ export enum Theme {
 
 const DEFAULT_THEME = Theme.system
 const STORAGE_KEY = 'theme'
-const colorSchemes = ['light', 'dark']
 
 export const useTheme = () => {
   const [theme, setThemeState] = useState(() =>
@@ -19,10 +18,8 @@ export const useTheme = () => {
 
   const changeResolvedTheme = (theme: Theme) => {
     const DOCUMENT = document.documentElement
-    const colorScheme = colorSchemes.includes(theme) ? theme : DEFAULT_THEME
 
     DOCUMENT.className = theme
-    DOCUMENT.style.colorScheme = colorScheme
   }
 
   const applyTheme = (theme: Theme) => {
