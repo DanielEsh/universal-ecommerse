@@ -1,7 +1,7 @@
 import test from '../../../tailwind.config'
 
 export const Colors = () => {
-  //   console.log('theme', test.theme?.extend?.colors)
+  // console.log('theme', test.theme?.extend?.colors)
 
   const COLORS = test.theme?.extend?.colors ?? []
 
@@ -26,12 +26,30 @@ export const Colors = () => {
   return (
     <div>
       <h1 className="text-2xl">Colors</h1>
-      <div>
-        {render.map((color) => (
-          <div style={{ background: color.style }}>
+      <div className="mt-4">
+        {/* {render.map((color, key) => (
+          <div key={key} style={{ background: color.style }} className="w-64">
             {color.name} {color.value}
           </div>
-        ))}
+        ))} */}
+
+        <div className="w-64">
+          <h2 className="text-lg">Primary</h2>
+          <div className="bg-primary-500">123</div>
+          <div className="bg-primary-400">123</div>
+          <div className="bg-primary-300">123</div>
+          <div className="bg-primary-200">123</div>
+          <div className="bg-primary-100">123</div>
+        </div>
+
+        <div className="w-64">
+          <h2 className="text-lg">Primary</h2>
+          <div className="bg-primary-500">123</div>
+          <div className="bg-primary-400">123</div>
+          <div className="bg-primary-300">123</div>
+          <div className="bg-primary-200">123</div>
+          <div className="bg-primary-100">123</div>
+        </div>
       </div>
     </div>
   )
