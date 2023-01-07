@@ -1,8 +1,6 @@
 import { BaseButton } from '../Button'
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { LeftIcon } from '../../../../../icons/dist/cjs/index'
+import { LeftIcon } from '../../../../../icons/dist/esm/index'
 
 const Default = () => {
   return (

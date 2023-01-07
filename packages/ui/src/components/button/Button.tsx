@@ -63,9 +63,12 @@ export const BaseButtonRoot = forwardRef<HTMLButtonElement, ButtonProps>(
       full: 'w-full h-full',
     }
 
+    const isGhost = variant === 'ghost'
+    const isOutlined = variant === 'outlined'
+
     const classes = clsx(className, 'BaseButton ripple-root', sizes[size], {
-      _outlined: variant === 'outlined',
-      _ghost: variant === 'ghost',
+      _outlined: isOutlined,
+      _ghost: isGhost,
     })
 
     return (
@@ -78,7 +81,7 @@ export const BaseButtonRoot = forwardRef<HTMLButtonElement, ButtonProps>(
         onMouseEnter={handleMouseEnter}
         {...otherProps}>
         {children}
-        <Ripple />
+        {!isGhost && <Ripple />}
       </button>
     )
   },
