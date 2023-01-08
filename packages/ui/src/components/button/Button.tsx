@@ -14,6 +14,7 @@ export type ButtonProps = {
   className?: string
   type?: 'button' | 'submit'
   size?: ButtonSizes
+  color?: string
   variant?: ButtonVariant
   disabled?: boolean
   onMouseDown?: () => void
@@ -38,6 +39,7 @@ export const BaseButtonRoot = forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       size = 'medium',
       type = 'button',
+      color = 'primary',
       variant = 'default',
       disabled,
       ...otherProps
@@ -66,10 +68,16 @@ export const BaseButtonRoot = forwardRef<HTMLButtonElement, ButtonProps>(
     const isGhost = variant === 'ghost'
     const isOutlined = variant === 'outlined'
 
-    const classes = clsx(className, 'BaseButton ripple-root', sizes[size], {
-      _outlined: isOutlined,
-      _ghost: isGhost,
-    })
+    const classes = clsx(
+      className,
+      'BaseButton ripple-root',
+      sizes[size],
+      `color-${color}`,
+      {
+        _outlined: isOutlined,
+        _ghost: isGhost,
+      },
+    )
 
     return (
       <button

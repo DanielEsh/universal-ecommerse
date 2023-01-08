@@ -1,11 +1,38 @@
 .BaseButton {
-    @apply flex gap-1 bg-secondary-500 text-white rounded-md transition-colors duration-300 hover:bg-secondary-300 disabled:bg-secondary-200 disabled:cursor-not-allowed
+    @apply inline-flex gap-1 rounded-md transition-colors duration-300 disabled:cursor-not-allowed
+}
+
+/** 
+  Colors
+*/
+.BaseButton.color-primary {
+    @apply bg-primary-500 text-black hover:bg-primary-300 disabled:bg-primary-200
+}
+
+.BaseButton.color-primary._outlined {
+    @apply border-primary-500 text-primary-500 hover:bg-primary-300 hover:text-black
+}
+
+.BaseButton.color-primary._ghost {
+    @apply text-primary-500
+}
+
+.BaseButton.color-secondary {
+    @apply bg-secondary-500 text-white hover:bg-secondary-300 disabled:bg-secondary-200
+}
+
+.BaseButton.color-secondary._outlined {
+    @apply border-secondary-500 text-secondary-500 hover:bg-secondary-300 hover:text-white
+}
+
+.BaseButton.color-secondary._ghost {
+    @apply text-secondary-500
 }
 
 .BaseButton._outlined {
-    @apply bg-transparent text-black border border-black rounded-md
+    @apply bg-transparent border
 }
 
 .BaseButton._ghost {
-    @apply bg-transparent text-black border-none
+    @apply bg-transparent  border-none hover:bg-transparent
 }
