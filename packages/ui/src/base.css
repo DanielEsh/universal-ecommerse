@@ -80,11 +80,19 @@ html.light {
 }
 
 html.dark {
-  --secondary-500: #1a1a1a;
+  color-scheme: dark;
+
+  --secondary-500: #bb0f0f;
   --secondary-400: #282828;
   --secondary-300: #3a3a3a;
   --secondary-200: #484848;
   --secondary-100: #636363;
+
+  --surface-500: #1a1a1a;
+  --surface-400: #9ca3af;
+  --surface-300: #d1d5db;
+  --surface-200: #e5e7eb;
+  --surface-100: #f3f4f6;
 }
 
 .ripple-root {

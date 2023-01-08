@@ -8,4 +8,12 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  themes: {
+    default: 'light',
+    list: [
+      { name: 'light', class: 'light', color: '#fff' },
+      { name: 'dark', class: 'dark', color: '#000' }
+    ],
+    target: 'html',
+  },
 }
