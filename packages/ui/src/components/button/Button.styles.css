@@ -5,6 +5,7 @@
 /** 
   Colors
 */
+/** primary */
 .BaseButton.color-primary {
     @apply bg-primary-500 text-black hover:bg-primary-300 disabled:bg-primary-200
 }
@@ -16,7 +17,7 @@
 .BaseButton.color-primary._ghost {
     @apply text-primary-500
 }
-
+/** secondary */
 .BaseButton.color-secondary {
     @apply bg-secondary-500 text-white hover:bg-secondary-300 disabled:bg-secondary-200
 }
@@ -27,6 +28,45 @@
 
 .BaseButton.color-secondary._ghost {
     @apply text-secondary-500
+}
+
+/** success */
+.BaseButton.color-success {
+    @apply bg-success-500 text-white hover:bg-success-300 disabled:bg-success-200
+}
+
+.BaseButton.color-success._outlined {
+    @apply border-success-500 text-success-500 hover:bg-success-300 hover:text-white
+}
+
+.BaseButton.color-success._ghost {
+    @apply text-success-500
+}
+
+/** warning */
+.BaseButton.color-warning {
+    @apply bg-warning-500 text-white hover:bg-warning-300 disabled:bg-warning-200
+}
+
+.BaseButton.color-warning._outlined {
+    @apply border-warning-500 text-warning-500 hover:bg-warning-300 hover:text-white
+}
+
+.BaseButton.color-warning._ghost {
+    @apply text-warning-500
+}
+
+/** error */
+.BaseButton.color-error {
+    @apply bg-error-500 text-white hover:bg-error-300 disabled:bg-error-200
+}
+
+.BaseButton.color-error._outlined {
+    @apply border-error-500 text-error-500 hover:bg-error-300 hover:text-white
+}
+
+.BaseButton.color-error._ghost {
+    @apply text-error-500
 }
 
 .BaseButton._outlined {
