@@ -64,7 +64,6 @@ export const Sidebar = () => {
 
       <nav>
         <SidebarList list={list} />
-        <hr />
         <SidebarList list={list2} />
       </nav>
     </div>

@@ -14,7 +14,7 @@ export const Header = () => {
 
   const classes = clsx(
     styles.header,
-    'fixed flex h-[64px] items-center justify-between border-b border-gray-300 bg-white/50 px-6 backdrop-blur backdrop-saturate-150',
+    'fixed flex h-[64px] items-center justify-between border-b border-divider-500 bg-white/50 px-6 backdrop-blur backdrop-saturate-150',
     {
       [styles.toggled]: !sideBarIsToggled,
     },

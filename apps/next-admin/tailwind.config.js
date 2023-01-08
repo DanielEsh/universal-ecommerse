@@ -71,6 +71,9 @@ const tailwindConfig = {
           200: 'var(--link-200)',
           100: 'var(--link-100)',
         },
+        divider: {
+          500: 'var(--divider-500)'
+        },
       },
     },
   },

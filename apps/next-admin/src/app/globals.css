@@ -81,6 +81,8 @@ a {
 
   --gray-100: #f3f4f6;
 
+  --divider-500: rgba(84, 84, 84, .48);
+
 
   /*
     Global variables
@@ -98,8 +100,8 @@ html.light {
   --secondary-200: #484848;
   --secondary-100: #636363;
 
-  --surface-500: #6b7280;
-  --surface-400: #9ca3af;
+  --surface-500: #f9f9f9;
+  --surface-400: #f1f1f1;
   --surface-300: #d1d5db;
   --surface-200: #e5e7eb;
   --surface-100: #f3f4f6;
@@ -115,7 +117,7 @@ html.dark {
   --secondary-100: #636363;
 
   --surface-500: #1a1a1a;
-  --surface-400: #9ca3af;
+  --surface-400: #242424;
   --surface-300: #d1d5db;
   --surface-200: #e5e7eb;
   --surface-100: #f3f4f6;
