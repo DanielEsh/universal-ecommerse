@@ -1,4 +1,11 @@
-import { ReactNode, useRef, useState, useEffect, MouseEvent } from 'react'
+import {
+  ReactNode,
+  useRef,
+  useState,
+  useEffect,
+  MouseEvent,
+  useContext,
+} from 'react'
 import { clsx } from 'clsx'
 import { useEventListener } from '../../hooks/useEventListener'
 import {
@@ -8,8 +15,13 @@ import {
   getOuterWidth,
   getOuterHeight,
 } from '../../utils/dom'
+import {
+  RippleContext,
+  type RippleContextType,
+} from '@/components/ripple/RippleContext'
 
 export type RippleProps = {
+  className?: string
   children?: ReactNode
 }
 
@@ -34,23 +46,50 @@ const removeClass = (element, className) => {
   }
 }
 
-export const Ripple = ({ children }: RippleProps) => {
+/**
+ * <Ripple.Container>
+ *
+ * <Ripple />
+ * </Ripple.Container>
+ */
+
+export const RippleContainer = ({ children, className }: RippleProps) => {
+  const containerRef = useRef<HTMLDivElement | null>(null)
+
+  const context: RippleContextType = {
+    color: 'primary',
+    containerRef,
+  }
+
+  const classes = clsx('ripple-root', className)
+
+  return (
+    <RippleContext.Provider value={context}>
+      <div ref={containerRef} className={classes}>
+        {children}
+      </div>
+    </RippleContext.Provider>
+  )
+}
+
+export const RippleRoot = ({ children }: RippleProps) => {
   const [effect, setEffect] = useState(false)
-  const targetRef = useRef<HTMLElement | null>(null)
   const rippleRef = useRef<HTMLElement | null>(null)
 
   const getTargetElement = () => {
     return rippleRef.current && rippleRef.current.parentElement
   }
 
+  const { color, containerRef } = useContext<RippleContextType>(RippleContext)
+
   const onMouseDown = (event: MouseEvent) => {
-    if (!targetRef.current) return
+    if (!containerRef.current) return
 
     if (event.target !== getTargetElement()) {
       return
     }
 
-    const offset = getOffset(targetRef.current)
+    const offset = getOffset(containerRef.current)
     const offsetX =
       event.pageX -
       offset.left +
@@ -74,8 +113,8 @@ export const Ripple = ({ children }: RippleProps) => {
 
     if (!getHeight(rippleRef.current) && !getWidth(rippleRef.current)) {
       const maxRippleValue = Math.max(
-        getOuterWidth(targetRef.current),
-        getOuterHeight(targetRef.current),
+        getOuterWidth(containerRef.current),
+        getOuterHeight(containerRef.current),
       )
 
       rippleRef.current.style.height = `${maxRippleValue}px`
@@ -85,19 +124,19 @@ export const Ripple = ({ children }: RippleProps) => {
     rippleRef.current.style.top = offsetY + 'px'
     rippleRef.current.style.left = offsetX + 'px'
 
-    addClass(rippleRef.current, 'animate-ripple')
+    setEffect(true)
   }
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   useEventListener('mousedown', onMouseDown)
 
-  useEffect(() => {
-    targetRef.current = getTargetElement()
-  }, [])
+  // useEffect(() => {
+  //   targetRef.current = getTargetElement()
+  // }, [])
 
-  const onAnimationEnd = (event) => {
-    removeClass(event.currentTarget, 'animate-ripple')
+  const onAnimationEnd = () => {
+    setEffect(false)
   }
 
   const classes = clsx('ripple-effect absolute block rounded-full', {
@@ -113,3 +152,7 @@ export const Ripple = ({ children }: RippleProps) => {
     />
   )
 }
+
+export const Ripple = Object.assign(RippleRoot, {
+  Container: RippleContainer,
+})

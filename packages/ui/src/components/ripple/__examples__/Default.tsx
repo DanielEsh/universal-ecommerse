@@ -8,10 +8,15 @@ const Default = () => {
         <Ripple />
       </div>
 
-      <div className="ripple-root flex items-center justify-center w-24 h-24 bg-black rounded-md text-white">
+      <Ripple.Container className="flex items-center justify-center w-24 h-24 bg-black rounded-md text-white">
+        children
+        <Ripple />
+      </Ripple.Container>
+
+      {/* <div className="ripple-root flex items-center justify-center w-24 h-24 bg-black rounded-md text-white">
         400x400
         <Ripple />
-      </div>
+      </div> */}
     </div>
   )
 }
