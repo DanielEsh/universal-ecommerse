@@ -1,3 +1,5 @@
+'use client'
+
 import { PropsWithChildren } from 'react'
 import { clsx } from 'clsx'
 import { Sidebar } from '@/src/widgets/sidebar/Sidebar'
@@ -8,16 +10,18 @@ import { Footer } from '@/src/widgets/footer/Footer'
 export const DefaultLayout = ({ children }: PropsWithChildren) => {
   const sideBarIsToggled = useMainStore()
 
-  const contentClasses = clsx('content bg-surface-500 dark:text-white', {
+  const contentClasses = clsx('content h-full bg-surface-500 dark:text-white', {
     toggled: !sideBarIsToggled,
   })
 
   return (
-    <div className="flex">
+    <div className="default-layout flex h-full">
       <Sidebar />
       <div className={contentClasses}>
         <Header />
-        <div className="mt-[64px] p-6 text-black">{children}</div>
+        <div className="page mt-[64px] p-6 text-black dark:text-white">
+          {children}
+        </div>
         <Footer />
       </div>
     </div>

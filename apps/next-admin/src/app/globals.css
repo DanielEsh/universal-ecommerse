@@ -89,6 +89,8 @@ a {
   */
   --small-sidebar-width: 120px;
   --toggled-sidebar-width: 360px;
+  --header-height: 64px;
+  --footer-height: 64px;
 }
 
 html.light {
@@ -132,4 +134,8 @@ html.dark {
 .content.toggled {
   width: calc(100% - var(--small-sidebar-width));
   margin-left: var(--small-sidebar-width);
+}
+
+.page {
+  min-height: calc(100vh - (var(--header-height) + var(--footer-height)))
 }
