@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "slug": "brand1",
+        "name": "brand 1",
+        "description": "description of brand1",
+        "goodsCount": 20
+    },
+    {
+        "id": 2,
+        "slug": "brand2",
+        "name": "brand 2",
+        "description": "description of brand2",
+        "goodsCount": 10
+    },
+    {
+        "id": 3,
+        "slug": "brand3",
+        "name": "brand 3",
+        "description": "description of brand3",
+        "goodsCount": 30
+    },
+    {
+        "id": 4,
+        "slug": "brand4",
+        "name": "brand 4",
+        "description": "description of brand4",
+        "goodsCount": 40
+    },
+    {
+        "id": 5,
+        "slug": "brand5",
+        "name": "brand 5",
+        "description": "description of brand5",
+        "goodsCount": 50
+    }
+]
