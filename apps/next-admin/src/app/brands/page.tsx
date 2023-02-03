@@ -1,17 +1,16 @@
 'use client'
 
 import { useGetAllBrands } from '@/src/shared/api/brands/queries'
+import { BrandsTable } from '@/src/entities/brands'
 
 export default function BrandsPage() {
   const { isLoading, data: brands } = useGetAllBrands()
 
-  const renderBrands = () => (
+  return (
     <div>
-      {brands?.map((brand) => (
-        <div key={brand.id}>{brand.name}</div>
-      ))}
+      {isLoading && <div>Loading...</div>}
+
+      {!isLoading && brands && <BrandsTable brands={brands} />}
     </div>
   )
-
-  return <div>{isLoading ? <div>Loading...</div> : renderBrands()}</div>
 }
