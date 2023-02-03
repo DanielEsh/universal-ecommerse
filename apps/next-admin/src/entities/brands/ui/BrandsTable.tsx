@@ -1,5 +1,7 @@
 import { Brand } from '@/src/entities/brands'
 import { Table } from '@/src/shared/ui/Table'
+import { BrandsTableActions } from '@/src/entities/brands/ui/BrandsTableActions'
+import { BrandsTableHeader } from '@/src/entities/brands/ui/BrandsTableHeader'
 
 interface Props {
   brands: Brand[]
@@ -8,6 +10,9 @@ interface Props {
 export const BrandsTable = ({ brands }: Props) => {
   return (
     <Table>
+      <Table.Caption>
+        <BrandsTableHeader />
+      </Table.Caption>
       <Table.Head>
         <Table.Cell width="10%" component="th">
           Number
@@ -33,7 +38,9 @@ export const BrandsTable = ({ brands }: Props) => {
             <Table.Cell>{slug}</Table.Cell>
             <Table.Cell>{name}</Table.Cell>
             <Table.Cell>{goodsCount}</Table.Cell>
-            <Table.Cell>{goodsCount}</Table.Cell>
+            <Table.Cell>
+              <BrandsTableActions />
+            </Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>

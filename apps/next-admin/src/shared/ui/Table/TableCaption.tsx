@@ -5,5 +5,5 @@ export type TableCaptionProps = {
 }
 
 export const TableCaption = ({ children }: TableCaptionProps) => {
-  return <caption>{children}</caption>
+  return <caption className="py-4 text-left">{children}</caption>
 }
