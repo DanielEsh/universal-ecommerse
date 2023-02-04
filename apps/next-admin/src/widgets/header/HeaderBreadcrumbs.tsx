@@ -1,6 +1,8 @@
 import { useMemo } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { Breadcrumbs } from 'ui'
 
 export const HeaderBreadcrumbs = () => {
