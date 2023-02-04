@@ -39,7 +39,7 @@ export const BrandsTable = ({ brands }: Props) => {
             <Table.Cell>{name}</Table.Cell>
             <Table.Cell>{goodsCount}</Table.Cell>
             <Table.Cell>
-              <BrandsTableActions />
+              <BrandsTableActions slug={slug} />
             </Table.Cell>
           </Table.Row>
         ))}
