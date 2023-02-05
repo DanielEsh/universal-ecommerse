@@ -2,6 +2,7 @@
 
 import { BaseModal } from 'ui'
 import { useRouter } from 'next/navigation'
+import { useGetBrandBySlug } from '@/src/shared/api/brands/queries'
 
 type PageProps = {
   params?: any
@@ -10,6 +11,7 @@ type PageProps = {
 
 export default function BrandSlugPage({ params }: PageProps) {
   const router = useRouter()
+  const { isLoading, data: brand } = useGetBrandBySlug(params.brandSlug)
 
   return (
     <BaseModal
@@ -18,13 +20,17 @@ export default function BrandSlugPage({ params }: PageProps) {
         router.push('/brands')
       }}>
       <div className="-translate-1/2 rounde absolute top-1/2 left-1/2 h-28">
-        Brand Slug {params.brandSlug} Modal
-        <button
-          onClick={() => {
-            router.push('/brands')
-          }}>
-          Close
-        </button>
+        {isLoading && <div>Loading...</div>}
+
+        {!isLoading && brand && <div>Brand Slug {brand.slug} Modal</div>}
+        <div>
+          <button
+            onClick={() => {
+              router.push('/brands')
+            }}>
+            Close
+          </button>
+        </div>
       </div>
     </BaseModal>
   )
