@@ -1,7 +1,7 @@
 'use client'
 
 import { BaseModal } from 'ui'
-import { useRouter } from 'next/navigation'
+import { useRouter, notFound } from 'next/navigation'
 import { useGetBrandBySlug } from '@/src/shared/api/brands/queries'
 
 type PageProps = {
@@ -12,6 +12,8 @@ type PageProps = {
 export default function BrandSlugPage({ params }: PageProps) {
   const router = useRouter()
   const { isLoading, data: brand } = useGetBrandBySlug(params.brandSlug)
+
+  if (!brand) notFound()
 
   return (
     <BaseModal
