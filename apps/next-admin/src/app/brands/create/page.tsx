@@ -2,9 +2,25 @@
 
 import { BaseModal } from 'ui'
 import { useRouter } from 'next/navigation'
+import { useCreateBrandMutation } from '@/src/shared/api/brands/queries'
 
 export default function CreateBrandPage() {
   const router = useRouter()
+
+  const handleSuccessCreateBrand = () => {
+    // router.push('/brands')
+  }
+
+  const { mutate } = useCreateBrandMutation(handleSuccessCreateBrand)
+
+  const handleCreateBrand = () => {
+    mutate({
+      id: 6,
+      slug: 'createdBrand',
+      name: 'createdBrand',
+      goodsCount: 0,
+    })
+  }
 
   return (
     <BaseModal
@@ -13,13 +29,18 @@ export default function CreateBrandPage() {
         router.push('/brands')
       }}>
       <div className="-translate-1/2 rounde absolute top-1/2 left-1/2 h-28">
-        Modal
-        <button
-          onClick={() => {
-            router.push('/brands')
-          }}>
-          Close
-        </button>
+        <div>CreateModal</div>
+        <div>
+          <button onClick={handleCreateBrand}>Create Brand</button>
+        </div>
+        <div>
+          <button
+            onClick={() => {
+              router.push('/brands')
+            }}>
+            Close
+          </button>
+        </div>
       </div>
     </BaseModal>
   )

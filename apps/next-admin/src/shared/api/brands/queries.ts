@@ -1,5 +1,17 @@
-import { useQuery } from '@tanstack/react-query'
-import { getAllBrands, getBrandBySlug } from '@/src/shared/api/brands'
+import { useQuery, useMutation } from '@tanstack/react-query'
+import {
+  createBrand,
+  getAllBrands,
+  getBrandBySlug,
+} from '@/src/shared/api/brands'
+import { Brand } from '@/src/entities/brands'
+
+export const useCreateBrandMutation = (onSuccess: () => void) => {
+  return useMutation({
+    mutationFn: (newBrand: Brand) => createBrand(newBrand),
+    onSuccess,
+  })
+}
 
 export const useGetAllBrands = () => {
   return useQuery({ queryKey: ['allBrands'], queryFn: getAllBrands })
