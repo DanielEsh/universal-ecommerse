@@ -2,13 +2,17 @@
 
 import { BaseModal } from 'ui'
 import { useRouter } from 'next/navigation'
+import { useQueryClient } from '@tanstack/react-query'
+
 import { useCreateBrandMutation } from '@/src/shared/api/brands/queries'
 
 export default function CreateBrandPage() {
   const router = useRouter()
+  const queryClient = useQueryClient()
 
   const handleSuccessCreateBrand = () => {
-    // router.push('/brands')
+    router.push('/brands')
+    queryClient.refetchQueries({ queryKey: ['allBrands'] })
   }
 
   const { mutate } = useCreateBrandMutation(handleSuccessCreateBrand)

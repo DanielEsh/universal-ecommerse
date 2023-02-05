@@ -2,6 +2,7 @@
 
 import { BaseModal } from 'ui'
 import { useRouter, notFound } from 'next/navigation'
+
 import { useGetBrandBySlug } from '@/src/shared/api/brands/queries'
 
 type PageProps = {
