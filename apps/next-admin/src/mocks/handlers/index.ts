@@ -32,14 +32,14 @@ function readBrandBySlug() {
 
     const brand = brandsData.find((brand) => brand.slug === slug)
 
-    if (!brand) {
-      return res(
-        ctx.status(404),
-        ctx.json({
-          message: `Brand not found`,
-        }),
-      )
-    }
+    // if (!brand) {
+    //   return res(
+    //     ctx.status(404),
+    //     ctx.json({
+    //       message: `Brand not found`,
+    //     }),
+    //   )
+    // }
 
     return res(ctx.json(brand))
   })

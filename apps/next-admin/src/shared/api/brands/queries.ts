@@ -17,9 +17,10 @@ export const useGetAllBrands = () => {
   return useQuery({ queryKey: ['allBrands'], queryFn: getAllBrands })
 }
 
-export const useGetBrandBySlug = (slug: string) => {
+export const useGetBrandBySlug = (slug: string, onError?: () => void) => {
   return useQuery({
     queryKey: ['todos', slug],
     queryFn: () => getBrandBySlug(slug),
+    onError,
   })
 }

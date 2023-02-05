@@ -11,9 +11,10 @@ type PageProps = {
 
 export default function BrandSlugPage({ params }: PageProps) {
   const router = useRouter()
+
   const { isLoading, data: brand } = useGetBrandBySlug(params.brandSlug)
 
-  if (!brand) notFound()
+  if (!isLoading && !brand) notFound()
 
   return (
     <BaseModal
