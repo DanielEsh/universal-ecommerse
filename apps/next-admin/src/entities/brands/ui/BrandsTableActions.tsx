@@ -1,4 +1,5 @@
 import { useRouter } from 'next/navigation'
+import { useQueryClient } from '@tanstack/react-query'
 
 import { useDeleteBrandBySlug } from '@/src/shared/api/brands/queries'
 
@@ -8,13 +9,14 @@ interface Props {
 
 export const BrandsTableActions = ({ slug }: Props) => {
   const router = useRouter()
+  const queryClient = useQueryClient()
 
   const handleViewClick = () => {
     router.push(`/brands/${slug}`)
   }
 
   const handleSuccessDelete = () => {
-    console.log('delete')
+    queryClient.refetchQueries({ queryKey: ['allBrands'] })
   }
 
   const { mutate } = useDeleteBrandBySlug(handleSuccessDelete)

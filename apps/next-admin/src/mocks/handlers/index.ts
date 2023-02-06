@@ -5,7 +5,7 @@ export const handlers = [
   createBrand(),
   readAllBrands(),
   readBrandBySlug(),
-  // deleteBrandBySlug(),
+  deleteBrandBySlug(),
 ]
 
 function createBrand() {
@@ -43,7 +43,7 @@ function readBrandBySlug() {
 }
 
 function deleteBrandBySlug() {
-  rest.post('https://my.backend/book/:slug', (req, res, ctx) => {
+  return rest.delete('https://my.backend/book/:slug', (req, res, ctx) => {
     const slug = req.params.slug
     const blogIndex = brandsData.findIndex((brand) => brand.slug === slug)
 
