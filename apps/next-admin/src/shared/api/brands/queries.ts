@@ -3,6 +3,7 @@ import {
   createBrand,
   getAllBrands,
   getBrandBySlug,
+  deleteBrandBySlug,
 } from '@/src/shared/api/brands'
 import { Brand } from '@/src/entities/brands'
 
@@ -22,5 +23,12 @@ export const useGetBrandBySlug = (slug: string, onError?: () => void) => {
     queryKey: ['todos', slug],
     queryFn: () => getBrandBySlug(slug),
     onError,
+  })
+}
+
+export const useDeleteBrandBySlug = (onSuccess: () => void) => {
+  return useMutation({
+    mutationFn: (slug: string) => deleteBrandBySlug(slug),
+    onSuccess,
   })
 }

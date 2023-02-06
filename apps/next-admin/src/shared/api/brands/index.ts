@@ -19,3 +19,8 @@ export const getBrandBySlug = async (brandSlug: string) => {
   )
   return data
 }
+
+export const deleteBrandBySlug = async (slug: string) => {
+  const { data } = await $axios.delete(`https://my.backend/book/${slug}`)
+  return { data }
+}

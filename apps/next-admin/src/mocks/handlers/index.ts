@@ -1,14 +1,11 @@
 import { rest } from 'msw'
-import { test } from './test'
 import brandsData from './brandsData.json'
 
 export const handlers = [
-  // rest.get('https://my.backend/book', (_req, res, ctx) => {
-  //   return res(ctx.json(test))
-  // }),
   createBrand(),
   readAllBrands(),
   readBrandBySlug(),
+  // deleteBrandBySlug(),
 ]
 
 function createBrand() {
@@ -42,5 +39,16 @@ function readBrandBySlug() {
     // }
 
     return res(ctx.json(brand))
+  })
+}
+
+function deleteBrandBySlug() {
+  rest.post('https://my.backend/book/:slug', (req, res, ctx) => {
+    const slug = req.params.slug
+    const blogIndex = brandsData.findIndex((brand) => brand.slug === slug)
+
+    brandsData.splice(blogIndex, 1)
+
+    return res(ctx.json({ message: 'Deleted successfully' }))
   })
 }
