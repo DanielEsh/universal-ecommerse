@@ -1,6 +1,6 @@
 // Components
 export * from '@/components/portal'
-export * from '@/components/modal'
+export * from './components/modal'
 export * from '@/components/breadcrumbs'
 export * from '@/components/dropdown'
 export * from '@/components/menu'

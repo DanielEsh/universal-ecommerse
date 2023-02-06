@@ -9,9 +9,10 @@ const nextConfig = {
     return config;
   },
 
+  transpilePackages: ["ui"],
+
   experimental: {
     appDir: true,
-    transpilePackages: ["ui"],
   },
 }
 
