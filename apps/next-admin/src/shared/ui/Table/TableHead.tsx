@@ -5,5 +5,9 @@ export type TableHeadProps = {
 }
 
 export const TableHead = ({ children }: TableHeadProps) => {
-  return <thead>{children}</thead>
+  return (
+    <thead>
+      <tr>{children}</tr>
+    </thead>
+  )
 }

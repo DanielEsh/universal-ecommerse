@@ -14,21 +14,11 @@ export const BrandsTable = ({ brands }: Props) => {
         <BrandsTableHeader />
       </Table.Caption>
       <Table.Head>
-        <Table.Cell width="10%" component="th">
-          Number
-        </Table.Cell>
-        <Table.Cell width="15%" component="th">
-          Slug
-        </Table.Cell>
-        <Table.Cell width="15%" component="th">
-          Name
-        </Table.Cell>
-        <Table.Cell width="20%" component="th">
-          Count
-        </Table.Cell>
-        <Table.Cell width="20%" component="th">
-          Actions
-        </Table.Cell>
+        <Table.CellHead>Number</Table.CellHead>
+        <Table.CellHead>Slug</Table.CellHead>
+        <Table.CellHead>Name</Table.CellHead>
+        <Table.CellHead>Count</Table.CellHead>
+        <Table.CellHead>Actions</Table.CellHead>
       </Table.Head>
 
       <Table.Body>

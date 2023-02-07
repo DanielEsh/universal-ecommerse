@@ -8,6 +8,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  TableCellHead,
 } from './index'
 import { TableContextType } from '@/src/shared/ui/Table/TableContext'
 
@@ -40,6 +41,7 @@ export const Table = Object.assign(TableRoot, {
   Body: TableBody,
   Row: TableRow,
   Cell: TableCell,
+  CellHead: TableCellHead,
 })
 
 TableRoot.displayName = NAME

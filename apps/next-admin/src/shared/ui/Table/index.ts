@@ -4,6 +4,7 @@ import { TableHead } from './TableHead'
 import { TableBody } from './TableBody'
 import { TableRow } from './TableRow'
 import { TableCell } from './TableCell'
+import { TableCellHead } from './TableCellHead'
 import { Table } from './Table'
 
 export {
@@ -13,5 +14,6 @@ export {
   TableBody,
   TableRow,
   TableCell,
+  TableCellHead,
   Table,
 }

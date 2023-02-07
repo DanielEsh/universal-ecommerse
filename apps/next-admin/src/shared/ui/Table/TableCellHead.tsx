@@ -6,7 +6,7 @@ export type TableCellProps = {
   children: ReactNode
 }
 
-export const TableCell = (props: TableCellProps) => {
+export const TableCellHead = (props: TableCellProps) => {
   const { children } = props
 
   const { color } = useContext(TableContext)
@@ -17,5 +17,5 @@ export const TableCell = (props: TableCellProps) => {
 
   const classes = classNames(colorsList[color])
 
-  return <td className={classes}>{children}</td>
+  return <th className={classes}>{children}</th>
 }
