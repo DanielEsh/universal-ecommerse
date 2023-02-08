@@ -9,7 +9,7 @@ export * from '@/components/menu'
 export * from '@/utils/canUseDOM'
 
 // Hooks
-export * from '@/hooks/useClickOutside'
-export * from '@/hooks/useComposedRefs'
-export * from '@/hooks/useEventListener'
-export * from '@/hooks/useKeyPress'
+export * from './hooks/useClickOutside'
+export * from './hooks/useComposedRefs'
+export * from './hooks/useEventListener'
+export * from './hooks/useKeyPress'
