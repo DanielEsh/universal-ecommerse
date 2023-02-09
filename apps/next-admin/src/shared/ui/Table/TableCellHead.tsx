@@ -1,4 +1,4 @@
-import { ReactNode, useContext } from 'react'
+import { ReactNode, useContext, useRef } from 'react'
 import classNames from 'clsx'
 import { TableContext } from '@/src/shared/ui/Table/TableContext'
 
@@ -11,6 +11,8 @@ export type TableCellProps = {
 
 export const TableCellHead = (props: TableCellProps) => {
   const { children, resizable, onResizerClick, onResizeStart } = props
+
+  const ref = useRef<HTMLTableCellElement | null>(null)
 
   const { color } = useContext(TableContext)
 
@@ -34,11 +36,12 @@ export const TableCellHead = (props: TableCellProps) => {
     if (onResizeStart)
       onResizeStart({
         originalEvent: event,
+        column: ref.current,
       })
   }
 
   return (
-    <th className={classes}>
+    <th ref={ref} className={classes}>
       {resizable && (
         <span
           className="absolute top-0 right-0 h-full w-2 cursor-col-resize bg-red-500"
