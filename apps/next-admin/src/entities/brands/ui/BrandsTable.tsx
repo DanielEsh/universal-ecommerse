@@ -39,6 +39,9 @@ export const BrandsTable = ({ brands }: Props) => {
   const resizerHelperRef = useRef(null)
   const rootRef = useRef(null)
   const resizeX = useRef(0)
+  const lastResizeHelperX = useRef(0)
+  const resizeColumn = useRef(null)
+  const resizeColumnElement = useRef(null)
 
   const move = () => {
     console.log('MOVE')
@@ -71,6 +74,7 @@ export const BrandsTable = ({ brands }: Props) => {
   }
 
   function handleResize() {
+    // onColumnResize
     console.log('handle resize')
 
     const containerLeft = getOffset(rootRef.current).left
@@ -86,6 +90,7 @@ export const BrandsTable = ({ brands }: Props) => {
   }
 
   const handleResizeStart = (event: any) => {
+    // onColumnResizeStart
     console.log('start', event.originalEvent, event.column)
 
     const containerLeft = getOffset(rootRef.current).left
@@ -94,12 +99,19 @@ export const BrandsTable = ({ brands }: Props) => {
 
     console.log('containerLeft', containerLeft)
     console.log('resizeX.curren', resizeX.current)
-
+    resizeColumn.current = event.column
+    resizeColumnElement.current =
+      event.originalEvent.currentTarget.parentElement
+    lastResizeHelperX.current =
+      event.originalEvent.pageX - containerLeft + rootRef.current.scrollLeft
+    console.log('resizeColumn', resizeColumn.current)
+    console.log('resizeColumnElement', resizeColumnElement.current)
     bindMove()
     bindUp()
   }
 
   function handleResizeEnd() {
+    // onColumnResizeEnd
     console.log('resize end')
 
     resizerHelperRef.current.style.display = 'none'
@@ -117,9 +129,9 @@ export const BrandsTable = ({ brands }: Props) => {
           ref={resizerHelperRef}
           className="absolute z-10 hidden w-[1px] bg-red-500"
         />
-        {/* <Table.Caption>
+        <Table.Caption>
           <BrandsTableHeader />
-        </Table.Caption> */}
+        </Table.Caption>
         <Table.Head>
           <Table.CellHead
             resizable
