@@ -110,13 +110,29 @@ export const BrandsTable = ({ brands }: Props) => {
     bindUp()
   }
 
+  const updateTableWidth = (el, newWidth) => {
+    !!el && (el.style.width = newWidth)
+  }
+
   function handleResizeEnd() {
     // onColumnResizeEnd
     console.log('resize end')
 
-    resizerHelperRef.current.style.display = 'none'
+    const delta =
+      resizerHelperRef.current.offsetLeft - lastResizeHelperX.current
+    const columnWidth = resizeColumnElement.current.offsetWidth
+    const newColumnWidth = columnWidth + delta
+    const minWidth = resizeColumnElement.current.style.minWidth || 15
+
+    console.log('newWidth', newColumnWidth)
+    console.log('minWidth', minWidth)
+    const tableWidth = resizeColumnElement.current.offsetWidth + delta + 'px'
+
+    resizeColumnElement.current.style.width = tableWidth
 
     // TODO: установить выделяемый текст для ячейки
+
+    resizerHelperRef.current.style.display = 'none'
 
     unbindMove()
     unbindUp()
