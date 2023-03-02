@@ -11,7 +11,7 @@ export default function BrandsLayout({ children }: PropsWithChildren) {
     <div>
       {isLoading && <div>Loading...</div>}
 
-      {!isLoading && brands && <BrandsTable brands={brands} />}
+      {!isLoading && brands && <div>{JSON.stringify(brands)}</div>}
 
       <>{children}</>
     </div>

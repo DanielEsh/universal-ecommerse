@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div className="h-[2000px] text-black dark:text-white">
       <div>Dashboard page</div>
-      <Link href="/layouts">Dashboard</Link>
+      <Link href="/brands">Dashboard</Link>
     </div>
   )
 }
