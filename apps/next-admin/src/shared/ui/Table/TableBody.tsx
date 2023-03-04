@@ -1,9 +1,21 @@
-import { ReactNode } from 'react'
+import { useContext } from 'react'
+import { TableCell } from '@/src/shared/ui/Table/TableCell'
+import { TableContext } from '@/src/shared/ui/Table/TableContext'
 
-export type TableBodyProps = {
-  children: ReactNode
-}
+export const TableBody = () => {
+  const context = useContext(TableContext)
+  const { rows } = context
 
-export const TableBody = ({ children }: TableBodyProps) => {
-  return <tbody>{children}</tbody>
+  return (
+    <tbody>
+      {rows &&
+        rows.map((row) => (
+          <tr key={row.id}>
+            {row.getVisibleCells().map((cell) => (
+              <TableCell key={cell.id} cell={cell} />
+            ))}
+          </tr>
+        ))}
+    </tbody>
+  )
 }

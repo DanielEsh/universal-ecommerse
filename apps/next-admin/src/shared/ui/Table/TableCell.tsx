@@ -1,21 +1,15 @@
-import { ReactNode, useContext } from 'react'
-import classNames from 'clsx'
-import { TableContext } from '@/src/shared/ui/Table/TableContext'
+import { Cell, flexRender } from '@tanstack/react-table'
 
-export type TableCellProps = {
-  children: ReactNode
+export interface TableCell {
+  cell: Cell<any, unknown>
 }
 
-export const TableCell = (props: TableCellProps) => {
-  const { children } = props
-
-  const { color } = useContext(TableContext)
-
-  const colorsList: any = {
-    primary: 'p-2 border',
-  }
-
-  const classes = classNames(colorsList[color])
-
-  return <td className={classes}>{children}</td>
+export const TableCell = ({ cell }: TableCell) => {
+  return (
+    <td
+      className="border border-red-500 bg-yellow-400"
+      style={{ width: cell.column.getSize() }}>
+      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+    </td>
+  )
 }

@@ -1,55 +1,32 @@
-import { ReactNode, useContext, useRef } from 'react'
-import classNames from 'clsx'
-import { TableContext } from '@/src/shared/ui/Table/TableContext'
+import type { TouchEvent, MouseEvent } from 'react'
+import { flexRender, type Header } from '@tanstack/react-table'
 
-export type TableCellProps = {
-  children: ReactNode
-  resizable?: boolean
-  onResizerClick?: (e: any) => void
-  onResizeStart?: (e: any) => void
+export interface TableCellHead {
+  header: Header<any, unknown>
 }
 
-export const TableCellHead = (props: TableCellProps) => {
-  const { children, resizable, onResizerClick, onResizeStart } = props
-
-  const ref = useRef<HTMLTableCellElement | null>(null)
-
-  const { color } = useContext(TableContext)
-
-  const colorsList: any = {
-    primary: 'p-2 border',
-  }
-
-  const classes = classNames(colorsList[color], {
-    relative: resizable,
-  })
-
-  const handleResizerClick = (event: any) => {
-    if (onResizerClick) {
-      onResizerClick({
-        originalEvent: event,
-      })
-    }
-  }
-
-  const handleMouseDown = (event: any) => {
-    if (onResizeStart)
-      onResizeStart({
-        originalEvent: event,
-        column: ref.current,
-      })
+export const TableCellHead = ({ header }: TableCellHead) => {
+  const handleTouchResize = (event: TouchEvent | MouseEvent) => {
+    const changeColumnSesizeFn = header.getResizeHandler()
+    changeColumnSesizeFn(event)
   }
 
   return (
-    <th ref={ref} className={classes}>
-      {resizable && (
-        <span
-          className="absolute top-0 right-0 h-full w-2 cursor-col-resize bg-red-500"
-          onMouseDown={handleMouseDown}
-          onClick={handleResizerClick}
-        />
-      )}
-      {children}
+    <th
+      className="relative border border-red-500 bg-slate-400"
+      colSpan={header.colSpan}
+      style={{ width: header.getSize() }}>
+      {header.isPlaceholder
+        ? null
+        : flexRender(header.column.columnDef.header, header.getContext())}
+
+      <div
+        onTouchStart={(event) => handleTouchResize(event)}
+        onMouseDown={(event) => handleTouchResize(event)}
+        className={`resizer ${
+          header.column.getIsResizing() ? 'isResizing' : ''
+        }`}
+      />
     </th>
   )
 }
