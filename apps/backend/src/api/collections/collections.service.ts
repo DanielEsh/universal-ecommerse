@@ -14,12 +14,21 @@ export class CollectionService {
     newModel.slug = body.slug;
     newModel.name = body.name;
     newModel.description = body?.description;
+    newModel.goodsCount = 0;
 
     return this.repository.save(newModel);
   }
 
   async findAll() {
-    return await this.repository.find();
+    const builder = await this.repository
+      .createQueryBuilder('collections')
+      .select('collections.id')
+      .addSelect('collections.slug')
+      .addSelect('collections.name')
+      .addSelect('collections.goodsCount')
+      .getMany();
+
+    return builder;
   }
 
   findOne(id: number) {
