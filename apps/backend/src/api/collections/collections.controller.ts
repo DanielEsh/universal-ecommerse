@@ -2,10 +2,13 @@ import {
   Controller,
   Get,
   Post,
-  Body,
   Patch,
-  Param,
   Delete,
+  Body,
+  Param,
+  Query,
+  DefaultValuePipe,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { CollectionService } from '@/api/collections/collections.service';
 
@@ -19,8 +22,17 @@ export class CollectionsController {
   }
 
   @Get()
-  findAll() {
-    return this.collectionsService.findAll();
+  async findAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
+  ) {
+    limit = limit > 100 ? 100 : limit;
+
+    return this.collectionsService.findAll({
+      page,
+      limit,
+      route: ' ',
+    });
   }
 
   @Get(':id')

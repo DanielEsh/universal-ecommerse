@@ -19,16 +19,51 @@ export class CollectionService {
     return this.repository.save(newModel);
   }
 
-  async findAll() {
-    const builder = await this.repository
-      .createQueryBuilder('collections')
+  async findAll(options) {
+    const builder = await this.repository.createQueryBuilder('collections');
+
+    return this.paginate(builder, options);
+  }
+
+  private async paginate(builder, options) {
+    const { limit = 10, page = 1 } = options;
+    builder.limit(limit);
+    builder.offset((page - 1) * limit);
+    const totalItemsCount = await builder.getCount();
+    const items = await builder
       .select('collections.id')
       .addSelect('collections.slug')
       .addSelect('collections.name')
       .addSelect('collections.goodsCount')
       .getMany();
+    const totalPages =
+      totalItemsCount !== undefined
+        ? Math.ceil(totalItemsCount / limit)
+        : undefined;
+    const hasNextPage = page < totalPages;
+    const hasPreviousPage = page > 1;
 
-    return builder;
+    const routes = totalItemsCount
+      ? {
+          previous: hasPreviousPage ? page - 1 : null,
+          next: hasNextPage ? page + 1 : null,
+        }
+      : undefined;
+
+    const meta = {
+      totalItemsCount,
+      itemCount: items.length,
+      itemsPerPage: limit,
+      totalPages,
+      currentPage: page,
+      previous: routes.previous,
+      next: routes.next,
+    };
+
+    return {
+      items,
+      meta,
+    };
   }
 
   findOne(id: number) {
