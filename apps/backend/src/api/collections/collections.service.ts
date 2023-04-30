@@ -13,7 +13,7 @@ export class CollectionService {
 
     newModel.slug = body.slug;
     newModel.name = body.name;
-    newModel.description = body?.description;
+    newModel.description = '';
     newModel.goodsCount = 0;
 
     return this.repository.save(newModel);
