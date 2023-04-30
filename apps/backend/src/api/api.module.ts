@@ -4,6 +4,7 @@ import { AuthModule } from '@/api/auth/auth.module';
 import { GoodsModule } from '@/api/goods/goods.module';
 import { CategoriesModule } from '@/api/categories/categories.module';
 import { BrandsModule } from '@/api/brands/brands.module';
+import { CollectionsModule } from '@/api/collections/collections.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { BrandsModule } from '@/api/brands/brands.module';
     GoodsModule,
     CategoriesModule,
     BrandsModule,
+    CollectionsModule,
   ],
 })
 export class ApiModule {}
