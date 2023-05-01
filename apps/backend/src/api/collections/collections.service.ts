@@ -66,8 +66,8 @@ export class CollectionService {
     };
   }
 
-  findOne(id: number) {
-    return this.repository.findOne({ where: { id } });
+  async findOne(id: number) {
+    return await this.repository.findOne({ where: { id } });
   }
 
   async update(id: number, body: any) {

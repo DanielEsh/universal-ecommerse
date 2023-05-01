@@ -9,6 +9,7 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
+  NotFoundException,
 } from '@nestjs/common';
 import { CollectionService } from '@/api/collections/collections.service';
 
@@ -36,8 +37,10 @@ export class CollectionsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.collectionsService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const item = await this.collectionsService.findOne(+id);
+
+    if (!item) throw new NotFoundException();
   }
 
   @Patch(':id')
