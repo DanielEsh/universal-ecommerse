@@ -10,6 +10,7 @@ import {
   DefaultValuePipe,
   ParseIntPipe,
   NotFoundException,
+  ConflictException,
 } from '@nestjs/common';
 import { CollectionService } from '@/api/collections/collections.service';
 
@@ -18,8 +19,15 @@ export class CollectionsController {
   constructor(private readonly collectionsService: CollectionService) {}
 
   @Post()
-  create(@Body() createCategoryDto: any) {
-    return this.collectionsService.create(createCategoryDto);
+  async create(@Body() createCategoryDto: any) {
+    try {
+      return await this.collectionsService.create(createCategoryDto);
+    } catch (e: any) {
+      console.log('ERROR', e);
+      if (e.code === '23505') {
+        throw new ConflictException('Slug already exist');
+      }
+    }
   }
 
   @Get()

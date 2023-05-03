@@ -8,7 +8,7 @@ export class CollectionService {
   @InjectRepository(Collection)
   private readonly repository: Repository<Collection>;
 
-  create(body: any) {
+  async create(body: any) {
     const newModel = new Collection();
 
     newModel.slug = body.slug;
@@ -16,7 +16,7 @@ export class CollectionService {
     newModel.description = '';
     newModel.goodsCount = 0;
 
-    return this.repository.save(newModel);
+    return await this.repository.save(newModel);
   }
 
   async findAll(options) {
@@ -56,8 +56,8 @@ export class CollectionService {
       itemsPerPage: limit,
       totalPages,
       currentPage: page,
-      previous: routes.previous,
-      next: routes.next,
+      previous: null,
+      next: null,
     };
 
     return {
