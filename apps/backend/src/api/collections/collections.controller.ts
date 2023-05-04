@@ -49,6 +49,8 @@ export class CollectionsController {
     const item = await this.collectionsService.findOne(+id);
 
     if (!item) throw new NotFoundException();
+
+    return item;
   }
 
   @Patch(':id')

@@ -3,6 +3,20 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Collection } from '@/api/collections/collections.entity';
 
+interface Pagination {
+  totalItemsCount: number;
+  itemCount: number;
+  itemsPerPage: number;
+  totalPages: number;
+  currentPage: number;
+  previous: number | null;
+  next: number | null;
+}
+
+export interface Meta {
+  pagination: Pagination;
+}
+
 @Injectable()
 export class CollectionService {
   @InjectRepository(Collection)
@@ -27,8 +41,10 @@ export class CollectionService {
 
   private async paginate(builder, options) {
     const { limit = 10, page = 1 } = options;
+
     builder.limit(limit);
     builder.offset((page - 1) * limit);
+
     const totalItemsCount = await builder.getCount();
     const items = await builder
       .select('collections.id')
@@ -36,6 +52,7 @@ export class CollectionService {
       .addSelect('collections.name')
       .addSelect('collections.goodsCount')
       .getMany();
+
     const totalPages =
       totalItemsCount !== undefined
         ? Math.ceil(totalItemsCount / limit)
@@ -43,21 +60,21 @@ export class CollectionService {
     const hasNextPage = page < totalPages;
     const hasPreviousPage = page > 1;
 
-    const routes = totalItemsCount
-      ? {
-          previous: hasPreviousPage ? page - 1 : null,
-          next: hasNextPage ? page + 1 : null,
-        }
-      : undefined;
+    const routes = {
+      previous: hasPreviousPage ? page - 1 : null,
+      next: hasNextPage ? page + 1 : null,
+    };
 
-    const meta = {
-      totalItemsCount,
-      itemCount: items.length,
-      itemsPerPage: limit,
-      totalPages,
-      currentPage: page,
-      previous: null,
-      next: null,
+    const meta: Meta = {
+      pagination: {
+        totalItemsCount,
+        itemCount: items.length,
+        itemsPerPage: limit,
+        totalPages,
+        currentPage: page,
+        previous: routes.previous,
+        next: routes.next,
+      },
     };
 
     return {
