@@ -78,7 +78,7 @@ export class CollectionService {
     };
 
     return {
-      items,
+      data: items,
       meta,
     };
   }

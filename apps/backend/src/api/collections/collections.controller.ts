@@ -14,6 +14,11 @@ import {
 } from '@nestjs/common';
 import { CollectionService } from '@/api/collections/collections.service';
 
+const DEFAULT_VALUES = {
+  limit: 5,
+  page: 1,
+};
+
 @Controller('collections')
 export class CollectionsController {
   constructor(private readonly collectionsService: CollectionService) {}
@@ -32,8 +37,10 @@ export class CollectionsController {
 
   @Get()
   async findAll(
-    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
-    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
+    @Query('page', new DefaultValuePipe(DEFAULT_VALUES.page), ParseIntPipe)
+    page,
+    @Query('limit', new DefaultValuePipe(DEFAULT_VALUES.limit), ParseIntPipe)
+    limit,
   ) {
     limit = limit > 100 ? 100 : limit;
 
