@@ -18,6 +18,8 @@ import { CollectionService } from '@/api/collections/collections.service';
 const DEFAULT_VALUES = {
   limit: 5,
   page: 1,
+  sort_by: [],
+  order_by: [],
 };
 
 @Controller('collections')
@@ -42,8 +44,18 @@ export class CollectionsController {
     page,
     @Query('limit', new DefaultValuePipe(DEFAULT_VALUES.limit), ParseIntPipe)
     limit,
-    @Query('sort_by', ParseArrayPipe) sort,
-    @Query('order_by', ParseArrayPipe) order,
+    @Query(
+      'sort_by',
+      new DefaultValuePipe(DEFAULT_VALUES.sort_by),
+      ParseArrayPipe,
+    )
+    sort,
+    @Query(
+      'order_by',
+      new DefaultValuePipe(DEFAULT_VALUES.order_by),
+      ParseArrayPipe,
+    )
+    order,
   ) {
     limit = limit > 100 ? 100 : limit;
 
