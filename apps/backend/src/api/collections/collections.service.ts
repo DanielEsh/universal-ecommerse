@@ -64,7 +64,7 @@ export class CollectionService {
       options.sort.map((field, index) =>
         getBuilder.orderBy(
           `collections.${field}`,
-          options.order[index].toUpperCase(),
+          options.order.length ? options.order[index]?.toUpperCase() : 'ASC',
         ),
       );
     }
