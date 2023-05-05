@@ -9,6 +9,7 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
+  ParseArrayPipe,
   NotFoundException,
   ConflictException,
 } from '@nestjs/common';
@@ -41,10 +42,14 @@ export class CollectionsController {
     page,
     @Query('limit', new DefaultValuePipe(DEFAULT_VALUES.limit), ParseIntPipe)
     limit,
+    @Query('sort_by', ParseArrayPipe) sort,
+    @Query('order_by', ParseArrayPipe) order,
   ) {
     limit = limit > 100 ? 100 : limit;
 
     return this.collectionsService.findAll({
+      sort,
+      order,
       page,
       limit,
       route: ' ',

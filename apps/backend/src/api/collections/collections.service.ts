@@ -17,6 +17,14 @@ export interface Meta {
   pagination: Pagination;
 }
 
+interface FindAllOptions {
+  sort: [string];
+  order: ['asc' | 'desc'];
+  limit: number;
+  page: number;
+  route: string;
+}
+
 @Injectable()
 export class CollectionService {
   @InjectRepository(Collection)
@@ -33,25 +41,35 @@ export class CollectionService {
     return await this.repository.save(newModel);
   }
 
-  async findAll(options) {
+  async findAll(options: FindAllOptions) {
     const builder = await this.repository.createQueryBuilder('collections');
 
     return this.paginate(builder, options);
   }
 
-  private async paginate(builder, options) {
+  private async paginate(builder, options: FindAllOptions) {
     const { limit = 10, page = 1 } = options;
 
     builder.limit(limit);
     builder.offset((page - 1) * limit);
 
     const totalItemsCount = await builder.getCount();
-    const items = await builder
+    const getBuilder = await builder
       .select('collections.id')
       .addSelect('collections.slug')
       .addSelect('collections.name')
-      .addSelect('collections.goodsCount')
-      .getMany();
+      .addSelect('collections.goodsCount');
+
+    if (options.sort) {
+      options.sort.map((field, index) =>
+        getBuilder.orderBy(
+          `collections.${field}`,
+          options.order[index].toUpperCase(),
+        ),
+      );
+    }
+
+    const items = await getBuilder.getMany();
 
     const totalPages =
       totalItemsCount !== undefined
