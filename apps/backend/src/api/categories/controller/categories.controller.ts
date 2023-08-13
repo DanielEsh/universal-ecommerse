@@ -2,14 +2,25 @@ import {
   Controller,
   Get,
   Post,
-  Body,
   Patch,
-  Param,
   Delete,
+  Body,
+  Param,
+  Query,
+  DefaultValuePipe,
+  ParseIntPipe,
+  ParseArrayPipe,
 } from '@nestjs/common';
 import { CategoriesService } from '@/api/categories/service/categories.service';
 import { CreateCategoryDto } from '@/api/categories/dto/create-category.dto';
 import { UpdateCategoryDto } from '@/api/categories/dto/update-category.dto';
+
+const DEFAULT_VALUES = {
+  limit: 10,
+  page: 1,
+  sort_by: [],
+  order_by: [],
+};
 
 @Controller('categories')
 export class CategoriesController {
@@ -21,8 +32,31 @@ export class CategoriesController {
   }
 
   @Get()
-  findAll() {
-    return this.categoriesService.findAll();
+  findAll(
+    @Query('page', new DefaultValuePipe(DEFAULT_VALUES.page), ParseIntPipe)
+    page,
+    @Query('limit', new DefaultValuePipe(DEFAULT_VALUES.limit), ParseIntPipe)
+    limit,
+    @Query(
+      'sort_by',
+      new DefaultValuePipe(DEFAULT_VALUES.sort_by),
+      ParseArrayPipe,
+    )
+    sort,
+    @Query(
+      'order_by',
+      new DefaultValuePipe(DEFAULT_VALUES.order_by),
+      ParseArrayPipe,
+    )
+    order,
+  ) {
+    return this.categoriesService.findAll({
+      sort,
+      order,
+      page,
+      limit,
+      route: ' ',
+    });
   }
 
   @Get(':id')

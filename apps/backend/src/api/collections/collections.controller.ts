@@ -16,7 +16,7 @@ import {
 import { CollectionService } from '@/api/collections/collections.service';
 
 const DEFAULT_VALUES = {
-  limit: 5,
+  limit: 10,
   page: 1,
   sort_by: [],
   order_by: [],
